@@ -1,0 +1,15 @@
+<?php
+
+	class sendings_details extends SQLTable {
+		function sendings_details(&$Con) {
+			$this->involvedTables = array('dm_subscribers','dm_sendings');
+			$this->_defaultFields = "dm_subscribers.*,dm_sendings.id AS sendid";
+			parent::SQLTable($Con,"dm_sendings","dm_sendings LEFT JOIN dm_subscribers ON dm_sendings.subscriber_id=dm_subscribers.id","id");
+		}
+
+		function Find($fieldsList = "",$Cond = "",$Order = "",$Limit="", $GroupBy="") {
+			if(!$fieldsList) $fieldsList=$this->_defaultFields;
+			return parent::Find($fieldsList,$Cond,$Order,$Limit,$GroupBy);	
+		}
+	}
+?>

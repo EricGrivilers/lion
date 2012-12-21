@@ -1,0 +1,19 @@
+
+#homeBkg {
+	height:368px;
+	/*width:710px;*/
+	overflow:hidden;
+}
+#intro {
+	padding:10px;	
+}
+
+#intro h2 {
+	
+	font-size:13px;
+	margin-bottom:5px;
+}
+
+#intro p {
+	margin-bottom:10px;
+}

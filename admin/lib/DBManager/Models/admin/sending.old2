@@ -1,0 +1,60 @@
+<?php
+	class sending extends SQLTable {
+		function sending(&$Con) {
+			$this->involvedTables = array('dm_sendings');
+			$this->_defaultFields = "dm_sendings.*";
+			parent::SQLTable($Con,"dm_sendings","","id");
+		}
+
+		/*
+		function returnNextIncrement() {
+			$rsNextIncrement = parent::Query("SHOW TABLE STATUS LIKE 'dm_sendings'");
+			if($rowItem = $rsNextIncrement->FetchRow()) {
+				return $rowItem["Auto_increment"];
+			}
+		}
+
+		function returnMax($sField) {
+			$rsReturnMax = parent::Query("SELECT MAX(".$sField.") FROM dm_sendings");
+			if($rowItem = $rsReturnMax->FetchRow()) {
+				foreach($rowItem as $v){
+					return $v;
+				}
+			}
+		}
+
+		function returnMaxEmails() {
+			$max=0;
+			$rsMails = parent::Query("SELECT DISTINCT mailing_id FROM dm_sendings");
+			while($rowItem = $rsMails->FetchRow()) {
+				$rsCount = parent::Query("SELECT COUNT(*) as cnt FROM dm_sendings WHERE mailing_id=".$rowItem['mailing_id']);
+				if($rowItem2 = $rsCount->FetchRow()){
+					if($max<$rowItem2['cnt']){
+						$max=$rowItem2['cnt'];
+					}
+				}
+				return $max;
+			}
+			
+			$aMailings[2]=30;
+			$aMailings=asort($aMailings);
+			print_r($aMailings);
+			while ($out = current($aMailings)) {
+				return key($aMailings);
+			}
+		}
+		*/
+		
+		function Save($params) {
+			if ($params["id"]==0) {
+				if (!isset($params["record_date"])) $params["record_date"] = date("Y-m-d H:i");
+			}
+			return parent::Save($params);
+		}
+
+		function Find($fieldsList = "",$Cond = "",$Order = "",$Limit="", $GroupBy="") {
+			if(!$fieldsList) $fieldsList=$this->_defaultFields;
+			return parent::Find($fieldsList,$Cond,$Order,$Limit,$GroupBy);	
+		}
+	}
+?>

@@ -1,0 +1,43 @@
+<?php
+	class sending extends SQLTable {
+		function sending(&$Con) {
+			$this->_defaultFields = "dm_sendings.*";
+			parent::SQLTable($Con,"dm_sendings","","id");
+		}
+
+		function returnNextIncrement() {
+			$rsNextIncrement = parent::Query("SHOW TABLE STATUS LIKE 'dm_sendings'");
+			if($rowItem = $rsNextIncrement->FetchRow()) {
+				return $rowItem["Auto_increment"];
+			}
+		}
+
+		function returnMax($sField) {
+			$rsReturnMax = parent::Query("SELECT MAX(".$sField.") FROM dm_sendings");
+			if($rowItem = $rsReturnMax->FetchRow()) {
+				foreach($rowItem as $v){
+					return $v;
+				}
+			}
+		}
+		
+		function Save($params) {
+			//print_r($params);
+			if ($params["id"]==0) {
+				if (!isset($params["date_created"])) $params["date_created"] = date("Y-m-d H:i");
+			}else{
+				unset($params["ref_num"]);
+			}
+			$params["date_updated"]=date("Y-m-d H:i");
+			return parent::Save($params);
+		}
+
+		function Find($fieldsList = "",$Cond = "",$Order = "",$Limit="") {
+			//$totCond=" (newsletters.id=newsletters_sent.newsletter_id OR newsletters.id NOT IN (select newsletter_id from newsletters_sent)) ";
+			$totCond="";
+			if ($Cond) $totCond .= " $Cond ";
+			if(!$fieldsList) $fieldsList=$this->_defaultFields;
+			return parent::Find($fieldsList,$totCond,$Order,$Limit);	
+		}
+	}
+?>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html >
+<head>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{{title}}</title>
+	{{styles}}
+{{headerScripts}}
+</head>
+<body >
+	{{addOns}}
+	<div id="container" class="container">
+		<div class="row">
+			<div id="sidebar1" class="span3">
+				<div id="logo">
+					<a href="{{webRoot}}" >
+						<img src="/medias/logov4.gif" />
+					</a>
+				</div>
+				<p id="baseline">{% block baseline %} {{baseline}} {% endblock baseline %} </p>
+				<div id="searchBlock" class='area'>{{searchBlock}}</div>
+				<div id="loginBlock" class='area'>{{loginBlock}}</div>
+				<div id="lastViews" class='area'>{{lastViews}}</div>
+				<div id='app'>
+					<a href='http://itunes.apple.com/be/app/id396510696?mt=8' target='_blank'>
+						<img src='/medias/iphone_app.jpg' />
+						<br/>
+						Disponible sur
+						<br/>
+						l'AppStore
+					</a>
+				</div>
+				{% block social %}
+				<div id='socialIcons'>
+
+					<div class='facebook'>
+						<a href="http://www.facebook.com/pages/Brussels-Belgium/Immobiliere-Le-Lion/117039664993793" target="_blank"> <b>Suivez-nous</b>
+							sur facebook
+						</a>
+						<iframe src="http://www.facebook.com/plugins/like.php?href=www.immo-lelion.be&amp;layout=standard&amp;show_faces=true&amp;width=280&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:80px;" allowTransparency="true"></iframe>
+					</div>
+					<div class='twitter'>
+						<a href="http://twitter.com/ImmoLeLion" target="_blank"> <b>Immo-lelion.be</b>
+							sur Twitter
+						</a>
+						<br/>
+						<a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="ImmoLeLion">Tweet</a>
+						<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+					</div>
+				</div>
+				{% endblock social %}
+				<!-- fin de #sidebar1 -->
+
+			</div>
+			<div id="mainContent" class="span9">
+				<div id="header" class="row-fluid">
+					<div id='partners' class="span6">
+						<li>
+							<a href="http://www.leadingre.com/" target="_blank">
+								<img src="/medias/leadingrealestate.gif" />
+							</a>
+						</li>
+						<li>&nbsp;</li>
+					</div>
+					<div id='languages' class="span6">
+						<a href='{{currentUrl}}&language=fr'>FRANCAIS</a>
+						|
+						<a href='{{currentUrl}}&language=en'>ENGLISH</a>
+					</div>
+				</div>
+				{% block bkg %}
+				<div id='homeBkg' class="row-fluid" style="background:url(/medias/banners/IMG_0082.JPG)">
+					<!--<div id="menuBkg" >&nbsp;</div>-->
+					<div id="mainMenu" class='area'>{{mainMenu}}</div>
+					<!--<img src="/medias/banners/IMG_0082.JPG"/>-->
+				</div>
+				{% endblock bkg %}
+				{% block content %}
+				<div id="intro" class="row-fluid">{{content}}</div>
+				{% endblock content %}
+				<!-- fin de #mainContent -->
+			</div>
+		</div>
+		<!-- / class row -->
+		<!-- Cet élément de suppression doit suivre immédiatement l'élément div #mainContent afin de forcer l'élément div #container à contenir tous les éléments flottants enfants -->
+		<div class="row">
+			<div id="footer" >
+				| Immobilière Le LION s.a. Avenue Delleur 8 B-1170 Bruxelles | Tel +32 2 672 71 11 Fax +32 2 672 67 17 |
+				<a href='/contact'>Contactez-nous</a>
+				| © 2008 Immo LE LION |
+				<!-- fin de #footer -->
+			</div>
+		</div>
+		<!-- fin de #container -->
+	</div>
+</body>
+	<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+	<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5519449-10");
+pageTracker._trackPageview();
+</script>
+</html>
