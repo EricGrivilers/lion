@@ -39,45 +39,45 @@ $row=mysql_fetch_array($r);
 <div id='item'>
 
 <table class='edit' cellpadding=5 cellspacing=0 >
-      <tr><th><?= $row['id']; ?></th><th colspan=3 style='background:#666666;color:#ffffff'><?=strtoupper($row['lastname']);?> <?=ucfirst($row['firstname']);?><br><?=$row['tel'];?>&nbsp;&nbsp;<a href='<?=ROOT_WS.'/admin/pdf/'.$basename;?>' target='_blank'><img src='<?=ROOT_WS.'/medias/pdf.gif';?>' style='border: none;'></a></th>
+      <tr><th><?php echo  $row['id']; ?></th><th colspan=3 style='background:#666666;color:#ffffff'><?php echo strtoupper($row['lastname']);?> <?php echo ucfirst($row['firstname']);?><br><?php echo $row['tel'];?>&nbsp;&nbsp;<a href='<?php echo ROOT_WS.'/admin/pdf/'.$basename;?>' target='_blank'><img src='<?php echo ROOT_WS.'/medias/pdf.gif';?>' style='border: none;'></a></th>
       </tr>
       <tr>
         <td class='formlab' width=100>Langue</td>
-        <td><input type='radio' name='language' <?=($_SESSION['language']=='fr' ? 'checked' : '');?> value='fr'/>
+        <td><input type='radio' name='language' <?php echo ($_SESSION['language']=='fr' ? 'checked' : '');?> value='fr'/>
           fr
-          <input type='radio' name='language'  <?=($_SESSION['language']=='en' ? 'checked' : '');?> value='en'/>
+          <input type='radio' name='language'  <?php echo ($_SESSION['language']=='en' ? 'checked' : '');?> value='en'/>
           en </td>
-        <td width=100>Salutaion</td><td><select name='salutation'><option value='Mme' <?=($row['salutation']=='Mme' ? 'selected' : '');?>><?=$lang['mrs'];?></option><option value='M' <?=($row['salutation']=='M' ? 'selected' : '');?>><?=$lang['mr'];?></option></select></td>
+        <td width=100>Salutaion</td><td><select name='salutation'><option value='Mme' <?php echo ($row['salutation']=='Mme' ? 'selected' : '');?>><?php echo $lang['mrs'];?></option><option value='M' <?php echo ($row['salutation']=='M' ? 'selected' : '');?>><?php echo $lang['mr'];?></option></select></td>
       </tr>
       <tr>
         <td class='formlab'>Nom</td>
-        <td><?=$row['lastname'];?></td>
+        <td><?php echo $row['lastname'];?></td>
         <td class='formlab'>Prénom</td>
-        <td><?=$row['firstname'];?></td>
+        <td><?php echo $row['firstname'];?></td>
       </tr>
       <tr>
         <td class='formlab'>E-mail</td>
-        <td><a href='mailto:<?=$row['email'];?>'><?=$row['email'];?></a></td>
+        <td><a href='mailto:<?php echo $row['email'];?>'><?php echo $row['email'];?></a></td>
         <td class='formlab'>Tél.</td>
-        <td><?=$row['tel'];?></td>
+        <td><?php echo $row['tel'];?></td>
       </tr>
       <tr>
         <td class='formlab'>Rue</td>
-        <td><?=$row['street'];?></td>
+        <td><?php echo $row['street'];?></td>
         <td class='formlab'>Num</td>
-        <td><?=$row['number'];?></td>
+        <td><?php echo $row['number'];?></td>
       </tr>
       <tr>
         <td class='formlab'>ZIP</td>
-        <td><?=$row['zip'];?></td>
+        <td><?php echo $row['zip'];?></td>
         <td class='formlab'>Ville</td>
-        <td><?=$row['city'];?></td>
+        <td><?php echo $row['city'];?></td>
       </tr>
       <tr>
         <td class='formlab'>Pays</td>
-        <td><?=$row['country'];?></td>
+        <td><?php echo $row['country'];?></td>
         <td class='formlab'>Fax</td>
-        <td><?=$row['fax'];?></td>
+        <td><?php echo $row['fax'];?></td>
       </tr>
      
      
@@ -138,7 +138,7 @@ convert_to_pdf($html,$pdfpath);
 	}
 ?>
 <input type='button' value='exporter' onclick="document.location='tools/export.php?exp=users'" /><table  cellpadding=2 cellspacing=1>
-<tr class='rank<?= $i; ?>'>
+<tr class='rank<?php echo  $i; ?>'>
 <th></th>  
 <th><a href="index.php?kind=users&orderby=date" class=yellow>Date</a></th>  
 <th><a href="index.php?kind=users&orderby=lastVisit " class=yellow>Dernière<br/>visite</a></th>  
@@ -184,27 +184,27 @@ if($row['location']=='outercity') { $loc='Brabant'; }
 if($i>1) {$i=0;}
 
 
-?><tr class='rank<?= $i; ?> <?= $oe[$o];?>' >
- <td><a href='index.php?kind=users&userId=<?= $row['id']; ?>'><img src='../medias/b_edit.png' border=0/></a></td>
- <td><?= shakeDate($row['date']); ?></td> 
+?><tr class='rank<?php echo  $i; ?> <?php echo  $oe[$o];?>' >
+ <td><a href='index.php?kind=users&userId=<?php echo  $row['id']; ?>'><img src='../medias/b_edit.png' border=0/></a></td>
+ <td><?php echo  shakeDate($row['date']); ?></td> 
  <td> <?php if($row['lastVisit']!='0000-00-00 00:00:00') { echo $row['lastVisit']; } ?> </td>
- <td><a href="mailto:<?= $row['email']; ?>"><?= $row['email']; ?></a></td>               
-   <!--<td> <?= $row['language'] ; ?>  </td>           
-   <td>  <?= $row['salutation']; ?></td>-->
- <td><?= $row['firstname'] ; ?> </td>               
-   <td> <?= $row['lastname']; ?></td>                 
-   <td> <?= $row['tel'] ; ?></td>               
-  <!-- <td> <?= $row['zip'] ; ?></td>             
-   <td> <?= $row['fax'] ; ?></td>                
-   <td> <?= $row['street'] ; ?></td>               
-   <td> <?= $row['number']; ?></td>                
-   <td> <?= $row['city'] ; ?></td>                
-   <td> <?= $row['country'] ; ?> </td>            
-   <td> <?= $row['company']; ?> </td>
-   <td> <?= $row['type2']; ?> </td>
-   <td> <?= $row['searchfor']; ?> </td>
-   <td> <?= $loc; ?> </td>
-   <td> <?= $row['price']; ?> </td>-->
+ <td><a href="mailto:<?php echo  $row['email']; ?>"><?php echo  $row['email']; ?></a></td>               
+   <!--<td> <?php echo  $row['language'] ; ?>  </td>           
+   <td>  <?php echo  $row['salutation']; ?></td>-->
+ <td><?php echo  $row['firstname'] ; ?> </td>               
+   <td> <?php echo  $row['lastname']; ?></td>                 
+   <td> <?php echo  $row['tel'] ; ?></td>               
+  <!-- <td> <?php echo  $row['zip'] ; ?></td>             
+   <td> <?php echo  $row['fax'] ; ?></td>                
+   <td> <?php echo  $row['street'] ; ?></td>               
+   <td> <?php echo  $row['number']; ?></td>                
+   <td> <?php echo  $row['city'] ; ?></td>                
+   <td> <?php echo  $row['country'] ; ?> </td>            
+   <td> <?php echo  $row['company']; ?> </td>
+   <td> <?php echo  $row['type2']; ?> </td>
+   <td> <?php echo  $row['searchfor']; ?> </td>
+   <td> <?php echo  $loc; ?> </td>
+   <td> <?php echo  $row['price']; ?> </td>-->
   <td>  <?php
   $refs=array();
   $a=1;
@@ -221,7 +221,7 @@ if($i>1) {$i=0;}
    }
    echo implode('<br>',$refs);
    ?></td>
-   <td><a href='#' onclick="deleteUser('<?= $row['id']; ?>')">delete</a></td>
+   <td><a href='#' onclick="deleteUser('<?php echo  $row['id']; ?>')">delete</a></td>
    </tr>             
  <?php
  $o=!$o;

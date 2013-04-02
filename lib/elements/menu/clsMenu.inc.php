@@ -73,15 +73,13 @@ class menu extends element {
 	
 	
 	function getMenu($parentId,$level) {
-		$out="<div class='navbar'>";
-		$out.="<ul class='menu_level_".$level."' id='menu_".$this->contentId."'>";
+	
+		$out="<ul class='menu_level_".$level."' id='menu_".$this->contentId."'>";
 		$i=0;
 		if($l=count($this->menuArray[$parentId])) {
 			foreach($this->menuArray[$parentId] as $k=>$v) {
-				
-				
 				if($v['inMenu']==1 || $this->admin==1) {
-					$class=array('span3');
+					$class=array();
 					if($v['pageId']==$this->pageId || in_array($v['pageId'],$this->parents)) {
 						$class[]="current";
 					}
@@ -99,9 +97,11 @@ class menu extends element {
 							
 						}
 					}
+					$out.=" class='";
 					if($class) {
-						$out.=" class='".implode(" ",$class)."' ";
+						$out.=implode(" ",$class);
 					}
+					$out.=" span3'";
 					$out.="><a href=\"/".$v['alias']."\" ";
 					if($class) {
 						$out.=" class='".implode(" ",$class)."' ";
@@ -132,13 +132,10 @@ class menu extends element {
 					}
 					
 				}
-				
 				$i++;
-
 			}
 		}
 		$out.="</ul>";
-		$out.="</div>";
 		return $out;
 	}
 	

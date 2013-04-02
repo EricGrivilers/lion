@@ -40,8 +40,8 @@ $row=mysql_fetch_array($r);
 	  $tr=mysql_query($tq) or die(mysql_error());
 	  while($trow=mysql_fetch_array($tr)) {
 	  ?>
-          <option value="<?= $trow['zip']." ".$trow['fr']; ?>" <?php if($row['locfr']==$trow['zip']." ".$trow['fr']) { echo 'selected'; } ?>>
-            <?= $trow['zip']." - ".$trow['fr']; ?>
+          <option value="<?php echo  $trow['zip']." ".$trow['fr']; ?>" <?php if($row['locfr']==$trow['zip']." ".$trow['fr']) { echo 'selected'; } ?>>
+            <?php echo  $trow['zip']." - ".$trow['fr']; ?>
           </option>
           <?php
 	  }
@@ -60,7 +60,7 @@ $row=mysql_fetch_array($r);
       <td align=left>Vente <input type=radio name=searchfor value='sale' <?php if($row['location']!='Y') { echo 'checked'; } ?>/> Location <input type=radio name=searchfor value='rent' <?php if($row['location']=='Y') { echo 'checked'; } ?>/></td>
 	</tr>
 	<tr>
-		<td>Rue et numéro&nbsp;<input type="text" name="name" id="name" value="<?= $row['name'];?>" style="width: 200px;" />
+		<td>Rue et numéro&nbsp;<input type="text" name="name" id="name" value="<?php echo  $row['name'];?>" style="width: 200px;" />
 		</td>
 		<td>
 			<?php
@@ -115,19 +115,19 @@ echo options($row['zone']);?>
     <tr>
       <td colspan="2" align=left class="loc">Surface <input type='text' size='4' name='area' /> m² | Chambre(s) <select name='rooms'><?php
 	for($i=1;$i<15;$i++) {?>
-	<option value='<?= $i; ?>'><?= $i; ?></option>
+	<option value='<?php echo  $i; ?>'><?php echo  $i; ?></option>
 	<?php
 	}  
 	  ?>
 	  </select> | salle(s) d'eau <select name='bathrooms'><?php
 	for($i=1;$i<15;$i++) {?>
-	<option value='<?= $i; ?>'><?= $i; ?></option>
+	<option value='<?php echo  $i; ?>'><?php echo  $i; ?></option>
 	<?php
 	}  
 	  ?>
 	  </select> | garage(s) <select name='garages'><?php
 	for($i=0;$i<15;$i++) {?>
-	<option value='<?= $i; ?>'><?= $i; ?></option>
+	<option value='<?php echo  $i; ?>'><?php echo  $i; ?></option>
 	<?php
 	}  
 	  ?>
@@ -136,7 +136,7 @@ echo options($row['zone']);?>
 	 
 	 
     <tr>
-      <td colspan="2" align="left" valign="bottom"><!--Lien Whyse: <input type='text' name='lienwhyse' value="<?= $row['lienwhyse']; ?>"  size='40'/>--></td>
+      <td colspan="2" align="left" valign="bottom"><!--Lien Whyse: <input type='text' name='lienwhyse' value="<?php echo  $row['lienwhyse']; ?>"  size='40'/>--></td>
     </tr>
     
 

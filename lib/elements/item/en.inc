@@ -15,6 +15,7 @@ Imprimer	Print
 bien(s) correspond(ent) à votre recherche	property(ies) matche(s) your search
 
 Filtrer par	Filter by
+Biens par page	Items per page
 Prix croissant	Ascending price
 Prix décroissant	Descending price
 Communes	Zip code

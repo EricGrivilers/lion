@@ -28,8 +28,8 @@
 				$r=mysql_query($q) or die(mysql_error());
 				while($row=mysql_fetch_array($r)) {
 				?>
-        <option value='<?= $row['id']; ?>' <?php if($row['id']==$_POST['type']) { echo 'selected'; } ?> >
-        <?= $row['type_'.$_SESSION['language']]; ?>
+        <option value='<?php echo  $row['id']; ?>' <?php if($row['id']==$_POST['type']) { echo 'selected'; } ?> >
+        <?php echo  $row['type_'.$_SESSION['language']]; ?>
         </option>
         <?php
 				}
@@ -83,14 +83,14 @@
 		$r=mysql_query($q) or die(mysql_error());
 		for($j=0;$j<=$i;$j++) {
 		?>
-        <option value='<?= $pricesRangesArray[$j]; ?>' <?php
+        <option value='<?php echo  $pricesRangesArray[$j]; ?>' <?php
 		if($_POST['price']==$pricesRangesArray[$j]) {
 		?>
 		 selected 
 		 <?php
 		 }
 		?>>
-        <?= $rangeArray[$j]." €"; ?>
+        <?php echo  $rangeArray[$j]." €"; ?>
         </option>
         <?php
 		}
@@ -149,7 +149,7 @@
 	  else {
 	  ?>
       <tr>
-        <td><input type='hidden' name='searchfor' value='<?= $_POST['searchfor']; ?>' /></td>
+        <td><input type='hidden' name='searchfor' value='<?php echo  $_POST['searchfor']; ?>' /></td>
         <td ></td>
         <td></td>
         <td ></td>

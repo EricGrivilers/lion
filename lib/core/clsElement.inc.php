@@ -26,7 +26,7 @@ class element extends page {
 	
 	function getContent() {
 			$out="<div id='element_".$this->area."_".$this->counter."_".$this->contentId."_".$this->elementId."' ";
-			$cl=array();
+			$cl=array($this->elementName);
 			if(!empty($this->classes)) {
 				
 				$cl[]=$this->classes;

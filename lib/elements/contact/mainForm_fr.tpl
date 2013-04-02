@@ -57,6 +57,6 @@
 							<td colspan="3" align="left"><textarea cols=40 rows=6 name="comments">{comments}</textarea></td>
 						</tr>
 						<tr>
-                                <td colspan="4" class="detailb" style="text-align: center;"><a href='#' onclick='submitContactForm()' >Envoyer</a></td>
+                                <td colspan="4" class="detailb" style="text-align: center;"><a href='#' onclick='submitContactForm()' class="btn">Envoyer</a></td>
 						</tr>
 					</table>

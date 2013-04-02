@@ -1,74 +1,57 @@
-/* Import plugin specific language pack */
-tinyMCE.importPluginLanguagePack('advhr', 'en,de,sv,zh_cn,cs,fa,fr_ca,fr,pl,pt_br,nl');
-
-function TinyMCE_advhr_getInfo() {
-	return {
-		longname : 'Advanced HR',
-		author : 'Moxiecode Systems',
-		authorurl : 'http://tinymce.moxiecode.com',
-		infourl : 'http://tinymce.moxiecode.com/tinymce/docs/plugin_advhr.html',
-		version : tinyMCE.majorVersion + "." + tinyMCE.minorVersion
-	};
-};
-
-function TinyMCE_advhr_getControlHTML(control_name) {
-    switch (control_name) {
-        case "advhr":
-            return '<a href="javascript:tinyMCE.execInstanceCommand(\'{$editor_id}\',\'mceAdvancedHr\');" onmousedown="return false;"><img id="{$editor_id}_advhr" src="{$pluginurl}/images/advhr.gif" title="{$lang_insert_advhr_desc}" width="20" height="20" class="mceButtonNormal" onmouseover="tinyMCE.switchClass(this,\'mceButtonOver\');" onmouseout="tinyMCE.restoreClass(this);" onmousedown="tinyMCE.restoreAndSwitchClass(this,\'mceButtonDown\');" /></a>';
-    }
-
-    return "";
-}
-
 /**
- * Executes the mceAdvanceHr command.
+ * editor_plugin_src.js
+ *
+ * Copyright 2009, Moxiecode Systems AB
+ * Released under LGPL License.
+ *
+ * License: http://tinymce.moxiecode.com/license
+ * Contributing: http://tinymce.moxiecode.com/contributing
  */
-function TinyMCE_advhr_execCommand(editor_id, element, command, user_interface, value) {
-    // Handle commands
-    switch (command) {
-        case "mceAdvancedHr":
-            var template = new Array();
 
-            template['file']   = '../../plugins/advhr/rule.htm'; // Relative to theme
-            template['width']  = 270;
-            template['height'] = 180;
+(function() {
+	tinymce.create('tinymce.plugins.AdvancedHRPlugin', {
+		init : function(ed, url) {
+			// Register commands
+			ed.addCommand('mceAdvancedHr', function() {
+				ed.windowManager.open({
+					file : url + '/rule.htm',
+					width : 250 + parseInt(ed.getLang('advhr.delta_width', 0)),
+					height : 160 + parseInt(ed.getLang('advhr.delta_height', 0)),
+					inline : 1
+				}, {
+					plugin_url : url
+				});
+			});
 
-			template['width']  += tinyMCE.getLang('lang_advhr_delta_width', 0);
-			template['height'] += tinyMCE.getLang('lang_advhr_delta_height', 0);
+			// Register buttons
+			ed.addButton('advhr', {
+				title : 'advhr.advhr_desc',
+				cmd : 'mceAdvancedHr'
+			});
 
-            var size = "", width = "", noshade = "";
-            if (tinyMCE.selectedElement != null && tinyMCE.selectedElement.nodeName.toLowerCase() == "hr"){
-                tinyMCE.hrElement = tinyMCE.selectedElement;
-                if (tinyMCE.hrElement) {
-                    size    = tinyMCE.hrElement.getAttribute('size') ? tinyMCE.hrElement.getAttribute('size') : "";
-                    width   = tinyMCE.hrElement.getAttribute('width') ? tinyMCE.hrElement.getAttribute('width') : "";
-                    noshade = tinyMCE.hrElement.getAttribute('noshade') ? tinyMCE.hrElement.getAttribute('noshade') : "";
-                }
-                tinyMCE.openWindow(template, {editor_id : editor_id, size : size, width : width, noshade : noshade, mceDo : 'update'});
-            } else {
-                if (tinyMCE.isMSIE) {
-                    tinyMCE.execInstanceCommand(editor_id, 'mceInsertContent', false,'<hr />');
-                } else {
-                    tinyMCE.openWindow(template, {editor_id : editor_id, inline : "yes", size : size, width : width, noshade : noshade, mceDo : 'insert'});
-                }
-            }
-                    
-       return true;
-   }
-   // Pass to next handler in chain
-   return false;
-}
+			ed.onNodeChange.add(function(ed, cm, n) {
+				cm.setActive('advhr', n.nodeName == 'HR');
+			});
 
-function TinyMCE_advhr_handleNodeChange(editor_id, node, undo_index, undo_levels, visual_aid, any_selection) {
-	tinyMCE.switchClassSticky(editor_id + '_advhr', 'mceButtonNormal');
+			ed.onClick.add(function(ed, e) {
+				e = e.target;
 
-	if (node == null)
-		return;
+				if (e.nodeName === 'HR')
+					ed.selection.select(e);
+			});
+		},
 
-	do {
-		if (node.nodeName.toLowerCase() == "hr")
-			tinyMCE.switchClassSticky(editor_id + '_advhr', 'mceButtonSelected');
-	} while ((node = node.parentNode));
+		getInfo : function() {
+			return {
+				longname : 'Advanced HR',
+				author : 'Moxiecode Systems AB',
+				authorurl : 'http://tinymce.moxiecode.com',
+				infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/advhr',
+				version : tinymce.majorVersion + "." + tinymce.minorVersion
+			};
+		}
+	});
 
-	return true;
-}
+	// Register plugin
+	tinymce.PluginManager.add('advhr', tinymce.plugins.AdvancedHRPlugin);
+})();

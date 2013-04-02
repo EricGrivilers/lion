@@ -11,7 +11,7 @@
         +32 2 672 67 17
 {% endblock baseline %}
 
-{% block social %}{% endblock social %}
+
      
 
 

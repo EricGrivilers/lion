@@ -137,18 +137,18 @@ $tPrix='<b>V E N D U / L O U É</b>';
       <td width="100px"></td>
     </tr>
     <tr>
-      <td rowspan=3><a href='javascript:document.theForm.detailId.value=<?= $row['num']; ?>; document.theForm.submit()' class=price><img src='../photos/thumbs/<?= $row['photo'];?>.jpg' class='thumbnail' border='0'/></a></td>
+      <td rowspan=3><a href='javascript:document.theForm.detailId.value=<?php echo  $row['num']; ?>; document.theForm.submit()' class=price><img src='../photos/thumbs/<?php echo  $row['photo'];?>.jpg' class='thumbnail' border='0'/></a></td>
       <td ><h2>
-          <?= $row['locfr'];?>
+          <?php echo  $row['locfr'];?>
         </h2></td>
-      <td><button onclick='document.theForm.detailId.value=<?= $row['num']; ?>; document.theForm.submit()' class=price><u>editer&nbsp;>></button></td>
+      <td><button onclick='document.theForm.detailId.value=<?php echo  $row['num']; ?>; document.theForm.submit()' class=price><u>editer&nbsp;>></button></td>
     </tr>
     <tr>
-      <td><?= $tPrix;?></td>
+      <td><?php echo  $tPrix;?></td>
       <td></td>
     </tr>
     <tr>
-      <td><?= $row['descrfr'];?></td>
+      <td><?php echo  $row['descrfr'];?></td>
       <td></td>
     </tr>
   </table>
@@ -170,15 +170,15 @@ $row=mysql_fetch_array($r);
 
 ?>
 <input type='hidden' name='level' value='3' />
-<input type='hidden' name='num' id='num' value='<?= $_POST['detailId']; ?>' />
+<input type='hidden' name='num' id='num' value='<?php echo  $_POST['detailId']; ?>' />
 <?php //print_r($row); ?>
-<div id="stats"> <a href="index.php?kind=stats&action=view&itemId=<?= $_POST['detailId']; ?>&rawstats=<?=rawurlencode('Visites hebdomadaires: '.$row['weekview'].' | Visites mensuelles '.$row['totalview'].' | Total visites depuis le 18/12/06: '.$row['totalview']);?>" class="yellow">Statistiques</a><br>
+<div id="stats"> <a href="index.php?kind=stats&action=view&itemId=<?php echo  $_POST['detailId']; ?>&rawstats=<?php echo rawurlencode('Visites hebdomadaires: '.$row['weekview'].' | Visites mensuelles '.$row['totalview'].' | Total visites depuis le 18/12/06: '.$row['totalview']);?>" class="yellow">Statistiques</a><br>
   Visites hebdomadaires: <b>
-  <?= statsv2($row,'weeks',$currentWeek); ?>
+  <?php echo  statsv2($row,'weeks',$currentWeek); ?>
 </b>  | Visites mensuelles
- <b> <?= statsv2($row,'months',$currentMonth); ?>
+ <b> <?php echo  statsv2($row,'months',$currentMonth); ?>
  </b> | Total visites depuis le 01/04/08:
- <b> <?= statsv2total($row); ?>
+ <b> <?php echo  statsv2total($row); ?>
  </b>
 </div>
 <div id='item' >
@@ -206,7 +206,7 @@ $row=mysql_fetch_array($r);
     </tr>
     <tr>
       <td align=left class='loc'>Prix:
-        <input name='prix' type='text' id="prix" value='<?= $row['prix'];?>' />
+        <input name='prix' type='text' id="prix" value='<?php echo  $row['prix'];?>' />
         &euro;&nbsp;&nbsp;
         <input name='surdemande' type=checkbox id="surdemande" <?php if($row['surdemande']=='Y') { echo ' checked'; } ?>/>
         sur demande</td>
@@ -218,8 +218,8 @@ $row=mysql_fetch_array($r);
 	  $tr=mysql_query($tq) or die(mysql_error());
 	  while($trow=mysql_fetch_array($tr)) {
 	  ?>
-          <option value="<?= $trow['zip']." ".$trow['fr']; ?>" <?php if($row['locfr']==$trow['zip']." ".$trow['fr']) { echo 'selected'; } ?>>
-          <?= $trow['zip']." - ".$trow['fr']; ?>
+          <option value="<?php echo  $trow['zip']." ".$trow['fr']; ?>" <?php if($row['locfr']==$trow['zip']." ".$trow['fr']) { echo 'selected'; } ?>>
+          <?php echo  $trow['zip']." - ".$trow['fr']; ?>
           </option>
           <?php
 	  }
@@ -229,18 +229,18 @@ $row=mysql_fetch_array($r);
     </tr>
     <tr>
       <td align=left class='loc'>Ancien prix:
-        <input name='oldPrix' type='text' id="oldPrix" value='<?= $row['oldPrix'];?>' />
+        <input name='oldPrix' type='text' id="oldPrix" value='<?php echo  $row['oldPrix'];?>' />
         &euro;</td>
       <td align=left class='loc'></td>
       
     </tr>
     <tr>
       <td align=left class='loc'>Reference:
-        <input name='reference' type='text' id="reference" value="<?= $row['reference']; ?>" /></td>
+        <input name='reference' type='text' id="reference" value="<?php echo  $row['reference']; ?>" /></td>
       <td align=left class=loc>zip 
-        <!--<input type='text' name='zip' size="4" value='<?= substr($row['locfr'],0,4); ?> '/>
+        <!--<input type='text' name='zip' size="4" value='<?php echo  substr($row['locfr'],0,4); ?> '/>
 nom
-<input type='text' name='city' value='<?= substr($row['locfr'],5,strlen($row['locfr'])); ?> '/> --></td>
+<input type='text' name='city' value='<?php echo  substr($row['locfr'],5,strlen($row['locfr'])); ?> '/> --></td>
     </tr>
     <tr>
       <td align='left' class='loc'>Type:
@@ -250,8 +250,8 @@ nom
 		$tr=mysql_query($tq) or die(mysql_error());
 		while($trow=mysql_fetch_array($tr)) {
 		?>
-          <option value="<?= $trow['id']; ?>" <?php if($trow['id']==$row['type']) { echo ' selected';}; ?>>
-          <?= $trow['type_fr']; ?>
+          <option value="<?php echo  $trow['id']; ?>" <?php if($trow['id']==$row['type']) { echo ' selected';}; ?>>
+          <?php echo  $trow['type_fr']; ?>
           </option>
           <?php
 		}
@@ -264,7 +264,7 @@ nom
     </tr>
     <tr>
       <td>Rue et numéro&nbsp;
-        <input type="text" name="name" id="name" value="<?= $row['name'];?>" style="width: 200px;" />
+        <input type="text" name="name" id="name" value="<?php echo  $row['name'];?>" style="width: 200px;" />
        </td>
         <td rowspan='3'><?php
 		 
@@ -324,13 +324,13 @@ echo options($row['zone']);?>
     </tr>-->
     <tr>
       <td colspan="2" align=left class="loc">Surface
-        <input type='text' size='4' name='area' value='<?= $row['area']; ?>'/>
+        <input type='text' size='4' name='area' value='<?php echo  $row['area']; ?>'/>
         m² | Chambre(s)
         <select name='rooms'>
           <?php
 	for($i=1;$i<15;$i++) {?>
-          <option value='<?= $i; ?>' <?php if($row['rooms']==$i) { echo ' selected';} ?>>
-          <?= $i; ?>
+          <option value='<?php echo  $i; ?>' <?php if($row['rooms']==$i) { echo ' selected';} ?>>
+          <?php echo  $i; ?>
           </option>
           <?php
 	}  
@@ -340,8 +340,8 @@ echo options($row['zone']);?>
         <select name='bathrooms'>
           <?php
 	for($i=1;$i<15;$i++) {?>
-          <option value='<?= $i; ?>' <?php if($row['bathrooms']==$i) { echo ' selected';} ?>>
-          <?= $i; ?>
+          <option value='<?php echo  $i; ?>' <?php if($row['bathrooms']==$i) { echo ' selected';} ?>>
+          <?php echo  $i; ?>
           </option>
           <?php
 	}  
@@ -351,8 +351,8 @@ echo options($row['zone']);?>
         <select name='garages'>
           <?php
 	for($i=0;$i<15;$i++) {?>
-          <option value='<?= $i; ?>' <?php if($row['garages']==$i) { echo ' selected';} ?>>
-          <?= $i; ?>
+          <option value='<?php echo  $i; ?>' <?php if($row['garages']==$i) { echo ' selected';} ?>>
+          <?php echo  $i; ?>
           </option>
           <?php
 	}  
@@ -367,7 +367,7 @@ echo options($row['zone']);?>
         </select></td>
     </tr>
     <tr>
-      <td colspan="2" align="left" valign="bottom"><!--Lien Whyse: <input type='text' name='lienwhyse' value="<?= $row['lienwhyse']; ?>"  size='40'/>--></td>
+      <td colspan="2" align="left" valign="bottom"><!--Lien Whyse: <input type='text' name='lienwhyse' value="<?php echo  $row['lienwhyse']; ?>"  size='40'/>--></td>
     </tr>
     <tr>
       <td>
@@ -376,7 +376,7 @@ echo options($row['zone']);?>
     </td>
     </tr>
     <tr>
-      <td colspan="4" align="left" valign="bottom"><?= $row['datein']."  --  ".$row['update']; ?></td>
+      <td colspan="4" align="left" valign="bottom"><?php echo  $row['datein']."  --  ".$row['update']; ?></td>
     </tr>
     <tr>
       <td colspan=4 class=price align='center'><input type='submit' value='METTRE À JOUR' /></td>

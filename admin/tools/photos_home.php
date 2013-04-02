@@ -144,10 +144,10 @@ $NavBarParams=$dtl->NavBarParams;
 <table cellpadding="2" cellspacing="0" style="width: 60%; margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="background-color: #DFC599;">
-<b><?=!empty($aPhoto)?'Modifier le media':'Ajouter un media';?></b>
+<b><?php echo !empty($aPhoto)?'Modifier le media':'Ajouter un media';?></b>
 			<form name="f_photo" id="f_photo" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="photo_save" id="photo_save" value="">
-			<input type="hidden" name="photo_modif" id="photo_modif" value="<?=$aPhoto['id'];?>">
+			<input type="hidden" name="photo_modif" id="photo_modif" value="<?php echo $aPhoto['id'];?>">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td style="width: 50%">
@@ -162,7 +162,7 @@ $NavBarParams=$dtl->NavBarParams;
 									}
 									echo(makeselect('vv','ranking',$arr,(!empty($aVars['ranking'])?$aVars['ranking']:$aPhoto['ranking']),'selectbox',''));
 									?>
-									&nbsp;<?=$aInvalidFields['ranking'];?></td>
+									&nbsp;<?php echo $aInvalidFields['ranking'];?></td>
 							</tr>
 						</table>
 					</td>
@@ -183,21 +183,21 @@ $NavBarParams=$dtl->NavBarParams;
 											}
 											if($pathinfo['extension']=='swf'){
 												?>
-												<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/photo/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?=$width;?>" height="<?=$height;?>" id="<?=$nameonly;?>" align="middle">
+												<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/photo/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<?php echo $width;?>" height="<?php echo $height;?>" id="<?php echo $nameonly;?>" align="middle">
 												<param name="allowScriptAccess" value="sameDomain" />
-												<param name="movie" value="<?=UPLOADS_WS.$aPhoto['photo'];?>" /><param name="quality" value="high" />
+												<param name="movie" value="<?php echo UPLOADS_WS.$aPhoto['photo'];?>" /><param name="quality" value="high" />
 												<param name="bgcolor" value="#009966" />
-												<embed src="<?=UPLOADS_WS.$aPhoto['photo'];?>" quality="high" bgcolor="#009966" width="<?=$width;?>" height="<?=$height;?>" name="<?=$nameonly;?>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+												<embed src="<?php echo UPLOADS_WS.$aPhoto['photo'];?>" quality="high" bgcolor="#009966" width="<?php echo $width;?>" height="<?php echo $height;?>" name="<?php echo $nameonly;?>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 												</object>
 
 												<?
 											}else{
 											?>
-											<img src="<?=MEDIAS_WS;?>/banners/<?=$aPhoto['photo'];?>" style="border: solid 2px #204291; width: <?=$width;?>px; height: <?=$height;?>px;">
+											<img src="<?php echo MEDIAS_WS;?>/banners/<?php echo $aPhoto['photo'];?>" style="border: solid 2px #204291; width: <?php echo $width;?>px; height: <?php echo $height;?>px;">
 											<?}?>
 											<br><br>
 											<input type="hidden" name="delimg" id="delimg" value="" />
-											<input type="hidden" name="photo" id="photo" value="<?=$aPhoto['photo'];?>" />
+											<input type="hidden" name="photo" id="photo" value="<?php echo $aPhoto['photo'];?>" />
 											<input type="button" value="Effacer le media" onClick="document.getElementById('delimg').value=1; document.getElementById('photo_save').value=1; this.form.submit();" />
 											<?php
 										}else{
@@ -250,21 +250,21 @@ $NavBarParams=$dtl->NavBarParams;
 			
 			<div style="background-color: #AF9B78; padding: 3px;">
 				<? if ($NavBarParams["pagenum"]> 0) { ?>
-				<a href="?<?=$NavBarParams["first_link"]?>" ><<</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["first_link"]?>" ><<</a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] > 0) { ?>
-				<a href="?<?=$NavBarParams["previous_link"]?>"><</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["previous_link"]?>"><</a>&nbsp;
 				<? } ?>
 
-				Page&nbsp;<?=$NavBarParams["pagenum"]+1?>/<?=$NavBarParams["totalpages"]?>&nbsp;(<?=$NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
+				Page&nbsp;<?php echo $NavBarParams["pagenum"]+1?>/<?php echo $NavBarParams["totalpages"]?>&nbsp;(<?php echo $NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"] -1 ) { ?>            
-				<a href="?<?=$NavBarParams["next_link"]?>">></a>&nbsp;
+				<a href="?<?php echo $NavBarParams["next_link"]?>">></a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"]-1) { ?>            
-				<a href="?<?=$NavBarParams["last_link"]?>">>></a>
+				<a href="?<?php echo $NavBarParams["last_link"]?>">>></a>
 				<? } ?>
 				&nbsp;&nbsp;&nbsp;Visualiser&nbsp;par:&nbsp;
 				<?php
@@ -287,11 +287,11 @@ $NavBarParams=$dtl->NavBarParams;
 				  </tr>
 				  <? foreach($aRows as $row) { ?>
 				  <tr>
-					<td style="background-color: #EFE4D1; text-align: center;"><A href="?kind=images&todo=home&delid=<?=$row["id"];?>" OnClick="return confirm('Supprimer la photo : <?=$row["photo"]?> ?');"><img src="<?=MEDIAS_WS;?>/b_drop.png" border="0" title="Supprimer"></A>&nbsp;<A href="?kind=images&todo=home&editid=<?=$row["id"];?>" ><img src="<?=MEDIAS_WS;?>/b_edit.png" border="0" title="<?=$lang_Conf["editgroup"];?>"></a>
+					<td style="background-color: #EFE4D1; text-align: center;"><A href="?kind=images&todo=home&delid=<?php echo $row["id"];?>" OnClick="return confirm('Supprimer la photo : <?php echo $row["photo"]?> ?');"><img src="<?php echo MEDIAS_WS;?>/b_drop.png" border="0" title="Supprimer"></A>&nbsp;<A href="?kind=images&todo=home&editid=<?php echo $row["id"];?>" ><img src="<?php echo MEDIAS_WS;?>/b_edit.png" border="0" title="<?php echo $lang_Conf["editgroup"];?>"></a>
 					</td>
-					<td style="background-color: #EFE4D1; text-align: center;"><?=!empty($row["ranking"])?$row["ranking"]:'&nbsp;';?></td>
-					<td style="background-color: #EFE4D1; text-align: center;"><?=!empty($row["photo"])?$row["photo"]:'&nbsp;';?></td>
-					<td style="background-color: #EFE4D1; text-align: center;"><? if(is_file(MEDIAS_FS.PATH_DELIM.'banners'.PATH_DELIM.$row['photo'])){;?><img src="<?=MEDIAS_WS . '/banners/' . $row['photo'];?>" style="width: 150px; border: none;"><? } ?></td>
+					<td style="background-color: #EFE4D1; text-align: center;"><?php echo !empty($row["ranking"])?$row["ranking"]:'&nbsp;';?></td>
+					<td style="background-color: #EFE4D1; text-align: center;"><?php echo !empty($row["photo"])?$row["photo"]:'&nbsp;';?></td>
+					<td style="background-color: #EFE4D1; text-align: center;"><? if(is_file(MEDIAS_FS.PATH_DELIM.'banners'.PATH_DELIM.$row['photo'])){;?><img src="<?php echo MEDIAS_WS . '/banners/' . $row['photo'];?>" style="width: 150px; border: none;"><? } ?></td>
 				  </tr>
 				  <? } ?>
 			</table>
@@ -301,21 +301,21 @@ $NavBarParams=$dtl->NavBarParams;
 		<td>
 			<div style="background-color: #AF9B78; padding: 3px;">
 				<? if ($NavBarParams["pagenum"]> 0) { ?>
-				<a href="?<?=$NavBarParams["first_link"]?>" ><<</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["first_link"]?>" ><<</a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] > 0) { ?>
-				<a href="?<?=$NavBarParams["previous_link"]?>"><</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["previous_link"]?>"><</a>&nbsp;
 				<? } ?>
 
-				Page&nbsp;<?=$NavBarParams["pagenum"]+1?>/<?=$NavBarParams["totalpages"]?>&nbsp;(<?=$NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
+				Page&nbsp;<?php echo $NavBarParams["pagenum"]+1?>/<?php echo $NavBarParams["totalpages"]?>&nbsp;(<?php echo $NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"] -1 ) { ?>            
-				<a href="?<?=$NavBarParams["next_link"]?>">></a>&nbsp;
+				<a href="?<?php echo $NavBarParams["next_link"]?>">></a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"]-1) { ?>            
-				<a href="?<?=$NavBarParams["last_link"]?>">>></a>
+				<a href="?<?php echo $NavBarParams["last_link"]?>">>></a>
 				<? } ?>
 				&nbsp;&nbsp;&nbsp;Visualiser&nbsp;par:&nbsp;
 				<?php

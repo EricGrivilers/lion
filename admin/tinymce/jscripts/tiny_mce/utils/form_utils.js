@@ -1,26 +1,26 @@
 /**
- * $RCSfile: form_utils.js,v $
- * $Revision: 1.3 $
- * $Date: 2005/08/23 17:01:40 $
+ * form_utils.js
  *
- * Various form utilitiy functions.
+ * Copyright 2009, Moxiecode Systems AB
+ * Released under LGPL License.
  *
- * @author Moxiecode
- * @copyright Copyright © 2005, Moxiecode Systems AB, All rights reserved.
+ * License: http://tinymce.moxiecode.com/license
+ * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-function renderColorPicker(id, target_form_element) {
-	var html = "";
+var themeBaseURL = tinyMCEPopup.editor.baseURI.toAbsolute('themes/' + tinyMCEPopup.getParam("theme"));
 
-	html += '<a id="' + id + '_link" href="javascript:tinyMCEPopup.pickColor(event,\'' + target_form_element +'\');" onmousedown="return false;">';
-	html += '<img id="' + id + '" src="../../themes/advanced/images/color.gif"';
-	html += ' onmouseover="tinyMCE.switchClass(this,\'mceButtonOver\');"';
-	html += ' onmouseout="tinyMCE.restoreClass(this);"';
-	html += ' onmousedown="tinyMCE.restoreAndSwitchClass(this,\'mceButtonDown\');"';
-	html += ' width="20" height="16" border="0" title="' + tinyMCE.getLang('lang_browse') + '"';
-	html += ' class="mceButtonNormal" alt="' + tinyMCE.getLang('lang_browse') + '" /></a>';
+function getColorPickerHTML(id, target_form_element) {
+	var h = "", dom = tinyMCEPopup.dom;
 
-	document.write(html);
+	if (label = dom.select('label[for=' + target_form_element + ']')[0]) {
+		label.id = label.id || dom.uniqueId();
+	}
+
+	h += '<a role="button" aria-labelledby="' + id + '_label" id="' + id + '_link" href="javascript:;" onclick="tinyMCEPopup.pickColor(event,\'' + target_form_element +'\');" onmousedown="return false;" class="pickcolor">';
+	h += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;<span id="' + id + '_label" class="mceVoiceLabel mceIconOnly" style="display:none;">' + tinyMCEPopup.getLang('browse') + '</span></span></a>';
+
+	return h;
 }
 
 function updateColor(img_id, form_element_id) {
@@ -35,43 +35,44 @@ function setBrowserDisabled(id, state) {
 		if (state) {
 			lnk.setAttribute("realhref", lnk.getAttribute("href"));
 			lnk.removeAttribute("href");
-			tinyMCE.switchClass(img, 'mceButtonDisabled', true);
+			tinyMCEPopup.dom.addClass(img, 'disabled');
 		} else {
-			lnk.setAttribute("href", lnk.getAttribute("realhref"));
-			tinyMCE.switchClass(img, 'mceButtonNormal', false);
+			if (lnk.getAttribute("realhref"))
+				lnk.setAttribute("href", lnk.getAttribute("realhref"));
+
+			tinyMCEPopup.dom.removeClass(img, 'disabled');
 		}
 	}
 }
 
-function renderBrowser(id, target_form_element, type, prefix) {
-	var option = prefix + "_" + type + "_browser_callback";
-	var cb = tinyMCE.getParam(option, tinyMCE.getParam("file_browser_callback"));
-	if (cb == null)
-		return;
+function getBrowserHTML(id, target_form_element, type, prefix) {
+	var option = prefix + "_" + type + "_browser_callback", cb, html;
 
-	var html = "";
+	cb = tinyMCEPopup.getParam(option, tinyMCEPopup.getParam("file_browser_callback"));
 
-	html += '<a id="' + id + '_link" href="javascript:openBrower(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;">';
-	html += '<img id="' + id + '" src="../../themes/advanced/images/browse.gif"';
-	html += ' onmouseover="tinyMCE.switchClass(this,\'mceButtonOver\');"';
-	html += ' onmouseout="tinyMCE.restoreClass(this);"';
-	html += ' onmousedown="tinyMCE.restoreAndSwitchClass(this,\'mceButtonDown\');"';
-	html += ' width="20" height="18" border="0" title="' + tinyMCE.getLang('lang_browse') + '"';
-	html += ' class="mceButtonNormal" alt="' + tinyMCE.getLang('lang_browse') + '" /></a>';
+	if (!cb)
+		return "";
 
-	document.write(html);
+	html = "";
+	html += '<a id="' + id + '_link" href="javascript:openBrowser(\'' + id + '\',\'' + target_form_element + '\', \'' + type + '\',\'' + option + '\');" onmousedown="return false;" class="browse">';
+	html += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;</span></a>';
+
+	return html;
 }
 
-function openBrower(img_id, target_form_element, type, option) {
+function openBrowser(img_id, target_form_element, type, option) {
 	var img = document.getElementById(img_id);
 
 	if (img.className != "mceButtonDisabled")
 		tinyMCEPopup.openBrowser(target_form_element, type, option);
 }
 
-function selectByValue(form_obj, field_name, value, add_custom) {
+function selectByValue(form_obj, field_name, value, add_custom, ignore_case) {
 	if (!form_obj || !form_obj.elements[field_name])
 		return;
+
+	if (!value)
+		value = "";
 
 	var sel = form_obj.elements[field_name];
 
@@ -79,7 +80,7 @@ function selectByValue(form_obj, field_name, value, add_custom) {
 	for (var i=0; i<sel.options.length; i++) {
 		var option = sel.options[i];
 
-		if (option.value == value) {
+		if (option.value == value || (ignore_case && option.value.toLowerCase() == value.toLowerCase())) {
 			option.selected = true;
 			found = true;
 		} else
@@ -87,9 +88,10 @@ function selectByValue(form_obj, field_name, value, add_custom) {
 	}
 
 	if (!found && add_custom && value != '') {
-		var option = new Option('Value: ' + value, value);
+		var option = new Option(value, value);
 		option.selected = true;
 		sel.options[sel.options.length] = option;
+		sel.selectedIndex = sel.options.length - 1;
 	}
 
 	return found;
@@ -98,17 +100,23 @@ function selectByValue(form_obj, field_name, value, add_custom) {
 function getSelectValue(form_obj, field_name) {
 	var elm = form_obj.elements[field_name];
 
-	if (elm == null || elm.options == null)
+	if (elm == null || elm.options == null || elm.selectedIndex === -1)
 		return "";
 
 	return elm.options[elm.selectedIndex].value;
 }
 
+function addSelectValue(form_obj, field_name, name, value) {
+	var s = form_obj.elements[field_name];
+	var o = new Option(name, value);
+	s.options[s.options.length] = o;
+}
+
 function addClassesToList(list_id, specific_option) {
 	// Setup class droplist
 	var styleSelectElm = document.getElementById(list_id);
-	var styles = tinyMCE.getParam('theme_advanced_styles', false);
-	styles = tinyMCE.getParam(specific_option, styles);
+	var styles = tinyMCEPopup.getParam('theme_advanced_styles', false);
+	styles = tinyMCEPopup.getParam(specific_option, styles);
 
 	if (styles) {
 		var stylesAr = styles.split(';');
@@ -124,10 +132,9 @@ function addClassesToList(list_id, specific_option) {
 			}
 		}
 	} else {
-		// Use auto impored classes
-		var csses = tinyMCE.getCSSClasses(tinyMCE.getWindowArg('editor_id'));
-		for (var i=0; i<csses.length; i++)
-			styleSelectElm.options[styleSelectElm.length] = new Option(csses[i], csses[i]);
+		tinymce.each(tinyMCEPopup.editor.dom.getClasses(), function(o) {
+			styleSelectElm.options[styleSelectElm.length] = new Option(o.title || o['class'], o['class']);
+		});
 	}
 }
 
@@ -135,4 +142,69 @@ function isVisible(element_id) {
 	var elm = document.getElementById(element_id);
 
 	return elm && elm.style.display != "none";
+}
+
+function convertRGBToHex(col) {
+	var re = new RegExp("rgb\\s*\\(\\s*([0-9]+).*,\\s*([0-9]+).*,\\s*([0-9]+).*\\)", "gi");
+
+	var rgb = col.replace(re, "$1,$2,$3").split(',');
+	if (rgb.length == 3) {
+		r = parseInt(rgb[0]).toString(16);
+		g = parseInt(rgb[1]).toString(16);
+		b = parseInt(rgb[2]).toString(16);
+
+		r = r.length == 1 ? '0' + r : r;
+		g = g.length == 1 ? '0' + g : g;
+		b = b.length == 1 ? '0' + b : b;
+
+		return "#" + r + g + b;
+	}
+
+	return col;
+}
+
+function convertHexToRGB(col) {
+	if (col.indexOf('#') != -1) {
+		col = col.replace(new RegExp('[^0-9A-F]', 'gi'), '');
+
+		r = parseInt(col.substring(0, 2), 16);
+		g = parseInt(col.substring(2, 4), 16);
+		b = parseInt(col.substring(4, 6), 16);
+
+		return "rgb(" + r + "," + g + "," + b + ")";
+	}
+
+	return col;
+}
+
+function trimSize(size) {
+	return size.replace(/([0-9\.]+)(px|%|in|cm|mm|em|ex|pt|pc)/i, '$1$2');
+}
+
+function getCSSSize(size) {
+	size = trimSize(size);
+
+	if (size == "")
+		return "";
+
+	// Add px
+	if (/^[0-9]+$/.test(size))
+		size += 'px';
+	// Sanity check, IE doesn't like broken values
+	else if (!(/^[0-9\.]+(px|%|in|cm|mm|em|ex|pt|pc)$/i.test(size)))
+		return "";
+
+	return size;
+}
+
+function getStyle(elm, attrib, style) {
+	var val = tinyMCEPopup.dom.getAttrib(elm, attrib);
+
+	if (val != '')
+		return '' + val;
+
+	if (typeof(style) == 'undefined')
+		style = attrib;
+
+	return tinyMCEPopup.dom.getStyle(elm, style);
 }

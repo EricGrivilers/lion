@@ -35,26 +35,26 @@ ob_start();
     <td colspan="2" align="center">&nbsp;</td>
   </tr>
   <tr>
-    <td colspan="2" align="center" style="font-weight: bold;">Référence: <?=$row['reference'];?>&nbsp;&nbsp;<a href="<?=ROOT_WS.'/admin/pdf/'.$basename;?>" target="_blank"><img src="<?=ROOT_WS.'/medias/pdf.gif';?>" style="border: none;"></a></td>
+    <td colspan="2" align="center" style="font-weight: bold;">Référence: <?php echo $row['reference'];?>&nbsp;&nbsp;<a href="<?php echo ROOT_WS.'/admin/pdf/'.$basename;?>" target="_blank"><img src="<?php echo ROOT_WS.'/medias/pdf.gif';?>" style="border: none;"></a></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" style="font-weight: bold;"><?=rawurldecode($_GET['rawstats']);?></td>
+    <td colspan="2" align="center" style="font-weight: bold;"><?php echo rawurldecode($_GET['rawstats']);?></td>
   </tr>
   <tr>
     <td>Visites</td>
-    <td align="left"><img src="<?=ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?= $_GET['itemId']; ?>&period=days" /></td>
+    <td align="left"><img src="<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=days" /></td>
   </tr>
   <tr>
     <td>Moyenne hebdomadaire<br />(par jour de semaine)</td>
-    <td align="left"><img src="<?=ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?= $_GET['itemId']; ?>&period=wdays" /></td>
+    <td align="left"><img src="<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=wdays" /></td>
   </tr>
    <tr>
     <td>Visites hebdomadaires</td>
-    <td align="left"><img src="<?=ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?= $_GET['itemId']; ?>&period=weeks" /></td>
+    <td align="left"><img src="<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=weeks" /></td>
   </tr>
   <tr>
     <td>Visites mensuelles</td>
-    <td align="left"><img src="<?=ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?= $_GET['itemId']; ?>&period=months" /></td>
+    <td align="left"><img src="<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=months" /></td>
   </tr>
 </table>
 <br /><br />
@@ -66,10 +66,10 @@ $q="select * from users2items,users where itemId='".$_GET['itemId']."' and userI
 $r=mysql_query($q) or die(mysql_error());
 while($row=mysql_fetch_array($r)) {
 ?>
-  <tr class='rank<?= $o; ?>'>
+  <tr class='rank<?php echo  $o; ?>'>
    
-    <td><a href='index.php?kind=users&userId=<?= $row['userId']; ?>'><?= $row['firstname']." ".strtoupper($row['lastname']); ?></a></td>
-   <td><?= shakeDate($row['date']); ?></td>
+    <td><a href='index.php?kind=users&userId=<?php echo  $row['userId']; ?>'><?php echo  $row['firstname']." ".strtoupper($row['lastname']); ?></a></td>
+   <td><?php echo  shakeDate($row['date']); ?></td>
    </tr>
   <?php
 $o++;

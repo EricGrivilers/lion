@@ -148,10 +148,10 @@ foreach($aItemsLoc as $k=>$v){
 <table cellpadding="2" cellspacing="0" style="width: 60%; margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="background-color: #DFC599;">
-<b><?=!empty($aPhoto)?'Modifier le media':'Ajouter un media';?></b>
+<b><?php echo !empty($aPhoto)?'Modifier le media':'Ajouter un media';?></b>
 			<form name="f_photo" id="f_photo" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="photo_save" id="photo_save" value="">
-			<input type="hidden" name="photo_modif" id="photo_modif" value="<?=$aPhoto['id'];?>">
+			<input type="hidden" name="photo_modif" id="photo_modif" value="<?php echo $aPhoto['id'];?>">
 			<table width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td style="width: 70%">
@@ -166,35 +166,35 @@ foreach($aItemsLoc as $k=>$v){
 									}
 									echo(makeselect('vv','ranking',$arr,(!empty($aVars['ranking'])?$aVars['ranking']:$aPhoto['ranking']),'selectbox',''));
 									?>
-									&nbsp;<?=$aInvalidFields['ranking'];?></td>
+									&nbsp;<?php echo $aInvalidFields['ranking'];?></td>
 							</tr>
 						</table>
 					</td>
 					<td style="width: 30%">
 						<div name="photodiv" id="photodiv" style="height: 150px;">
 							<? if(!empty($aPhoto) && is_array($aPhoto)){ ?>
-							<img src="<?=PICTURES_WS.'/thumbs/'.$aPhoto['photo'].'.jpg';?>">
+							<img src="<?php echo PICTURES_WS.'/thumbs/'.$aPhoto['photo'].'.jpg';?>">
 							<? } ?>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<b>CHOISIR PARMIS:</b>&nbsp;<?=$aInvalidFields['select'];?><br />
+						<b>CHOISIR PARMIS:</b>&nbsp;<?php echo $aInvalidFields['select'];?><br />
 						Ventes:<br />
 						<select name="ventes" id="ventes" style="width: 550px;" onClick="if(this.value!=''){document.getElementById('locs').selectedIndex=0;document.getElementById('newz').selectedIndex=0;}" onBlur="if(this.value==''){document.getElementById('photodiv').innerHTML='';}">
 							<option onMouseOver="document.getElementById('photodiv').innerHTML='';" ></option>
-							<?=$seloptsVente;?>
+							<?php echo $seloptsVente;?>
 						</select><br />
 						ou Locations:<br />
 						<select name="locs" id="locs" style="width: 550px;" onClick="if(this.value!=''){document.getElementById('ventes').selectedIndex=0;document.getElementById('newz').selectedIndex=0;}" onBlur="if(this.value==''){document.getElementById('photodiv').innerHTML='';}">
 							<option onMouseOver="document.getElementById('photodiv').innerHTML='';" ></option>
-							<?=$seloptsLoc;?>
+							<?php echo $seloptsLoc;?>
 						</select><br />
 						ou Nouveautés:<br />
 						<select name="newz" id="newz" style="width: 550px;" onClick="if(this.value!=''){document.getElementById('locs').selectedIndex=0;document.getElementById('ventes').selectedIndex=0;}" onBlur="if(this.value==''){document.getElementById('photodiv').innerHTML='';}">
 							<option onMouseOver="document.getElementById('photodiv').innerHTML='';" ></option>
-							<?=$seloptsNew;?>
+							<?php echo $seloptsNew;?>
 						</select>
 					</td>
 				</tr>
@@ -233,21 +233,21 @@ foreach($aItemsLoc as $k=>$v){
 			
 			<div style="background-color: #AF9B78; padding: 3px;">
 				<? if ($NavBarParams["pagenum"]> 0) { ?>
-				<a href="?<?=$NavBarParams["first_link"]?>" ><<</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["first_link"]?>" ><<</a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] > 0) { ?>
-				<a href="?<?=$NavBarParams["previous_link"]?>"><</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["previous_link"]?>"><</a>&nbsp;
 				<? } ?>
 
-				Page&nbsp;<?=$NavBarParams["pagenum"]+1?>/<?=$NavBarParams["totalpages"]?>&nbsp;(<?=$NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
+				Page&nbsp;<?php echo $NavBarParams["pagenum"]+1?>/<?php echo $NavBarParams["totalpages"]?>&nbsp;(<?php echo $NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"] -1 ) { ?>            
-				<a href="?<?=$NavBarParams["next_link"]?>">></a>&nbsp;
+				<a href="?<?php echo $NavBarParams["next_link"]?>">></a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"]-1) { ?>            
-				<a href="?<?=$NavBarParams["last_link"]?>">>></a>
+				<a href="?<?php echo $NavBarParams["last_link"]?>">>></a>
 				<? } ?>
 				&nbsp;&nbsp;&nbsp;Visualiser&nbsp;par:&nbsp;
 				<?php
@@ -271,9 +271,9 @@ foreach($aItemsLoc as $k=>$v){
 				  </tr>
 				  <? foreach($aRows as $row) { ?>
 				  <tr>
-					<td style="background-color: #EFE4D1; text-align: center;"><A href="?kind=images&todo=slide&delid=<?=$row["id"];?>" OnClick="return confirm('Supprimer la photo : <?=$row["photo"]?> ?');"><img src="<?=MEDIAS_WS;?>/b_drop.png" border="0" title="Supprimer"></A>&nbsp;<A href="?kind=images&todo=slide&editid=<?=$row["id"];?>" ><img src="<?=MEDIAS_WS;?>/b_edit.png" border="0" title="<?=$lang_Conf["editgroup"];?>"></a>
+					<td style="background-color: #EFE4D1; text-align: center;"><A href="?kind=images&todo=slide&delid=<?php echo $row["id"];?>" OnClick="return confirm('Supprimer la photo : <?php echo $row["photo"]?> ?');"><img src="<?php echo MEDIAS_WS;?>/b_drop.png" border="0" title="Supprimer"></A>&nbsp;<A href="?kind=images&todo=slide&editid=<?php echo $row["id"];?>" ><img src="<?php echo MEDIAS_WS;?>/b_edit.png" border="0" title="<?php echo $lang_Conf["editgroup"];?>"></a>
 					</td>
-					<td style="background-color: #EFE4D1; text-align: center;"><?=!empty($row["ranking"])?$row["ranking"]:'&nbsp;';?></td>
+					<td style="background-color: #EFE4D1; text-align: center;"><?php echo !empty($row["ranking"])?$row["ranking"]:'&nbsp;';?></td>
 					<td style="background-color: #EFE4D1; text-align: center;">
 						<?php
 						if( strtotime($row['datein']) >= mktime(0, 0, 0, date("m")-1, date("d"),   date("Y")) ){
@@ -286,7 +286,7 @@ foreach($aItemsLoc as $k=>$v){
 						
 						?>
 					</td>
-					<td style="background-color: #EFE4D1; text-align: center;"><?=$row['locfr'].'<br />'.$row['descrfr'];?></td>
+					<td style="background-color: #EFE4D1; text-align: center;"><?php echo $row['locfr'].'<br />'.$row['descrfr'];?></td>
 					<td style="background-color: #EFE4D1; text-align: center;">
 
 						<?php
@@ -310,21 +310,21 @@ foreach($aItemsLoc as $k=>$v){
 		<td>
 			<div style="background-color: #AF9B78; padding: 3px;">
 				<? if ($NavBarParams["pagenum"]> 0) { ?>
-				<a href="?<?=$NavBarParams["first_link"]?>" ><<</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["first_link"]?>" ><<</a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] > 0) { ?>
-				<a href="?<?=$NavBarParams["previous_link"]?>"><</a>&nbsp;
+				<a href="?<?php echo $NavBarParams["previous_link"]?>"><</a>&nbsp;
 				<? } ?>
 
-				Page&nbsp;<?=$NavBarParams["pagenum"]+1?>/<?=$NavBarParams["totalpages"]?>&nbsp;(<?=$NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
+				Page&nbsp;<?php echo $NavBarParams["pagenum"]+1?>/<?php echo $NavBarParams["totalpages"]?>&nbsp;(<?php echo $NavBarParams["totalrows"]?>&nbsp;Résultats&nbsp;trouvés)&nbsp;
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"] -1 ) { ?>            
-				<a href="?<?=$NavBarParams["next_link"]?>">></a>&nbsp;
+				<a href="?<?php echo $NavBarParams["next_link"]?>">></a>&nbsp;
 				<? } ?>
 
 				<? if ($NavBarParams["pagenum"] < $NavBarParams["totalpages"]-1) { ?>            
-				<a href="?<?=$NavBarParams["last_link"]?>">>></a>
+				<a href="?<?php echo $NavBarParams["last_link"]?>">>></a>
 				<? } ?>
 				&nbsp;&nbsp;&nbsp;Visualiser&nbsp;par:&nbsp;
 				<?php

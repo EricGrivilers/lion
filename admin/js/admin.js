@@ -51,3 +51,27 @@ function deleteUser(userId) {
 		}
 	}
 }
+
+
+function getLatLng() {
+	
+	
+	//	alert($(this).find('small a').attr('href'));
+		href=$('#f_quartier small a').attr('href');
+		
+		t=href.split('&');
+		for (var i=0;i<t.length;i++)
+		{
+			a=t[i].split('=');
+			if(a[0]=='ll') {
+				latlng=a[1]
+			} 
+			if(a[0]=='z') {
+				zoom=a[1]
+			} 
+		}	
+		
+		$('#LatLng').val(latlng);
+		$('#zoom').val(zoom);
+	
+}

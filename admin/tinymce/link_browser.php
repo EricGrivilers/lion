@@ -40,9 +40,9 @@ function insertLink() {
 </script>
 <form name="theForm" action="link_browser.php" method='post'>
 <input type='hidden' name='parentId' value='0'>
-<input type='hidden' name='fieldname' value='<?=$fieldname; ?>'>
-<input type='hidden' name='language' value='<?=$language;?>'>
-<input type='hidden' name='alink' value='<?=$alink; ?>'>
+<input type='hidden' name='fieldname' value='<?php echo $fieldname; ?>'>
+<input type='hidden' name='language' value='<?php echo $language;?>'>
+<input type='hidden' name='alink' value='<?php echo $alink; ?>'>
 <table border=0 cellpadding=0 cellspacing=0 width=90%>
 <tr><td><select name="_parent" onChange="createLink()">
 
@@ -57,7 +57,7 @@ else {
 	$parentName=$_parent[1];
 }
 ?>
-<option><?=$parentName; ?></option>
+<option><?php echo $parentName; ?></option>
 <option>-----------</option>
 <?php
 switch($parentId) {
@@ -73,7 +73,7 @@ echo $q;
 $r=mysql_query($q) or die(mysql_error());
 while($row=mysql_fetch_array($r)) {
 ?>
-<option value='<?=$row['rank']."|".$row[$language]; ?>'><?=$row[$language]; ?></option>
+<option value='<?php echo $row['rank']."|".$row[$language]; ?>'><?php echo $row[$language]; ?></option>
 <?php
 }
 ?>

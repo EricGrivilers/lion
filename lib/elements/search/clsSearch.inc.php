@@ -1,5 +1,5 @@
 <?php
-
+require_once __root__.'/lib/Twig/lib/Twig/Autoloader.php';
 
 class search extends element {
 
@@ -8,6 +8,8 @@ class search extends element {
 	var $areas;
 	var $cities;
 	
+
+
 	function display() {
 		if(empty($_GET['searchType'])) {
 			$_GET['searchType']='sale';			   
@@ -19,6 +21,13 @@ class search extends element {
 	
 	function getForm() {
 		
+		Twig_Autoloader::register();
+
+$loader = new Twig_Loader_Filesystem(__root__.'lib/templates');
+$twig = new Twig_Environment($loader, array('debug' => true,'autoescape'=>false));
+$twig->addExtension(new Twig_Extension_Debug());
+
+		
 		$db=new DB;
 		$db->query="SELECT * FROM  `prices` ORDER BY price";
 		$db->setQuery();
@@ -28,7 +37,16 @@ class search extends element {
 			$this->prices[$price['type']][]=$price['price'];
 			
 		}
-		
+
+
+
+		$db=new DB;
+		$db->query="SELECT id,nom_quartier FROM  `quartiers` ORDER BY nom_quartier";
+		$db->setQuery();
+		$quartiers=$db->output;
+
+
+
 		$db=new DB;
 		$db->query="SELECT type_".$_SESSION['language']." as label FROM  `type`";
 		$db->setQuery();
@@ -43,7 +61,9 @@ class search extends element {
 		$out.="<div class='searchHeader'><div class='main'>".l::t("RECHERCHE")." : <div id='radio'><input type='radio' id='searchTypeSale' name='searchType' value='sale' onclick='changeSearchType()' ".$this->isChecked2('searchType','sale')." /><label for='searchTypeSale'>&nbsp;</label> ".l::t("Vente")." <input type='radio' name='searchType' id='searchTypeRent' value='rent' onclick='changeSearchType()' ".$this->isChecked2('searchType','rent')." /><label for='searchTypeRent'>&nbsp;</label> ".l::t("Location")."</div></div><div class='infos'>".l::t("Précisez votre recherche (choix multiples)").":</div></div>";
 		
 		$out.="<table cellspacing='0' cellpadding='0' id='searchTable'>";
-		$out.="<tr id='types'>
+		$out.="
+		<tbody class='collapsible'>
+		<tr id='types'>
 		<td><input type='checkbox' id='type_1' name='type[1]' value=\"".$this->types[0]['label']."\" ".$this->isChecked('type',1,$this->types[0]['label'])." /><label for='type_1'>".strtoupper($this->types[0]['label'])."</label></td>
 		<td><input type='checkbox' id='type_2' name='type[2]' value=\"".$this->types[1]['label']."\" ".$this->isChecked('type',2,$this->types[1]['label'])." /><label for='type_2'>".strtoupper($this->types[1]['label'])."</label></td>
 		<td><input type='checkbox' id='type_3' name='type[3]' value=\"".$this->types[2]['label']."\" ".$this->isChecked('type',3,$this->types[2]['label'])." /><label for='type_3'>".strtoupper($this->types[2]['label'])."</label></td>
@@ -83,7 +103,8 @@ class search extends element {
 		$out.="<tr id='cities'>
 		<td colspan='2'><input type='checkbox' id='area_3' name='area[3]' value=\"3\" ".$this->isChecked('area',3,3)." /><label for='area_3'>".$this->areas[2]."</label></td>
 		<td><input type='checkbox' id='area_4' name='area[4]' value=\"4\" ".$this->isChecked('area',4,4)." /><label for='area_4'>".$this->areas[3]."</label></td>
-		</tr>";
+		</tr>
+		</tbody>";
 		
 		
 		$out.="<tr><td colspan='2' class='ref'><input type='text' name='ref' id='ref' ";
@@ -98,6 +119,11 @@ class search extends element {
 		$out.="</table>";
 		$out.="</form>";
 		
+		$tab="generale";
+		if($_GET['quartier'] || $_GET['address'] ) {
+			$tab="geographique";
+		}
+		$out=$twig->render("search/form.tpl",array('language'=>$_SESSION['language'],'get'=>$_GET,'prices'=>$this->prices,'types'=>$this->types,'areas'=>$this->areas,'tab'=>$tab,'quartiers'=>$quartiers));
 		return $out;
 		
 		

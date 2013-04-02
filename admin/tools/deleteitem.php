@@ -3,7 +3,7 @@ switch($_GET['level']) {
 
 	default:
 	?>
-	<table border=0 class=thumb align=center bgcolor="#FF6600"><tr><td class=title>Etes-vous sûr de vouloir supprimer ce bien (cette action est irrévocable)<br /><input type=button value='oui' onclick="document.location='index.php?kind=item&action=delete&level=1&itemId=<?= $_GET['itemId']; ?>';"/><input type=button value='non' onclick="history.back()"/></td></tr></table>
+	<table border=0 class=thumb align=center bgcolor="#FF6600"><tr><td class=title>Etes-vous sûr de vouloir supprimer ce bien (cette action est irrévocable)<br /><input type=button value='oui' onclick="document.location='index.php?kind=item&action=delete&level=1&itemId=<?php echo  $_GET['itemId']; ?>';"/><input type=button value='non' onclick="history.back()"/></td></tr></table>
 	
 	<?php
 	$q="select * from items where num='".$_GET['itemId']."'";
@@ -47,13 +47,13 @@ if($row['vendu']=='Y') {
     </tr>
     <tr>
       <td colspan=3 align=left class='loc'>
-	  <table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td class=price2 width=30%><?= $row['locfr'];?></td><td class=price2  width=30% align=center><?= $tPrix;?></td><td class=price align=right ></td>
+	  <table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td class=price2 width=30%><?php echo  $row['locfr'];?></td><td class=price2  width=30% align=center><?php echo  $tPrix;?></td><td class=price align=right ></td>
 	  </tr><tr><td colspan=3>&nbsp;</td></tr></table></td>
       <td >&nbsp;</td>
     </tr>
     <tr>
       <td align=left><table border=0 cellpadding=0 cellspacing=0><tr><td><img src='medias/spirit.gif' width=400 height=1 /></td></tr><tr><td align=center>
-	  <img src='../photos/big/<?= $row['photo'];?>.jpg'></td></tr></table></td>
+	  <img src='../photos/big/<?php echo  $row['photo'];?>.jpg'></td></tr></table></td>
       <td colspan=2 class='descro' align=center><!-- thumbs -->
         <table border=0 cellpadding=5 cellspacing=0 bgcolor="#020935" width=320>
 		<tr><td colspan=2><img src='medias/spirit.gif' width=280 height=1 /></td></tr>
@@ -61,10 +61,10 @@ if($row['vendu']=='Y') {
 		 <!-- <tr>
             <td class=price><?php if($row['reference']!='') {?>
         (ref.:
-        <?= $row['reference'];?>
+        <?php echo  $row['reference'];?>
         )
         <?php }?></td>
-            <td class=price> <?= $tPrix;?></td>
+            <td class=price> <?php echo  $tPrix;?></td>
           </tr>-->
         </table></td>
     </tr>
@@ -73,18 +73,18 @@ if($row['vendu']=='Y') {
     </tr>
     <tr>
       <td align=left><!--<span class="loc">
-        <?= $row['locfr'];?>
+        <?php echo  $row['locfr'];?>
         </span>--></td>
       <td colspan=2 align=right class='price'><?php if($row['reference']!='') {?>
         (ref.:
-        <?= $row['reference'];?>
+        <?php echo  $row['reference'];?>
         )
         <?php }?></td>
       <td align=left>&nbsp;</td>
     </tr>
 	<tr>
       <td colspan=4 align=left class="descro">
-        <?= $row['descrfr'];?>      </td>
+        <?php echo  $row['descrfr'];?>      </td>
     </tr>
 	<tr>
       <td colspan=4 align=left class="descro">&nbsp;
@@ -92,7 +92,7 @@ if($row['vendu']=='Y') {
     </tr>
 	<tr>
       <td colspan=4 align=left class="descro">
-        <?= $row['moredescrfr'];?>      </td>
+        <?php echo  $row['moredescrfr'];?>      </td>
     </tr>
 	<tr>
       <td colspan=4 align=left>&nbsp;</td>
@@ -128,14 +128,14 @@ if($row['vendu']=='Y') {
 		  <td class=detailb>aa</td></tr></table>-->
 		  <table border=0 class="detail" cellspacing=0 cellpadding=5 width=720><tr>
 		 <td class=detaila>surface</td>
-          <td class=detailb><?= $row['area']; ?>&nbsp;m²</td>
+          <td class=detailb><?php echo  $row['area']; ?>&nbsp;m²</td>
 		  <td class=detaila>chambre(s)</td>
-          <td class=detailb><?= $row['rooms']; ?></td>
+          <td class=detailb><?php echo  $row['rooms']; ?></td>
 		  <td class=detaila>salle(s) d'eau</td>
-		  <td class=detailb><?= $row['bathrooms']; ?></td>
+		  <td class=detailb><?php echo  $row['bathrooms']; ?></td>
 		  <td class=detaila>garage(s)</td>
-		  <td class=detailb><?= $row['garages']; ?></td>
-		  <td class=detaila><?= $row['garden']; ?></td>
+		  <td class=detailb><?php echo  $row['garages']; ?></td>
+		  <td class=detaila><?php echo  $row['garden']; ?></td>
 		  </tr></table>      </td>
     </tr>
 	<tr>

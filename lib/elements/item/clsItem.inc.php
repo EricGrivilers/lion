@@ -1,4 +1,10 @@
 <?php
+require_once __root__.'/lib/Twig/lib/Twig/Autoloader.php';
+include_once __root__.'/lib/GoogleMap/GoogleMap.php';
+include_once __root__.'/lib/GoogleMap/JSMin.php';
+
+
+
 
 class item extends element {
 	
@@ -31,8 +37,8 @@ class item extends element {
 		*/
 		//print_r($_SESSION['items']);
 		$db=new DB;
-		$db->query="SELECT items.num as itemId,items.reference,items.tphoto as photo,items.location FROM items  WHERE items.num IN (".implode(',',$_SESSION['items']).")  GROUP BY items.num";
-		$db->query="SELECT items.num as itemId,items.reference,items.location,photo2item.photo   FROM items  LEFT JOIN photo2item ON photo2item.item_id=items.num WHERE items.num IN (".implode(',',$_SESSION['items']).")  GROUP BY items.num ORDER BY ranking";
+	//	$db->query="SELECT items.num as itemId,items.reference,items.tphoto as photo,items.location FROM items  WHERE items.num IN (".implode(',',$_SESSION['items']).")  GROUP BY items.num";
+	//	$db->query="SELECT items.num as itemId,items.reference,items.location,photo2item.photo   FROM items  LEFT JOIN photo2item ON photo2item.item_id=items.num WHERE items.num IN (".implode(',',$_SESSION['items']).")  GROUP BY items.num ORDER BY ranking";
 		$db->query="SELECT items.num as itemId,items.reference,items.location,items.photo   FROM items  WHERE items.num IN (".implode(',',$_SESSION['items']).")  ";
 		$db->setQuery();
 		//echo $db->query;
@@ -77,6 +83,13 @@ class item extends element {
 	
 	function detail() {
 		
+
+		Twig_Autoloader::register();
+
+		$loader = new Twig_Loader_Filesystem(__root__.'lib/templates');
+		$twig = new Twig_Environment($loader, array('debug' => true,'autoescape'=>false));
+		$twig->addExtension(new Twig_Extension_Debug());
+
 		$this->reference=preg_replace('/030\//','',$this->reference);
 		$db=new DB;
 		$db->query="SELECT I.*,Q.googlecode FROM items I LEFT JOIN quartiers Q ON Q.id=I.quartier_id WHERE I.reference LIKE '%/".$this->reference."' AND I.actif='Y' LIMIT 0,1";
@@ -87,7 +100,7 @@ class item extends element {
 		
 		//print_r($this->item);
 		if($this->item['num']<=0) {
-			$out="<div class='alert'>";
+			$out="<div class='alert error'>";
 			$out.= l::t("Aucun bien ne correspond à cette recherche.");
 			$out.="</div>";
 			return $out;
@@ -126,9 +139,14 @@ class item extends element {
 		$db->query="UPDATE item_statsv2 SET  days='".implode(",",$days)."',months='".implode(",",$months)."', weeks='".implode(",",$weeks)."', years='".implode(",",$years)."', wdays='".implode(",",$wdays)."' WHERE itemId='".$this->item['num']."'";
 		//echo $db->query;
 		
+
+
+
+
+
 		$out.="<input type='hidden' id='num' name='num' value='".$this->item['num']."' />";
-		$out.="<div id='item'>";
-		$out.="<div  class='listHeader'>";
+		$out.="<div id='item'><a name='item'></a>";
+		$out.="<div  class='listHeader row-fluid'>";
 		$out.="<div class='resultsIntro'>";
 		$out.="<span style='font-size:15px;font-weight:bold;color:#5a5a5a'>Bien à ";
 		($this->item['location']=='Y')? $out.="louer":$out.="vendre";
@@ -136,28 +154,39 @@ class item extends element {
 		$out.="</div>";
 		$out.="<div class='nextBack'>";
 		//$out.="<li><a onclick=\"$('#ref').val(0);$('#searchForm').submit();\"><img src='/medias/print.gif' alt='print' /></a></li>";
-		$out.="<li><a onclick=\"$('#ref').val('');$('#searchForm').submit();\">&lt;&lt; ".l::t("Retour à la liste")."</a></li>";
+		//$out.="<li><a onclick=\"$('#ref').val('');$('#searchForm').submit();\">&lt;&lt; ".l::t("Retour à la liste")."</a></li>";
 		
 		$out.="</div>";
 		$out.="</div>";
 		
 		
-		
-		$out.="<div id='tabs'>";
-		$out.="<ul>";
+		$out.='<ul class="nav nav-tabs itemDetail">
+		<li class="pull-left"><a onclick="$(\'#ref\').val(\'\');$(\'#searchForm\').submit()"><i class="icon icon-th"></i> '.l::t("Retour à la liste").'</a></li>
+			  <li class=" active pull-right"><a href="#picts_tab" data-toggle="tab" ><i class="icon  icon-camera"></i> '.l::t("Photos").'</a></li>
+			  <li class="pull-right"><a href="#map_tab"  data-toggle="tab"><i class="icon  icon-map-marker"></i> '.l::t("Plan").'</a></li>
+			  
+			</ul>';
+		$out.="<div id='tabs' >";
+		/*$out.="<ul>";
 		$out.="<li class='current'><a href='#picts_tab'><span>".l::t("Photos")."</span></a></li>";
 		$out.="<li><a href='#map_tab'><span>".l::t("Plan")."</span></a></li>";
 		$out.="</ul>";
-		$out.="<div id='picts_tab' class='tabDiv'>";
+		*/
+		$out.="<div class='tab-content'>";
+		$out.="<div id='picts_tab' class='tabDiv tab-pane active'>";
 		//$out.=$this->flash();
 		$out.=$this->slideShow();
 		$out.="</div>";
-		$out.="<div id='map_tab' class='tabDiv'>";
+		$out.="<div id='map_tab' class='tabDiv tab-pane'>";
 		$out.=$this->map();
+		$out.="</div>";
 		$out.="</div>";
 		$out.="</div>";
 		
 		$out.="<div id='infos'>";
+
+		$out.="<div class='span6'>";
+		$out.="<div style='margin-left:20px'>";
 		$out.="<div class='leftBlock'>";
 		$out.="<li class='yellow'>";
 		($this->item['surdemande']=='Y')? $p=l::t("Prix sur demande"):$p=l::t("Prix").": ".$this->fPrice($this->item['prix']);
@@ -180,9 +209,16 @@ class item extends element {
 		$out.="</p>";
 
 
+		$out.="</div>";
+		$out.="<ul style='margin-top:20px'>";
+		$out.="<li>&gt; <a href='#' onclick=\"contactMe('".$_GET['ref']."')\">".l::t("Me contacter à propos de ce bien")."</a></li>";
+		$out.="<li>&gt; <a href='#' onclick='saveMe()'>".l::t("Sauvegarder ce bien dans mon profil")."</a></li>";
+		$out.="<li>&gt; <a href='/print.php?itemId=".$this->item['num']."' target='_blank'>".l::t("Imprimer")."</a></li>";
+		$out.="</ul>";
 
 		$out.="</div>";
-		$out.="<div class='rightBlock'>";
+		$out.="</div>";
+		$out.="<div class='rightBlock span6'>";
 		$out.="<h3>".$this->item['locfr']."</h3>";
 		
 		$out.="<div id='text'>";
@@ -199,27 +235,63 @@ class item extends element {
 		
 		
 		$out.="</div>";
+
+
 		$out.="</div>";
-		$out.="<br class='clearfloat' />";
+		//$out.="<br class='clearfloat' />";
 		
 		$trA=explode('/',$this->item['reference']);
 		($this->item['location']=='Y')? $flink.="location/".$trA[1]:$flink.="vente/".$trA[1];
 		
 		$out.="</div>";
-		$out.="<div id='itemLinks'>";
+		/*$out.="<div id='itemLinks'>";
 	
 		$out.="<li><a href='#' onclick=\"contactMe('".$_GET['ref']."')\">".l::t("Me contacter à propos de ce bien")."</a></li>";
 		$out.="<li><a href='#' onclick='saveMe()'>".l::t("Sauvegarder ce bien dans mon profil")."</a></li>";
 		$out.="<li><a href='/print.php?itemId=".$this->item['num']."' target='_blank'>".l::t("Imprimer")."</a></li>";
 		$out.="</div>";
 		
+*/
 		$out.="<div id='fblink'>";
-		$out.="<li class='fb'><a href=\"http://www.facebook.com/share.php?u=http://www.immo-lelion.be/".$flink."\" target='_blank'><img src='/medias/facebook.png' height='30'/> Partager sur Facebook</a>";
+
+		$out.='<div class="row-fluid">
+		<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style pull-right">
+
+<a class="addthis_button_tweet"></a>
+<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50fd480167721f19"></script>
+<!-- AddThis Button END -->
+</div>';
+	//	$out.="<li class='fb'><a href=\"http://www.facebook.com/share.php?u=http://www.immo-lelion.be/".$flink."\" target='_blank'><img src='/medias/facebook.png' height='30'/> Partager sur Facebook</a>";
+	
 		$out.="</div>";
+
+/*
+
+		$db=new DB;
+		$db->query="SELECT items.photo as phot,photo2item.photo as photos FROM items LEFT JOIN photo2item ON photo2item.item_id=items.num WHERE num='".$this->item['num']."' ORDER BY ranking";
+		$db->setQuery();
+		//echo $db->query;
+		$picts=$db->output;
+
+*/
+
+		//$out.=$twig->render("item/detail.tpl",array('language'=>$_SESSION['language'],'get'=>$_GET,'item'=>$this->item,'picts'=>$picts));
 		return $out;
 	}
 	
 	function listAll() {
+
+		Twig_Autoloader::register();
+
+		$loader = new Twig_Loader_Filesystem(__root__.'lib/templates');
+		$twig = new Twig_Environment($loader, array('debug' => true,'autoescape'=>false));
+		$twig->addExtension(new Twig_Extension_Debug());
+
 		($_GET['searchType']=='sale') ? $where="WHERE location!='Y' " :$where="WHERE location='Y' ";
 		($_GET['searchType']=='sale') ? $page="Vente" :$page="Location";
 		
@@ -246,6 +318,35 @@ class item extends element {
 			case 'new':
 				$ob=" `update` DESC,`datein` DESC ";
 			break;
+		}
+
+		if($_GET['limitBy']) {
+			$this->limitBy=$_GET['limitBy'];
+		}
+		else {
+			$this->limitBy=12;
+		}
+
+
+		if($_GET['keywords']) {
+			$where.=" AND (locfr LIKE \"%".$_GET['keywords']."%\" OR descrfr LIKE \"%".$_GET['keywords']."%\" OR reference LIKE \"%".$_GET['keywords']."%\" ) ";
+		}
+
+		if($_GET['address']) {
+			$MAP_OBJECT = new GoogleMapAPI(); $MAP_OBJECT->_minify_js = isset($_REQUEST["min"])?FALSE:TRUE;
+			if($geocodes = $MAP_OBJECT->getGeoCode($_GET['address']."+belgium")) {
+			//	print_r($geocodes);
+				if($_GET['rayon']<=1) {$_GET['rayon']=0.5;}
+				$sql="SELECT * FROM items WHERE (
+POW( ( 69.1 * ( Longitude - -74.008680 ) * cos( 40.711676 / 57.3 ) ) , 2 ) + POW( ( 69.1 * ( Latitude - 40.711676 ) ) , 2 )
+) < ( 1 *1 );";
+
+$where.=" AND (POW( ( 69.1 * ( Lng - ".$geocodes['lon']." ) * cos( ".$geocodes['lat']." / 57.3 ) ) , 2 ) + POW( ( 69.1 * ( Lat - ".$geocodes['lat']." ) ) , 2 )
+) < ( 1 *".$_GET['rayon']." )  ";
+				
+
+			}
+			
 		}
 		
 		if($_GET['type']) {
@@ -325,6 +426,10 @@ class item extends element {
 		}
 		*/
 		
+		if($_GET['quartier']) {
+			$where.=" AND quartier_id='".$_GET['quartier']."' ";	
+		}
+
 		$db=new DB;
 		$q="SELECT count(num) as m FROM items  ";
 		$q.=$where;
@@ -342,41 +447,74 @@ class item extends element {
 		$q.=$where;
 		$q.=" AND actif='Y'  GROUP BY items.num ";
 		$q.=" ORDER BY  ".$ob.",ranking ASC ";
-		$q.=" LIMIT ".$this->listStart.",9";
+		$q.=" LIMIT ".$this->listStart.",".$this->limitBy;
 		
 		$db->query=$q;
 		$db->setQuery();
-		//echo $db->query;
+	//	echo $db->query;
 		
-		$this->items=$db->output;
+		if($db->output) {
+	$this->items=$db->output;
+}
+else {
+	$this->items=array();
+}
 		
 		$out.="<input type='hidden' id='listStart' value='".$this->listStart."' />";
 		$out.="<input type='hidden' id='maxItems' value='".$this->maxItems."' />";
 		
-		$out.="<div class='listHeader'>";
+		$out.="<div class='listHeader row-fluid'>";
 		$out.="<div class='resultsIntro'>";
 		$out.="<span style='font-size:15px;font-weight:bold;color:#5a5a5a'>".l::t("Résultats")." /</span> ".$this->maxItems." ".l::t("bien(s) correspond(ent) à votre recherche");
 		$out.="</div>";
-		$out.="<div class='nextBack'>";
+	/*	$out.="<div class='nextBack'>";
 		$out.=$this->nextBack();
 		$out.="</div>";
+		*/
 		$out.="</div>";
 		
 		
-		
-		$out.="<div id='listFilter'>";
-		$out.="<b>".l::t("Filtrer par")."</b> ";
+		$out.="<div class='row-fluid'>";
+		$out.="<div id='listFilter' >";
+		$out.="<table style='width:100%'><tr><td>";
+			//$out.="<div class='span8'>";
+			$out.="<b>".l::t("Filtrer par")."</b> ";
+			$out.="<select name='orderBy'>";
+			$out.="<option value='price_asc' ".$this->isSelected('orderBy','price_asc').">".l::t("Prix croissant")."</option>";
+			$out.="<option value='price_desc' ".$this->isSelected('orderBy','price_desc').">".l::t("Prix décroissant")."</option>";
+			$out.="<option value='city' ".$this->isSelected('orderBy','city').">".l::t("Communes")."</option>";
+			$out.="<option value='new' ".$this->isSelected('orderBy','new').">".l::t("Nouveautés")."</option>";
+			$out.="</select>";
+			//$out.="</div>";
+			//$out.="<div class='span4' style='text-align:right'>";
+			$out.="</td><td style='text-align:right'>";
+			$out.="<b>".l::t("Biens par page")."</b>";
+			$out.="<select name='limitBy' id='limitBy' style='width:70px'>";
+			$out.="<option value='12' ".$this->isSelected('limitBy','12').">12</option>";
+			$out.="<option value='24' ".$this->isSelected('limitBy','24').">24</option>";
+			$out.="<option value='48' ".$this->isSelected('limitBy','48').">48</option>";
+			//$out.="<option value='72' ".$this->isSelected('limitBy','72').">72</option>";
+			$out.="</select>";
+			$out.="</td></tr></table>";
+			//$out.="</div>";
+/*
 		$out.="<input type='radio' name='orderBy' value='price_asc' ".$this->isChecked('orderBy','price_asc')." />".l::t("Prix croissant");
 		$out.="<input type='radio' name='orderBy' value='price_desc' ".$this->isChecked('orderBy','price_desc')."/>".l::t("Prix décroissant");
 		$out.="<input type='radio' name='orderBy' value='city' ".$this->isChecked('orderBy','city')."/>".l::t("Communes");
 		$out.="<input type='radio' name='orderBy' value='new' ".$this->isChecked('orderBy','new')."/>".l::t("Nouveautés");
+		*/
+		$out.="</div>";
 		$out.="</div>";
 		
-		$out.="<div id='items'>";
+		
+		$out.="<div id='items' >";
+		$out.="<div class='row-fluid'>";
 		require_once(__lib__."core/clsImageManip.inc.php");
+		$m=0;
 		foreach($this->items as $item) {
 			$t=explode('/',$item['reference']);
-			$out.="<div class='itemThumb' rel='".$t[1]."'>";
+
+			$out.="<div class='span3 itemThumb' rel='".$t[1]."'>";
 			$delay = mktime(0, 0, 0, date("m"), date("d")-15, date("Y")); 
 			if($item['vendu']=='Y' && $item['location']=='Y') {
 				$out.="<div class='options osold'>".l::t("LOUE")."</div>";
@@ -456,7 +594,7 @@ class item extends element {
 			*/
 			
 			$out.="</div>";
-			$out.="<div class='more'><div class='descro'>".$item['descrfr']."</div><div class='moreLink' ><a href='#'>".l::t("plus d'infos")."</a></div></div>";
+			$out.="<div class='more'><div class='descro2'>".$item['descrfr']."</div><div class='moreLink' ><a href='#'>".l::t("plus d'infos")."</a></div></div>";
 			$out.="<div class='descro'>";
 			$l=explode(" ",$item['locfr']);
 			$l[1]=$item['locfr'];
@@ -471,10 +609,18 @@ class item extends element {
 			$out.="</div>";
 			
 			$out.="</div>";
+			//echo $m;
+			
+			if($m%4==3) {
+				$out.="</div><div class='row-fluid'>";
+				//$m=0;
+			}
+			$m++;
 		}
 		$out.="</div>";
+		$out.="</div>";
 		
-		$out.="<div class='listHeader'>";
+		$out.="<div class='listHeader row-fluid'>";
 		$out.="<div class='resultsIntro'>";
 		//$out.="<span style='font-size:15px;font-weight:bold;color:#5a5a5a'>Résultats /</span> ".$this->maxItems." bien(s) correspon(ent) à votre recherche";
 		$out.="</div>";
@@ -482,6 +628,13 @@ class item extends element {
 		$out.=$this->nextBack();
 		$out.="</div>";
 		$out.="</div>";
+		/*
+echo "<pre>";
+print_r($this->items);
+echo "</pre>pre>";
+*/
+		//$out.=$twig->render("item/list.tpl",array('language'=>$_SESSION['language'],'get'=>$_GET,'items'=>$this->items));
+		//return $out;
 		return $out;
 		
 	}
@@ -493,16 +646,89 @@ class item extends element {
 			$out.="<li><a href='#' onclick=\"goTo('prev')\"/><img src='/medias/go-previous.gif'/></a></li>";
 		}
 		$out.="<li>Page ";
-		$out.=floor($this->listStart/9)+1;
+		$out.=floor($this->listStart/$this->limitBy)+1;
 		$out.="/";
-		$out.=floor($this->maxItems/9)+1;
+		$out.=floor($this->maxItems/$this->limitBy)+1;
 		$out.="</li>";
 		
-		if($this->listStart<=$this->maxItems-9) {
+		if($this->listStart<=$this->maxItems-$this->limitBy) {
 			$out.="<li><a href='#' onclick=\"goTo('next')\"/><img src='/medias/go-next.gif'/></a></li>";
 			$out.="<li><a href='#' onclick=\"goTo('last')\"/><img src='/medias/go-last.gif'/></a></li>";
 		}
-		
+			$nbPages=floor($this->maxItems/$this->limitBy+1);
+			$currentPage=floor($this->listStart/$this->limitBy+1);
+
+			/*echo $nbPages."---";
+			echo $currentPage;
+			*/
+
+			if($nbPages<=1) {
+				return "";
+			}
+
+			$out='<div class="pagination">
+  			<ul><li ';
+			if($currentPage<=1) {
+				$out.=' class="disabled" ';
+			}
+			$out.='><a href="#" onclick="goTo(\'prev\')" >Prev</a></li>';
+
+			if($nbPages>10) {
+				if($currentPage<6) {
+					for($i=1;$i<7;$i++) {
+						$out.='<li ';
+					  	if($i==$currentPage) {
+					  		$out.=" class='active' ";
+					  	}
+					  			
+					  	$out.='><a href="#" onclick="goTo('.(($i-1)*$_GET['limitBy']).')">'.$i.'</a></li>';
+					}
+					$out.="<li><a href='#'>...</a></li>";
+				}
+				else if($currentPage>$nbPages-7){
+					$out.="<li><a href='#'>...</a></li>";
+					for($i=$nbPages-7;$i<=$nbPages;$i++) {
+						$out.='<li ';
+					  	if($i==$currentPage) {
+					  		$out.=" class='active' ";
+					  	}
+					  			
+					  	$out.='><a href="#" onclick="goTo('.(($i-1)*$_GET['limitBy']).')">'.$i.'</a></li>';
+					}
+				}
+				else {
+					$out.="<li><a href='#'>...</a></li>";
+					for($i=$currentPage-3;$i<=$currentPage+3;$i++) {
+						$out.='<li ';
+					  	if($i==$currentPage) {
+					  		$out.=" class='active' ";
+					  	}
+					  			
+					  	$out.='><a href="#" onclick="goTo('.(($i-1)*$_GET['limitBy']).')">'.$i.'</a></li>';
+					}
+					$out.="<li><a href='#'>...</a></li>";
+				}
+			}
+			else {
+				for($i=1;$i<=$nbPages;$i++) {
+			  	$out.='<li ';
+			  	if($i==$currentPage) {
+			  		$out.=" class='active' ";
+			  	}
+			  			
+			  	$out.='><a href="#" onclick="goTo('.(($i-1)*$_GET['limitBy']).')">'.$i.'</a></li>';
+			  }
+			}
+			
+			$out.='
+			    <li ';
+			if($currentPage>=$nbPages) {
+				$out.=' class="disabled" ';
+			}
+			$out.='><a href="#" onclick="goTo(\'next\')">Next</a></li>
+			  </ul>
+			</div>';
+
 		return $out;
 	}
 	
@@ -553,7 +779,7 @@ class item extends element {
 	</script>";
 		return $out;
 	}
-	
+	/*
 	function flash() {
 		$w=680;
 		$h=523;
@@ -601,7 +827,7 @@ class item extends element {
 		return $out;
 	
 	}
-	
+	*/
 	
 	function map() {
 		$w=680;
@@ -632,6 +858,8 @@ class item extends element {
       }
     </script>';
 		 * */
+    	
+
 		return $out;
 	}
 	
@@ -640,6 +868,12 @@ class item extends element {
 	function isChecked($var,$val) {
 		if($_GET[$var]==$val ) {
 			return ' checked' ;
+		}
+	}
+
+	function isSelected($var,$val) {
+		if($_GET[$var]==$val ) {
+			return ' selected' ;
 		}
 	}
 	

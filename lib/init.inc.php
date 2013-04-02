@@ -14,6 +14,8 @@ require_once __core__."clsUtils.inc.php";
 require_once __core__."clsLang.inc.php";
 require_once __core__."clsImageManip.inc.php";
 
+include_once __root__.'/lib/GoogleMap/GoogleMap.php';
+include_once __root__.'/lib/GoogleMap/JSMin.php';
 
 
 if ( !function_exists('json_decode') ){

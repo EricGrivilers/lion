@@ -1,10 +1,13 @@
 <?php
+error_reporting(E_ALL ^ E_NOTICE);
 require_once('../config.inc.php');
-include('config.inc.php');
+//include('config.inc.php');
+$Connect = mysql_connect(__DBhost__, __DBuser__, __DBpass__) or die("Can not connect");
+@mysql_select_db(__DBName__) or die ("Can not access the database");
 include('main.inc.php');
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -12,8 +15,8 @@ include('main.inc.php');
 <!--<link href="../css/main.css" type="text/css" rel="stylesheet" />
 <link href="../css/admin.css" type="text/css" rel="stylesheet" />-->
 <script src="js/AC_RunActiveContent.js" language="javascript" type="text/javascript"></script>
-<script src="js/jquery-1.4.2.min.js" language="javascript" type="text/javascript"></script>
-<script src="js/jquery-ui-1.8.2.custom.min.js" language="javascript" type="text/javascript"></script>
+<script src="../js/jquery-1.8.3.min.js" language="javascript" type="text/javascript"></script>
+<script src="../js/jquery-ui-1.9.2.custom.min.js" language="javascript" type="text/javascript"></script>
 <script src="js/swfobject.js" language="javascript" type="text/javascript"></script>
 <script src="js/jquery.uploadify.v2.1.0.min.js" language="javascript" type="text/javascript"></script>
 
@@ -27,6 +30,7 @@ document.forms[0].submit();
 <script>tinyMCE.init({
 		mode : "textareas",
 		theme : "advanced",
+		editor_deselector : "mceNoEditor",
 		//plugins : "save",
 		theme_advanced_buttons1_add : "save,separator,cut,copy,paste,pastetext,pasteword,separator,fontselect,fontsizeselect,separator,forecolor,backcolor",
 		//theme_advanced_buttons1_add : "fontselect,fontsizeselect",
@@ -62,7 +66,7 @@ if(!isset($_SESSION['isadmin'])) {
 		default:
 ?>
 <form name='theForm' action='index.php' method='post'>
-  <input type='hidden' name='level' value='1'>
+  <input type='hidden' name='level' value='1' />
   <table border=0 cellpadding=0 cellspacing=0 width=104 align=center>
     <tr>
       <td width="20"></td>
@@ -128,20 +132,20 @@ else {
 	
 ?>
 <form name='theForm' method='post' action='index.php' enctype="multipart/form-data">
-<input type='hidden' name='kind' value='<?= $_GET['kind']; ?>' />
-<input type='hidden' name='action' value='<?= $_GET['action']; ?>' />
+<input type='hidden' name='kind' value='<?php echo $_GET['kind']; ?>' />
+<input type='hidden' name='action' value='<?php echo  $_GET['action']; ?>' />
 
   <table border=0 celppading=0 cellspacing=0 width=100% align=center>
     <tr>
       <td><img src="../medias/logo.gif" alt="Immobili&egrave;re Le Lion" width="188" height="100" vspace="10" /></td>
 	 </tr>
 	 <tr>
-      <td class='title' valign='bottom' style="border-bottom: solid 1px #CCCCCC;"><a href='index.php?kind=item&action=edit&level=0' class='title' style="<?=($_GET['kind']=='item'?'color: red;':'');?>">Biens</a> 
-	  | <a href='index.php?kind=quartiers' class='title' style="<?=($_GET['kind']=='quartiers'?'color: red;':'');?>">Quartiers</a> 
-	<!--  | <a href='index.php?kind=images' class='title' style="<?=($_GET['kind']=='images'?'color: red;':'');?>">Photos site</a> -->
-	  | <a href='index.php?kind=textes' class='title' style="<?=($_GET['kind']=='textes'?'color: red;':'');?>">Textes site</a> 
-	  | <a href='index.php?kind=users' class='title' style="<?=($_GET['kind']=='users'?'color: red;':'');?>">Utilisateurs</a> 
-	<!--  | <a href='http://www.immo-lelion.be/phpmv2/' class='title' style="<?=($_GET['kind']=='stats'?'color: red;':'');?>">Statistiques</a> 
+      <td class='title' valign='bottom' style="border-bottom: solid 1px #CCCCCC;"><a href='index.php?kind=item&action=edit&level=0' class='title' style="<?php echo ($_GET['kind']=='item'?'color: red;':'');?>">Biens</a> 
+	  | <a href='index.php?kind=quartiers' class='title' style="<?php echo ($_GET['kind']=='quartiers'?'color: red;':'');?>">Quartiers</a> 
+	<!--  | <a href='index.php?kind=images' class='title' style="<?php echo ($_GET['kind']=='images'?'color: red;':'');?>">Photos site</a> -->
+	  | <a href='index.php?kind=textes' class='title' style="<?php echo ($_GET['kind']=='textes'?'color: red;':'');?>">Textes site</a> 
+	  | <a href='index.php?kind=users' class='title' style="<?php echo ($_GET['kind']=='users'?'color: red;':'');?>">Utilisateurs</a> 
+	<!--  | <a href='http://www.immo-lelion.be/phpmv2/' class='title' style="<?php echo ($_GET['kind']=='stats'?'color: red;':'');?>">Statistiques</a> 
 	  | <a href='index.php?kind=location' class='title'>Localit�s</a>--><br /><br /></td>
     </tr>
 	

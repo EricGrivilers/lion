@@ -1,5 +1,5 @@
 <?php
-
+require_once __root__.'/lib/Twig/lib/Twig/Autoloader.php';
 
 class user extends element {
 	
@@ -14,6 +14,13 @@ class user extends element {
 	
 	
 	function loginForm() {
+
+		Twig_Autoloader::register();
+		$loader = new Twig_Loader_Filesystem(__root__.'lib/templates');
+		$twig = new Twig_Environment($loader, array('debug' => true,'autoescape'=>false));
+		$twig->addExtension(new Twig_Extension_Debug());
+
+
 		if(!empty($_GET['logout'])) {
 			unset($_SESSION['user']);
 		}
@@ -49,6 +56,13 @@ class user extends element {
 			
 		}
 		$out.="</table>";
+
+		$out=$twig->render("user/login-form.tpl",array(
+			'language'=>$_SESSION['language'],
+			'get'=>$_GET,
+			'user'=>$_SESSION['user']
+		));
+		return $out;
 		return $out;
 		
 		
@@ -200,7 +214,9 @@ class user extends element {
 		$out.="</div>";
 		}
 		else {
-			$out="Vous devez être enregistré pour consulter votre profile.";	
+
+			$out="<p>Vous devez être enregistré pour consulter votre profil.<p>";	
+			$out.="<p>Veuillez remplir ce champ pour recevoir votre mot passe.</p>";
 		}
 		
 		return $out;	

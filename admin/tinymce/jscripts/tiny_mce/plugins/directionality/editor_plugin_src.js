@@ -1,79 +1,85 @@
-/* Import plugin specific language pack */
-tinyMCE.importPluginLanguagePack('directionality', 'en,sv,fr_ca,zh_cn,cs');
+/**
+ * editor_plugin_src.js
+ *
+ * Copyright 2009, Moxiecode Systems AB
+ * Released under LGPL License.
+ *
+ * License: http://tinymce.moxiecode.com/license
+ * Contributing: http://tinymce.moxiecode.com/contributing
+ */
 
-function TinyMCE_directionality_getInfo() {
-	return {
-		longname : 'Directionality',
-		author : 'Moxiecode Systems',
-		authorurl : 'http://tinymce.moxiecode.com',
-		infourl : 'http://tinymce.moxiecode.com/tinymce/docs/plugin_directionality.html',
-		version : tinyMCE.majorVersion + "." + tinyMCE.minorVersion
-	};
-};
+(function() {
+	tinymce.create('tinymce.plugins.Directionality', {
+		init : function(ed, url) {
+			var t = this;
 
-function TinyMCE_directionality_getControlHTML(control_name) {
-    switch (control_name) {
-        case "ltr":
-            return '<a href="javascript:tinyMCE.execInstanceCommand(\'{$editor_id}\',\'mceDirectionLTR\');" onmousedown="return false;"><img id="{$editor_id}_ltr" src="{$pluginurl}/images/ltr.gif" title="{$lang_directionality_ltr_desc}" width="20" height="20" class="mceButtonNormal" onmouseover="tinyMCE.switchClass(this,\'mceButtonOver\');" onmouseout="tinyMCE.restoreClass(this);" onmousedown="tinyMCE.restoreAndSwitchClass(this,\'mceButtonDown\');" /></a>';
+			t.editor = ed;
 
-        case "rtl":
-            return '<a href="javascript:tinyMCE.execInstanceCommand(\'{$editor_id}\',\'mceDirectionRTL\');" onmousedown="return false;"><img id="{$editor_id}_rtl" src="{$pluginurl}/images/rtl.gif" title="{$lang_directionality_rtl_desc}" width="20" height="20" class="mceButtonNormal" onmouseover="tinyMCE.switchClass(this,\'mceButtonOver\');" onmouseout="tinyMCE.restoreClass(this);" onmousedown="tinyMCE.restoreAndSwitchClass(this,\'mceButtonDown\');" /></a>';
-    }
+			function setDir(dir) {
+				var dom = ed.dom, curDir, blocks = ed.selection.getSelectedBlocks();
 
-    return "";
-}
+				if (blocks.length) {
+					curDir = dom.getAttrib(blocks[0], "dir");
 
-function TinyMCE_directionality_execCommand(editor_id, element, command, user_interface, value) {
-	// Handle commands
-	switch (command) {
-		case "mceDirectionLTR":
-			var inst = tinyMCE.getInstanceById(editor_id);
-			var elm = tinyMCE.getParentElement(inst.getFocusElement(), "p,div,td,h1,h2,h3,h4,h5,h6,pre,address");
+					tinymce.each(blocks, function(block) {
+						// Add dir to block if the parent block doesn't already have that dir
+						if (!dom.getParent(block.parentNode, "*[dir='" + dir + "']", dom.getRoot())) {
+							if (curDir != dir) {
+								dom.setAttrib(block, "dir", dir);
+							} else {
+								dom.setAttrib(block, "dir", null);
+							}
+						}
+					});
 
-			if (elm)
-				elm.setAttribute("dir", "ltr");
+					ed.nodeChanged();
+				}
+			}
 
-			tinyMCE.triggerNodeChange(false);
-			return true;
+			ed.addCommand('mceDirectionLTR', function() {
+				setDir("ltr");
+			});
 
-		case "mceDirectionRTL":
-			var inst = tinyMCE.getInstanceById(editor_id);
-			var elm = tinyMCE.getParentElement(inst.getFocusElement(), "p,div,td,h1,h2,h3,h4,h5,h6,pre,address");
+			ed.addCommand('mceDirectionRTL', function() {
+				setDir("rtl");
+			});
 
-			if (elm)
-				elm.setAttribute("dir", "rtl");
+			ed.addButton('ltr', {title : 'directionality.ltr_desc', cmd : 'mceDirectionLTR'});
+			ed.addButton('rtl', {title : 'directionality.rtl_desc', cmd : 'mceDirectionRTL'});
 
-			tinyMCE.triggerNodeChange(false);
-			return true;
-	}
+			ed.onNodeChange.add(t._nodeChange, t);
+		},
 
-	// Pass to next handler in chain
-	return false;
-}
+		getInfo : function() {
+			return {
+				longname : 'Directionality',
+				author : 'Moxiecode Systems AB',
+				authorurl : 'http://tinymce.moxiecode.com',
+				infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/directionality',
+				version : tinymce.majorVersion + "." + tinymce.minorVersion
+			};
+		},
 
-function TinyMCE_directionality_handleNodeChange(editor_id, node, undo_index, undo_levels, visual_aid, any_selection) {
-	function getAttrib(elm, name) {
-		return elm.getAttribute(name) ? elm.getAttribute(name) : "";
-	}
+		// Private methods
 
-	tinyMCE.switchClassSticky(editor_id + '_ltr', 'mceButtonNormal', false);
-	tinyMCE.switchClassSticky(editor_id + '_rtl', 'mceButtonNormal', false);
+		_nodeChange : function(ed, cm, n) {
+			var dom = ed.dom, dir;
 
-	if (node == null)
-		return;
+			n = dom.getParent(n, dom.isBlock);
+			if (!n) {
+				cm.setDisabled('ltr', 1);
+				cm.setDisabled('rtl', 1);
+				return;
+			}
 
-	var elm = tinyMCE.getParentElement(node, "p,div,td,h1,h2,h3,h4,h5,h6,pre,address");
-	if (!elm) {
-		tinyMCE.switchClassSticky(editor_id + '_ltr', 'mceButtonDisabled', true);
-		tinyMCE.switchClassSticky(editor_id + '_rtl', 'mceButtonDisabled', true);
-		return;
-	}
+			dir = dom.getAttrib(n, 'dir');
+			cm.setActive('ltr', dir == "ltr");
+			cm.setDisabled('ltr', 0);
+			cm.setActive('rtl', dir == "rtl");
+			cm.setDisabled('rtl', 0);
+		}
+	});
 
-	var dir = getAttrib(elm, "dir");
-	if (dir == "ltr" || dir == "")
-		tinyMCE.switchClassSticky(editor_id + '_ltr', 'mceButtonSelected', false);
-	else
-		tinyMCE.switchClassSticky(editor_id + '_rtl', 'mceButtonSelected', false);
-
-	return true;
-}
+	// Register plugin
+	tinymce.PluginManager.add('directionality', tinymce.plugins.Directionality);
+})();

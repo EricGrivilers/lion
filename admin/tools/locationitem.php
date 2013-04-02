@@ -40,12 +40,12 @@ $o=0;
 	$r=mysql_query($q) or die(mysql_error());
 	while($row=mysql_fetch_array($r)) {
 		?>
-  <tr class='rank<?= $o; ?>'>
-    <td><?= $row['zip']; ?></td>
-    <td><?= $row['fr']; ?></td>
-    <td><?= $row['innercity']; ?></td>
-    <td><?php if($row['fixed']!='true') { ?><a href='index.php?kind=item&action=location&level=1&itemId=<?= $row['id']; ?>'><img src='../medias/b_edit.png' border=0/></a><?php } ?></td>
-    <td><?php if($row['fixed']!='true') { ?><a href='index.php?kind=item&action=location&level=4&itemId=<?= $row['id']; ?>'><img src='../medias/b_drop.png' border=0/></a><?php } ?></td>
+  <tr class='rank<?php echo  $o; ?>'>
+    <td><?php echo  $row['zip']; ?></td>
+    <td><?php echo  $row['fr']; ?></td>
+    <td><?php echo  $row['innercity']; ?></td>
+    <td><?php if($row['fixed']!='true') { ?><a href='index.php?kind=item&action=location&level=1&itemId=<?php echo  $row['id']; ?>'><img src='../medias/b_edit.png' border=0/></a><?php } ?></td>
+    <td><?php if($row['fixed']!='true') { ?><a href='index.php?kind=item&action=location&level=4&itemId=<?php echo  $row['id']; ?>'><img src='../medias/b_drop.png' border=0/></a><?php } ?></td>
   </tr>
   <?php
 		$o++;
@@ -61,18 +61,18 @@ $r=mysql_query($q) or die(mysql_error());
 
 ?>
 <input type='hidden' name='level' value='' />
-<input type='hidden' name='itemId' value='<?= $_GET['itemId']; ?>' />
+<input type='hidden' name='itemId' value='<?php echo  $_GET['itemId']; ?>' />
 <table align=center>
   <tr>
     <td colspan=2 class=yellow>Modifier une commune</td>
   </tr>
   <tr>
     <td>Zip</td>
-    <td><input type=text name=zip value="<?= mysql_result($r,0,'zip'); ?>"></td>
+    <td><input type=text name=zip value="<?php echo  mysql_result($r,0,'zip'); ?>"></td>
   </tr>
   <tr>
     <td>Commune</td>
-    <td><input type='text' name='fr' value="<?= mysql_result($r,0,'fr'); ?>" /></td>
+    <td><input type='text' name='fr' value="<?php echo  mysql_result($r,0,'fr'); ?>" /></td>
   </tr>
    <tr>
     <td>19 communes</td>
@@ -80,7 +80,7 @@ $r=mysql_query($q) or die(mysql_error());
   </tr>
   <tr>
     <td></td>
-    <td><input type=button value='modifier' onclick="document.theForm.level.value=2;submit()"><!-- "document.location='index.php?zip='+document.theForm.zip.value+'&innercity='+document.theForm.innercity.value+'&fr='+document.theForm.fr.value+'&kind=item&action=location&level=2&itemId=<?= $_GET['itemId']; ?>'" --></td>
+    <td><input type=button value='modifier' onclick="document.theForm.level.value=2;submit()"><!-- "document.location='index.php?zip='+document.theForm.zip.value+'&innercity='+document.theForm.innercity.value+'&fr='+document.theForm.fr.value+'&kind=item&action=location&level=2&itemId=<?php echo  $_GET['itemId']; ?>'" --></td>
   </tr>
 </table>
 <?php
