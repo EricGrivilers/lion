@@ -1,9 +1,14 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_STRICT);
 
 include('config.inc.php');
 include(__lib__."init.inc.php");
 
+/*
+echo "<pre>";
+print_r($_GET);
+echo "<pre>";
+*/
 //echo $_GET['q'];
 //die();
 

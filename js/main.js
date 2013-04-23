@@ -8,7 +8,20 @@ $(document).ready(function() {
 	$("#cities").buttonset();
 	$(".sale").buttonset();
 	$(".rent").buttonset();
-	$("#radio").buttonset();;
+	$("#radio a.switchType").click(function() {
+		$("#radio .checkbox").removeClass('active');
+		$(this).find('.checkbox').addClass('active');
+		$('#searchType').val($(this).attr('rel'));
+		if($(this).attr('rel')=='sale') {
+			$('#searchForm tr.sale').show();
+			$('#searchForm tr.rent').hide();
+		}
+		else {
+			$('#searchForm tr.sale').hide();
+			$('#searchForm tr.rent').show();
+		}
+
+	});
 	$('.pictThumb').each(function() {
 		//$(this).css('margin-top',(138-$(this).height())/2);
 	});
@@ -133,7 +146,7 @@ function changeSearchType() {
 	//alert(i);
 	$('#radio input').removeAttr('checked');
 	$('#'+i).attr('checked','checked');
-	// alert($('#'+i).val());
+	//alert($('#'+i).val());
 	$('#searchType').val($('#'+i).val());
 	/*
 	//$(".collapsible").show();
@@ -165,8 +178,9 @@ function login() {
 
 
 function searchItem() {
-	var t=$("input[name$='searchType']:checked").attr('value');
-
+//	var t=$("input[name$='searchType']:checked").attr('value');
+	var t=$('#searchType').val();
+//	alert(t);
 	if(t=='sale') {
 		t='vente';
 	}

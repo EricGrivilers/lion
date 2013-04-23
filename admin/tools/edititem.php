@@ -1,16 +1,17 @@
 <?php
 
 //stats v2
-  
-  
+
+
  $currentMonth=date('n');
 	$currentWeek=date('W');
 	$currentDay=date('z');
 	$currentWDay=date('N');
 	$currentYear=date('Y');
-	
+
 	//$fields=array('days'=>366,'weeks'=>52,'months'=>12,'years'=>22,'wdays'=>7);
 	function statsv2($row,$field,$current) {
+        //print_r($row);
 	//foreach($fields as $keys => $values) {
 		//$t=$fields[$i];
 		//if($row[$keys]!='') {
@@ -25,23 +26,23 @@
 		}*/
 		//print_r($tArray);
 		return $tArray[$current];
-	
+
 	}
-	
+
 	function statsv2total($row) {
 		$tArray=explode(",",$row['months']);
 		for($i=0;$i<count($tArray);$i++) {
 			$t+=$tArray[$i];
 		}
-		
-		
+
+
 		return $t;
-	
+
 	}
-	
-	
-	
-	
+
+
+
+
 	//end stats
 
 if(!empty($_POST['level'])){
@@ -72,14 +73,14 @@ switch($level) {
 	}
 	include('tools/search.php');
 	break;
-	
+
 	case 1:
 		$limit="";
 		$anyMoreWhere='';
 		$params='';
 		//echo ($_POST['searchfor']);
 		if($_POST['price']) {
-		
+
 			$priceArray=explode('|',$_POST['price']);
 			$min=$priceArray[0];
 			$max=$priceArray[1];
@@ -160,7 +161,7 @@ $tPrix='<b>V E N D U / L O U É</b>';
 <input type='hidden' name='detailId' value='' />
 <?php
 	break;
-	
+
 	case 2:
 	if(isset($_GET['itemId'])) {$_POST['detailId']=$_GET['itemId']; }
 	$q="select *, (SELECT COUNT(*) FROM photo2item WHERE photo <> '' AND item_id = '" . $_POST['detailId'] . "') AS photos_number from items LEFT JOIN item_statsv2 on item_statsv2.itemId=items.num where num='".$_POST['detailId']."'";
@@ -191,9 +192,9 @@ $row=mysql_fetch_array($r);
         <input type='button' value='supprimer' onclick="document.theForm.submit();"/></td>
     </tr>
   </table>
-  
-  
-  
+
+
+
   <table width="100%" cellpadding='5' class='edit'>
     <tr>
       <td align=left class='loc'>Vendu / Lou&eacute;
@@ -202,7 +203,7 @@ $row=mysql_fetch_array($r);
         <input name='enoption' type='checkbox' <?php if($row['enoption']=='Y') { echo ' checked'; } ?>/></td>
       <td align=left class='loc' >Actif
         <input type='checkbox' name='actif' <?php if($row['actif']=='Y') { echo ' checked'; } ?> onchange="if (this.checked && <?php echo $row['photos_number']; ?> > 0) { document.theForm.mobile_push.disabled = false; document.getElementById('mobile_push_message').style.display = 'none'; } else { document.theForm.mobile_push.disabled = true; document.theForm.mobile_push.checked = false; document.getElementById('mobile_push_message').style.display = ''; }" /></td>
-     
+
     </tr>
     <tr>
       <td align=left class='loc'>Prix:
@@ -225,19 +226,19 @@ $row=mysql_fetch_array($r);
 	  }
 	  ?>
         </select></td>
-      
+
     </tr>
     <tr>
       <td align=left class='loc'>Ancien prix:
         <input name='oldPrix' type='text' id="oldPrix" value='<?php echo  $row['oldPrix'];?>' />
         &euro;</td>
       <td align=left class='loc'></td>
-      
+
     </tr>
     <tr>
       <td align=left class='loc'>Reference:
         <input name='reference' type='text' id="reference" value="<?php echo  $row['reference']; ?>" /></td>
-      <td align=left class=loc>zip 
+      <td align=left class=loc>zip
         <!--<input type='text' name='zip' size="4" value='<?php echo  substr($row['locfr'],0,4); ?> '/>
 nom
 <input type='text' name='city' value='<?php echo  substr($row['locfr'],5,strlen($row['locfr'])); ?> '/> --></td>
@@ -267,16 +268,16 @@ nom
         <input type="text" name="name" id="name" value="<?php echo  $row['name'];?>" style="width: 200px;" />
        </td>
         <td rowspan='3'><?php
-		 
+
 			require_once('functions.inc.php');
 			$sq="SELECT id,nom_quartier FROM quartiers ORDER BY nom_quartier ASC";
-			
+
 			$rq=mysql_query($sq) or die(mysql_error());
-			
+
 			while($rowq=mysql_fetch_array($rq)){
 				$aQuartiers[$rowq['id']]=$rowq['nom_quartier'];
 			}
-			
+
 			$quartier_id=(!empty($_POST['quartier_id'])?$_POST['quartier_id']:$row['quartier_id']);
 			echo('Quartier:&nbsp;'.makeselect('kv','quartier_id',$aQuartiers,$quartier_id,'selectbox',''));
 
@@ -293,22 +294,22 @@ nom
         Zone de recherche
         <select name='zone'>
           <option></option>
-          <?php 
+          <?php
 		function options($def) {
 	$zones=array(1=>"BRUXELLES SUD ET CENTRE",2=>"BRUXELLES EST",3=>"PERIPHERIE BRUXELLOISE",4=>"PROVINCE");
 	foreach($zones as $k=>$v) {
 		$out.="<option value='".$k."' ";
 		if($def==$k) {
-			$out.=" selected ";	
+			$out.=" selected ";
 		}
-		$out.=">".$v."</option>";	
+		$out.=">".$v."</option>";
 	}
 	return $out;
 }
 echo options($row['zone']);?>
         </select>
         </td>
-     
+
     </tr>
     <tr><td>Description<br />
         <textarea id="descrfr" name="descrfr" rows="10" cols="60">
@@ -328,34 +329,34 @@ echo options($row['zone']);?>
         m² | Chambre(s)
         <select name='rooms'>
           <?php
-	for($i=1;$i<15;$i++) {?>
+	for($i=0;$i<30;$i++) {?>
           <option value='<?php echo  $i; ?>' <?php if($row['rooms']==$i) { echo ' selected';} ?>>
           <?php echo  $i; ?>
           </option>
           <?php
-	}  
+	}
 	  ?>
         </select>
         | salle(s) d'eau
         <select name='bathrooms'>
           <?php
-	for($i=1;$i<15;$i++) {?>
+	for($i=0;$i<30;$i++) {?>
           <option value='<?php echo  $i; ?>' <?php if($row['bathrooms']==$i) { echo ' selected';} ?>>
           <?php echo  $i; ?>
           </option>
           <?php
-	}  
+	}
 	  ?>
         </select>
         | garage(s)
         <select name='garages'>
           <?php
-	for($i=0;$i<15;$i++) {?>
+	for($i=0;$i<30;$i++) {?>
           <option value='<?php echo  $i; ?>' <?php if($row['garages']==$i) { echo ' selected';} ?>>
           <?php echo  $i; ?>
           </option>
           <?php
-	}  
+	}
 	  ?>
         </select>
         | Jardin
@@ -386,7 +387,7 @@ echo options($row['zone']);?>
           <?php
 				$ranks=array();
 				$q="SELECT photo2item.*,items.photo as defPict FROM items LEFT JOIN photo2item ON items.num=photo2item.item_id WHERE num='".$_POST['detailId']."' ORDER BY ranking ASC";
-				
+
 				$r=mysql_query($q) or die(mysql_error());
 				$i=1;
 				$picts=array();
@@ -399,11 +400,11 @@ echo options($row['zone']);?>
 					if($p['photo']!='' && file_exists(__root__."photos/big/".$p['photo'])) {
 					$picts[$p['photo']]=$p['photo'];
 					}
-					
+
 				}
-				
+
 				//print_r($picts);
-				
+
 				foreach($picts as $p) {
 				$tp=strtolower($p);
 					if(!file_exists(__root__."photos/thumbs/".$tp)) {
@@ -422,9 +423,9 @@ echo options($row['zone']);?>
 					}
 					echo "</li>";
 					$ranks[]=$tp;
-					$i++;	
+					$i++;
 				}
-				
+
 			?>
         </ul>
         <input type='hidden' name='ranks' id='ranks' value='<?php echo implode(",",$ranks); ?>' />
@@ -440,13 +441,13 @@ echo options($row['zone']);?>
 </div>
 <?php
 	break;
-	
+
 	case 3:
-	
-	
+
+
 		/*
 		if(isset($_POST['zip']) && isset($_POST['city'])) {
-			
+
 			$tq="select * from locations where zip='".$_POST['zip']."'";
 			$tr=mysql_query($tq) or die(mysql_error());
 			if(mysql_affected_rows($Connect)==0) {
@@ -469,7 +470,7 @@ echo options($row['zone']);?>
 				$update="`update`='".date('Ymd')."',";
 			}
 		}
-		$q="UPDATE `items` SET 
+		$q="UPDATE `items` SET
 			name=\"".$_POST['name']."\",
 			prix='".$_POST['prix']."',
 			oldPrix='".$_POST['oldPrix']."',
@@ -497,24 +498,24 @@ echo options($row['zone']);?>
 			 WHERE `num` ='".$_POST['num']."'";
 			$r=mysql_query($q) or die(mysql_error());
 			//echo($q);
-			
+
 			foreach($_POST['del'] as $k=>$v) {
 				$q="DELETE FROM photo2item WHERE item_id='".$_POST['num']."' and photo='".$v."' ";
 				$r=mysql_query($q) or die(mysql_error());
 				unlink(__root__."photos/big/".$v);
-				unlink(__root__."photos/thumbs/".$v);	
-				
+				unlink(__root__."photos/thumbs/".$v);
+
 			}
 			$rank=1;
 			$tr=explode(",",$_POST['ranks']);
-			
+
 			foreach($tr as $r) {
 				$q="INSERT INTO photo2item (item_id,ranking,photo) VALUES ('".$_POST['num']."','".$rank."','".$r."') ON DUPLICATE KEY UPDATE ranking='".$rank."' ";
 				$r=mysql_query($q) or die(mysql_error());
 				//echo $q."<br/>";
 				$rank++;
 			}
-			
+
 			$tf=__root__."photos/big/".$tr[0];
 			$path_parts = pathinfo($tf);
 			$q="UPDATE items SET photo='".$path_parts['filename']."' WHERE num='".$_POST['num']."' ";
@@ -522,14 +523,14 @@ echo options($row['zone']);?>
 		//	$tr[0]
 			//echo $q;
 			$r=mysql_query($q) or die(mysql_error());
-				
-				
-		
-		
+
+
+
+
 			$q = 'SELECT COUNT(*) AS photos_number FROM photo2item WHERE photo <> \'\' AND item_id = \'' . $_POST['num'] . '\'';
 			$r = mysql_query($q) or die(mysql_error());
 			$row = mysql_fetch_array($r);
-			
+
 			if (isset($_POST['mobile_push']) && $actif == 'Y' && $row['photos_number'] > 0)
 			{
 				include('../mobile/mobile_push.class.php');
@@ -543,10 +544,10 @@ echo options($row['zone']);?>
 					echo $e->getMessage();
 				}
 			}
-			
+
 			echo("<script>window.location='index.php?kind=item&action=edit&level=2&itemId=".$_POST['num']."&detailId=".$_POST['num']."';</script>");
-				
-			
+
+
 	break;
 }
 ?>

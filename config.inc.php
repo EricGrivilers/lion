@@ -1,6 +1,6 @@
 <?php
-
-
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_STRICT);
+/*http://cpanel.optinet-isp.net*/
 
 define(__DBhost__,"localhost");
 define(__DBuser__,"immolelionbe");
@@ -16,11 +16,10 @@ define(__cc__,"eric@caravanemedia.com");
 define(__root__,$_SERVER['DOCUMENT_ROOT']."/");
 
 //define(__web__,"/v4/");
-define(__web__,"http:/local.immo-lelion.be/");
+define(__web__,"http://".$_SERVER['HTTP_HOST']."/");
 define(__lib__,__root__."lib/");
 define(__core__,__lib__."core/");
 define(__elem__,__lib__."elements/");
-
 
 /*
 

@@ -2,17 +2,17 @@
 require_once __root__.'/lib/Twig/lib/Twig/Autoloader.php';
 
 class user extends element {
-	
+
 	function display() {
 		$this->content.=$this->loginForm();
-		
+
 		return $this->content;
-		
+
 	}
-	
-	
-	
-	
+
+
+
+
 	function loginForm() {
 
 		Twig_Autoloader::register();
@@ -31,7 +31,7 @@ class user extends element {
 			$db->setQuery();
 			if($db->output) {
 				$_SESSION['user']=$db->output[0];
-				
+
 				$out="<script>loaction.reload()</script>";
 			}
 			else {
@@ -43,17 +43,17 @@ class user extends element {
 			$db=new DB;
 			$db->query="UPDATE users SET lastVisit=NOW() WHERE id='".$_SESSION['user']['userId']."'";
 			$db->setQuery();
-			
+
 			$out.="<tr><td class='title' colspan='3'><b>".trim($_SESSION['user']['firstname']." ".$_SESSION['user']['lastname'])."</b></td></tr>";
 			$out.="<tr><td class='newAccount'><a href=\"/utilisateur\">".l::t("mon profil")."</a></td><td colspan='2' class='newAccount'><a href='/logout'>".l::t("Se deconnecter")."</a></td></tr>";
-		
+
 		}
 		else {
-			
+
 			$out.="<tr><td class='title'>".l::t("MON COMPTE")."</td><td colspan='2' class='newAccount'><a href='/register'>".l::t("Créer un nouveau compte")."</a></td></tr>";
 			$out.="<tr><td><input type='text' name='email' value='email' onclick=\"resetField(this)\" rel='email'/></td><td><input type='text' name='password' value='".l::t("mot de passe")."' onclick=\"resetField(this)\" onfocus=\"resetField(this)\" rel='".l::t("mot de passe")."' /></td><td style='padding:0'><a href='#' onclick='login()'><img src='/medias/login_go.gif' /></a></td></tr>";
 			$out.="<tr><td> <label><input type='checkbox' name='remindme' class='checkbox' />".l::t("se souvenir de moi")."</label></td><td colspan='2'> <a href='#' onclick=\"getPassword()\">".l::t("Mot de passe oublié")." ?</a></td></tr>";
-			
+
 		}
 		$out.="</table>";
 
@@ -64,24 +64,24 @@ class user extends element {
 		));
 		return $out;
 		return $out;
-		
-		
+
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	function register() {
-		
+
 		$errors='';
 		if($_GET['confirm']) {
 			$db=new DB;
 			$db->query="SELECT * FROM users WHERE status='".$_GET['confirm']."'";
 			$db->setQuery();
-			
+
 			$u=$db->output[0];
-			
+
 			if($u['email']!='') {
 				$db=new DB;
 				$db->query="UPDATE  users SET status='' WHERE status='".$_GET['confirm']."'";
@@ -89,7 +89,7 @@ class user extends element {
 				$db->setQuery();
 				$_SESSION['user']=$db->output[0];
 				return "<div class='alert'>Vous avez bien été enregistré.</div>";
-				
+
 			}
 			else {
 				return "<div class='alert'>Utilisateur inconnu ou déja confirmé.</div>";
@@ -116,7 +116,7 @@ class user extends element {
 				$errors.="<br/>".l::t("Le mot de passe de confirmation de correspond pas").".";
 			}
 			if($errors!='') {
-				$out.="<div class='alert'>".$errors."</div>";	
+				$out.="<div class='alert'>".$errors."</div>";
 			}
 			else if($d['updating']){
 				$sqlfields=array();
@@ -125,13 +125,13 @@ class user extends element {
 					if($k!='updating') {
 					$sqlvalues[]=" ".trim($k)."=\"".trim(addslashes($v))."\" ";
 					}
-					
+
 				}
 				$db=new DB;
 				$db->query="UPDATE users SET ".implode(",",$sqlvalues)." WHERE id='".$_SESSION['user']['userId']."'";
 				$db->setQuery();
 //$out.=$db->query;
-				
+
 			}
 			else {
 				$db=new DB;
@@ -159,11 +159,11 @@ class user extends element {
 					$db=new db;
 					$db->query="INSERT INTO users (".implode(",",$sqlfields).") VALUES (".implode(",",$sqlvalues).")";
 					$db->resultType='none';
-					
+
 					$db->setQuery();
-//$out.=$db->query;
+$out.=$db->query;
 					$m=l::t("Pour confirmer votre inscription, veuillez cliquer sur ce lien")."\n".__web__."register?confirm=".$r;
-					
+
 					mail(__postmaster__,"Inscription au site Immo-Lelion.be",$m,"From:".$d['email'] );
 					$out="<p>".l::t("Votre demande a bien été enregistrée.<br/> Vous allez recevoir un email de confirmation à l'adresse")." ".$d['email'].".</p>";
 					return $out;
@@ -176,7 +176,7 @@ class user extends element {
 		$out.="<p>".l::t("Pour vous enregistrer veuillez utiliser le formulaire ci-après").". <br/>".l::t("Merci").".</p>";
 		$template=new template('.');
 		$template->set_file("template",__lib__."elements/user/registerForm".$_SESSION['language'].".tpl");
-		
+
 		if($_POST['datas']) {
 			foreach($d as $k=>$v) {
 				$template->set_var($k, $v);
@@ -188,16 +188,16 @@ class user extends element {
 			$template->set_var('isFr', $isFr);
 			$template->set_var('isEn', $isEn);
 		}
-		
-		
-		
+
+
+
 		$template->parse("parse", "template");
 		$out.=$template->p("parse",false);
 		$out.="<p>* ".l::t("champs obligatoires")."</p>";
-		return $out;	
+		return $out;
 	}
-	
-	
+
+
 	function myAccount() {
 		if($_SESSION['user']['userId']) {
 		$out.="<div id='tabs'>";
@@ -215,19 +215,19 @@ class user extends element {
 		}
 		else {
 
-			$out="<p>Vous devez être enregistré pour consulter votre profil.<p>";	
+			$out="<p>Vous devez être enregistré pour consulter votre profil.<p>";
 			$out.="<p>Veuillez remplir ce champ pour recevoir votre mot passe.</p>";
 		}
-		
-		return $out;	
+
+		return $out;
 	}
-	
-	
+
+
 	function savedItems() {
 		$db=new DB;
 		$db->query="SELECT * FROM users2items LEFT JOIN items ON items.num=users2items.itemId WHERE users2items.userId='".$_SESSION['user']['userId']."' AND saved='1'";
 		$db->setQuery();
-		
+
 		$items=$db->output;
 		$out.="<table id='savedItemList' cellpadding='5'>";
 		$oe=array('odd','even');
@@ -244,16 +244,16 @@ class user extends element {
 			$o=!$o;
 		}
 		$out.="</table>";
-		
+
 		return $out;
 	}
-	
-	
-	
+
+
+
 	function updateAccount() {
-		
-		
-		
+
+
+
 		$template=new template('.');
 		$template->set_file("template",__lib__."elements/user/updateForm".$_SESSION['language'].".tpl");
 		$db=new DB;
@@ -261,7 +261,7 @@ class user extends element {
 		$db->setQuery();
 		//echo $db->query;
 		$d=$db->output[0];
-		
+
 		($d['salutation']=='Mme') ? $isMme="selected" :$isM="selected";
 		($d['language']=='fr') ? $isFr="checked" :$isEn="checked";
 		$template->set_var('isMme', $isMme);
@@ -269,7 +269,7 @@ class user extends element {
 		$template->set_var('isFr', $isFr);
 		$template->set_var('isEn', $isEn);
 		if($_POST['datas']) {
-			$d=$_POST['datas'];	
+			$d=$_POST['datas'];
 		}
 		foreach($d as $k=>$v) {
 			$template->set_var($k, $v);
@@ -280,22 +280,22 @@ class user extends element {
 		$template->set_var('isM', $isM);
 		$template->set_var('isFr', $isFr);
 		$template->set_var('isEn', $isEn);
-		
-		
-		
-		
+
+
+
+
 		$template->parse("parse", "template");
 		$out.=$template->p("parse",false);
-		
-		
-		
+
+
+
 		return $out;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }
 
 

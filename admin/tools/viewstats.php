@@ -50,7 +50,7 @@ ob_start();
   </tr>
    <tr>
     <td>Visites hebdomadaires</td>
-    <td align="left"><img src="<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=weeks" /></td>
+    <td align="left"><img src="__web__<?php echo ROOT_WS.'/admin';?>/tools/graph.php?itemId=<?php echo  $_GET['itemId']; ?>&period=weeks" /></td>
   </tr>
   <tr>
     <td>Visites mensuelles</td>
@@ -59,7 +59,7 @@ ob_start();
 </table>
 <br /><br />
 <table border=0 cellpadding=2 cellspacing=1 align=center>
- <tr><th width=300>Biens mis en favoris par</th><th  width=300>Le</th></tr> 
+ <tr><th width=300>Biens mis en favoris par</th><th  width=300>Le</th></tr>
   <?php
 $o=0;
 $q="select * from users2items,users where itemId='".$_GET['itemId']."' and userId=users.id";
@@ -67,7 +67,7 @@ $r=mysql_query($q) or die(mysql_error());
 while($row=mysql_fetch_array($r)) {
 ?>
   <tr class='rank<?php echo  $o; ?>'>
-   
+
     <td><a href='index.php?kind=users&userId=<?php echo  $row['userId']; ?>'><?php echo  $row['firstname']." ".strtoupper($row['lastname']); ?></a></td>
    <td><?php echo  shakeDate($row['date']); ?></td>
    </tr>
@@ -93,7 +93,7 @@ if(is_file($pdfpath)){
 	header("Pragma: public");
 	header("Expires: 0");
 	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-	header("Cache-Control: public"); 
+	header("Cache-Control: public");
 	header("Content-Description: File Transfer");
 	header("Content-Type: application/pdf");
 	header("Content-Disposition: attachment; filename=".basename($pdfpath).";");

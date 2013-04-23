@@ -56,13 +56,13 @@ function createPict($url,$thumburl,$twidth) {
 					$width = imagesx($pic);
         			$height = imagesy($pic);
 					//$twidth = 320;
-					
+
 					$theight = $twidth * $height / $width; # calculate height
 					$thumb = @imagecreatetruecolor ($twidth, $theight) or die ("Can't create Image!");
 					imagecopyresampled($thumb, $pic, 0, 0, 0, 0,$twidth, $theight, $width, $height); # resize image into thumb
 					ImageJPEG($thumb,$thumburl,100); # Thumbnail as JPEG
     			}
-}	
+}
 
 function makeThumb($url,$thumburl) {
 	$pic = imagecreatefromjpeg($url) or die ("Image not found!");
@@ -143,7 +143,7 @@ $url="photos/".$photo.".jpg";
 		else if($height>$width || $height>=300){
 			$q=" height=400 ";
 		}
-		
+
 	}
 	return ("<img src='photos/".$photo.$ad.".jpg' class='thumbnail' ".$p." ".$q." border=0/ name='big'>");
 	//return ("<img src='photos/".$photo.$ad.".jpg' class='thumbnail' height=300 border=0/ name='big'>");
@@ -163,11 +163,11 @@ for($i=$l;$i>=0;$i--) {
 	$price=$a[$i].$price;
 	$t++;
 	if($t==4) {
-	
+
 	$price=".".$price;
 	}
 	if($t==7 && $l>6) {
-	
+
 	$price=".".$price;
 	}
 }
@@ -176,6 +176,7 @@ return $price;
 
 
 function shakeDate($date) {
+
 	return substr($date,6,2)."/".substr($date,4,2)."/".substr($date,0,4);
 }
 
@@ -196,7 +197,7 @@ function shakeDate($date) {
 		$q="insert into items_stats (type,date) values ('day','".date('Ymd')."')";
 		$r=mysql_query($q);
 	}
-	
+
 	$q="select * from items_stats where type='month' and date='".date('m')."'";
 	//echo $q;
 	$r=mysql_query($q) or die(mysql_error());
@@ -209,7 +210,7 @@ function shakeDate($date) {
 	}
 
 
-	
+
 */
 
 ?>
