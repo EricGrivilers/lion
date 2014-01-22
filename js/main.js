@@ -8,7 +8,21 @@ $(document).ready(function() {
 	$("#cities").buttonset();
 	$(".sale").buttonset();
 	$(".rent").buttonset();
-	$("#radio").buttonset();;
+	$("#radio a.switchType").click(function() {
+		$('#ref').val('');
+		$("#radio .checkbox").removeClass('active');
+		$(this).find('.checkbox').addClass('active');
+		$('#searchType').val($(this).attr('rel'));
+		if($(this).attr('rel')=='sale') {
+			$('#searchForm tr.sale').show();
+			$('#searchForm tr.rent').hide();
+		}
+		else {
+			$('#searchForm tr.sale').hide();
+			$('#searchForm tr.rent').show();
+		}
+
+	});
 	$('.pictThumb').each(function() {
 		//$(this).css('margin-top',(138-$(this).height())/2);
 	});
@@ -23,12 +37,20 @@ $(document).ready(function() {
 	});
 	$('.itemThumb').click(function() {
 		$('#ref').val($(this).attr('rel'));
+		$('#searchForm').attr('action',$(this).data('type'));
 		$('#searchForm').submit();
 	});
 
 	$('.moreLink').click(function() {
-		$('#ref').val($(this).closest('.itemThumb').attr('rel'));
+		thumb=$(this).closest('.itemThumb');
+		$('#ref').val(thumb.attr('rel'));
+		$('#searchForm').attr('action',thumb.data('type'));
 		$('#searchForm').submit();
+	});
+
+	$('#translation').change(function() {
+
+		translate();
 	});
 
 
@@ -133,7 +155,7 @@ function changeSearchType() {
 	//alert(i);
 	$('#radio input').removeAttr('checked');
 	$('#'+i).attr('checked','checked');
-	// alert($('#'+i).val());
+	//alert($('#'+i).val());
 	$('#searchType').val($('#'+i).val());
 	/*
 	//$(".collapsible").show();
@@ -165,8 +187,9 @@ function login() {
 
 
 function searchItem() {
-	var t=$("input[name$='searchType']:checked").attr('value');
-
+//	var t=$("input[name$='searchType']:checked").attr('value');
+	var t=$('#searchType').val();
+//	alert(t);
 	if(t=='sale') {
 		t='vente';
 	}
@@ -239,8 +262,8 @@ function resetField(o) {
 }
 
 
-function contactMe(ref) {
-	window.location="/contact?ref="+ref;
+function contactMe(ref,type) {
+	window.location="/contact?ref="+ref+"&searchType="+type;
 }
 
 function submitContactForm() {
@@ -307,18 +330,18 @@ function removeFromUser(itemId) {
 	});
 }
 
-function translate(language) {
-	//alert(language);
-	var text=$("#origLang").val();
-	text=text.substr(0,1200);
-    google.language.detect(text, function(result) {
-        if (!result.error && result.language) {
-          google.language.translate(text, result.language, language, function(result) {
-            if (result.translation) {
-				$("#text").html(result.translation);
-            }
-         });
-       }
-   });
+function translate() {
+	language=$('#translation').find(":selected").val();
+	if(language=='fr') {
+		$('#text').html($('#toTranslate').text());
+		return;
+	}
+	//var selectedValue = $(this).find(":selected").val();
+	$.get('https://www.googleapis.com/language/translate/v2',{'key':'AIzaSyBoadQb9g3bDp74MRopQ1wiDM350U4proI','target':language,'q':$('#text').html()},function(data) {
+		result=data.data.translations;
+		$.each(result, function(i) {
+			$('#text').html(result[i].translatedText);
+		});
+	});
 
 }

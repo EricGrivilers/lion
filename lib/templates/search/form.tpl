@@ -18,12 +18,10 @@
 						{% if language=='en' %} SEARCH {% else %} RECHERCHE {% endif %}:
 						<input type='hidden' name='searchType' id='searchType' value='{{get.searchType}}' />
 						<div id='radio'>
-							<input type='radio' id='searchTypeSale' name='searchTypeA' value='sale' onclick='changeSearchType()' {% if get.searchType=='sale' or get.searchType=='' %} checked='ckecked' {% endif %} />
-							<label for='searchTypeSale'>&nbsp;</label>
-							{% if language=='en' %} Sale {% else %} Vente {% endif %}
-							<input type='radio' name='searchTypeA' id='searchTypeRent' value='rent' onclick='changeSearchType()' {% if get.searchType=='rent' %} checked='checked' {% endif %} />
-							<label for='searchTypeRent'>&nbsp;</label>
-							{% if language=='en' %} Rent {% else %} Location {% endif %}
+							<a class="switchType" rel="sale"><div class="checkbox  {% if get.searchType=='sale' or get.searchType=='' %}active{% endif %}" rel="sale"></div>
+							{% if language=='en' %} Sale {% else %} Vente {% endif %}</a>
+							<a class="switchType" rel="rent"><div class="checkbox  {% if get.searchType=='rent' %} active {% endif %}" rel="rent"></div>
+							{% if language=='en' %} Rent {% else %} Location {% endif %}</a>
 						</div>
 					</div>
 					<!--<div class='infos'>{% if language=='en' %}
@@ -31,7 +29,7 @@
 						{% else %}
 						Précisez votre recherche (choix multiples)
 						{% endif %}</div>-->
-						<input type='text' name='keywords' id='keywords' value="{{get.keywords}}" class='span12' placeholder="{% if language=='en' %}Search by keyword {% else %}Recherche par mot clef{% endif %}" />
+						<input type='text' name='keywords' id='keywords' value="{{get.keywords}}" class='span12' placeholder="{% if language=='en' %}Search. Ex.: piscine, brugmann by keyword {% else %}Recherche. Ex.: piscine, brugmann{% endif %}" />
 						{% if language=='en' %}Or precise your search criterias: {% else %} Ou précisez vos critères de recherche:{% endif %}
 				</div>
 		</div>
@@ -124,18 +122,18 @@
 									<label for='area_1'>{{ areas[0] }}</label>
 								</td>
 								<td >
-									<input type='checkbox' id='area_2' name='area[2]' value="1" {% if get.area[2] %} checked {% endif %} />
+									<input type='checkbox' id='area_2' name='area[2]' value="2" {% if get.area[2] %} checked {% endif %} />
 									<label for='area_2'>{{ areas[1] }}</label>
 								</td>
 
 							</tr>
 							<tr id="cities">
 								<td >
-									<input type='checkbox' id='area_3' name='area[3]' value="1" {% if get.area[3] %} checked {% endif %} />
+									<input type='checkbox' id='area_3' name='area[3]' value="3" {% if get.area[3] %} checked {% endif %} />
 									<label for='area_3'>{{ areas[2] }}</label>
 								</td>
 								<td >
-									<input type='checkbox' id='area_4' name='area[4]' value="1" {% if get.area[4] %} checked {% endif %} />
+									<input type='checkbox' id='area_4' name='area[4]' value="4" {% if get.area[4] %} checked {% endif %} />
 									<label for='area_4'>{{ areas[3] }}</label>
 								</td>
 
@@ -155,7 +153,7 @@
 				  	<tr><td>
 
 
-				  <select name="quartier" id="quartiers" class="span11"><option value=''>Quartier</option>
+				  <select name="quartier" id="quartiers" class="span11"><option value=''>{% if language=='en' %}Neighborhood{% else %}Quartier{% endif %}</option>
 				  			{% for quartier in quartiers %}
 				  			<option value='{{quartier.id}}' {% if get.quartier==quartier.id %}selected{% endif %}>{{quartier.nom_quartier}}</option>
 				  			{% endfor %}
@@ -164,7 +162,7 @@
 				  		<tr><td>
 
 
-				  	<select name="rayon" class="span11"><option value=''>Rayon</option>
+				  	<select name="rayon" class="span11"><option value=''>{% if language=='en' %}Distance range{% else %}Rayon{% endif %}</option>
 				  			<option value="1" {% if get.rayon==1 %} selected {% endif %} >1km</option>
 				  			<option value="5" {% if get.rayon==5 %} selected {% endif %} >5 km</option>
 				  			<option value="10" {% if get.rayon==10 %} selected {% endif %} >10 km</option>

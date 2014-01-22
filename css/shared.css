@@ -6,9 +6,9 @@
 
 *,html,body {
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
-	
-	
-	
+
+
+
 	font-size:12px;
 }
 
@@ -24,7 +24,7 @@ body {
 
 a {
 	cursor:pointer;
-	
+
 }
 
 div.text,div.contact {
@@ -32,7 +32,7 @@ div.text,div.contact {
 }
 
 #content a {
-	color:#B55407;	
+	color:#B55407;
 }
 
 label {
@@ -42,7 +42,7 @@ label {
 }
 
 h1 {
-	font-size:13px;	
+	font-size:13px;
 }
 
 h2 {
@@ -50,7 +50,7 @@ h2 {
 }
 
 #container {
-	/*width: 990px;  
+	/*width: 990px;
 	background: #FFFFFF;
 	margin: 0 auto; /* les marges automatiques (et dotées d'une largeur positive) centrent la page */
 	text-align: left; /* ce paramétrage annule le paramètre text-align: center de l'élément body. */
@@ -99,7 +99,7 @@ img  {
 
 #partners {
 	width:400px;
-	float:left;	
+	float:left;
 }
 
 #languages {
@@ -145,7 +145,7 @@ img  {
 	/*width:710px;*/
 	width:100%;
 	height:57px;
-	
+
   /* for IE */
   filter:alpha(opacity=30);
   /* CSS3 standard */
@@ -169,17 +169,17 @@ background:url(/medias/menubkg30.png);
 	padding:20px 0;
 	float:left;
 	margin:0;
-	
-	
+
+
 }
 
 #mainMenu ul li.last {
 
 	border-right:0;
-	
-	
 
-	
+
+
+
 }
 
 #mainMenu ul li a {
@@ -187,7 +187,7 @@ background:url(/medias/menubkg30.png);
 	text-decoration:none;
 	font-weight:bold;
 	margin:0 auto;
-	
+
 }
 
 p#baseline {
@@ -225,19 +225,19 @@ form.geographic .searchHeader {
 }
 
 #searchTable td:hover {
-	background-color:#76808A;	
+	background-color:#76808A;
 }
 
 .searchHeader .main{
 	font-weight:normal;
 	padding:3px 0 5px 0;
-	
+
 }
 
 .searchHeader .main #radio{
 
 	text-transform:uppercase;
-	
+
 }
 
 .searchHeader .infos{
@@ -265,7 +265,7 @@ form.geographic .searchHeader {
 	margin:0;
 	display:inline-block;
 	display:inline;
-	
+
 }
 
 
@@ -281,8 +281,8 @@ form.geographic .searchHeader {
 #searchBlock .ui-button-text {
 	padding:0;
 	margin:0;
-	
-	
+
+
 }
 
 #searchBlock .ui-button,#searchBlock .ui-buttonset {
@@ -301,15 +301,15 @@ form.geographic .searchHeader {
 	border:0;
 	color:#ffffff;
 	width:100%;
-	
+
 }
 
 form.general .ui-state-active {
-	background:#6D6D6D;	
+	background:#6D6D6D;
 }
 
 form.geographic .ui-state-active {
-	background:#554634;	
+	background:#554634;
 }
 
 
@@ -324,7 +324,7 @@ form.geographic .ui-state-active {
 	overflow:hidden;
 	padding:0;
 	margin:0;
-	
+
 }
 
 #searchBlock #radio .ui-state-active {
@@ -334,11 +334,11 @@ form.geographic .ui-state-active {
 
 
 #searchBlock table td {
-	
+
 	border-bottom:2px solid #ffffff;
 	border-right:1px solid #ffffff;
-	
-	
+
+
 	text-align:center;
 	height:33px;
 	padding:0;
@@ -369,7 +369,7 @@ form.geographic table td.active {
 #searchBlock table td.ref {
 	border-bottom:0;
 	height:25px;
-	
+
 }
 #searchBlock td a.ref {
 	color:#c60900;font-weight:bold
@@ -380,7 +380,7 @@ form.geographic table td.active {
 	border:0;
 	/*background:#dddee2;*/
 	padding:2px 3px;
-	
+
 	font-size:11px;
 	font-family:Arial, Helvetica, sans-serif;
 	-webkit-border-radius: 0px;
@@ -392,7 +392,7 @@ border-radius: 0px;
 	border:0;
 	/*background:#dddee2;*/
 	padding:2px 3px;
-	
+
 	font-size:11px;
 	font-family:Arial, Helvetica, sans-serif;
 	-webkit-border-radius: 0px;
@@ -408,7 +408,7 @@ border-radius: 0px;
 #searchBlock table td.submit {
 	border:0;
 	background:#ffffff;
-	
+
 	height:25px;
 }
 
@@ -512,9 +512,9 @@ form.geographic input#ref {
 
 #loginBlock table tbody {
 	background:#eae9e5;
-	
-	
-	
+
+
+
 }
 
 #loginBlock table#loginForm td {
@@ -542,22 +542,22 @@ color:#fff;
 	/*border:1px solid #cbcbc9;
 	font-size:10px;
 	width:97%;
-	
-	
+
+
     padding: 0;
     margin:0 0 2px 0;
     vertical-align: top;
     position: relative;
-    
+
     *overflow: hidden;
 */
 
-	
+
 }
 
 #loginBlock table#loginForm td input.checkbox {
 	width:auto;
-	
+
 }
 
 
@@ -572,18 +572,18 @@ color:#fff;
 
 
 #content {
-	padding:0px;	
+	padding:0px;
 }
 
 body.vente #content,body.location #content {
-	padding:0px;	
+	padding:0px;
 }
 
 #translation {
 
 	background:#ededed;
 	margin-top:10px;
-	
+
 }
 
 #translation select,option{
@@ -592,7 +592,7 @@ body.vente #content,body.location #content {
 
 #items {
 	margin-top:20px;
-	padding:0 10px;	
+	padding:0 10px;
 	display:block;
 	text-align:center;
 }
@@ -606,8 +606,8 @@ body.vente #content,body.location #content {
 .options {
 	position:absolute;
 	margin-top:115px;
-	
-	width:185px;
+	padding:2px 5px;
+	/*width:185px;*/
 	background-color:#ffffff;
 	text-align:center;
 	font-weight:bold;
@@ -619,15 +619,15 @@ body.vente #content,body.location #content {
 }
 
 .onew {
-	color:red;	
+	color:red;
 }
 
 .osold ,.ooption {
-	color:black;	
+	color:black;
 }
 
 .oupdated {
-	color:orange;	
+	color:orange;
 }
 
 .listHeader {
@@ -644,7 +644,7 @@ body.vente #content,body.location #content {
 	font-size:12px;
 	background:#ededed;
 	color:#5a5a5a;
-	
+
 
 }
 
@@ -723,11 +723,11 @@ margin-left: 23.076923076923077px;
 	font-size:12px;
 	font-weight:bold;*/
 	text-align:center;
-	
+
 }
 
 .nextBack a {
-	color:#b25601;	
+	color:#b25601;
 }
 
 .nextBack li{
@@ -738,7 +738,7 @@ margin-left: 23.076923076923077px;
 }
 
 #item {
-	margin-bottom:20px;	
+	margin-bottom:20px;
 }
 #tabs {
 	height:570px;
@@ -753,7 +753,7 @@ margin-left: 23.076923076923077px;
 
 
 #tabs li {
-	
+
 	display:inline-block;
 	display:inline;
 	margin:3px 0px 0 3px;
@@ -765,7 +765,7 @@ margin-left: 23.076923076923077px;
 	font-size:13px;
 	height:20px;
 	text-align:center;
-	
+
 }
 
 #tabs li a{
@@ -775,14 +775,14 @@ margin-left: 23.076923076923077px;
 }
 
 #tabs li.current {
-	
+
 	background:#76808A;
 }
 
 
 #tabs .tabDiv {
 	/*position:absolute;*/
-	
+
 }
 
 #infos ul,li {
@@ -801,7 +801,7 @@ margin-left: 23.076923076923077px;
 	background:#ededed;
 	padding:5px;
 	width:100%;
-	
+
 }
 
 #contactForm td,.registerForm td{
@@ -810,7 +810,7 @@ margin-left: 23.076923076923077px;
 }
 
 td.formlab {
-	text-align:right;	
+	text-align:right;
 }
 
 #contactForm input,.registerForm input {
@@ -837,24 +837,24 @@ td.formlab {
 
 
 #fblink {
-	text-align:center;	
+	text-align:center;
 }
 #fblink li.fb {
-	
+
 	background:none;
-	
+
 }
 
 #fblink li.fb img {
-	
+
 	vertical-align:middle;
-	
+
 }
 
 #fblink li.fb a{
 	color:#039;
 	text-decoration:none;
-	
+
 }
 
 
@@ -865,13 +865,13 @@ td.formlab {
 	border:1px solid #cccccc;
 	padding:10px;
 	background:#ededed;
-	
+
 }
 
 .rightBlock {
 	width:300px;
 	float:right;
-	
+
 	padding:10px;
 }
 
@@ -883,38 +883,38 @@ td.formlab {
 
 
 #googt {
-	float:right;	
+	float:right;
 	font-size:10px;
 	position:absolute;
-	
+
 }
 
 .goog-te-gadget {
-	float:right;	
+	float:right;
 	font-size:9px;
 
-	
+
 }
 
 .goog-te-gadget select {
 
 	font-size:9px;
 
-	
+
 }
 
 .goog-te-combo {
-	
+
 	font-size:9px;
 
-	
+
 }
 
 .alert {
 	border:1px solid red;
 	padding:10px;
 	color:red;
-	
+
 }
 
 .fltrt { /* cette classe permet de rendre flottant le côté droit d'un élément dans la page. L'élément flottant doit précéder l'élément à côté duquel il doit se trouver dans la page. */
@@ -935,23 +935,23 @@ td.formlab {
 
 
 #editorForm,#editorForm td {
-	text-align:left;	
+	text-align:left;
 }
 
 
 
 #savedItemList {
-	text-align:left;	
+	text-align:left;
 	width:670px;
 }
 
 .odd {
-	background:#DDDEE2;	
+	background:#DDDEE2;
 }
 
 
 .tabAccountDiv {
-	padding:10px;	
+	padding:10px;
 }
 
 
@@ -960,20 +960,20 @@ td.formlab {
 
 #socialIcons {
 	text-align:center;
-	margin:30px 0 20px 0;	
+	margin:30px 0 20px 0;
 }
 .facebook {
 text-align:left;
 padding:5px;
 border:1px solid #cfd3de ;
 background-color:#ebeef5;
-color:#5b74a9;	
+color:#5b74a9;
 
 }
 
 .facebook a {
 text-decoration:none;
-color:#5b74a9;	
+color:#5b74a9;
 }
 
 .twitter {
@@ -981,13 +981,13 @@ text-align:left;
 padding:5px;
 border:1px solid #a4cce5 ;
 background-color:#dbeaf5;
-color:#186487;	
+color:#186487;
 
 }
 
 .twitter a {
 text-decoration:none;
-color:#186487;	
+color:#186487;
 }
 
 
@@ -995,7 +995,7 @@ color:#186487;
 	margin:30px 0 10px 0;
 	padding:0;
 	text-align:center;
-}	
+}
 
 #app a {
 	text-decoration:none;
@@ -1004,11 +1004,40 @@ color:#186487;
 }
 
 #app img {
-	
+
 }
 
 .searchHeader #radio input {
 	vertical-align:top;
+}
+
+.searchHeader #radio a.switchType {
+	text-decoration:none;
+	color:#fff;
+	vertical-align: 0;
+}
+.searchHeader #radio div.checkbox {
+	width:8px;
+	height:8px;
+	min-width:8px;
+	min-height:8px;
+	border:2px solid #b25601;
+	background:#fff;
+	padding:0;
+	cursor:pointer;
+
+
+}
+.searchHeader #radio div.active {
+	width:4px;
+	height:4px;
+	min-width:4px;
+	min-height:4px;
+	border:4px solid #b25601;
+	background:#fff;
+	padding:0;
+	cursor:pointer;
+
 }
 
 #searchForm .nav-tabs {
@@ -1068,13 +1097,13 @@ form.geographic .nav-tabs li.active a {
 
 
 
- 
+
 /* Landscape phones and down */
-@media (max-width: 480px) { 
+@media (max-width: 480px) {
 	.searchHeader {
 		height:auto;
 	}
-	
+
 	#socialIcons, #lastViews,#searchForm .infos,#baseline,.socialicon {
 		display:none;
 	}
@@ -1093,9 +1122,9 @@ form.geographic .nav-tabs li.active a {
 	}
 
 	div.itemThumb {
-		
-		
-		
+
+
+
 		float:none;
 	}
 
