@@ -1,9 +1,11 @@
 <?php
 
+
+
 include_once __root__.'/lib/GoogleMap/GoogleMap.php';
 include_once __root__.'/lib/GoogleMap/JSMin.php';
 switch($_GET['level']) {
-
+	case 0:
 	default:
 	$url="index.php?kind=item&action=list&level=0&actifonly=".$_GET['actifonly'];
 	$o=0;
@@ -33,7 +35,7 @@ biens actifs uniquement | <a href="javascript:window.print()" class=yellow>impri
   </tr>
   <?php
   
-  
+
   //stats v2
   
   
@@ -79,6 +81,8 @@ biens actifs uniquement | <a href="javascript:window.print()" class=yellow>impri
 	
 	
 	$q="select items.*,item_statsv2.days,item_statsv2.months,item_statsv2.weeks  from items LEFT JOIN item_statsv2 on item_statsv2.itemId=items.num where items.num>0 AND Lat=''  LIMIT 0,50";
+
+
 	$r=mysql_query($q) or die(mysql_error());
 	while($row=mysql_fetch_array($r)) {
 
@@ -93,6 +97,7 @@ biens actifs uniquement | <a href="javascript:window.print()" class=yellow>impri
 		$tq="update items SET Lng='".$lng."',lat='".$lat."',processed='1' WHERE num='".$row['num']."'";
 		
 		$tr=mysql_query($tq);
+
 	}
 
 	
@@ -111,7 +116,11 @@ biens actifs uniquement | <a href="javascript:window.print()" class=yellow>impri
 	$q="select items.*,item_statsv2.days,item_statsv2.months,item_statsv2.weeks  from items LEFT JOIN item_statsv2 on item_statsv2.itemId=items.num where items.num>0 ".$filter." order by ".$orderby." ";
 	//$q="select items.*  from items  where items.num>0 ".$filter."order by ".$orderby." ";
 	
+
+
 	$r=mysql_query($q) or die(mysql_error());
+
+
 	while($row=mysql_fetch_array($r)) {
 	
 		
