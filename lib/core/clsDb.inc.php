@@ -47,47 +47,50 @@ class db {
 	
 	
 	function sendResult() {
-		switch($this->resultType) {
-			
-			case 'xml':
-				$out="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-				$out.="<datas>";
-				//if(mysql_num_rows($this->result)>0) {
+		if(!is_bool($this->result)) {
+			switch($this->resultType) {
+				
+				case 'xml':
+					$out="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+					$out.="<datas>";
+					//if(mysql_num_rows($this->result)>0) {
+						while($row=mysql_fetch_assoc($this->result)) {
+							$out.="<data>";
+								foreach($row as $field=>$value) {
+									$out.="<".$field.">".$value."</".$field.">";
+								}
+							$out.="</data>";
+						}
+					//}
+					//$out.="<data><debug>".$this->query."</debug></data>";
+					$out.="</datas>";
+				break;
+				
+				default:
+				case 'array':
+
+				//$_SESSION['isarray']='1';
+					$out=array();
+					//if(mysql_num_rows($this->result)>0) {
+						while($row=mysql_fetch_assoc($this->result)) {
+							$out[]=$row;
+						}
+					//}
+				break;
+				
+				case 'json':
+					$json=array();
 					while($row=mysql_fetch_assoc($this->result)) {
-						$out.="<data>";
-							foreach($row as $field=>$value) {
-								$out.="<".$field.">".$value."</".$field.">";
-							}
-						$out.="</data>";
+							$json[]=$row;
 					}
-				//}
-				//$out.="<data><debug>".$this->query."</debug></data>";
-				$out.="</datas>";
-			break;
+					$out=json_encode($json);
+				break;
+				
+				case 'none':
+					$out='';
+				break;
 			
-			default:
-			case 'array':
-			//$_SESSION['isarray']='1';
-				$out=array();
-				//if(mysql_num_rows($this->result)>0) {
-					while($row=mysql_fetch_assoc($this->result)) {
-						$out[]=$row;
-					}
-				//}
-			break;
-			
-			case 'json':
-				$json=array();
-				while($row=mysql_fetch_assoc($this->result)) {
-						$json[]=$row;
-				}
-				$out=json_encode($json);
-			break;
-			
-			case 'none':
-				$out='';
-			break;
-		
+			}
 		}
 		$this->output=$out;
 	}
