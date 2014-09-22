@@ -1,0 +1,3 @@
+caravane_estate_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CaravaneEstateBundle:Default:index }

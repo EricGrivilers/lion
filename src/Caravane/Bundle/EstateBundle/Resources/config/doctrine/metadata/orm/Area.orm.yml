@@ -1,0 +1,43 @@
+Area:
+    type: entity
+    table: Area
+    uniqueConstraints:
+        nom:
+            columns:
+                - nom_quartier
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nomQuartier:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            column: nom_quartier
+        googlecode:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        latlng:
+            type: string
+            nullable: false
+            length: 32
+            fixed: false
+            comment: ''
+            column: LatLng
+        zoom:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

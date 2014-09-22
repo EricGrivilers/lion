@@ -1,0 +1,74 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Search
+ *
+ * @ORM\Table(name="Search", uniqueConstraints={@ORM\UniqueConstraint(name="userId", columns={"user_id"})})
+ * @ORM\Entity
+ */
+class Search
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     */
+    private $userId = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=3, nullable=false)
+     */
+    private $type = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="string", length=100, nullable=false)
+     */
+    private $price = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="location", type="string", length=100, nullable=false)
+     */
+    private $location = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="searchfor", type="string", length=100, nullable=false)
+     */
+    private $searchfor = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile_possessiontypes", type="string", length=255, nullable=false)
+     */
+    private $mobilePossessiontypes;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile_zipcodes", type="string", length=255, nullable=false)
+     */
+    private $mobileZipcodes;
+
+
+}

@@ -1,0 +1,33 @@
+Adusers:
+    type: entity
+    table: adusers
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        login:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+        password:
+            type: string
+            nullable: false
+            length: 10
+            fixed: false
+            comment: ''
+            default: ''
+        level:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+    lifecycleCallbacks: {  }

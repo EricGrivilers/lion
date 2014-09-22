@@ -1,0 +1,4 @@
+caravane_estate:
+    resource: "@CaravaneEstateBundle/Resources/config/routing.yml"
+    prefix:   /
+

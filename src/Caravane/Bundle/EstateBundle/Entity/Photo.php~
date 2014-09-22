@@ -1,0 +1,46 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Photo
+ *
+ * @ORM\Table(name="Photo", uniqueConstraints={@ORM\UniqueConstraint(name="item_id", columns={"estate_id", "photo"})})
+ * @ORM\Entity
+ */
+class Photo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estate_id", type="integer", nullable=true)
+     */
+    private $estateId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255, nullable=false)
+     */
+    private $photo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ranking", type="integer", nullable=false)
+     */
+    private $ranking;
+
+
+}

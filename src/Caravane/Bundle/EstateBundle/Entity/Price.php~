@@ -1,0 +1,39 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Price
+ *
+ * @ORM\Table(name="Price")
+ * @ORM\Entity
+ */
+class Price
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="price", type="integer", nullable=false)
+     */
+    private $price = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=5, nullable=false)
+     */
+    private $type = '';
+
+
+}

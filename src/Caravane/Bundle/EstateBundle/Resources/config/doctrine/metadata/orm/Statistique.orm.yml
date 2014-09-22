@@ -1,0 +1,54 @@
+Statistique:
+    type: entity
+    table: Statistique
+    indexes:
+        itemId:
+            columns:
+                - estate_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        estateId:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: estate_id
+        days:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        months:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        weeks:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        years:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        wdays:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+    lifecycleCallbacks: {  }

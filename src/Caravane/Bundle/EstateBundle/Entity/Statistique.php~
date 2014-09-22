@@ -1,0 +1,67 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Statistique
+ *
+ * @ORM\Table(name="Statistique", indexes={@ORM\Index(name="itemId", columns={"estate_id"})})
+ * @ORM\Entity
+ */
+class Statistique
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estate_id", type="integer", nullable=true)
+     */
+    private $estateId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="days", type="text", nullable=false)
+     */
+    private $days;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="months", type="text", nullable=false)
+     */
+    private $months;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="weeks", type="text", nullable=false)
+     */
+    private $weeks;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="years", type="text", nullable=false)
+     */
+    private $years;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="wdays", type="text", nullable=false)
+     */
+    private $wdays;
+
+
+}

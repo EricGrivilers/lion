@@ -1,0 +1,39 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Stat
+ *
+ * @ORM\Table(name="Stat", uniqueConstraints={@ORM\UniqueConstraint(name="type", columns={"type", "date"})})
+ * @ORM\Entity
+ */
+class Stat
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=8, nullable=false)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="date", type="string", length=8, nullable=false)
+     */
+    private $date;
+
+
+}

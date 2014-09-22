@@ -1,0 +1,27 @@
+Price:
+    type: entity
+    table: Price
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        price:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            default: '0'
+        type:
+            type: string
+            nullable: false
+            length: 5
+            fixed: false
+            comment: ''
+            default: ''
+    lifecycleCallbacks: {  }

@@ -1,0 +1,46 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * MobileUdids
+ *
+ * @ORM\Table(name="mobile_udids", uniqueConstraints={@ORM\UniqueConstraint(name="udid", columns={"udid"})})
+ * @ORM\Entity
+ */
+class MobileUdids
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     */
+    private $userId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="udid", type="string", length=100, nullable=false)
+     */
+    private $udid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="device", type="string", length=7, nullable=false)
+     */
+    private $device;
+
+
+}

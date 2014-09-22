@@ -1,0 +1,67 @@
+<?php
+
+namespace Caravane\Bundle\EstateBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UserEstate
+ *
+ * @ORM\Table(name="user_estate")
+ * @ORM\Entity
+ */
+class UserEstate
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     */
+    private $userId = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="estate_id", type="integer", nullable=true)
+     */
+    private $estateId = '0';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date = '0000-00-00 00:00:00';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="counter", type="integer", nullable=false)
+     */
+    private $counter;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="saved", type="integer", nullable=false)
+     */
+    private $saved;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="view", type="boolean", nullable=false)
+     */
+    private $view;
+
+
+}

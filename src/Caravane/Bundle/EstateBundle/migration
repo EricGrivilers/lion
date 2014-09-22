@@ -1,0 +1,69 @@
+ALTER TABLE `items` CHANGE `num` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `locations` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `prices` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `type` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `zip2item` CHANGE `itemId` `item_id` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `zip2item` CHANGE `locationZip` `locationZip` VARCHAR(10) NOT NULL DEFAULT '0';
+ALTER TABLE `items_stats` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `item_statsv2` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `item_statsv2` CHANGE `itemId` `item_id` INT(11) NOT NULL;
+
+
+ALTER TABLE `users2items` CHANGE `userId` `user_id` INT(11) NOT NULL DEFAULT '0', CHANGE `itemId` `item_id` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `users2items` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+ALTER TABLE `users2search` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+ALTER TABLE `zip2item` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+ALTER TABLE `mobile_udids` CHANGE `user_id` `user_id` INT(11) UNSIGNED NOT NULL;
+ALTER TABLE `mobile_udids` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+
+ALTER TABLE `items` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `items_stats` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `items_statsv2` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `locations` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+ALTER TABLE `photo2item` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `prices` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `quartiers` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `slideshow` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `type` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `users` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `users2items` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `users2search` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `zip2item` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE `banners` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+
+// change noms des db en Upper case
+
+
+
+
+puis
+
+
+ALTER TABLE `user_estate` CHANGE `item_id` `estate_id` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `Photo` CHANGE `item_id` `estate_id` INT(11) NOT NULL;
+ALTER TABLE `Estate` CHANGE `quartier_id` `area_id` INT(11) NOT NULL;
+ALTER TABLE `Estate` CHANGE `update` `updateDate` DATE NOT NULL;
+
+
+
+ALTER TABLE `user_estate` CHANGE `user_id` `user_id` INT(11) NULL DEFAULT '0', CHANGE `estate_id` `estate_id` INT(11) NULL DEFAULT '0';
+ALTER TABLE `Photo` CHANGE `estate_id` `estate_id` INT(11) NULL;
+ALTER TABLE `Statistique` CHANGE `estate_id` `estate_id` INT(11) NULL;
+
+
+
+UPDATE `Photo` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
+UPDATE `user_estate` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
+UPDATE `user_estate` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
+
+UPDATE `Statistique` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
+UPDATE `Search` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
+
+
+

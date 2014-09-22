@@ -1,0 +1,30 @@
+Type:
+    type: entity
+    table: Type
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        typeFr:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+            default: ''
+            column: type_fr
+        typeEn:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+            default: ''
+            column: type_en
+    lifecycleCallbacks: {  }
