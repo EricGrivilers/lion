@@ -241,7 +241,8 @@ class item extends element {
 		$out.=$this->item['descrfr'];
 		$out.="</div>";
 
-		$out.="<div id='translation'>Translate in <select name='translateLanguageIso'  onchange='translate(this.value)'><option value=''>select language</option><option value='en'>ENGLISH</option><option value='nl'>DUTCH</option><option value='es'>SPANISH</option><option value='de'>GERMAN</option><option value='it'>ITALIAN</option><option value='ru'>RUSSIAN</option><option value=''>---</option><option value='af'>AFRIKAANS</option><option value='sq'>ALBANIAN</option><option value='am'>AMHARIC</option><option value='ar'>ARABIC</option><option value='hy'>ARMENIAN</option><option value='az'>AZERBAIJANI</option><option value='eu'>BASQUE</option><option value='be'>BELARUSIAN</option><option value='bn'>BENGALI</option><option value='bh'>BIHARI</option><option value='bg'>BULGARIAN</option><option value='my'>BURMESE</option><option value='ca'>CATALAN</option><option value='chr'>CHEROKEE</option><option value='zh'>CHINESE</option><option value='zh-CN'>CHINESE_SIMPLIFIED</option><option value='zh-TW'>CHINESE_TRADITIONAL</option><option value='hr'>CROATIAN</option><option value='cs'>CZECH</option><option value='da'>DANISH</option><option value='dv'>DHIVEHI</option><option value='eo'>ESPERANTO</option><option value='et'>ESTONIAN</option><option value='tl'>FILIPINO</option><option value='fi'>FINNISH</option><option value='fr'>FRENCH</option><option value='gl'>GALICIAN</option><option value='ka'>GEORGIAN</option><option value='el'>GREEK</option><option value='gn'>GUARANI</option><option value='gu'>GUJARATI</option><option value='iw'>HEBREW</option><option value='hi'>HINDI</option><option value='hu'>HUNGARIAN</option><option value='is'>ICELANDIC</option><option value='id'>INDONESIAN</option><option value='iu'>INUKTITUT</option><option value='ga'>IRISH</option><option value='ja'>JAPANESE</option><option value='kn'>KANNADA</option><option value='kk'>KAZAKH</option><option value='km'>KHMER</option><option value='ko'>KOREAN</option><option value='ku'>KURDISH</option><option value='ky'>KYRGYZ</option><option value='lo'>LAOTHIAN</option><option value='lv'>LATVIAN</option><option value='lt'>LITHUANIAN</option><option value='mk'>MACEDONIAN</option><option value='ms'>MALAY</option><option value='ml'>MALAYALAM</option><option value='mt'>MALTESE</option><option value='mr'>MARATHI</option><option value='mn'>MONGOLIAN</option><option value='ne'>NEPALI</option><option value='no'>NORWEGIAN</option><option value='or'>ORIYA</option><option value='ps'>PASHTO</option><option value='fa'>PERSIAN</option><option value='pl'>POLISH</option><option value='pt-PT'>PORTUGUESE</option><option value='pa'>PUNJABI</option><option value='ro'>ROMANIAN</option><option value='sa'>SANSKRIT</option><option value='sr'>SERBIAN</option><option value='sd'>SINDHI</option><option value='si'>SINHALESE</option><option value='sk'>SLOVAK</option><option value='sl'>SLOVENIAN</option><option value='sw'>SWAHILI</option><option value='sv'>SWEDISH</option><option value='tg'>TAJIK</option><option value='ta'>TAMIL</option><option value='tl'>TAGALOG</option><option value='te'>TELUGU</option><option value='th'>THAI</option><option value='bo'>TIBETAN</option><option value='tr'>TURKISH</option><option value='uk'>UKRAINIAN</option><option value='ur'>URDU</option><option value='uz'>UZBEK</option><option value='ug'>UIGHUR</option><option value='vi'>VIETNAMESE</option><option value='cy'>WELSH</option><option value='yi'>YIDDISH</option><option value=''>UNKNOWN</option></select></div>";
+$out.="<textarea id='toTranslate' style='display:none'>".$this->item['descrfr']."</textarea>";
+		$out.="<div id='translation'>Translate in <select name='translateLanguageIso' id='translateSelect' ><option value=''>select language</option><option value='fr'>FRENCH</option><option value='en'>ENGLISH</option><option value='nl'>DUTCH</option><option value='es'>SPANISH</option><option value='de'>GERMAN</option><option value='it'>ITALIAN</option><option value='ru'>RUSSIAN</option><option value=''>---</option><option value='af'>AFRIKAANS</option><option value='sq'>ALBANIAN</option><option value='am'>AMHARIC</option><option value='ar'>ARABIC</option><option value='hy'>ARMENIAN</option><option value='az'>AZERBAIJANI</option><option value='eu'>BASQUE</option><option value='be'>BELARUSIAN</option><option value='bn'>BENGALI</option><option value='bh'>BIHARI</option><option value='bg'>BULGARIAN</option><option value='my'>BURMESE</option><option value='ca'>CATALAN</option><option value='chr'>CHEROKEE</option><option value='zh'>CHINESE</option><option value='zh-CN'>CHINESE_SIMPLIFIED</option><option value='zh-TW'>CHINESE_TRADITIONAL</option><option value='hr'>CROATIAN</option><option value='cs'>CZECH</option><option value='da'>DANISH</option><option value='dv'>DHIVEHI</option><option value='eo'>ESPERANTO</option><option value='et'>ESTONIAN</option><option value='tl'>FILIPINO</option><option value='fi'>FINNISH</option><option value='fr'>FRENCH</option><option value='gl'>GALICIAN</option><option value='ka'>GEORGIAN</option><option value='el'>GREEK</option><option value='gn'>GUARANI</option><option value='gu'>GUJARATI</option><option value='iw'>HEBREW</option><option value='hi'>HINDI</option><option value='hu'>HUNGARIAN</option><option value='is'>ICELANDIC</option><option value='id'>INDONESIAN</option><option value='iu'>INUKTITUT</option><option value='ga'>IRISH</option><option value='ja'>JAPANESE</option><option value='kn'>KANNADA</option><option value='kk'>KAZAKH</option><option value='km'>KHMER</option><option value='ko'>KOREAN</option><option value='ku'>KURDISH</option><option value='ky'>KYRGYZ</option><option value='lo'>LAOTHIAN</option><option value='lv'>LATVIAN</option><option value='lt'>LITHUANIAN</option><option value='mk'>MACEDONIAN</option><option value='ms'>MALAY</option><option value='ml'>MALAYALAM</option><option value='mt'>MALTESE</option><option value='mr'>MARATHI</option><option value='mn'>MONGOLIAN</option><option value='ne'>NEPALI</option><option value='no'>NORWEGIAN</option><option value='or'>ORIYA</option><option value='ps'>PASHTO</option><option value='fa'>PERSIAN</option><option value='pl'>POLISH</option><option value='pt-PT'>PORTUGUESE</option><option value='pa'>PUNJABI</option><option value='ro'>ROMANIAN</option><option value='sa'>SANSKRIT</option><option value='sr'>SERBIAN</option><option value='sd'>SINDHI</option><option value='si'>SINHALESE</option><option value='sk'>SLOVAK</option><option value='sl'>SLOVENIAN</option><option value='sw'>SWAHILI</option><option value='sv'>SWEDISH</option><option value='tg'>TAJIK</option><option value='ta'>TAMIL</option><option value='tl'>TAGALOG</option><option value='te'>TELUGU</option><option value='th'>THAI</option><option value='bo'>TIBETAN</option><option value='tr'>TURKISH</option><option value='uk'>UKRAINIAN</option><option value='ur'>URDU</option><option value='uz'>UZBEK</option><option value='ug'>UIGHUR</option><option value='vi'>VIETNAMESE</option><option value='cy'>WELSH</option><option value='yi'>YIDDISH</option><option value=''>UNKNOWN</option></select></div>";
 
 		$out.="<br /><textarea id='origLang' style='display:none'>".$this->item['descrfr']."</textarea>";
 
@@ -254,6 +255,17 @@ class item extends element {
 
 
 		$out.="</div>";
+
+
+
+		if($_SESSION['language']=='en') {
+			$out.='<script type="text/javascript">
+				$(document).ready(function() {
+					$("#translateSelect").val("en");
+					$("#translation").change();
+				});
+			</script>';
+		}
 		//$out.="<br class='clearfloat' />";
 
 		$trA=explode('/',$this->item['reference']);
@@ -352,7 +364,6 @@ class item extends element {
 			$MAP_OBJECT = new GoogleMapAPI(); $MAP_OBJECT->_minify_js = isset($_REQUEST["min"])?FALSE:TRUE;
 			if($geocodes = $MAP_OBJECT->getGeoCode($_GET['address']."+belgium")) {
 			//	print_r($geocodes);
-				echo $_GET['address']."+belgium";
 				if($_GET['rayon']<=1) {$_GET['rayon']=0.5;}
 				$sql="SELECT * FROM items WHERE (
 POW( ( 69.1 * ( Longitude - -74.008680 ) * cos( 40.711676 / 57.3 ) ) , 2 ) + POW( ( 69.1 * ( Latitude - 40.711676 ) ) , 2 )
@@ -468,7 +479,7 @@ $where.=" AND (POW( ( 69.1 * ( Lng - ".$geocodes['lon']." ) * cos( ".$geocodes['
 
 		$db->query=$q;
 		$db->setQuery();
-		echo $db->query;
+	//	echo $db->query;
 
 		if($db->output) {
 	$this->items=$db->output;
