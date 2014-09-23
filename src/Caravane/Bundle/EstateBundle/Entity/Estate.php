@@ -4,6 +4,12 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+
+
 /**
  * Estate
  *
@@ -85,9 +91,10 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="shortdescrfr", type="string", length=255, nullable=false)
+     * @ORM\Column(name="summary", type="string", length=255, nullable=false)
+     * @Gedmo\Translatable
      */
-    private $shortdescrfr;
+    private $summary;
 
     /**
      * @var string
@@ -99,9 +106,10 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="descrfr", type="text", nullable=true)
+     * @ORM\Column(name="description", type="text", nullable=true)
+     * @Gedmo\Translatable
      */
-    private $descrfr;
+    private $description;
 
     /**
      * @var string
@@ -113,16 +121,16 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="vendu", type="string", length=1, nullable=true)
+     * @ORM\Column(name="sold", type="boolean", nullable=true)
      */
-    private $vendu;
+    private $sold;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="surdemande", type="string", length=1, nullable=true)
+     * @ORM\Column(name="ondemand", type="boolean", nullable=true)
      */
-    private $surdemande;
+    private $ondemand;
 
 
     /**
@@ -156,9 +164,9 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="type", type="string", length=100, nullable=false)
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Category")
      */
-    private $type = '';
+    private $category;
 
     /**
      * @var integer
@@ -299,6 +307,29 @@ class Estate
 
 
 
+
+    /**
+     * Get public
+     *
+     * @return string
+     */
+    public function getPublic()
+    {
+        return ($this->status?'checked':'');
+    }
+
+
+    /**
+     * Get actif
+     *
+     * @return string
+     */
+    public function getActif()
+    {
+        return ($this->status?'Y':'');
+    }
+
+
     /**
      * Constructor
      */
@@ -306,6 +337,8 @@ class Estate
     {
         $this->photo = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
+
 
     /**
      * Get id
@@ -456,29 +489,6 @@ class Estate
     }
 
     /**
-     * Set areaId
-     *
-     * @param integer $areaId
-     * @return Estate
-     */
-    public function setAreaId($areaId)
-    {
-        $this->areaId = $areaId;
-
-        return $this;
-    }
-
-    /**
-     * Get areaId
-     *
-     * @return integer
-     */
-    public function getAreaId()
-    {
-        return $this->areaId;
-    }
-
-    /**
      * Set zone
      *
      * @param string $zone
@@ -502,26 +512,26 @@ class Estate
     }
 
     /**
-     * Set shortdescrfr
+     * Set summary
      *
-     * @param string $shortdescrfr
+     * @param string $summary
      * @return Estate
      */
-    public function setShortdescrfr($shortdescrfr)
+    public function setSummary($summary)
     {
-        $this->shortdescrfr = $shortdescrfr;
+        $this->summary = $summary;
 
         return $this;
     }
 
     /**
-     * Get shortdescrfr
+     * Get summary
      *
      * @return string
      */
-    public function getShortdescrfr()
+    public function getSummary()
     {
-        return $this->shortdescrfr;
+        return $this->summary;
     }
 
     /**
@@ -548,26 +558,26 @@ class Estate
     }
 
     /**
-     * Set descrfr
+     * Set description
      *
-     * @param string $descrfr
+     * @param string $description
      * @return Estate
      */
-    public function setDescrfr($descrfr)
+    public function setDescription($description)
     {
-        $this->descrfr = $descrfr;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * Get descrfr
+     * Get description
      *
      * @return string
      */
-    public function getDescrfr()
+    public function getDescription()
     {
-        return $this->descrfr;
+        return $this->description;
     }
 
     /**
@@ -617,29 +627,27 @@ class Estate
     }
 
     /**
-     * Set surdemande
+     * Set ondemand
      *
-     * @param string $surdemande
+     * @param boolean $ondemand
      * @return Estate
      */
-    public function setSurdemande($surdemande)
+    public function setOndemand($ondemand)
     {
-        $this->surdemande = $surdemande;
+        $this->ondemand = $ondemand;
 
         return $this;
     }
 
     /**
-     * Get surdemande
+     * Get ondemand
      *
-     * @return string
+     * @return boolean
      */
-    public function getSurdemande()
+    public function getOndemand()
     {
-        return $this->surdemande;
+        return $this->ondemand;
     }
-
-
 
     /**
      * Set location
@@ -734,29 +742,6 @@ class Estate
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     * @return Estate
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set zip
      *
      * @param integer $zip
@@ -826,26 +811,26 @@ class Estate
     }
 
     /**
-     * Set area
+     * Set surface
      *
-     * @param integer $area
+     * @param string $surface
      * @return Estate
      */
-    public function setArea($area)
+    public function setSurface($surface)
     {
-        $this->area = $area;
+        $this->surface = $surface;
 
         return $this;
     }
 
     /**
-     * Get area
+     * Get surface
      *
-     * @return integer
+     * @return string
      */
-    public function getArea()
+    public function getSurface()
     {
-        return $this->area;
+        return $this->surface;
     }
 
     /**
@@ -963,10 +948,28 @@ class Estate
         return $this->viewable;
     }
 
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Estate
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
+        return $this;
+    }
 
-
-
+    /**
+     * Get status
+     *
+     * @return boolean
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 
     /**
      * Set dayview
@@ -1175,8 +1178,6 @@ class Estate
         return $this->lng;
     }
 
-
-
     /**
      * Add photo
      *
@@ -1205,91 +1206,54 @@ class Estate
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPhotos()
-    {
-        return $this->photo;
-    }
-
-    /**
-     * Set surface
-     *
-     * @param string $surface
-     * @return Estate
-     */
-    public function setSurface($surface)
-    {
-        $this->surface = $surface;
-
-        return $this;
-    }
-
-    /**
-     * Get surface
-     *
-     * @return string
-     */
-    public function getSurface()
-    {
-        return $this->surface;
-    }
-
-    /**
-     * Set status
-     *
-     * @param boolean $status
-     * @return Estate
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return boolean
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
     public function getPhoto()
     {
         return $this->photo;
     }
 
-
-
-
-
     /**
-     * Get public
+     * Set area
      *
-     * @return string
+     * @param \Caravane\Bundle\EstateBundle\Entity\Area $area
+     * @return Estate
      */
-    public function getPublic()
+    public function setArea(\Caravane\Bundle\EstateBundle\Entity\Area $area = null)
     {
-        return ($this->status?'checked':'');
+        $this->area = $area;
+
+        return $this;
     }
 
-
     /**
-     * Get actif
+     * Get area
      *
-     * @return string
+     * @return \Caravane\Bundle\EstateBundle\Entity\Area
      */
-    public function getActif()
+    public function getArea()
     {
-        return ($this->status?'Y':'');
+        return $this->area;
     }
 
+    /**
+     * Set category
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Category $category
+     * @return Estate
+     */
+    public function setCategory(\Caravane\Bundle\EstateBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
 
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

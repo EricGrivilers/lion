@@ -5,12 +5,12 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Type
+ * Category
  *
- * @ORM\Table(name="Type")
+ * @ORM\Table(name="Category")
  * @ORM\Entity
  */
-class Type
+class Category
 {
     /**
      * @var integer
@@ -40,7 +40,7 @@ class Type
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -63,7 +63,7 @@ class Type
     /**
      * Get typeFr
      *
-     * @return string 
+     * @return string
      */
     public function getTypeFr()
     {
@@ -86,7 +86,7 @@ class Type
     /**
      * Get typeEn
      *
-     * @return string 
+     * @return string
      */
     public function getTypeEn()
     {

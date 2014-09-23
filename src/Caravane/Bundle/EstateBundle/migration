@@ -99,3 +99,23 @@ ALTER TABLE `Estate` CHANGE `surdemande` `ondemand` VARCHAR(1) CHARACTER SET utf
 UPDATE `Estate` SET ondemand=0 WHERE ondemand!=1;
 ALTER TABLE `Estate` CHANGE `ondemand` `ondemand` TINYINT(1) NULL DEFAULT NULL;
 
+
+UPDATE `Estate` SET location=1 WHERE location='Y';
+UPDATE `Estate` SET location=0 WHERE location='';
+ALTER TABLE `Estate` CHANGE `location` `location` TINYINT(1) NULL DEFAULT NULL;
+
+
+ALTER TABLE `Estate` CHANGE `type` `category_id` INT(11) NOT NULL;
+
+
+
+ALTER TABLE `Estate` CHANGE `shortdescrfr` `summary` VARCHAR(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+
+ALTER TABLE `Estate` CHANGE `descrfr` `description` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;
+
+
+
+UPDATE `Estate` SET vendu="0" WHERE vendu='';
+
+
+
