@@ -14,7 +14,7 @@ use Gedmo\Translatable\Translatable;
  * Estate
  *
  * @ORM\Table(name="Estate")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\EstateRepository")
  */
 class Estate
 {
@@ -43,6 +43,7 @@ class Estate
 
     /**
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", mappedBy="estate")
+     * @ORM\OrderBy({"ranking" = "ASC"})
      */
     private $photo;
 
@@ -604,26 +605,26 @@ class Estate
     }
 
     /**
-     * Set vendu
+     * Set sold
      *
-     * @param string $vendu
+     * @param boolean $sold
      * @return Estate
      */
-    public function setVendu($vendu)
+    public function setSold($sold)
     {
-        $this->vendu = $vendu;
+        $this->sold = $sold;
 
         return $this;
     }
 
     /**
-     * Get vendu
+     * Get sold
      *
-     * @return string
+     * @return boolean
      */
-    public function getVendu()
+    public function getSold()
     {
-        return $this->vendu;
+        return $this->sold;
     }
 
     /**
@@ -1202,13 +1203,26 @@ class Estate
     }
 
     /**
-     * Get photo
+     * Get photos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPhoto()
+    public function getPhotos()
     {
         return $this->photo;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Caravane/Bundle/EstateBundle\Entity\Photo
+     */
+    public function getPhoto()
+    {
+        if(count($this->photo)>0) {
+            return $this->photo[0];
+        }
+        return null;
     }
 
     /**

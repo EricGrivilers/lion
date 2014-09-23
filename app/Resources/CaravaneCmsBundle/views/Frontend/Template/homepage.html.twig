@@ -1,0 +1,630 @@
+{% extends "CaravaneCmsBundle::layout.html.twig" %}
+
+
+
+{% block content %}
+
+	<div class='wrapper top-slider '>
+			<!-- START REVOLUTION SLIDER 4.5.95 fullwidth mode -->
+			<div id="rev_slider_1_2_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:450px;">
+				<div id="rev_slider_1_2" class="rev_slider fullwidthabanner" style="display:none;max-height:450px;height:450px;">
+					<ul>	<!-- SLIDE  -->
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
+						<!-- MAIN IMAGE -->
+						<img src="medias/home/1.jpg"  alt="slide11"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<!-- LAYERS -->
+						<!-- LAYER NR. 1 -->
+						<div class="tp-caption transp_bg lfl"
+							data-x="405"
+							data-y="70"
+							data-speed="500"
+							data-start="500"
+							data-easing="easeOutExpo"
+							data-splitin="none"
+							data-splitout="none"
+							data-elementdelay="0"
+							data-endelementdelay="0"
+							data-end="8700"
+							data-endspeed="300"
+							style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>standing</b><br> & nature</h2>
+							<p>Waterloo</p>
+						</div>
+					</li>
+					<!-- SLIDE  -->
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
+						<!-- MAIN IMAGE -->
+						<img src="medias/home/2.jpg"  alt="slide2_compressed-1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<!-- LAYERS -->
+						<!-- LAYER NR. 1 -->
+						<div class="tp-caption transp_bg lfl"
+							data-x="780"
+							data-y="135"
+							data-speed="500"
+							data-start="500"
+							data-easing="easeOutExpo"
+							data-splitin="none"
+							data-splitout="none"
+							data-elementdelay="0"
+							data-endelementdelay="0"
+							data-end="8700"
+							data-endspeed="300"
+							style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>LUXE</b><br>& tradition</h2>
+							<p>Ixelles</p>
+						</div>
+					</li>
+					<!-- SLIDE  -->
+					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
+						<!-- MAIN IMAGE -->
+						<img src="medias/home/3.jpg"  alt="slide41"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+						<!-- LAYERS -->
+						<!-- LAYER NR. 1 -->
+						<div class="tp-caption transp_bg lfl"
+							data-x="0"
+							data-y="128"
+							data-speed="500"
+							data-start="500"
+							data-easing="easeOutExpo"
+							data-splitin="none"
+							data-splitout="none"
+							data-elementdelay="0"
+							data-endelementdelay="0"
+							data-end="8700"
+							data-endspeed="300"
+							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>moderne</b><br>& chaleureux</h2>
+							<p>Uccle</p>
+						</div>
+						<!-- LAYER NR. 4 -->
+					</li>
+				</ul>
+				<div class="tp-bannertimer"></div>	</div>
+			</div>
+			<script type="text/javascript">
+				/******************************************
+													-	PREPARE PLACEHOLDER FOR SLIDER	-
+				******************************************/
+				var setREVStartSize = function() {
+									var	tpopt = new Object();
+						tpopt.startwidth = 1170;
+						tpopt.startheight = 450;
+						tpopt.container = jQuery('#rev_slider_1_2');
+						tpopt.fullScreen = "off";
+						tpopt.forceFullWidth="off";
+					tpopt.container.closest(".rev_slider_wrapper").css({height:tpopt.container.height()});tpopt.width=parseInt(tpopt.container.width(),0);tpopt.height=parseInt(tpopt.container.height(),0);tpopt.bw=tpopt.width/tpopt.startwidth;tpopt.bh=tpopt.height/tpopt.startheight;if(tpopt.bh>tpopt.bw)tpopt.bh=tpopt.bw;if(tpopt.bh<tpopt.bw)tpopt.bw=tpopt.bh;if(tpopt.bw<tpopt.bh)tpopt.bh=tpopt.bw;if(tpopt.bh>1){tpopt.bw=1;tpopt.bh=1}if(tpopt.bw>1){tpopt.bw=1;tpopt.bh=1}tpopt.height=Math.round(tpopt.startheight*(tpopt.width/tpopt.startwidth));if(tpopt.height>tpopt.startheight&&tpopt.autoHeight!="on")tpopt.height=tpopt.startheight;if(tpopt.fullScreen=="on"){tpopt.height=tpopt.bw*tpopt.startheight;var cow=tpopt.container.parent().width();var coh=jQuery(window).height();if(tpopt.fullScreenOffsetContainer!=undefined){try{var offcontainers=tpopt.fullScreenOffsetContainer.split(",");jQuery.each(offcontainers,function(e,t){coh=coh-jQuery(t).outerHeight(true);if(coh<tpopt.minFullScreenHeight)coh=tpopt.minFullScreenHeight})}catch(e){}}tpopt.container.parent().height(coh);tpopt.container.height(coh);tpopt.container.closest(".rev_slider_wrapper").height(coh);tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(coh);tpopt.container.css({height:"100%"});tpopt.height=coh;}else{tpopt.container.height(tpopt.height);tpopt.container.closest(".rev_slider_wrapper").height(tpopt.height);tpopt.container.closest(".forcefullwidth_wrapper_tp_banner").find(".tp-fullwidth-forcer").height(tpopt.height);}
+				};
+				/* CALL PLACEHOLDER */
+				setREVStartSize();
+				var tpj=jQuery;
+				tpj.noConflict();
+				var revapi1;
+				tpj(document).ready(function() {
+				if(tpj('#rev_slider_1_2').revolution == undefined)
+					revslider_showDoubleJqueryError('#rev_slider_1_2');
+				else
+				revapi1 = tpj('#rev_slider_1_2').show().revolution(
+					{
+						dottedOverlay:"none",
+						delay:9000,
+						startwidth:1170,
+						startheight:450,
+						hideThumbs:200,
+						thumbWidth:100,
+						thumbHeight:50,
+						thumbAmount:3,
+						navigationType:"none",
+						navigationArrows:"none",
+						navigationStyle:"round",
+						touchenabled:"on",
+						onHoverStop:"on",
+						swipe_velocity: 0.7,
+						swipe_min_touches: 1,
+						swipe_max_touches: 1,
+						drag_block_vertical: false,
+						keyboardNavigation:"off",
+						navigationHAlign:"center",
+						navigationVAlign:"bottom",
+						navigationHOffset:0,
+						navigationVOffset:20,
+						soloArrowLeftHalign:"left",
+						soloArrowLeftValign:"center",
+						soloArrowLeftHOffset:20,
+						soloArrowLeftVOffset:0,
+						soloArrowRightHalign:"right",
+						soloArrowRightValign:"center",
+						soloArrowRightHOffset:20,
+						soloArrowRightVOffset:0,
+						shadow:0,
+						fullWidth:"on",
+						fullScreen:"off",
+						spinner:"spinner3",
+						stopLoop:"off",
+						stopAfterLoops:-1,
+						stopAtSlide:-1,
+						shuffle:"off",
+						autoHeight:"off",
+						forceFullWidth:"off",
+						hideThumbsOnMobile:"off",
+						hideNavDelayOnMobile:1500,
+						hideBulletsOnMobile:"off",
+						hideArrowsOnMobile:"off",
+						hideThumbsUnderResolution:0,
+												hideSliderAtLimit:0,
+						hideCaptionAtLimit:0,
+						hideAllCaptionAtLilmit:0,
+																										startWithSlide:0					});
+								});	/*ready*/
+			</script>
+			<style type="text/css">
+			#rev_slider_1_2_wrapper .tp-loader.spinner3 div { background-color: #4d4d4d !important; }
+			</style>
+			<!-- END REVOLUTION SLIDER -->
+		</div>
+		<!-- Content area 1 -->
+		<aside class='wrapper blue'>
+			<div class='container blue-radial-grad'>
+				<section class='row two-headers'>
+					<div class="col-md-3">
+						<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
+					</div>
+					<div class="col-md-9">
+						<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
+						<img src="{{asset('medias/leadingrealestate2.png')}}" width="200" alt="" />
+					</div>
+				</section>
+			</div>
+		</aside>
+		<!-- Content area 5 -->
+
+		<aside class='wrapper default-bg'>
+			<div class='container'>
+				<section class='widget widget_recent_posts_2'>
+					<div class='row'>
+						<h2 class='title'>NOUVEAUX BIENS</h2>
+						<div class='separator'>
+							<div></div>
+						</div>
+
+						 {{ render(controller('CaravaneEstateBundle:Estate:lastUdated', { 'max': 9 } ) ) }}
+						{#<div class='pagination'>
+							<span id='flexslider-latest-posts-prev-740' class='prev-t1'></span>
+							<span id='flexslider-latest-posts-next-740' class='next-t1'></span>
+						</div>
+						<div  id='flexslider-latest-posts-740' class='flexslider '>
+							<ul class='slides'>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Maison</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Uccle</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/1.jpg" class="wp-post-image" width="360" height="181" alt="Class aptent taciti sociosqu ad litora full commentin"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='Class aptent taciti sociosqu ad litora full commentin' href='an-ordered-list-post/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1180 Uccle
+												</div>
+											</div>
+											<header>
+												<a href='an-ordered-list-post/index.html'><h2>Proximité Lycée Français, dans environnement bucolique, très privatif sur +/-10a et dans un ensemble immobilier type condominium</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Appartement</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Tervuren</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/2.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_est.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1150 Woluwe-Saint-Pierre
+												</div>
+											</div>
+											<header>
+												<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><h2>Sur la prestigieuse avenue de Tervuren, penthouse exceptionnel de +/-140 m² + terrasses de +/- 78 m² </h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/parent-category-i/index.html" title="View all posts in Parent Category I" rel="category tag">Parent Category I</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/3.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='another-post-with-everything-in-it/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1640 Rhode-St-Genese
+													</span>
+												</div>
+											</div>
+											<header>
+												<a href='another-post-with-everything-in-it/index.html'><h2>En retrait de la chaussée, situé dans une magnifique propriété d'un hectare50</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Maison</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Uccle</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/1.jpg" class="wp-post-image" width="360" height="181" alt="Class aptent taciti sociosqu ad litora full commentin"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='Class aptent taciti sociosqu ad litora full commentin' href='an-ordered-list-post/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1180 Uccle
+												</div>
+											</div>
+											<header>
+												<a href='an-ordered-list-post/index.html'><h2>Proximité Lycée Français, dans environnement bucolique, très privatif sur +/-10a et dans un ensemble immobilier type condominium</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Appartement</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Tervuren</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/2.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_est.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1150 Woluwe-Saint-Pierre
+												</div>
+											</div>
+											<header>
+												<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><h2>Sur la prestigieuse avenue de Tervuren, penthouse exceptionnel de +/-140 m² + terrasses de +/- 78 m² </h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/parent-category-i/index.html" title="View all posts in Parent Category I" rel="category tag">Parent Category I</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/3.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='another-post-with-everything-in-it/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1640 Rhode-St-Genese
+													</span>
+												</div>
+											</div>
+											<header>
+												<a href='another-post-with-everything-in-it/index.html'><h2>En retrait de la chaussée, situé dans une magnifique propriété d'un hectare50</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Maison</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Uccle</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/1.jpg" class="wp-post-image" width="360" height="181" alt="Class aptent taciti sociosqu ad litora full commentin"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='Class aptent taciti sociosqu ad litora full commentin' href='an-ordered-list-post/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1180 Uccle
+												</div>
+											</div>
+											<header>
+												<a href='an-ordered-list-post/index.html'><h2>Proximité Lycée Français, dans environnement bucolique, très privatif sur +/-10a et dans un ensemble immobilier type condominium</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Appartement</a>
+																</span>,
+																<span>
+																<a href="category/standard/index.html" title="View all posts in Standard" rel="category tag">Tervuren</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/2.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_est.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1150 Woluwe-Saint-Pierre
+												</div>
+											</div>
+											<header>
+												<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><h2>Sur la prestigieuse avenue de Tervuren, penthouse exceptionnel de +/-140 m² + terrasses de +/- 78 m² </h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+								<li>
+									<article class='item'>
+										<div class='item-con-t1'>
+											<div class='container-t1'>
+												<div class='container-t1-margin'>
+													<footer class='visible-on-hover'>
+														<div class='bg-black-045'></div>
+														<div class='widget_recent_posts_2-fac'>
+															<div class='category'>
+																<span>
+																<a href="category/parent-category-i/index.html" title="View all posts in Parent Category I" rel="category tag">Parent Category I</a>
+																</span>
+															</div>
+														</div>
+													</footer>
+													<img src="medias/new/3.jpg" class="wp-post-image" width="360" height="181" alt="With just a few clicks you can add in both portrait"  />
+													<div class='facilities visible-on-hover'>
+														<div class='bg-black-020'></div>
+														<div class='image-links'>
+															<a rel='' title='With just a few clicks you can add in both portrait' href='another-post-with-everything-in-it/index.html'><span class='add'></span></a>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class='blue-line visible-on-hover tran03slinear'></div>
+										</div>
+										<div class='item-body'>
+											<div class='item-helper'>
+												<div class='avatar big'>
+													<img alt='' src='medias/tinymap_centre_sud.png' class='avatar avatar-71 photo' height='71' width='71' />
+												</div>
+												<div class='post-author'>
+													1640 Rhode-St-Genese
+													</span>
+												</div>
+											</div>
+											<header>
+												<a href='another-post-with-everything-in-it/index.html'><h2>En retrait de la chaussée, situé dans une magnifique propriété d'un hectare50</h2></a>
+											</header>
+										</div>
+									</article>
+								</li>
+							</ul>
+						</div>
+						#}
+					</div>
+				</section>
+			</div>
+		</aside>
+		<!-- Content area 4 -->
+		<aside class='wrapper border-tb-white marble-color'>
+			<div class='container'>
+				<div class='advantages'>
+					<section class='col-md-6'>
+						<div class='icon-content'>
+							<img src="medias/iphone2.png" />
+						</div>
+					</section>
+					<section class='col-md-6'>
+						<a href='index.html'><h2 class='tran03slinear'>SUIVEZ-NOUS</h2>
+						</a>
+						<div class='icon-content'>
+							<ul class='socials-bottom clearfix'>
+								<li>
+									<a href='http://facebook.com' target="_blank" style="background-image: none; font-size: 52px;"><span class="fa fa-facebook"></span></a>
+									<div class='cloud'>Facebook<div class='helper'></div></div>
+								</li>
+								<li>
+									<a class='twitter' href='http://twitter.com/google' target="_blank" style="background-image: none; font-size: 52px;"><span class="fa fa-twitter"></span></a>
+									<div class='cloud'>Twitter<div class='helper'></div></div>
+								</li>
+							</ul></div>
+							<br/>
+							<a href='index.html'><h2 class='tran03slinear'>NEWSLETTER</h2>
+							</a>
+							<div class='icon-content'>
+								<div class="input-group text-center">
+									<label class="sr-only" for="caravane_bundle_crmbundle_newslettertype_email"></label><input type="text" id="caravane_bundle_crmbundle_newslettertype_email" name="caravane_bundle_crmbundle_newslettertype[email]" required="required" class=" form-control " placeholder="Email *
+									">
+									<span class="input-group-btn">
+									<button class="btn btn-default" type="submit">Subscribe</button>
+									</span>
+								</div>
+							</div>
+						</section>
+					</div>				</div>
+				</aside>
+
+
+{% endblock content %}

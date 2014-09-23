@@ -1,0 +1,51 @@
+<div id="estate_last_updated" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+	<ol class="carousel-indicators">
+		<li data-target="#estate_last_updated" data-slide-to="0" class="active"></li>
+		<li data-target="#estate_last_updated" data-slide-to="1"></li>
+		<li data-target="#estate_last_updated" data-slide-to="2"></li>
+	</ol>
+
+	<!-- Wrapper for slides -->
+	<div class="carousel-inner">
+		<div class="item active">
+			{% for estate in estates %}
+
+				<div class="col-md-4">
+					<article class='item'>
+						<div>
+							<footer >
+								{{estate.category.name}}
+							</footer>
+							{{estate.photo}}
+							<img src="{{asset('photos/big/'~estate.photo ) }}" class="wp-post-image" width="360" height="181" alt="{{estate.category.name}} {{estate.locfr}}"  />
+
+						</div>
+						<div class='item-body'>
+							<div class='post-author'>
+													{{estate.locfr}}
+												</div>
+							<header>
+												<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'><h2>{{estate.description|raw}} </h2></a>
+											</header>
+						</div>
+					</article>
+				</div>
+
+				{% if loop.index is divisibleby(3) %}
+					</div>
+					<div class="item">
+				{% endif %}
+
+			{% endfor %}
+		</div>
+	</div>
+
+	<!-- Controls -->
+	<a class="left carousel-control" href="#estate_last_updated" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a class="right carousel-control" href="#estate_last_updated" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>

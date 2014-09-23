@@ -1,0 +1,111 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Estate list {{entities|length}}</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Createdon</th>
+                <th>Updatedon</th>
+                <th>Prix</th>
+                <th>Oldprix</th>
+                <th>Locfr</th>
+                <th>Locuk</th>
+                <th>Zone</th>
+                <th>Summary</th>
+                <th>Shortdescren</th>
+                <th>Description</th>
+                <th>Descren</th>
+                <th>Sold</th>
+                <th>Ondemand</th>
+                <th>Location</th>
+                <th>Reference</th>
+                <th>Enoption</th>
+                <th>Name</th>
+                <th>Zip</th>
+                <th>Googlemap</th>
+                <th>Moredescrfr</th>
+                <th>Surface</th>
+                <th>Rooms</th>
+                <th>Bathrooms</th>
+                <th>Garages</th>
+                <th>Garden</th>
+                <th>Viewable</th>
+                <th>Status</th>
+                <th>Dayview</th>
+                <th>Weekview</th>
+                <th>Monthview</th>
+                <th>Totalview</th>
+                <th>Lastdayview</th>
+                <th>Lastweekview</th>
+                <th>Lastmonthview</th>
+                <th>Lat</th>
+                <th>Lng</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('caravane_estate_backend_estate_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{% if entity.createdOn %}{{ entity.createdOn|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.updatedOn %}{{ entity.updatedOn|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.prix }}</td>
+                <td>{{ entity.oldprix }}</td>
+                <td>{{ entity.locfr }}</td>
+                <td>{{ entity.locuk }}</td>
+                <td>{{ entity.zone }}</td>
+                <td>{{ entity.summary }}</td>
+                <td>{{ entity.shortdescren }}</td>
+                <td>{{ entity.description }}</td>
+                <td>{{ entity.descren }}</td>
+                <td>{{ entity.sold }}</td>
+                <td>{{ entity.ondemand }}</td>
+                <td>{{ entity.location }}</td>
+                <td>{{ entity.reference }}</td>
+                <td>{{ entity.enoption }}</td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.zip }}</td>
+                <td>{{ entity.googleMap }}</td>
+                <td>{{ entity.moredescrfr }}</td>
+                <td>{{ entity.surface }}</td>
+                <td>{{ entity.rooms }}</td>
+                <td>{{ entity.bathrooms }}</td>
+                <td>{{ entity.garages }}</td>
+                <td>{{ entity.garden }}</td>
+                <td>{{ entity.viewable }}</td>
+                <td>{{ entity.status }}</td>
+                <td>{{ entity.dayview }}</td>
+                <td>{{ entity.weekview }}</td>
+                <td>{{ entity.monthview }}</td>
+                <td>{{ entity.totalview }}</td>
+                <td>{{ entity.lastdayview }}</td>
+                <td>{{ entity.lastweekview }}</td>
+                <td>{{ entity.lastmonthview }}</td>
+                <td>{{ entity.lat }}</td>
+                <td>{{ entity.lng }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('caravane_estate_backend_estate_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('caravane_estate_backend_estate_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

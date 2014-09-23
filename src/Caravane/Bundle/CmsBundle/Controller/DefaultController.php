@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('CaravaneCmsBundle:Homepage:index.html.twig', array());
+        return $this->render('CaravaneCmsBundle:Frontend:Template/homepage.html.twig', array());
     }
 }

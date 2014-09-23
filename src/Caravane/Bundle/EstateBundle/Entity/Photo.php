@@ -31,9 +31,9 @@ class Photo
     /**
      * @var string
      *
-     * @ORM\Column(name="photo", type="string", length=255, nullable=false)
+     * @ORM\Column(name="filename", type="string", length=255, nullable=false)
      */
-    private $photo;
+    private $filename;
 
     /**
      * @var integer
@@ -41,6 +41,11 @@ class Photo
      * @ORM\Column(name="ranking", type="integer", nullable=false)
      */
     private $ranking;
+
+
+    public function __toString() {
+        return $this->filename;
+    }
 
 
 
@@ -55,26 +60,26 @@ class Photo
     }
 
     /**
-     * Set photo
+     * Set filename
      *
-     * @param string $photo
+     * @param string $filename
      * @return Photo
      */
-    public function setPhoto($photo)
+    public function setFilename($filename)
     {
-        $this->photo = $photo;
+        $this->filename = $filename;
 
         return $this;
     }
 
     /**
-     * Get photo
+     * Get filename
      *
      * @return string
      */
-    public function getPhoto()
+    public function getFilename()
     {
-        return $this->photo;
+        return $this->filename;
     }
 
     /**

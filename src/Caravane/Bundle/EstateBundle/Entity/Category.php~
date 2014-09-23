@@ -4,6 +4,9 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+
 /**
  * Category
  *
@@ -24,9 +27,10 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="type_fr", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @Gedmo\Translatable
      */
-    private $typeFr = '';
+    private $name = '';
 
     /**
      * @var string
@@ -37,10 +41,12 @@ class Category
 
 
 
+
+
     /**
      * Get id
      *
-     * @return integer
+     * @return integer 
      */
     public function getId()
     {
@@ -48,33 +54,33 @@ class Category
     }
 
     /**
-     * Set typeFr
+     * Set name
      *
-     * @param string $typeFr
-     * @return Type
+     * @param string $name
+     * @return Category
      */
-    public function setTypeFr($typeFr)
+    public function setName($name)
     {
-        $this->typeFr = $typeFr;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get typeFr
+     * Get name
      *
-     * @return string
+     * @return string 
      */
-    public function getTypeFr()
+    public function getName()
     {
-        return $this->typeFr;
+        return $this->name;
     }
 
     /**
      * Set typeEn
      *
      * @param string $typeEn
-     * @return Type
+     * @return Category
      */
     public function setTypeEn($typeEn)
     {
@@ -86,7 +92,7 @@ class Category
     /**
      * Get typeEn
      *
-     * @return string
+     * @return string 
      */
     public function getTypeEn()
     {

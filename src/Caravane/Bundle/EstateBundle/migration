@@ -118,4 +118,12 @@ ALTER TABLE `Estate` CHANGE `descrfr` `description` TEXT CHARACTER SET latin1 CO
 UPDATE `Estate` SET vendu="0" WHERE vendu='';
 
 
+ALTER TABLE `Estate` CHANGE `vendu` `sold` TINYINT(1) NULL DEFAULT NULL;
+
+
+ALTER TABLE `Photo` CHANGE `photo` `filename` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
+
+
+
+
 

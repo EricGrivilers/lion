@@ -1,0 +1,172 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Estate</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Createdon</th>
+                <td>{{ entity.createdOn|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Updatedon</th>
+                <td>{{ entity.updatedOn|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ entity.prix }}</td>
+            </tr>
+            <tr>
+                <th>Oldprix</th>
+                <td>{{ entity.oldprix }}</td>
+            </tr>
+            <tr>
+                <th>Locfr</th>
+                <td>{{ entity.locfr }}</td>
+            </tr>
+            <tr>
+                <th>Locuk</th>
+                <td>{{ entity.locuk }}</td>
+            </tr>
+            <tr>
+                <th>Zone</th>
+                <td>{{ entity.zone }}</td>
+            </tr>
+            <tr>
+                <th>Summary</th>
+                <td>{{ entity.summary }}</td>
+            </tr>
+            <tr>
+                <th>Shortdescren</th>
+                <td>{{ entity.shortdescren }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
+            <tr>
+                <th>Descren</th>
+                <td>{{ entity.descren }}</td>
+            </tr>
+            <tr>
+                <th>Sold</th>
+                <td>{{ entity.sold }}</td>
+            </tr>
+            <tr>
+                <th>Ondemand</th>
+                <td>{{ entity.ondemand }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ entity.location }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ entity.reference }}</td>
+            </tr>
+            <tr>
+                <th>Enoption</th>
+                <td>{{ entity.enoption }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ entity.name }}</td>
+            </tr>
+            <tr>
+                <th>Zip</th>
+                <td>{{ entity.zip }}</td>
+            </tr>
+            <tr>
+                <th>Googlemap</th>
+                <td>{{ entity.googleMap }}</td>
+            </tr>
+            <tr>
+                <th>Moredescrfr</th>
+                <td>{{ entity.moredescrfr }}</td>
+            </tr>
+            <tr>
+                <th>Surface</th>
+                <td>{{ entity.surface }}</td>
+            </tr>
+            <tr>
+                <th>Rooms</th>
+                <td>{{ entity.rooms }}</td>
+            </tr>
+            <tr>
+                <th>Bathrooms</th>
+                <td>{{ entity.bathrooms }}</td>
+            </tr>
+            <tr>
+                <th>Garages</th>
+                <td>{{ entity.garages }}</td>
+            </tr>
+            <tr>
+                <th>Garden</th>
+                <td>{{ entity.garden }}</td>
+            </tr>
+            <tr>
+                <th>Viewable</th>
+                <td>{{ entity.viewable }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ entity.status }}</td>
+            </tr>
+            <tr>
+                <th>Dayview</th>
+                <td>{{ entity.dayview }}</td>
+            </tr>
+            <tr>
+                <th>Weekview</th>
+                <td>{{ entity.weekview }}</td>
+            </tr>
+            <tr>
+                <th>Monthview</th>
+                <td>{{ entity.monthview }}</td>
+            </tr>
+            <tr>
+                <th>Totalview</th>
+                <td>{{ entity.totalview }}</td>
+            </tr>
+            <tr>
+                <th>Lastdayview</th>
+                <td>{{ entity.lastdayview }}</td>
+            </tr>
+            <tr>
+                <th>Lastweekview</th>
+                <td>{{ entity.lastweekview }}</td>
+            </tr>
+            <tr>
+                <th>Lastmonthview</th>
+                <td>{{ entity.lastmonthview }}</td>
+            </tr>
+            <tr>
+                <th>Lat</th>
+                <td>{{ entity.lat }}</td>
+            </tr>
+            <tr>
+                <th>Lng</th>
+                <td>{{ entity.lng }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('caravane_estate_backend_estate') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
