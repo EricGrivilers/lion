@@ -24,9 +24,9 @@ class Photo
     /**
      * @var integer
      *
-     * @ORM\Column(name="estate_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", inversedBy="photo")
      */
-    private $estateId;
+    private $estate;
 
     /**
      * @var string
@@ -47,34 +47,11 @@ class Photo
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set estateId
-     *
-     * @param integer $estateId
-     * @return Photo
-     */
-    public function setEstateId($estateId)
-    {
-        $this->estateId = $estateId;
-
-        return $this;
-    }
-
-    /**
-     * Get estateId
-     *
-     * @return integer 
-     */
-    public function getEstateId()
-    {
-        return $this->estateId;
     }
 
     /**
@@ -93,7 +70,7 @@ class Photo
     /**
      * Get photo
      *
-     * @return string 
+     * @return string
      */
     public function getPhoto()
     {
@@ -116,10 +93,33 @@ class Photo
     /**
      * Get ranking
      *
-     * @return integer 
+     * @return integer
      */
     public function getRanking()
     {
         return $this->ranking;
+    }
+
+    /**
+     * Set estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     * @return Photo
+     */
+    public function setEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate = null)
+    {
+        $this->estate = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Estate
+     */
+    public function getEstate()
+    {
+        return $this->estate;
     }
 }

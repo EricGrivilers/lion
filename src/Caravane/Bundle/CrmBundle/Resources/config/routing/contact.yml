@@ -1,0 +1,30 @@
+caravane_crm_contact:
+    path:     /
+    defaults: { _controller: "CaravaneCrmBundle:Contact:index" }
+
+caravane_crm_contact_show:
+    path:     /{id}/show
+    defaults: { _controller: "CaravaneCrmBundle:Contact:show" }
+
+caravane_crm_contact_new:
+    path:     /new
+    defaults: { _controller: "CaravaneCrmBundle:Contact:new" }
+
+caravane_crm_contact_create:
+    path:     /create
+    defaults: { _controller: "CaravaneCrmBundle:Contact:create" }
+    requirements: { _method: post }
+
+caravane_crm_contact_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "CaravaneCrmBundle:Contact:edit" }
+
+caravane_crm_contact_update:
+    path:     /{id}/update
+    defaults: { _controller: "CaravaneCrmBundle:Contact:update" }
+    requirements: { _method: post|put }
+
+caravane_crm_contact_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "CaravaneCrmBundle:Contact:delete" }
+    requirements: { _method: post|delete }

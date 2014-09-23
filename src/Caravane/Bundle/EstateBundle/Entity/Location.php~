@@ -57,4 +57,129 @@ class Location
     private $fixed;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set zip
+     *
+     * @param string $zip
+     * @return Location
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+
+        return $this;
+    }
+
+    /**
+     * Get zip
+     *
+     * @return string 
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * Set fr
+     *
+     * @param string $fr
+     * @return Location
+     */
+    public function setFr($fr)
+    {
+        $this->fr = $fr;
+
+        return $this;
+    }
+
+    /**
+     * Get fr
+     *
+     * @return string 
+     */
+    public function getFr()
+    {
+        return $this->fr;
+    }
+
+    /**
+     * Set nl
+     *
+     * @param string $nl
+     * @return Location
+     */
+    public function setNl($nl)
+    {
+        $this->nl = $nl;
+
+        return $this;
+    }
+
+    /**
+     * Get nl
+     *
+     * @return string 
+     */
+    public function getNl()
+    {
+        return $this->nl;
+    }
+
+    /**
+     * Set innercity
+     *
+     * @param string $innercity
+     * @return Location
+     */
+    public function setInnercity($innercity)
+    {
+        $this->innercity = $innercity;
+
+        return $this;
+    }
+
+    /**
+     * Get innercity
+     *
+     * @return string 
+     */
+    public function getInnercity()
+    {
+        return $this->innercity;
+    }
+
+    /**
+     * Set fixed
+     *
+     * @param string $fixed
+     * @return Location
+     */
+    public function setFixed($fixed)
+    {
+        $this->fixed = $fixed;
+
+        return $this;
+    }
+
+    /**
+     * Get fixed
+     *
+     * @return string 
+     */
+    public function getFixed()
+    {
+        return $this->fixed;
+    }
 }

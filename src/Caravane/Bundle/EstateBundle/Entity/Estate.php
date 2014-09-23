@@ -24,23 +24,23 @@ class Estate
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="datein", type="date", nullable=true)
+     * @ORM\Column(name="createdOn", type="datetime", nullable=true)
      */
-    private $datein;
+    private $createdOn;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updateDate", type="date", nullable=false)
+     * @ORM\Column(name="updatedOn", type="datetime", nullable=false)
      */
-    private $updatedate;
+    private $updatedOn;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="photo", type="string", length=150, nullable=true)
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", mappedBy="estate")
      */
     private $photo;
+
+
 
     /**
      * @var string
@@ -71,11 +71,9 @@ class Estate
     private $locuk;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="area_id", type="integer", nullable=false)
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Area", inversedBy="estate")
      */
-    private $areaId;
+    private $area;
 
     /**
      * @var string
@@ -126,12 +124,6 @@ class Estate
      */
     private $surdemande;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="actif", type="string", length=1, nullable=true)
-     */
-    private $actif;
 
     /**
      * @var string
@@ -189,38 +181,38 @@ class Estate
      */
     private $moredescrfr;
 
-    /**
+   /**
      * @var integer
      *
-     * @ORM\Column(name="area", type="integer", nullable=false)
+     * @ORM\Column(name="surface", type="decimal", nullable=true)
      */
-    private $area = '0';
+    private $surface = '0';
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="rooms", type="integer", nullable=false)
+     * @ORM\Column(name="rooms", type="integer", nullable=true)
      */
     private $rooms = '0';
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="bathrooms", type="integer", nullable=false)
+     * @ORM\Column(name="bathrooms", type="integer", nullable=true)
      */
     private $bathrooms = '0';
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="garages", type="integer", nullable=false)
+     * @ORM\Column(name="garages", type="integer", nullable=true)
      */
     private $garages = '0';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="garden", type="string", length=10, nullable=false)
+     * @ORM\Column(name="garden", type="string", length=10, nullable=true)
      */
     private $garden = '';
 
@@ -234,23 +226,13 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="public", type="string", length=10, nullable=false)
+     * @ORM\Column(name="status", type="boolean", nullable=true)
      */
-    private $public = 'checked';
+    private $status = true;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photobck", type="string", length=20, nullable=false)
-     */
-    private $photobck = '';
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tphoto", type="string", length=15, nullable=false)
-     */
-    private $tphoto = '';
+
+
 
     /**
      * @var integer
@@ -315,19 +297,20 @@ class Estate
      */
     private $lng;
 
+
+
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="processed", type="boolean", nullable=false)
+     * Constructor
      */
-    private $processed;
-
-
+    public function __construct()
+    {
+        $this->photo = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -335,72 +318,49 @@ class Estate
     }
 
     /**
-     * Set datein
+     * Set createdOn
      *
-     * @param \DateTime $datein
+     * @param \DateTime $createdOn
      * @return Estate
      */
-    public function setDatein($datein)
+    public function setCreatedOn($createdOn)
     {
-        $this->datein = $datein;
+        $this->createdOn = $createdOn;
 
         return $this;
     }
 
     /**
-     * Get datein
+     * Get createdOn
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDatein()
+    public function getCreatedOn()
     {
-        return $this->datein;
+        return $this->createdOn;
     }
 
     /**
-     * Set updatedate
+     * Set updatedOn
      *
-     * @param \DateTime $updatedate
+     * @param \DateTime $updatedOn
      * @return Estate
      */
-    public function setUpdatedate($updatedate)
+    public function setUpdatedOn($updatedOn)
     {
-        $this->updatedate = $updatedate;
+        $this->updatedOn = $updatedOn;
 
         return $this;
     }
 
     /**
-     * Get updatedate
+     * Get updatedOn
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getUpdatedate()
+    public function getUpdatedOn()
     {
-        return $this->updatedate;
-    }
-
-    /**
-     * Set photo
-     *
-     * @param string $photo
-     * @return Estate
-     */
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-
-        return $this;
-    }
-
-    /**
-     * Get photo
-     *
-     * @return string 
-     */
-    public function getPhoto()
-    {
-        return $this->photo;
+        return $this->updatedOn;
     }
 
     /**
@@ -419,7 +379,7 @@ class Estate
     /**
      * Get prix
      *
-     * @return string 
+     * @return string
      */
     public function getPrix()
     {
@@ -442,7 +402,7 @@ class Estate
     /**
      * Get oldprix
      *
-     * @return string 
+     * @return string
      */
     public function getOldprix()
     {
@@ -465,7 +425,7 @@ class Estate
     /**
      * Get locfr
      *
-     * @return string 
+     * @return string
      */
     public function getLocfr()
     {
@@ -488,7 +448,7 @@ class Estate
     /**
      * Get locuk
      *
-     * @return string 
+     * @return string
      */
     public function getLocuk()
     {
@@ -511,7 +471,7 @@ class Estate
     /**
      * Get areaId
      *
-     * @return integer 
+     * @return integer
      */
     public function getAreaId()
     {
@@ -534,7 +494,7 @@ class Estate
     /**
      * Get zone
      *
-     * @return string 
+     * @return string
      */
     public function getZone()
     {
@@ -557,7 +517,7 @@ class Estate
     /**
      * Get shortdescrfr
      *
-     * @return string 
+     * @return string
      */
     public function getShortdescrfr()
     {
@@ -580,7 +540,7 @@ class Estate
     /**
      * Get shortdescren
      *
-     * @return string 
+     * @return string
      */
     public function getShortdescren()
     {
@@ -603,7 +563,7 @@ class Estate
     /**
      * Get descrfr
      *
-     * @return string 
+     * @return string
      */
     public function getDescrfr()
     {
@@ -626,7 +586,7 @@ class Estate
     /**
      * Get descren
      *
-     * @return string 
+     * @return string
      */
     public function getDescren()
     {
@@ -649,7 +609,7 @@ class Estate
     /**
      * Get vendu
      *
-     * @return string 
+     * @return string
      */
     public function getVendu()
     {
@@ -672,35 +632,14 @@ class Estate
     /**
      * Get surdemande
      *
-     * @return string 
+     * @return string
      */
     public function getSurdemande()
     {
         return $this->surdemande;
     }
 
-    /**
-     * Set actif
-     *
-     * @param string $actif
-     * @return Estate
-     */
-    public function setActif($actif)
-    {
-        $this->actif = $actif;
 
-        return $this;
-    }
-
-    /**
-     * Get actif
-     *
-     * @return string 
-     */
-    public function getActif()
-    {
-        return $this->actif;
-    }
 
     /**
      * Set location
@@ -718,7 +657,7 @@ class Estate
     /**
      * Get location
      *
-     * @return string 
+     * @return string
      */
     public function getLocation()
     {
@@ -741,7 +680,7 @@ class Estate
     /**
      * Get reference
      *
-     * @return string 
+     * @return string
      */
     public function getReference()
     {
@@ -764,7 +703,7 @@ class Estate
     /**
      * Get enoption
      *
-     * @return string 
+     * @return string
      */
     public function getEnoption()
     {
@@ -787,7 +726,7 @@ class Estate
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -810,7 +749,7 @@ class Estate
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {
@@ -833,7 +772,7 @@ class Estate
     /**
      * Get zip
      *
-     * @return integer 
+     * @return integer
      */
     public function getZip()
     {
@@ -856,7 +795,7 @@ class Estate
     /**
      * Get googleMap
      *
-     * @return string 
+     * @return string
      */
     public function getGoogleMap()
     {
@@ -879,7 +818,7 @@ class Estate
     /**
      * Get moredescrfr
      *
-     * @return string 
+     * @return string
      */
     public function getMoredescrfr()
     {
@@ -902,7 +841,7 @@ class Estate
     /**
      * Get area
      *
-     * @return integer 
+     * @return integer
      */
     public function getArea()
     {
@@ -925,7 +864,7 @@ class Estate
     /**
      * Get rooms
      *
-     * @return integer 
+     * @return integer
      */
     public function getRooms()
     {
@@ -948,7 +887,7 @@ class Estate
     /**
      * Get bathrooms
      *
-     * @return integer 
+     * @return integer
      */
     public function getBathrooms()
     {
@@ -971,7 +910,7 @@ class Estate
     /**
      * Get garages
      *
-     * @return integer 
+     * @return integer
      */
     public function getGarages()
     {
@@ -994,7 +933,7 @@ class Estate
     /**
      * Get garden
      *
-     * @return string 
+     * @return string
      */
     public function getGarden()
     {
@@ -1017,81 +956,17 @@ class Estate
     /**
      * Get viewable
      *
-     * @return string 
+     * @return string
      */
     public function getViewable()
     {
         return $this->viewable;
     }
 
-    /**
-     * Set public
-     *
-     * @param string $public
-     * @return Estate
-     */
-    public function setPublic($public)
-    {
-        $this->public = $public;
 
-        return $this;
-    }
 
-    /**
-     * Get public
-     *
-     * @return string 
-     */
-    public function getPublic()
-    {
-        return $this->public;
-    }
 
-    /**
-     * Set photobck
-     *
-     * @param string $photobck
-     * @return Estate
-     */
-    public function setPhotobck($photobck)
-    {
-        $this->photobck = $photobck;
 
-        return $this;
-    }
-
-    /**
-     * Get photobck
-     *
-     * @return string 
-     */
-    public function getPhotobck()
-    {
-        return $this->photobck;
-    }
-
-    /**
-     * Set tphoto
-     *
-     * @param string $tphoto
-     * @return Estate
-     */
-    public function setTphoto($tphoto)
-    {
-        $this->tphoto = $tphoto;
-
-        return $this;
-    }
-
-    /**
-     * Get tphoto
-     *
-     * @return string 
-     */
-    public function getTphoto()
-    {
-        return $this->tphoto;
-    }
 
     /**
      * Set dayview
@@ -1109,7 +984,7 @@ class Estate
     /**
      * Get dayview
      *
-     * @return integer 
+     * @return integer
      */
     public function getDayview()
     {
@@ -1132,7 +1007,7 @@ class Estate
     /**
      * Get weekview
      *
-     * @return integer 
+     * @return integer
      */
     public function getWeekview()
     {
@@ -1155,7 +1030,7 @@ class Estate
     /**
      * Get monthview
      *
-     * @return integer 
+     * @return integer
      */
     public function getMonthview()
     {
@@ -1178,7 +1053,7 @@ class Estate
     /**
      * Get totalview
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalview()
     {
@@ -1201,7 +1076,7 @@ class Estate
     /**
      * Get lastdayview
      *
-     * @return integer 
+     * @return integer
      */
     public function getLastdayview()
     {
@@ -1224,7 +1099,7 @@ class Estate
     /**
      * Get lastweekview
      *
-     * @return integer 
+     * @return integer
      */
     public function getLastweekview()
     {
@@ -1247,7 +1122,7 @@ class Estate
     /**
      * Get lastmonthview
      *
-     * @return integer 
+     * @return integer
      */
     public function getLastmonthview()
     {
@@ -1270,7 +1145,7 @@ class Estate
     /**
      * Get lat
      *
-     * @return string 
+     * @return string
      */
     public function getLat()
     {
@@ -1293,33 +1168,128 @@ class Estate
     /**
      * Get lng
      *
-     * @return string 
+     * @return string
      */
     public function getLng()
     {
         return $this->lng;
     }
 
+
+
     /**
-     * Set processed
+     * Add photo
      *
-     * @param boolean $processed
+     * @param \Caravane\Bundle\EstateBundle\Entity\Photo $photo
      * @return Estate
      */
-    public function setProcessed($processed)
+    public function addPhoto(\Caravane\Bundle\EstateBundle\Entity\Photo $photo)
     {
-        $this->processed = $processed;
+        $this->photo[] = $photo;
 
         return $this;
     }
 
     /**
-     * Get processed
+     * Remove photo
      *
-     * @return boolean 
+     * @param \Caravane\Bundle\EstateBundle\Entity\Photo $photo
      */
-    public function getProcessed()
+    public function removePhoto(\Caravane\Bundle\EstateBundle\Entity\Photo $photo)
     {
-        return $this->processed;
+        $this->photo->removeElement($photo);
     }
+
+    /**
+     * Get photo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhotos()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set surface
+     *
+     * @param string $surface
+     * @return Estate
+     */
+    public function setSurface($surface)
+    {
+        $this->surface = $surface;
+
+        return $this;
+    }
+
+    /**
+     * Get surface
+     *
+     * @return string
+     */
+    public function getSurface()
+    {
+        return $this->surface;
+    }
+
+    /**
+     * Set status
+     *
+     * @param boolean $status
+     * @return Estate
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return boolean
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+
+
+
+
+    /**
+     * Get public
+     *
+     * @return string
+     */
+    public function getPublic()
+    {
+        return ($this->status?'checked':'');
+    }
+
+
+    /**
+     * Get actif
+     *
+     * @return string
+     */
+    public function getActif()
+    {
+        return ($this->status?'Y':'');
+    }
+
+
 }

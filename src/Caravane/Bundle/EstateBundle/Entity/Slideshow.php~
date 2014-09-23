@@ -36,4 +36,60 @@ class Slideshow
     private $ranking;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set itemId
+     *
+     * @param integer $itemId
+     * @return Slideshow
+     */
+    public function setItemId($itemId)
+    {
+        $this->itemId = $itemId;
+
+        return $this;
+    }
+
+    /**
+     * Get itemId
+     *
+     * @return integer 
+     */
+    public function getItemId()
+    {
+        return $this->itemId;
+    }
+
+    /**
+     * Set ranking
+     *
+     * @param integer $ranking
+     * @return Slideshow
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    /**
+     * Get ranking
+     *
+     * @return integer 
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
 }

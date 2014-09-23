@@ -1,0 +1,88 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Contact</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ entity.password }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Language</th>
+                <td>{{ entity.language }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ entity.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ entity.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ entity.tel }}</td>
+            </tr>
+            <tr>
+                <th>Zip</th>
+                <td>{{ entity.zip }}</td>
+            </tr>
+            <tr>
+                <th>Fax</th>
+                <td>{{ entity.fax }}</td>
+            </tr>
+            <tr>
+                <th>Street</th>
+                <td>{{ entity.street }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ entity.number }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ entity.city }}</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>{{ entity.country }}</td>
+            </tr>
+            <tr>
+                <th>Company</th>
+                <td>{{ entity.company }}</td>
+            </tr>
+            <tr>
+                <th>Salutation</th>
+                <td>{{ entity.salutation }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('_crm_contact') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('_crm_contact_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

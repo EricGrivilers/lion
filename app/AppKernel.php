@@ -17,13 +17,20 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+
+            new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
+
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
+            new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
+            new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),
+            new Caravane\Bundle\UserBundle\CaravaneUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

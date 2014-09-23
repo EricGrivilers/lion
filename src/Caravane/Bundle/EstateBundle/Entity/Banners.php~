@@ -36,4 +36,60 @@ class Banners
     private $ranking;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     * @return Banners
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set ranking
+     *
+     * @param integer $ranking
+     * @return Banners
+     */
+    public function setRanking($ranking)
+    {
+        $this->ranking = $ranking;
+
+        return $this;
+    }
+
+    /**
+     * Get ranking
+     *
+     * @return integer 
+     */
+    public function getRanking()
+    {
+        return $this->ranking;
+    }
 }

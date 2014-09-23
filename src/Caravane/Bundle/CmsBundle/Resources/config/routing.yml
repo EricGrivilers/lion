@@ -1,0 +1,11 @@
+caravane_cms_homepage:
+    path:     /
+    defaults: { _controller: CaravaneCmsBundle:Default:index }
+
+
+caravane_cms_page:
+    defaults:  { _controller: CaravaneCmsBundle:Default:index }
+    #pattern:   /cms/page/{id}
+    pattern: /{uri}
+    requirements:
+      uri: ".+"

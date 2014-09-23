@@ -36,4 +36,60 @@ class Type
     private $typeEn = '';
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set typeFr
+     *
+     * @param string $typeFr
+     * @return Type
+     */
+    public function setTypeFr($typeFr)
+    {
+        $this->typeFr = $typeFr;
+
+        return $this;
+    }
+
+    /**
+     * Get typeFr
+     *
+     * @return string 
+     */
+    public function getTypeFr()
+    {
+        return $this->typeFr;
+    }
+
+    /**
+     * Set typeEn
+     *
+     * @param string $typeEn
+     * @return Type
+     */
+    public function setTypeEn($typeEn)
+    {
+        $this->typeEn = $typeEn;
+
+        return $this;
+    }
+
+    /**
+     * Get typeEn
+     *
+     * @return string 
+     */
+    public function getTypeEn()
+    {
+        return $this->typeEn;
+    }
 }

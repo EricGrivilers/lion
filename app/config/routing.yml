@@ -1,4 +1,18 @@
+caravane_crm:
+    resource: "@CaravaneCrmBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+
 caravane_estate:
     resource: "@CaravaneEstateBundle/Resources/config/routing.yml"
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+
+caravane_cms:
+    resource: "@CaravaneCmsBundle/Resources/config/routing.yml"
     prefix:   /
 

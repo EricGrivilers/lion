@@ -1,0 +1,11 @@
+caravane_crm_contact:
+    resource: "@CaravaneCrmBundle/Resources/config/routing/contact.yml"
+    prefix:   /_crm/contact
+
+caravane_crm_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CaravaneCrmBundle:Default:index }
+
+caravane_crm_migrate:
+    path:     /migrate
+    defaults: { _controller: CaravaneCrmBundle:Default:migrate }

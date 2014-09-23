@@ -43,4 +43,83 @@ class MobileUdids
     private $device;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param integer $userId
+     * @return MobileUdids
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * Set udid
+     *
+     * @param string $udid
+     * @return MobileUdids
+     */
+    public function setUdid($udid)
+    {
+        $this->udid = $udid;
+
+        return $this;
+    }
+
+    /**
+     * Get udid
+     *
+     * @return string 
+     */
+    public function getUdid()
+    {
+        return $this->udid;
+    }
+
+    /**
+     * Set device
+     *
+     * @param string $device
+     * @return MobileUdids
+     */
+    public function setDevice($device)
+    {
+        $this->device = $device;
+
+        return $this;
+    }
+
+    /**
+     * Get device
+     *
+     * @return string 
+     */
+    public function getDevice()
+    {
+        return $this->device;
+    }
 }

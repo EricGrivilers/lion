@@ -36,4 +36,60 @@ class ZipEstate
     private $estateId = '0';
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set locationzip
+     *
+     * @param string $locationzip
+     * @return ZipEstate
+     */
+    public function setLocationzip($locationzip)
+    {
+        $this->locationzip = $locationzip;
+
+        return $this;
+    }
+
+    /**
+     * Get locationzip
+     *
+     * @return string 
+     */
+    public function getLocationzip()
+    {
+        return $this->locationzip;
+    }
+
+    /**
+     * Set estateId
+     *
+     * @param integer $estateId
+     * @return ZipEstate
+     */
+    public function setEstateId($estateId)
+    {
+        $this->estateId = $estateId;
+
+        return $this;
+    }
+
+    /**
+     * Get estateId
+     *
+     * @return integer 
+     */
+    public function getEstateId()
+    {
+        return $this->estateId;
+    }
 }

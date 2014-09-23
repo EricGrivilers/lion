@@ -51,6 +51,9 @@ ALTER TABLE `Estate` CHANGE `quartier_id` `area_id` INT(11) NOT NULL;
 ALTER TABLE `Estate` CHANGE `update` `updateDate` DATE NOT NULL;
 
 
+ALTER TABLE `Estate` CHANGE `datein` `createdOn` DATE NULL DEFAULT NULL, CHANGE `updateDate` `updatedOn` DATE NOT NULL;
+ALTER TABLE `Estate` CHANGE `createdOn` `createdOn` DATETIME NULL DEFAULT NULL, CHANGE `updatedOn` `updatedOn` DATETIME NOT NULL;
+
 
 ALTER TABLE `user_estate` CHANGE `user_id` `user_id` INT(11) NULL DEFAULT '0', CHANGE `estate_id` `estate_id` INT(11) NULL DEFAULT '0';
 ALTER TABLE `Photo` CHANGE `estate_id` `estate_id` INT(11) NULL;
@@ -65,5 +68,34 @@ UPDATE `user_estate` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM Use
 UPDATE `Statistique` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
 UPDATE `Search` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
 
+//copy User to Contact
 
+puis
+
+
+
+//rename User to fos_user
+
+UPDATE `fos_user` SET contact_id=id
+
+
+
+
+
+
+ALTER TABLE `Estate` CHANGE `public` `status` TINYINT(1) NULL;
+ALTER TABLE `Estate` CHANGE `area` `surface` DECIMAL NOT NULL;
+
+
+
+UPDATE  `Estate` SET area_id=NULL WHERE area_id NOT IN (SELECT id FROM Area);
+
+UPDATE `Estate` SET enoption=1 WHERE enoption="Y";
+UPDATE `Estate` SET surdemande=1 WHERE surdemande="Y";
+
+ALTER TABLE `Estate` CHANGE `surdemande` `ondemand` VARCHAR(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL;
+
+
+UPDATE `Estate` SET ondemand=0 WHERE ondemand!=1;
+ALTER TABLE `Estate` CHANGE `ondemand` `ondemand` TINYINT(1) NULL DEFAULT NULL;
 
