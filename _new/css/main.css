@@ -114,7 +114,7 @@ a img.aligncenter {
 body {
   background: #f3f3f3;
   font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
+  /*font-size: 13px;*/
   color: #45484a;
   /*background-attachment: scroll !important;*/
 }

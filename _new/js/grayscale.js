@@ -1,5 +1,6 @@
 // Grayscale w canvas method
 function grayscale(src){
+	/*
 	var canvas = document.createElement('canvas');
 	var ctx = canvas.getContext('2d');
 	var imgObj = new Image();
@@ -19,4 +20,5 @@ function grayscale(src){
 	}
 	ctx.putImageData(imgPixels, 0, 0, 0, 0, imgPixels.width, imgPixels.height);
 	return canvas.toDataURL();
+	*/
 }

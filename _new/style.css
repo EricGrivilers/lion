@@ -186,14 +186,19 @@
 		}
 
 	
-	
+html {
+	font-family: 'EB Garamond', serif;
+}
 			
 
 
 
 .two-headers h2 {
 	margin: 4px 0 10px 0;
-	/*font-family: 'EB Garamond', serif;*/
+	font-family: 'EB Garamond', serif;
+
+	font-family: 'Lora', serif;
+	font-weight: 300;
 
 
 
@@ -212,7 +217,7 @@ font-weight: 50;
 }		
 		
 
-.container-t1 {
+.slides .container-t1 {
 	max-height: 192px;
 	overflow: hidden;
 }
@@ -284,3 +289,147 @@ font-weight: 50;
  	padding-bottom:0;
  	margin-bottom:0;
  }
+
+
+ #items .pict  {
+ 	width:450px; 
+ 	height: 450px;
+ 	overflow: hidden;
+ 	max-width: 100%;
+ 	max-height: auto;
+ }
+
+
+ #items .pict img {
+ 	width:450px; height: 450px;
+ 	height: auto;
+ 	max-width: 100%;
+ }
+
+
+
+
+ .image-links .add {
+ 	background-image: none;
+ }
+
+
+
+ .widget_out_stuff2 article{
+ 	margin-bottom:20px;
+ }
+
+
+
+
+ .widget_out_stuff2 .item-con-t1 img {
+ 	width: 110% !Important;
+height: auto !important;
+margin-left: -5%;
+filter: none;
+-webkit-filter: none;
+/* -webkit-transition: 0.3s; */
+/* -moz-transition: 0.3s; */
+/* -o-transition: 0.3s; */
+/* transition: 0.3s; */
+/* -webkit-backface-visibility: hidden; */
+ }
+
+
+ 
+
+
+ .widget_out_stuff2 .item-con-t1 header h2, .widget_out_stuff2 .item-con-t1 header p {
+ 	margin: 0 15px;
+ 	font-weight: normal;
+ }
+
+
+.widget_out_stuff2 .item-con-t1 header h2 {
+ 	margin-top: 10px;
+ 	font-size: 18px;
+ 	margin:10px 15px;
+ 	min-height: 73px;
+ }
+
+
+
+ .widget_out_stuff2 .item-con-t1 header {
+ 	height: 93px;
+ 	line-height: 13px;
+ }
+
+ .widget_out_stuff2 .item-con-t1 header:hover ,  .widget_out_stuff2:hover .item-con-t1 header {
+ 	height: 100%;
+ }
+
+
+
+
+ .bg-black-045 {
+ 	opacity: 0.60;
+filter: alpha(opacity=60);
+ }
+
+
+ .lastitems li {
+ 	display:inline;
+ 	float: left;
+ 	margin-right: 5px;
+ }
+
+.carousel-inner .item {
+	max-height:540px;
+}
+
+.carousel-inner img {
+	width:100%;
+	height:auto;
+
+}
+
+
+
+#detail {
+	font-size: 14px;
+}
+
+#detail h2 {
+	font-size: 14px;
+}
+
+#detail .infos ul {
+	list-style: none;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+
+#detail .infos ul label{
+	list-style: none;
+	font-weight: normal;
+}
+
+
+
+#map-canvas {
+   display: block;
+   width: 100%;
+   height: 300px;
+}
+
+
+.transp_bg {
+background:none;
+
+padding:0;
+
+}
+
+
+.transp_bg h2, .transp_bg p {
+	background: rgba(29, 29, 29, 0.65);
+	padding: 10px; 
+	/*font-weight: normal;*/
+}
+
