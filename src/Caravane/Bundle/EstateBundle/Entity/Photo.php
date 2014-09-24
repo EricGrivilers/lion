@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Photo
  *
- * @ORM\Table(name="Photo", uniqueConstraints={@ORM\UniqueConstraint(name="item_id", columns={"estate_id", "photo"})})
+ * @ORM\Table(name="Photo", uniqueConstraints={@ORM\UniqueConstraint(name="item_id", columns={"estate_id", "filename"})})
  * @ORM\Entity
  */
 class Photo

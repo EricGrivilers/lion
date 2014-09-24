@@ -15,7 +15,7 @@ class DefaultController extends Controller
 
 
     public function migrateAction() {
-    	die();
+    	
     		$em = $this->getDoctrine()->getManager();
 
     		$userManager = $this->container->get('fos_user.user_manager');

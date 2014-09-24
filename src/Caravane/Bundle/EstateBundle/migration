@@ -9,12 +9,20 @@ ALTER TABLE `item_statsv2` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `item_statsv2` CHANGE `itemId` `item_id` INT(11) NOT NULL;
 
 
+
 ALTER TABLE `users2items` CHANGE `userId` `user_id` INT(11) NOT NULL DEFAULT '0', CHANGE `itemId` `item_id` INT(11) NOT NULL DEFAULT '0';
+
+
+ALTER TABLE  `users2items` DROP PRIMARY KEY ;
 ALTER TABLE `users2items` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 ALTER TABLE `users2search` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
 
 ALTER TABLE `zip2item` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
+
+
+
+
 
 ALTER TABLE `mobile_udids` CHANGE `user_id` `user_id` INT(11) UNSIGNED NOT NULL;
 ALTER TABLE `mobile_udids` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST;
@@ -22,7 +30,9 @@ ALTER TABLE `mobile_udids` ADD `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY 
 
 ALTER TABLE `items` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 ALTER TABLE `items_stats` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-ALTER TABLE `items_statsv2` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+
+
+ALTER TABLE `item_statsv2` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 ALTER TABLE `locations` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 
 ALTER TABLE `photo2item` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
@@ -40,14 +50,27 @@ ALTER TABLE `banners` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_bi
 // change noms des db en Upper case
 
 
+RENAME TABLE  `immolelionbe`.`items` TO  `immolelionbe`.`Estate` ;
+RENAME TABLE  `immolelionbe`.`photo2item` TO  `immolelionbe`.`Photo` ;
+RENAME TABLE  `immolelionbe`.`item_statsv2` TO  `immolelionbe`.`Statistique` ;
+RENAME TABLE  `immolelionbe`.`quartiers` TO  `immolelionbe`.`Area` ;
+RENAME TABLE  `immolelionbe`.`locations` TO  `immolelionbe`.`Location` ;
+RENAME TABLE  `immolelionbe`.`prices` TO  `immolelionbe`.`Price` ;
+RENAME TABLE  `immolelionbe`.`type` TO  `immolelionbe`.`Category` ;
+RENAME TABLE  `immolelionbe`.`users2search` TO  `immolelionbe`.`Search` ;
+RENAME TABLE  `immolelionbe`.`users` TO  `immolelionbe`.`user_estate` ;
+RENAME TABLE  `immolelionbe`.`users2items` TO  `immolelionbe`.`UserEstate` ;
+RENAME TABLE  `immolelionbe`.`zip2item` TO  `immolelionbe`.`ZipEstate` ;
 
+Copier users vers Contact
 
 puis
 
 
-ALTER TABLE `user_estate` CHANGE `item_id` `estate_id` INT(11) NOT NULL DEFAULT '0';
+//////ALTER TABLE `user_estate` CHANGE `item_id` `estate_id` INT(11) NOT NULL DEFAULT '0';
 ALTER TABLE `Photo` CHANGE `item_id` `estate_id` INT(11) NOT NULL;
 ALTER TABLE `Estate` CHANGE `quartier_id` `area_id` INT(11) NOT NULL;
+
 ALTER TABLE `Estate` CHANGE `update` `updateDate` DATE NOT NULL;
 
 
@@ -55,18 +78,22 @@ ALTER TABLE `Estate` CHANGE `datein` `createdOn` DATE NULL DEFAULT NULL, CHANGE 
 ALTER TABLE `Estate` CHANGE `createdOn` `createdOn` DATETIME NULL DEFAULT NULL, CHANGE `updatedOn` `updatedOn` DATETIME NOT NULL;
 
 
-ALTER TABLE `user_estate` CHANGE `user_id` `user_id` INT(11) NULL DEFAULT '0', CHANGE `estate_id` `estate_id` INT(11) NULL DEFAULT '0';
+//////ALTER TABLE `user_estate` CHANGE `user_id` `user_id` INT(11) NULL DEFAULT '0', CHANGE `estate_id` `estate_id` INT(11) NULL DEFAULT '0';
 ALTER TABLE `Photo` CHANGE `estate_id` `estate_id` INT(11) NULL;
+ALTER TABLE  `Statistique` CHANGE  `item_id`  `estate_id` INT( 11 ) NOT NULL ;
+
 ALTER TABLE `Statistique` CHANGE `estate_id` `estate_id` INT(11) NULL;
 
 
 
 UPDATE `Photo` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
-UPDATE `user_estate` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
-UPDATE `user_estate` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
+//////UPDATE `user_estate` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
+//////UPDATE `user_estate` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
 
 UPDATE `Statistique` SET estate_id = NULL WHERE estate_id NOT IN (SELECT id FROM Estate);
-UPDATE `Search` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM User);
+ALTER TABLE  `Search` CHANGE  `userId`  `user_id` INT( 11 ) NOT NULL DEFAULT  '0';
+ALTER TABLE  `Search` CHANGE  `user_id`  `user_id` INT( 11 ) NULL DEFAULT  '0';
+UPDATE `Search` SET user_id = NULL WHERE user_id NOT IN (SELECT id FROM Contact);
 
 //copy User to Contact
 
@@ -82,12 +109,12 @@ UPDATE `fos_user` SET contact_id=id
 
 
 
-
+UPDATE `Estate` SET public=1 WHERE public='checked';
 ALTER TABLE `Estate` CHANGE `public` `status` TINYINT(1) NULL;
 ALTER TABLE `Estate` CHANGE `area` `surface` DECIMAL NOT NULL;
 
 
-
+ALTER TABLE  `Estate` CHANGE  `area_id`  `area_id` INT( 11 ) NULL ;
 UPDATE  `Estate` SET area_id=NULL WHERE area_id NOT IN (SELECT id FROM Area);
 
 UPDATE `Estate` SET enoption=1 WHERE enoption="Y";
@@ -104,7 +131,8 @@ UPDATE `Estate` SET location=1 WHERE location='Y';
 UPDATE `Estate` SET location=0 WHERE location='';
 ALTER TABLE `Estate` CHANGE `location` `location` TINYINT(1) NULL DEFAULT NULL;
 
-
+ALTER TABLE  `Estate` CHANGE  `type`  `type` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT  '';
+UPDATE `Estate` SET type=NULL WHERE type='';
 ALTER TABLE `Estate` CHANGE `type` `category_id` INT(11) NOT NULL;
 
 
@@ -124,6 +152,8 @@ ALTER TABLE `Estate` CHANGE `vendu` `sold` TINYINT(1) NULL DEFAULT NULL;
 ALTER TABLE `Photo` CHANGE `photo` `filename` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
 
 
+ALTER TABLE  `Category` CHANGE  `type_fr`  `name` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT  '';
 
+UPDATE `user_estate` SET date="0000000" WHERE date="";
 
 
