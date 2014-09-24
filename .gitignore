@@ -41,3 +41,7 @@
 web/photos/*
 web/old/photos/*
 /web/old/photos
+
+
+
+/web/old
