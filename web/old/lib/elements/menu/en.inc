@@ -1,2 +1,0 @@
-Estimation	Estimation
-Accueil	Home
