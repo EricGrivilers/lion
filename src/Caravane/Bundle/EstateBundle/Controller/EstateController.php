@@ -228,7 +228,7 @@ class EstateController extends Controller
 
 
 
-    public function lastUdatedAction($max=3) {
+    public function lastUpdatedAction($max=3) {
         $em = $this->getDoctrine()->getManager();
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
          return $this->render('CaravaneEstateBundle:Frontend:Homepage/last_updated.html.twig', array(

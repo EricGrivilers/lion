@@ -4,8 +4,15 @@
 
 
 {% stylesheets output="css/main.min.css"
-	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/*.css"
+"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/normalize.css"
+	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/main.css"
+
 	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/revslider/*"
+%}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+{% stylesheets output="css/styles.min.css" filter="less"
+	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/less/styles.less"
 %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
