@@ -1,10 +1,12 @@
 {% extends "CaravaneCmsBundle::layout.html.twig" %}
 
 
-
-{% block content %}
-
-	<div class='wrapper top-slider '>
+{% block header %}
+			<header class='page-header '>
+				<div class="fixed-top">
+				{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
+			</div>
+				<div class='wrapper top-slider ' id="home_slider">
 			<!-- START REVOLUTION SLIDER 4.5.95 fullwidth mode -->
 			<div id="rev_slider_1_2_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:450px;">
 				<div id="rev_slider_1_2" class="rev_slider fullwidthabanner" style="display:none;max-height:450px;height:450px;">
@@ -79,6 +81,16 @@
 				<div class="tp-bannertimer"></div>	</div>
 			</div>
 			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#main_menu').affix({
+					      offset: {
+					        top: $('#home_slider').height()
+					      }
+					}); 
+				});
+			</script>
+			{#<script type="text/javascript">
+
 				/******************************************
 													-	PREPARE PLACEHOLDER FOR SLIDER	-
 				******************************************/
@@ -152,26 +164,38 @@
 						hideAllCaptionAtLilmit:0,
 																										startWithSlide:0					});
 								});	/*ready*/
-			</script>
+			</script>#}
 			<style type="text/css">
 			#rev_slider_1_2_wrapper .tp-loader.spinner3 div { background-color: #4d4d4d !important; }
 			</style>
 			<!-- END REVOLUTION SLIDER -->
 		</div>
+
+
+
+
+				<div class="wrapper blue" id="main_menu">
+					<div class='container blue-radial-grad'>
+						<section class='row two-headers'>
+							<div class="col-md-3">
+								<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
+							</div>
+							<div class="col-md-9">
+								<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
+								<img src="{{asset('medias/leadingrealestate2.png')}}" width="200" alt="" />
+							</div>
+						</section>
+					</div>
+				</div>
+			</header>
+
+		{% endblock header %}
+
+{% block content %}
+
+	
 		<!-- Content area 1 -->
-		<aside class='wrapper blue'>
-			<div class='container blue-radial-grad'>
-				<section class='row two-headers'>
-					<div class="col-md-3">
-						<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
-					</div>
-					<div class="col-md-9">
-						<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
-						<img src="{{asset('medias/leadingrealestate2.png')}}" width="200" alt="" />
-					</div>
-				</section>
-			</div>
-		</aside>
+		
 		<aside id="search">
 			<div class='container'>
 				<section >
