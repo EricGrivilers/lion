@@ -4,16 +4,13 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Translatable\Translatable;
-
 /**
- * Category
+ * Zone
  *
- * @ORM\Table(name="Category")
+ * @ORM\Table(name="Zone")
  * @ORM\Entity
  */
-class Category
+class Zone
 {
     /**
      * @var integer
@@ -27,24 +24,16 @@ class Category
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
-     * @Gedmo\Translatable
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
-    private $name = '';
+    private $name;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type_en", type="string", length=100, nullable=false)
-     */
-    private $typeEn = '';
+  
 
 
     public function __toString() {
         return $this->name;
     }
-
-
     /**
      * Get id
      *
@@ -59,7 +48,7 @@ class Category
      * Set name
      *
      * @param string $name
-     * @return Category
+     * @return Zone
      */
     public function setName($name)
     {
@@ -78,26 +67,5 @@ class Category
         return $this->name;
     }
 
-    /**
-     * Set typeEn
-     *
-     * @param string $typeEn
-     * @return Category
-     */
-    public function setTypeEn($typeEn)
-    {
-        $this->typeEn = $typeEn;
-
-        return $this;
-    }
-
-    /**
-     * Get typeEn
-     *
-     * @return string 
-     */
-    public function getTypeEn()
-    {
-        return $this->typeEn;
-    }
+    
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Price
  *
  * @ORM\Table(name="Price")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\PriceRepository")
  */
 class Price
 {
@@ -37,6 +37,9 @@ class Price
 
 
 
+    public function __toString() {
+        return "".$this->price;
+    }
     /**
      * Get id
      *

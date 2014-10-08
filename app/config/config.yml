@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'CaravaneCmsBundle:Form:fields.html.twig'
 
 
 
@@ -88,3 +91,16 @@ fos_user:
 
 braincrafted_bootstrap:
     less_filter: less
+
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        thumbnail_medium:
+            quality: 75
+            filters:
+                thumbnail: { size: [360, 180], mode: outbound }

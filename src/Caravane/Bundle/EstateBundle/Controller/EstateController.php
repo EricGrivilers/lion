@@ -3,10 +3,12 @@
 namespace Caravane\Bundle\EstateBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
 use Caravane\Bundle\EstateBundle\Form\EstateType;
+use Caravane\Bundle\EstateBundle\Form\SearchType;
 
 /**
  * Estate controller.
@@ -232,6 +234,35 @@ class EstateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
          return $this->render('CaravaneEstateBundle:Frontend:Homepage/last_updated.html.twig', array(
+            'estates'      => $estates
+        ));
+    }
+
+
+    public function searchFormAction() {
+        $em = $this->getDoctrine()->getManager();
+        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();
+
+        $entity = new Estate();
+        
+        $form = $this->createForm(new SearchType(array('prices'=>$prices)), $entity, array(
+            'action' => $this->generateUrl('caravane_estate_backend_estate'),
+            'method' => 'POST',
+        ));
+        $form->add('submit', 'submit', array('label' => 'Search'));
+        //$form->handleRequest($request);
+
+        return $this->render('CaravaneEstateBundle:Estate:search.html.twig', array(
+            'entity'      => $entity,
+            'search_form'   => $form->createView()
+        ));
+    }
+
+    public function searchAction(Request $request) {
+        var_dump($_POST);
+        $em = $this->getDoctrine()->getManager();
+        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated(3);
+        return $this->render('CaravaneEstateBundle:Frontend:Homepage/last_updated.html.twig', array(
             'estates'      => $estates
         ));
     }

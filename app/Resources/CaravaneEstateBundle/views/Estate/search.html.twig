@@ -1,0 +1,53 @@
+{% form_theme search_form 'CaravaneCmsBundle:Form:fields.html.twig' %}
+
+
+
+<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="post" action="{{path('caravane_estate_frontend_estate_search')}}" role="form"><div id="caravane_bundle_estatebundle_search">
+{% block body -%}
+	
+
+	<section class='row' style="margin-bottom:10px">
+		<div class="col-md-4 col-md-offset-4">
+			{{form_row(search_form.location)}}
+		</div>
+	</section>
+	<section class='row' style="margin-bottom:10px">
+		<div class='col-sm-6  col-md-4'>
+			<div class="input-group">
+				<span class="input-group-addon"><span class="fa  fa-search"></span></span>
+				<input type="text" name="keywords" id="keywords" value="" class="form-control" placeholder="Mot clef (ex. piscine, brugmann)">
+			</div>
+		</div>
+		<div class='col-sm-6  col-md-4'>
+			{{form_row(search_form.area)}}
+		</div>
+		<div class=' col-sm-6 col-md-4'>
+			<div class="input-group">
+				<span class="input-group-addon">030</span>
+				{{form_widget(search_form.reference)}}
+			</div>
+		</div>
+	</section>
+	<section class='row' style="margin-bottom:10px">
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.isNew)}}
+			{{form_row(search_form.category)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.zone)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.prix)}}
+		</div>
+	</section>							
+
+{% endblock %}
+{{ form_rest(search_form) }}
+</div></form>
+
+
+	
+
+
+        
+

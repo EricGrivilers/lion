@@ -27,12 +27,13 @@
         "knplabs/knp-menu-bundle": "~2.0",
         "knplabs/knp-paginator-bundle": "~2.4",
 
-         "twbs/bootstrap": "dev-master",
+        "twbs/bootstrap": "dev-master",
         "jquery/jquery":  "1.11.*",
         "jquery/jquery-ui":  "1.10.*",
         "braincrafted/bootstrap-bundle": "~2.0",
         "bmatzner/fontawesome-bundle": "~4.1",
-        "necolas/normalize.css":"dev-master"
+        "necolas/normalize.css":"dev-master",
+        "liip/imagine-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

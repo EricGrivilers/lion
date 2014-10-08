@@ -157,3 +157,9 @@ ALTER TABLE  `Category` CHANGE  `type_fr`  `name` VARCHAR( 100 ) CHARACTER SET l
 UPDATE `user_estate` SET date="0000000" WHERE date="";
 
 
+
+
+
+ALTER TABLE  `Estate` CHANGE  `zone`  `zone` INT( 11 ) NOT NULL ;
+ALTER TABLE  `Estate` CHANGE  `zone`  `zone_id` INT( 11 ) NOT NULL ;
+

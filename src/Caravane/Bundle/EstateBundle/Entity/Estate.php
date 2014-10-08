@@ -83,9 +83,9 @@ class Estate
     private $area;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="zone", type="string", length=20, nullable=false)
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Zone")
      */
     private $zone;
 
@@ -163,7 +163,7 @@ class Estate
     private $name = '';
 
     /**
-     * @var string
+     * @var integer
      *
      * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Category")
      */
@@ -240,7 +240,12 @@ class Estate
     private $status = true;
 
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="isNew", type="boolean", nullable=true)
+     */
+    private $isNew = false;
 
 
     /**
@@ -489,28 +494,7 @@ class Estate
         return $this->locuk;
     }
 
-    /**
-     * Set zone
-     *
-     * @param string $zone
-     * @return Estate
-     */
-    public function setZone($zone)
-    {
-        $this->zone = $zone;
-
-        return $this;
-    }
-
-    /**
-     * Get zone
-     *
-     * @return string
-     */
-    public function getZone()
-    {
-        return $this->zone;
-    }
+    
 
     /**
      * Set summary
@@ -532,6 +516,21 @@ class Estate
      */
     public function getSummary()
     {
+        if(!$this->summary) {
+            if(!$this->description) {
+                return $this->summary;
+            }
+            $i=0;
+            $tA=explode(".",$this->description);
+            if(is_array($tA)) {
+                while(strlen($this->summary)<150) {
+                    $this->summary.=$tA[$i].". ";
+                    $i++;
+                }
+            }
+            
+        }
+        
         return $this->summary;
     }
 
@@ -972,6 +971,31 @@ class Estate
         return $this->status;
     }
 
+     /**
+     * Set isNew
+     *
+     * @param boolean $isNew
+     * @return Estate
+     */
+    public function setIsNew($isNew)
+    {
+        $this->isNew = $isNew;
+
+        return $this;
+    }
+
+    /**
+     * Get isNew
+     *
+     * @return boolean
+     */
+    public function getIsNew()
+    {
+        return $this->isNew;
+    }
+
+
+
     /**
      * Set dayview
      *
@@ -1270,4 +1294,31 @@ class Estate
     {
         return $this->category;
     }
+
+
+    /**
+     * Set zone
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Zone $zone
+     * @return Estate
+     */
+    public function setZone(\Caravane\Bundle\EstateBundle\Entity\Zone $zone = null)
+    {
+        $this->zone = $zone;
+
+        return $this;
+    }
+
+    /**
+     * Get zone
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Zone
+     */
+    public function getZone()
+    {
+        return $this->zone;
+    }
+
+
+
 }

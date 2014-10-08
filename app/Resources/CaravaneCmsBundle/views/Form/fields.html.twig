@@ -1,0 +1,9 @@
+{% block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }} >
+    {%- for k,child in form %}
+    	<label class="btn btn-primary {{child.vars.checked?'active':''}}">
+        	<input type="{{form.vars.multiple?'checkbox':'radio'}}" id="{{child.vars.id}}" name="{{child.vars.full_name}}" {% if child.vars.value is defined %} value="{{ child.vars.value }}"{% endif %}{% if child.vars.checked %} checked="checked"{% endif %} /> {{child.vars.label}}
+        </label>
+    {% endfor -%}
+    </div>
+{% endblock choice_widget_expanded %}

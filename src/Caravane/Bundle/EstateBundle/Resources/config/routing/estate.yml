@@ -34,3 +34,12 @@ caravane_estate_backend_estate_delete:
 caravane_estate_frontend_estate_last_updated:
     path:     /estate/last
     defaults: { _controller: "CaravaneEstateBundle:Estate:lastUdated" }
+
+
+caravane_estate_frontend_estate_search:
+    path:     /estate/search
+    defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
+
+caravane_estate_frontend_estate_search_from:
+    path:     /estate/searchForm
+    defaults: { _controller: "CaravaneEstateBundle:Estate:searchForm" }

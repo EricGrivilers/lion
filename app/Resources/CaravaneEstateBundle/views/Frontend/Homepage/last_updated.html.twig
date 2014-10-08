@@ -22,20 +22,23 @@
 						{% for estate in estates %}
 							<div class="col-md-4">
 								<article class='estate'>
-									<div>
+									<div class="estate-photo">
 										<footer >
-											{{estate.category.name}} {{estate.id}}
+											<div class="background">
+											</div>
+											<p>
+												{{estate.category.name}} - {{estate.locfr}}
+											<p>
 										</footer>
-										{{estate.photo}}
-										<img src="{{asset('photos/big/'~estate.photo ) }}" class="wp-post-image" width="360" height="181" alt="{{estate.category.name}} {{estate.locfr}}"  />
+										<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
 									</div>
-									<div class='item-body'>
-										<div class='post-author'>
+									<div class='estate-body'>
+										{#<div class='post-author'>
 											{{estate.locfr}}
-										</div>
+										</div>#}
 										<header>
 											<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'>
-												<h2>{{estate.description|raw}} </h2>
+												<p>{{estate.summary|raw }} </p>
 											</a>
 										</header>
 									</div>
