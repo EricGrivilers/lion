@@ -13,150 +13,28 @@
 	</head>
 	<body class="home page page-id-92 page-template page-template-template-homepage-php w1170 sticky-menu-on nice-scroll no-sidebar">
 		{% block header %}
-			<header class='page-header fixed-top'>
+			<header class='page-header '>
+				{#    MENU TOP  #}
 				{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
-				<div class="wrapper blue">
-					<div class='container blue-radial-grad'>
-						<section class='row two-headers'>
-							<div class="col-md-3">
-								<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
-							</div>
-							<div class="col-md-9">
-								<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
-								<img src="{{asset('medias/leadingrealestate2.png')}}" width="200" alt="" />
-							</div>
-						</section>
-					</div>
-				</div>
+				
+				{#    MAIN MENU + SEARCH  #}
+				{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
 			</header>
-
 		{% endblock header %}
+
 		{% block content %}
 
 
 		{% endblock content %}
 				<!-- Content area 7 -->
-				<aside class='wrapper lighter-grey default-bg'>
-					<div class='container'>
-						<h2 class='title'>RECHERCHE</h2>
 
+					
+			{#  FOOTER  #}
 
+			{% include "CaravaneCmsBundle:Menu:footer.html.twig" %}
+		
 
-
-
-						<div class="clear"></div>				</div>
-					</aside>
-					<aside class='wrapper blue'>
-						<section class='container blue-radial-grad widget widget_single_tweet'>
-							<div class='pagination'>
-								<span class='prev-t3'></span>
-								<span class='next-t3'></span>
-							</div>
-							<div class='grid_12'>
-								<div class='widget_single_tweet-container'>
-									<article id="recent-tweets" class='item'>
-										<ul class="slides">
-											<li >
-												<div class="message">
-													<a href="http://fb.me/3eeKwe6Gt">http://fb.me/3eeKwe6Gt </a>	Quartier Molière, à proximité immédiate de toutes les facilités (commerces, transport, écoles) et du Bois de la...
-												</div>
-											<footer class="time">Mon Aug 11 20:10:42 +0000 2014</footer>
-										</li>
-										<li style="display: none;">
-											<div class="message"><a href=" http://fb.me/6TLVjZuVc "> http://fb.me/6TLVjZuVc </a> Vente Appartement - 1180 Uccle - Immobilière Le Lion</div>
-										<footer class="time">Mon Aug 11 16:46:11 +0000 2014</footer>
-									</li>
-								</ul>
-							</article>
-							<script>
-								jQuery(document).ready(function($) {
-									$('footer.time').each(function() {
-										var date = new Date($(this).html()),
-										diff = (((new Date()).getTime() - date.getTime()) / 1000),
-										day_diff = Math.floor(diff / 86400);
-										if ( isNaN(day_diff) || day_diff < 0)
-										{
-											jQuery('footer.time').html('');
-										}
-										difference_text = day_diff == 0 && (
-											diff < 60 && "just now" ||
-											diff < 120 && "1 minute ago" ||
-											diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
-											diff < 7200 && "1 hour ago" ||
-											diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
-											day_diff == 1 && "Yesterday" ||
-											day_diff < 7 && day_diff + " days ago" ||
-											day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago" ||
-											day_diff < 365 && Math.ceil( day_diff / 30 ) + " months ago" ||
-											day_diff < 730  && "1 year ago" ||
-											day_diff >= 730  && Math.ceil( day_diff / 365 ) + " years ago";
-										$(this).html(difference_text);
-									});
-								});
-							</script>
-						</div>
-					</div>
-				</section>
-			</aside>
-			<footer>
-				<div class='wrapper grey'>
-					<div class='container'>
-						<div class='grid_3'>
-							<section id="text-5" class="widget widget_text">			<div class="textwidget"><img src="medias/logo_footer.png"  alt=""></div>
-						</section>	</div>
-						<div class='grid_3'>
-							<section id="latest-posts-2" class="widget widget_latest_posts_entries">			<h2>Latest posts</h2>									<ul class="latest-posts">
-								<li>
-									<div class="latest-desc">
-										<div class="latest-meta">
-											<div class="latest-date">September 5, 2013</div>
-										</div>
-										<h3><a title="Class aptent taciti sociosqu ad litora full commentin" href="an-ordered-list-post/index.html">L’immobilière Le Lion lance une application </a></h3>
-										<div class="latest-excerpts"><p>Via cette application, vous recevrez instantanément les dernières offres, vous pourrez géo-localiser les biens à proximité et consulter toutes les informations relatives à ceux-ci. [&hellip;]</p>
-										</div>
-									</div>
-									<div class="clear"></div>
-								</li>
-							</ul>
-						</section>	</div>
-						<div class='grid_3'>
-							<section id="text-3" class="widget widget_text"><h2>Contact</h2>			<div class="textwidget"><address>
-								<ul class="address">
-									<li>Avenue Delleur 8</li>
-									<li>B-1170</li>
-									<li>Brussels, Belgium</li>
-								</ul>
-								<ul class="phone">
-									<li>Phone: +32 2 672 71 11</li>
-									<li>Fax: +32 2 672 67 17</li>
-								</ul>
-							</address></div>
-						</section>	</div>
-						<div class='grid_3'>
-							<section id="random-work-2" class="widget widget_social_icons_item"><h2>Suivez-nous</h2>			<ul class='socials-bottom clearfix'>
-								<li>
-									<a class='facebook' href='http://facebook.com' target="_blank"></a>
-									<div class='cloud'>Facebook<div class='helper'></div></div>
-								</li>
-								<li>
-									<a class='twitter' href='http://twitter.com/google' target="_blank"></a>
-									<div class='cloud'>Twitter<div class='helper'></div></div>
-								</li>
-							</ul>
-						</section>	</div>
-					</div>
-				</div>
-				<div class='wrapper dark-grey copyright-bar'>
-					<div class='container'>
-						<div class='grid_12'>
-							<span class='copyright'>© 2014 Immobilière Le Lion</span>
-						</div>
-					</div>
-				</div>
-			</footer>
 			<a id="back_to_top" href="#"></a>
-			<style type="text/css"></style>
-			<style type="text/css"></style>
 			{% include "CaravaneCmsBundle::javascript.html.twig" %}
 		</body>
 	</html>

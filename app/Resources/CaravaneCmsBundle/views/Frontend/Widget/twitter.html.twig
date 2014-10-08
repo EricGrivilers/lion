@@ -1,0 +1,52 @@
+<aside class='wrapper blue'>
+						<section class='container blue-radial-grad widget widget_single_tweet'>
+							<div class='pagination'>
+								<span class='prev-t3'></span>
+								<span class='next-t3'></span>
+							</div>
+							<div class='grid_12'>
+								<div class='widget_single_tweet-container'>
+									<article id="recent-tweets" class='item'>
+										<ul class="slides">
+											<li >
+												<div class="message">
+													<a href="http://fb.me/3eeKwe6Gt">http://fb.me/3eeKwe6Gt </a>	Quartier Molière, à proximité immédiate de toutes les facilités (commerces, transport, écoles) et du Bois de la...
+												</div>
+											<footer class="time">Mon Aug 11 20:10:42 +0000 2014</footer>
+										</li>
+										<li style="display: none;">
+											<div class="message"><a href=" http://fb.me/6TLVjZuVc "> http://fb.me/6TLVjZuVc </a> Vente Appartement - 1180 Uccle - Immobilière Le Lion</div>
+										<footer class="time">Mon Aug 11 16:46:11 +0000 2014</footer>
+									</li>
+								</ul>
+							</article>
+							<script>
+								jQuery(document).ready(function($) {
+									$('footer.time').each(function() {
+										var date = new Date($(this).html()),
+										diff = (((new Date()).getTime() - date.getTime()) / 1000),
+										day_diff = Math.floor(diff / 86400);
+										if ( isNaN(day_diff) || day_diff < 0)
+										{
+											jQuery('footer.time').html('');
+										}
+										difference_text = day_diff == 0 && (
+											diff < 60 && "just now" ||
+											diff < 120 && "1 minute ago" ||
+											diff < 3600 && Math.floor( diff / 60 ) + " minutes ago" ||
+											diff < 7200 && "1 hour ago" ||
+											diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+											day_diff == 1 && "Yesterday" ||
+											day_diff < 7 && day_diff + " days ago" ||
+											day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago" ||
+											day_diff < 365 && Math.ceil( day_diff / 30 ) + " months ago" ||
+											day_diff < 730  && "1 year ago" ||
+											day_diff >= 730  && Math.ceil( day_diff / 365 ) + " years ago";
+										$(this).html(difference_text);
+									});
+								});
+							</script>
+						</div>
+					</div>
+				</section>
+			</aside>

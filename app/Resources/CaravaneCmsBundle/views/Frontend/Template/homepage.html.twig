@@ -2,136 +2,26 @@
 
 
 {% block header %}
-			<header class='page-header '>
-				<div class="fixed-top">
-				{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
-			</div>
-				<div class='wrapper top-slider ' id="home_slider">
-			<!-- START REVOLUTION SLIDER 4.5.95 fullwidth mode -->
-			<div id="rev_slider_1_2_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:450px;">
-				<div id="rev_slider_1_2" class="rev_slider fullwidthabanner" style="display:none;max-height:450px;height:450px;">
-					<ul>	<!-- SLIDE  -->
-					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-						<!-- MAIN IMAGE -->
-						<img src="medias/home/1.jpg"  alt="slide11"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-						<!-- LAYERS -->
-						<!-- LAYER NR. 1 -->
-						<div class="tp-caption transp_bg lfl"
-							data-x="405"
-							data-y="70"
-							data-speed="500"
-							data-start="500"
-							data-easing="easeOutExpo"
-							data-splitin="none"
-							data-splitout="none"
-							data-elementdelay="0"
-							data-endelementdelay="0"
-							data-end="8700"
-							data-endspeed="300"
-							style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>standing</b><br> & nature</h2>
-							<p>Waterloo</p>
-						</div>
-					</li>
-					<!-- SLIDE  -->
-					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-						<!-- MAIN IMAGE -->
-						<img src="medias/home/2.jpg"  alt="slide2_compressed-1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-						<!-- LAYERS -->
-						<!-- LAYER NR. 1 -->
-						<div class="tp-caption transp_bg lfl"
-							data-x="780"
-							data-y="135"
-							data-speed="500"
-							data-start="500"
-							data-easing="easeOutExpo"
-							data-splitin="none"
-							data-splitout="none"
-							data-elementdelay="0"
-							data-endelementdelay="0"
-							data-end="8700"
-							data-endspeed="300"
-							style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>LUXE</b><br>& tradition</h2>
-							<p>Ixelles</p>
-						</div>
-					</li>
-					<!-- SLIDE  -->
-					<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-						<!-- MAIN IMAGE -->
-						<img src="medias/home/3.jpg"  alt="slide41"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-						<!-- LAYERS -->
-						<!-- LAYER NR. 1 -->
-						<div class="tp-caption transp_bg lfl"
-							data-x="0"
-							data-y="128"
-							data-speed="500"
-							data-start="500"
-							data-easing="easeOutExpo"
-							data-splitin="none"
-							data-splitout="none"
-							data-elementdelay="0"
-							data-endelementdelay="0"
-							data-end="8700"
-							data-endspeed="300"
-							style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>moderne</b><br>& chaleureux</h2>
-							<p>Uccle</p>
-						</div>
-						<!-- LAYER NR. 4 -->
-					</li>
-				</ul>
-				<div class="tp-bannertimer"></div>	</div>
-			</div>
-
-
-			<!-- END REVOLUTION SLIDER -->
-		</div>
+	<header class='page-header '>
+		{#    MENU TOP  #}
+		{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
+		
+		{#    SLIDE SHOW  #}
+		{% include "CaravaneCmsBundle:Frontend:Widget/slider.html.twig" %}
 
 
 
-
-				<div class="wrapper blue  affix-top" id="main_menu" data-spy="affix" data-offset-top="480" style="top: 36px">
-					<div class='container blue-radial-grad'>
-						<section class='row two-headers'>
-							<div class="col-md-3">
-								<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
-							</div>
-							<div class="col-md-9">
-								<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
-								<img src="{{asset('medias/leadingrealestate2.png')}}" width="200" alt="" />
-							</div>
-						</section>
-					</div>
-				</div>
-			</header>
-
-		{% endblock header %}
+		{#    MAIN MENU + SEARCH  #}
+		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
+	</header>
+{% endblock header %}
 
 {% block content %}
 
-
-		<!-- Content area 1 -->
-
-		<aside id="search">
-			<div class='container'>
-				<section >
-					<h2 class='title'>RECHERCHE</h2>
-					<div class='separator'></div>
-					{% include "CaravaneEstateBundle:Frontend:Search/form.html.twig" %}
-				</section>
-			</div>
-		</aside>
-		<!-- Content area 5 -->
-
-		<aside class='wrapper default-bg'>
-			<div class='container'>
-				<section>
-					<h2 class='title'>NOUVEAUX BIENS</h2>
-					<div class='separator'></div>
-					{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 3 } ) ) }}
-				</section>
-			</div>
-		</aside>
+	{#   NEW ITEMS #}
+	{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 6 } ) ) }}
 		<!-- Content area 4 -->
-		<aside class='wrapper border-tb-white marble-color'>
+	<aside class='wrapper border-tb-white marble-color'>
 			<div class='container'>
 				<div class='advantages'>
 					<section class='col-md-6'>
@@ -167,7 +57,9 @@
 							</div>
 						</section>
 					</div>				</div>
-				</aside>
+	</aside>
+
+	{% include "CaravaneCmsBundle:Frontend:Widget/twitter.html.twig" %}
 
 
 {% endblock content %}

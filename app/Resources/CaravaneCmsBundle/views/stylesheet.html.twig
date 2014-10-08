@@ -4,76 +4,20 @@
 
 
 {% stylesheets output="css/main.min.css"
-"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/normalize.css"
+	"%kernel.root_dir%/../vendor/necolas/normalize.css/normalize.css"
 	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/main.css"
-
 	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/css/revslider/*"
 %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
 {% stylesheets output="css/styles.min.css" filter="less"
 	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/less/styles.less"
+	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/less/header.less"
+	"%kernel.root_dir%/Resources/CaravaneCmsBundle/public/less/new_items_slide.less"
 %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
 
 
-{#
-
-
-		<link rel='stylesheet' id='rs-plugin-settings-css'  href='wp-content/plugins/revslider/rs-plugin/css/settings-30827.css' type='text/css' media='all' />
-		<style type='text/css'>
-		@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,700);.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}
-		</style>
-		<link href='http://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
-			<link rel='stylesheet' id='normalize-css'  href='wp-content/themes/circles_08_04_14/css/normalize.css' type='text/css' media='all' />
-
-			<link rel='stylesheet' id='prettyPhoto-css'  href='wp-content/themes/circles_08_04_14/css/prettyPhoto.css' type='text/css' media='all' />
-			<link rel='stylesheet' id='grid-system-css'  href='wp-content/themes/circles_08_04_14/css/grid-system.css' type='text/css' media='all' />
-			<link rel='stylesheet' id='main-css'  href='wp-content/themes/circles_08_04_14/css/main.css' type='text/css' media='all' />
-			<!-- <link rel='stylesheet' id='shortcodes-css'  href='wp-content/themes/circles_08_04_14/css/shortcodes.css' type='text/css' media='all' />-->
-			<link rel='stylesheet' id='widgets-css'  href='wp-content/themes/circles_08_04_14/css/widgets.css' type='text/css' media='all' />
-			<link rel='stylesheet' id='font-awesome-css'  href='wp-content/themes/circles_08_04_14/css/font-awesome.css' type='text/css' media='all' />
-			<link rel='stylesheet' id='icomoon-css'  href='wp-content/themes/circles_08_04_14/css/icomoon.css' type='text/css' media='all' />
-			<link rel='stylesheet' id='responsiveness-css'  href='wp-content/themes/circles_08_04_14/css/media-42918.php.html' type='text/css' media='all' />
-			<link rel='stylesheet' id='style-css'  href='style.css' type='text/css' media='all' />
-
-			<link rel="EditURI" type="application/rsd+xml" title="RSD" href="xmlrpc-51008.php.html" />
-			<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="wp-includes/wlwmanifest.xml" />
-			<link rel='prev' title='Portfolio 3 Columns' href='portfolio/index.html' />
-			<link rel='next' title='Blog' href='blog-template-1/index.html' />
-			<meta name="generator" content="WordPress 3.9.2" />
-			<link rel='canonical' href='index.html' />
-			<link rel='shortlink' href='index.html' />
-
-			<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,700" rel="stylesheet" type="text/css">
-
-			<style type="text/css">
-			.menu li ul {min-width:200px;}
-			.menu li ul li a {font-size:13px;}
-			.headerstyle2 .menu>li>a, .headerstyle2 .menu>ul>li>a {padding:0 14px;}
-			.headerstyle2.menu li {margin-right:15px;}
-			.headerstyle4 .menu>li>a {padding:0 30px 0 14px;}
-			.header-text {color: #7f7f7f;font-size: 10px;}
-			@media only screen and (max-width: 479px){.special-text h2 {font-size: 15px;}}
-			.product_list_widget {margin-bottom:50px}		</style>
-			<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
-
-
-
-#}
 <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bmatznerfontawesome/css/font-awesome.min.css') }}" />
-<style type='text/css'>
-		@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,700);.tp-caption a{color:#ff7302;text-shadow:none;-webkit-transition:all 0.2s ease-out;-moz-transition:all 0.2s ease-out;-o-transition:all 0.2s ease-out;-ms-transition:all 0.2s ease-out}.tp-caption a:hover{color:#ffa902}
-		</style>
 
-		<style type="text/css">
-			.menu li ul {min-width:200px;}
-			.menu li ul li a {font-size:13px;}
-			.headerstyle2 .menu>li>a, .headerstyle2 .menu>ul>li>a {padding:0 14px;}
-			.headerstyle2.menu li {margin-right:15px;}
-			.headerstyle4 .menu>li>a {padding:0 30px 0 14px;}
-			.header-text {color: #7f7f7f;font-size: 10px;}
-			@media only screen and (max-width: 479px){.special-text h2 {font-size: 15px;}}
-			.product_list_widget {margin-bottom:50px}		</style>
-			<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
