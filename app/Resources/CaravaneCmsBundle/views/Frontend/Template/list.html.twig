@@ -1,0 +1,80 @@
+{% extends "CaravaneCmsBundle::layout.html.twig" %}
+
+
+{% block header %}
+	<header class='page-header '>
+		{#    MENU TOP  #}
+		{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
+		
+		{#    MAIN MENU + SEARCH  #}
+		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
+	</header>
+{% endblock header %}
+
+{% block content %}
+	
+		<!-- Content area 4 -->
+	<aside class='wrapper border-tb-white marble-color'>
+			<div class="container main">
+			<div class="row">
+			{% for estate in estates %}
+
+				{#<div class="col-md-4 col-sm-6">
+								<article class='estate'>
+									<div class="estate-photo">
+										<footer >
+											<div class="background">
+											</div>
+											<p>
+												{{estate.category.name}} - {{estate.locfr}}
+											<p>
+										</footer>
+										<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+									</div>
+									<div class='estate-body'>
+										
+										<header>
+											{{estate.prix}} - {{estate.reference}}
+											<a href='with-just-a-few-clicks-you-can-add-in-both-portrait/index.html'>
+												<p>{{estate.summary|raw }} </p>
+											</a>
+										</header>
+									</div>
+								</article>
+							</div>
+
+#}
+
+
+				<div class="col-xs-6 col-sm-6 col-md-3">
+										<div class="widget_out_stuff2 ">
+											<a rel="" title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="#" >
+												<article class="item-con-t1 blue-on-hover" style="opacity: 1;">
+													<div class="container-t1">
+														<div class="container-t1-margin">
+															<header>
+																<div class="overlay tran03slinear"></div>
+																<div class="bg-black-045 tran03slinear"></div>
+																<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
+																<p>{{estate.summary|raw }} </p>
+															</header>
+															<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+															
+														</div>
+													</div>
+													<div class="blue-line visible-on-hover tran03slinear"></div>
+												</article>
+											</a>
+										</div>
+									</div>
+
+
+			{% endfor %}
+		</div>
+		</div>
+	</aside>
+
+	{% include "CaravaneCmsBundle:Frontend:Widget/twitter.html.twig" %}
+
+
+{% endblock content %}

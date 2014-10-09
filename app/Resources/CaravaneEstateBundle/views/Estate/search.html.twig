@@ -2,7 +2,7 @@
 
 
 
-<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="post" action="{{path('caravane_estate_frontend_estate_search')}}" role="form"><div id="caravane_bundle_estatebundle_search">
+<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="get" action="{{path('caravane_estate_frontend_estate_search')}}" role="form"><div id="caravane_bundle_estatebundle_search">
 {% block body -%}
 	
 
@@ -15,7 +15,7 @@
 		<div class='col-sm-6  col-md-4'>
 			<div class="input-group">
 				<span class="input-group-addon"><span class="fa  fa-search"></span></span>
-				<input type="text" name="keywords" id="keywords" value="" class="form-control" placeholder="Mot clef (ex. piscine, brugmann)">
+				{{form_widget(search_form.keyword)}}
 			</div>
 		</div>
 		<div class='col-sm-6  col-md-4'>

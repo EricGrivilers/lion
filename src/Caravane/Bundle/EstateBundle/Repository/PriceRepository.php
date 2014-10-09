@@ -31,19 +31,20 @@ class PriceRepository extends EntityRepository
 		$i=0;
 		for($i=0;$i<count($tB);$i++) {
 			$price=$tB[$i];
+			
 			if($i==0) {
-				$key=$type."_<".$price->getPrice();
+				$key=$type."_".$price->getId()."_-";
 				$label=" - de ".$price->getPrice()." €";
 			}
 			else {
 				$sPrice=$tB[$i-1];
-				$key=$type."_".$sPrice->getPrice()."|".$price->getPrice();
+				$key=$type."_".$sPrice->getId()."_".$price->getId();
 				$label="de ".$sPrice->getPrice()." à ".$price->getPrice()." €";
 			}
 			$tA[$key]=$label;
 		}
 		$price=$tB[count($prices)-1];
-		$key=$type."_>".$price->getPrice();
+		$key=$type."_".$price->getId()."_+";
 		$label=" + de ".$price->getPrice()." €";
 		$tA[$key]=$label;
 		return $tA;

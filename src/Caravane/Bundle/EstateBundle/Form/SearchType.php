@@ -83,6 +83,12 @@ class SearchType extends AbstractType
                 )
             ))
             ->add('isNew','checkbox')
+            ->add('keyword','text',array(
+                "mapped" => false,
+                "attr"=>array(
+                    "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
+                )
+            ))
         ;
     }
     

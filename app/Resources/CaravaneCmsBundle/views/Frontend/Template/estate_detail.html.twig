@@ -1,0 +1,50 @@
+<div class="col-md-12">
+	<img src="{{asset(('photos/big/'~estate.photo)) }}" class="img-responsive" style="width:100%" alt="{{estate.category.name}} {{estate.locfr}}"  />
+</div>
+<div class="col-md-3">
+	<div class="infos">
+		<ul>
+			{% if estate.ondemand==false %}
+				<li><label>Prix:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
+			{% endif %}
+			<li><label>Reférence du bien:</label> {{estate.reference}}</li>
+			<li><label>Supérficie:</label> {{estate.surface}} <label>m2</label></li>
+			<li><label>Chambre{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>
+			<li><label>Salle{{estate.bathrooms>1?"s":""}} d'eau:</label> {{estate.bathrooms}}</li>
+			{% if estate.garages %}
+				<li><label>Garage{{estate.garages>1?"s":""}}:</label> {{estate.garages}}</li>
+			{% endif %}
+			{% if estate.garden %}
+				<li>{{estate.garden}} </li>
+			{% endif %}
+
+		</ul>
+	</div>
+</div>
+<div class="col-md-6">
+	<div class="descro">
+		<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
+		<div id="text">{{estate.description|raw }}</div>
+	</div>
+</div>
+<div class="col-md-3">
+					<div style="margfin-top:20px">
+<a class="btn btn-primary btn-block">Me contacter à propos de ce bien</a>
+<a class="btn btn-primary btn-block"> Sauvegarder ce bien dans mon profil</a>
+<a class="btn btn-primary btn-block"> Imprimer</a>
+</div>
+
+<div style="text-align: center; margin-top:20px">
+<a href="http://facebook.com" target="_blank" style="margin:10px;background-image: none; font-size: 42px;"><span class="fa fa-facebook"></span></a>
+				
+		
+				<a class="twitter" href="http://twitter.com/" target="_blank" style="margin:10px;background-image: none; font-size: 42px;"><span class="fa fa-twitter"></span></a>
+
+			</div>
+				
+		
+</div>
+<div class="col-md-12">
+	
+	<iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.be/?ie=UTF8&s=AARTsJqzARj-Z8VnW5pkPMLMmZbqrJcYpw&ll={{estate.area.LatLng}}&spn=0.016272,0.025749&z=15&output=embed"></iframe><br /><small><a href="http://maps.google.be/?ie=UTF8&ll={{estate.area.LatLng}}&spn=0.016272,0.025749&z=154&source=embed" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
+</div>

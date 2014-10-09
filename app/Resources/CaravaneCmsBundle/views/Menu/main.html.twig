@@ -1,8 +1,8 @@
-<div class="wrapper blue  affix-top" id="main_menu" data-spy="affix" data-offset-top="480" style="top: 36px">
+<div class="wrapper blue  " id="main_menu" >
 	<div class='container blue-radial-grad'>
 		<section class='row two-headers'>
 			<div class="col-md-3">
-				<img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" />
+				<a href="{{path("caravane_cms_homepage")}}"><img src="{{asset('medias/logo_white.png')}}" style="width: 150px; height: auto;" /></a>
 			</div>
 			<div class="col-md-9">
 				<h2>Une agence locale de qualité intégrée dans un réseau international de prestige.</h2>
@@ -25,10 +25,10 @@
 			<div class="collapse navbar-collapse" id="search_navigation">
 				<ul class='nav navbar-nav'>
 					<li>
-						<a href='' >{{"Vente"|trans}}</a>
+						<a href="{{path('caravane_estate_frontend_estate_sale_list')}}" >{{"Vente"|trans}}</a>
 					</li>
 					<li>
-						<a href='' >{{"Location"|trans}}</a>
+						<a href="{{path('caravane_estate_frontend_estate_rent_list')}}" >{{"Location"|trans}}</a>
 					</li>
 					<li>
 						<a href='' >{{"Biens neufs"|trans}}</a>

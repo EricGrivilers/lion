@@ -1,0 +1,32 @@
+{% extends "CaravaneCmsBundle::layout.html.twig" %}
+
+
+{% block header %}
+	<header class='page-header '>
+		{#    MENU TOP  #}
+		{% include "CaravaneCmsBundle:Menu:top.html.twig" %}
+		
+		{#    MAIN MENU + SEARCH  #}
+		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
+	</header>
+{% endblock header %}
+
+{% block content %}
+	
+		<!-- Content area 4 -->
+	<aside class='wrapper border-tb-white marble-color' id="detail">
+			<div class="container">
+			<div class="row">
+			
+
+				{% include "CaravaneEstateBundle:Frontend:estate_detail.html.twig" %}
+
+			
+		</div>
+		</div>
+	</aside>
+
+	{% include "CaravaneCmsBundle:Frontend:Widget/twitter.html.twig" %}
+
+
+{% endblock content %}

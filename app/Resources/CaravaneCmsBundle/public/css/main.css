@@ -2478,68 +2478,11 @@ margin-bottom: 0;
   font-weight: 400;
   text-transform: none;
 }
-.two-headers a {
-  position: absolute;
-  right: 0;
-  width: 85px;
-  height: 84px;
-  top: 50%;
-  margin-top: -46px;
-  color: #474a4c;
-  padding: 0;
-  text-align: center;
-  text-shadow: 1px 1px #f1f1f1;
-  text-transform: uppercase;
-  line-height: 1.2;
-  background: #fff;
-  border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.7);
 
-  -webkit-box-shadow: 2px 2px 0 0 rgba(0,0,0,0.2);
-  box-shadow: 2px 2px 0 0 rgba(0,0,0,0.2);
-  behavior: url(../../circles/css/PIE.htc);
-}
 
 .no-csstransitions .two-headers a:before {
 width: 11px;
 left: 5px;
-}
-.two-headers a:before {
-content: '';
-position: absolute;
-width: 18px;
-height: 12px;
-background: rgb(247, 247, 247);
-border: 1px solid rgba(0,0,0,0.6);
-left: 1px;
--webkit-transform: skewX(30deg);
--moz-transform: skewX(30deg);
--o-transform: skewX(30deg);
-transform: skewX(30deg);
--ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=1, M12=0.5773502691896265, M21=0, M22=1, SizingMethod='auto expand')";
-border-right: 0;
-border-bottom: 0;
-top: 8px;
-}
-.two-headers a span {
-padding: 28px 15px;
-float: left;
-background: #fff;
-background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…BoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
-background: -moz-linear-gradient(top, rgba(255,255,255,0.2) 0%, rgba(3,36,62,0.2) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,0.2)), color-stop(100%,rgba(3,36,62,0.2)));
-background: -webkit-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(3,36,62,0.2) 100%);
-background: -o-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(3,36,62,0.2) 100%);
-background: -ms-linear-gradient(top, rgba(255,255,255,0.2) 0%,rgba(3,36,62,0.2) 100%);
-background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%,rgba(3,36,62,0.2) 100%);
-border-radius: 50%;
--ms-border-radius: 50%;
-text-shadow: 0 1px 0 #fff;
-box-shadow: -1px -1px 0 1px rgba(0,0,0,0.1);
-height: 28px;
-overflow: hidden;
-width: 55px;
-  behavior: url(../../circles/css/PIE.htc);
 }
 /*----------------</TWO HEADERS>----------------*/
 

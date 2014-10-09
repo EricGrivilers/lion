@@ -4,8 +4,19 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "516328e7fb1ea768c6e1b21f39f863ee",
+    "hash": "fa4e3373bdadea98e03eddbc65cf7904",
     "packages": [
+        {
+            "name": "WickyNilliams/enquire.js",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/WickyNilliams/enquire.js.git",
+                "reference": "origin/master"
+            },
+            "type": "library",
+            "time": "2014-08-04 20:52:11"
+        },
         {
             "name": "bmatzner/fontawesome-bundle",
             "version": "4.2.0",
@@ -1676,12 +1687,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "eb695e51378e35a5efdf71e8ef21597758c43a73"
+                "reference": "f1cb0d12a38a7d2709c59debd4ebe8a33d55cd4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/eb695e51378e35a5efdf71e8ef21597758c43a73",
-                "reference": "eb695e51378e35a5efdf71e8ef21597758c43a73",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/f1cb0d12a38a7d2709c59debd4ebe8a33d55cd4f",
+                "reference": "f1cb0d12a38a7d2709c59debd4ebe8a33d55cd4f",
                 "shasum": ""
             },
             "require": {
@@ -1741,7 +1752,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-09-22 09:19:19"
+            "time": "2014-10-08 12:57:09"
         },
         {
             "name": "monolog/monolog",
@@ -2577,12 +2588,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "61705d35fa314a16579169fb7379e5101716e715"
+                "reference": "9299f5dfa25d6fbf0933f7de7db58b50c868ab47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/61705d35fa314a16579169fb7379e5101716e715",
-                "reference": "61705d35fa314a16579169fb7379e5101716e715",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9299f5dfa25d6fbf0933f7de7db58b50c868ab47",
+                "reference": "9299f5dfa25d6fbf0933f7de7db58b50c868ab47",
                 "shasum": ""
             },
             "replace": {
@@ -2620,7 +2631,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-10-07 04:57:46"
+            "time": "2014-10-09 05:17:56"
         },
         {
             "name": "twig/extensions",
@@ -2875,6 +2886,7 @@
         "stof/doctrine-extensions-bundle": 20,
         "twbs/bootstrap": 20,
         "necolas/normalize.css": 20,
+        "wickynilliams/enquire.js": 20,
         "liip/imagine-bundle": 20
     },
     "prefer-stable": false,

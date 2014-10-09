@@ -1,4 +1,6 @@
 @import '_variables.less';
+@import "../../../../../vendor/twbs/bootstrap/less/mixins.less";
+@import "../../../../../vendor/twbs/bootstrap/less/variables.less";
 
 			/* main_color */
 	a,
@@ -211,7 +213,7 @@ font-weight: 50;
 
 
 .container-t1 {
-	max-height: 192px;
+	/*max-height: 192px;*/
 	overflow: hidden;
 }
 
@@ -355,8 +357,73 @@ h2.title {
 
 
 
+#detail {
+	font-size: 14px;
+}
+
+#detail h2 {
+	font-size: 14px;
+}
+
+#detail .infos ul {
+	list-style: none;
+	font-weight: bold;
+	font-size: 15px;
+}
 
 
+#detail .infos ul label{
+	list-style: none;
+	font-weight: normal;
+}
+
+
+.container-t1 {
+	padding:0;
+	border:0;
+	padding:0;
+	background: #ffffff;
+	img {
+		border: 0;
+	}
+}
+.widget_out_stuff2  {
+	margin-bottom:10px;
+	article {
+		border:0;
+		padding:0;
+		background: #ffffff;
+	}
+	a:hover {
+		header {
+			top:0;
+			height:100%;
+			p {
+				color: #ffffff;
+				padding:10px;
+				.opacity(1);
+			}
+		}
+	}
+}
+.widget_out_stuff2 .item-con-t1 header {
+
+	bottom:0;
+	height: 93px;
+	line-height: 13px;
+	z-index: 1;
+	position: absolute;
+	display: block;
+	left:0;
+	width: 100%;
+	opacity: 1;
+	text-align: left;
+	h2 {
+		text-align: left;
+		padding:5px 5px 5px 10px;
+	}
+
+}
 
 
 

@@ -43,3 +43,21 @@ caravane_estate_frontend_estate_search:
 caravane_estate_frontend_estate_search_from:
     path:     /estate/searchForm
     defaults: { _controller: "CaravaneEstateBundle:Estate:searchForm" }
+
+
+
+caravane_estate_frontend_estate_sale_show:
+    path:   /vente/030/{reference}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:saleView" }
+
+caravane_estate_frontend_estate_rent_show:
+    path:   /location/030/{reference}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:rentView" }
+
+caravane_estate_frontend_estate_sale_list:
+    path:   /vente
+    defaults: { _controller: "CaravaneEstateBundle:Estate:saleList" }
+
+caravane_estate_frontend_estate_rent_list:
+    path:   /location
+    defaults: { _controller: "CaravaneEstateBundle:Estate:rentList" }

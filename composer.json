@@ -33,6 +33,7 @@
         "braincrafted/bootstrap-bundle": "~2.0",
         "bmatzner/fontawesome-bundle": "~4.1",
         "necolas/normalize.css":"dev-master",
+        "WickyNilliams/enquire.js":"dev-master",
         "liip/imagine-bundle": "dev-master"
     },
     "require-dev": {
@@ -116,6 +117,18 @@
                 "version":"dev-master",
                 "source":{
                     "url":"git://github.com/necolas/normalize.css.git",
+                    "type":"git",
+                    "reference":"origin/master"
+                }
+            }
+        },
+        {
+            "type":"package",
+            "package":{
+                "name":"WickyNilliams/enquire.js",
+                "version":"dev-master",
+                "source":{
+                    "url":"git://github.com/WickyNilliams/enquire.js.git",
                     "type":"git",
                     "reference":"origin/master"
                 }
