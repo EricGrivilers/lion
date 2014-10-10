@@ -89,6 +89,16 @@ class SearchType extends AbstractType
                     "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
                 )
             ))
+            ->add('offset','hidden',array(
+                "mapped" => false,
+            ))
+            ->add('limit','hidden',array(
+                "mapped" => false,
+                "data"=>24,
+            ))
+            ->add('sort','hidden',array(
+                "mapped" => false,
+            ))
         ;
     }
     
@@ -107,6 +117,6 @@ class SearchType extends AbstractType
      */
     public function getName()
     {
-        return 'caravane_bundle_estatebundle_search';
+        return 'c_s';
     }
 }

@@ -3,7 +3,7 @@
 namespace Caravane\Bundle\EstateBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use Doctrine\ORM\Tools\Pagination\Paginator;
 /**
  * EstateRepository
  *
@@ -22,11 +22,11 @@ class EstateRepository extends EntityRepository
 	}
 
 
-	public function getSearchResult($request) {
-		$datas=$request->query->get('caravane_bundle_estatebundle_search');
-        //var_dump($datas);
-		
-        
+	public function getSearchResult($postDatas=array(), $options=array()) {
+		/*if(!$postDatas=$request->query->get('c_s')) {
+            $postDatas=array();
+		}*/
+        $datas=array_merge_recursive($postDatas, $options);
 
 
 		 $type=($datas['location']==1?'rent':'sale');
@@ -38,7 +38,12 @@ class EstateRepository extends EntityRepository
             
          }
 
-
+        if(!isset($datas['offset'])) {
+            $datas['offset']=0;
+        }
+        if(!isset($datas['limit'])) {
+            $datas['limit']=24;
+        }
         $query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
         ->where('C.status = :status')
         ->andWhere('C.location = :type')
@@ -110,15 +115,18 @@ class EstateRepository extends EntityRepository
         //    $dql.=" AND (".implode(" OR ", $dqlA).") ";
         }
 
+        $query->setFirstResult($datas['offset']);
+        $query->setMaxResults($datas['limit']);
       // echo $dql;
-
+//echo $datas['offset'];
 
         //$query = $this->getEntityManager()->createQuery($dql);
         //$entities = $query->getResult();
 
-        $entities = $query->getQuery()->getResult();
+        //$entities = $query->getQuery()->getResult();
+        $entities = new Paginator($query, $fetchJoinCollection = true);
 
-
+        
         return $entities;
 
 	}
