@@ -239,45 +239,32 @@ class EstateController extends Controller
     }
 
 
-    public function searchFormAction() {
-        $search_form=$this->searchForm();
+    public function searchFormAction(Request $request, $oRequest) {
+        $search_form=$this->searchForm($oRequest);
         return $this->render('CaravaneEstateBundle:Estate:search.html.twig', array(
-            'entity'      => $search_form['entity'],
-            'search_form'   => $search_form['form']->createView()
+            'search_form'   => $search_form->createView()
         ));
     }
 
     public function searchAction(Request $request) {
 
-        if(!$datas=$request->query->get('c_s')) {
+        if(!$datas=$request->request->get('form')) {
             $datas=array('location'=>0);
         }
+
         $type=($datas['location']==1?'rent':'sale');
         $em = $this->getDoctrine()->getManager();
         if(isset($datas['reference'])) {
             if($datas['reference']!="") {
                 return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
             }
-                    }
+        }
+
+
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
             'estates'      => $estates
         ));
-    }
-
-
-    private function searchForm() {
-        $em = $this->getDoctrine()->getManager();
-        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();
-
-        $entity = new Estate();
-        
-        $form = $this->createForm(new SearchType(array('prices'=>$prices)), $entity, array(
-            'action' => $this->generateUrl('caravane_estate_backend_estate'),
-            'method' => 'GET',
-        ));
-        $form->add('submit', 'submit', array('label' => 'Search'));
-        return array('entity'=>$entity,"form"=>$form);
     }
 
 
@@ -300,7 +287,7 @@ class EstateController extends Controller
     }
 
     public function saleListAction(Request $request) {
-        
+
         if(!$datas=$request->query->get('c_s')) {
             $datas=array();
         }
@@ -313,8 +300,8 @@ class EstateController extends Controller
     }
 
     public function rentListAction(Request $request) {
-        
-        if(!$datas=$request->query->get('c_s')) {
+
+        if(!$datas=$request->request->get('form')) {
             $datas=array();
         }
         $em = $this->getDoctrine()->getManager();
@@ -323,5 +310,95 @@ class EstateController extends Controller
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
             'estates'      => $estates
         ));
+    }
+
+
+
+
+
+
+    public function searchForm($request) {
+
+
+
+        $datas=array('location'=>0);
+        $em = $this->getDoctrine()->getManager();
+        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();
+
+
+
+        $form = $this->createFormBuilder($datas)
+        ->add('prix','choice', array(
+                "label"=>false,
+                "expanded"=>true,
+                "multiple"=>true,
+                'choices' => $prices,
+                "attr"=>array(
+                    "class"=>"btn-group btn-group-vertical",
+                    "data-toggle"=>"buttons"
+                )
+            ))
+            ->add('area',"entity",array(
+                "label"=>false,
+                "empty_value" => 'Quartier',
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Area"
+            ))
+            ->add('zone','entity', array(
+                "label"=>false,
+                "expanded"=>true,
+                "multiple"=>true,
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Zone",
+                "attr"=>array(
+                    "class"=>"btn-group btn-group-vertical",
+                    "data-toggle"=>"buttons"
+                )
+            ))
+            ->add('reference',"text",array(
+                "attr"=>array(
+                    "placeholder"=>"Reference"
+                )
+            ))
+            ->add('category','entity', array(
+                "label"=>false,
+                "expanded"=>true,
+                "multiple"=>true,
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Category",
+                "attr"=>array(
+                    "class"=>"btn-group btn-group-vertical",
+                    "data-toggle"=>"buttons"
+                )
+            ))
+            ->add('location','choice', array(
+                "label"=>false,
+                "expanded"=>true,
+                "multiple"=>false,
+                "data"=>0,
+                "choices"=>array(
+                    "0"=>"Vente",
+                    "1"=>"Location"
+                ),
+                "attr"=>array(
+                    "class"=>"btn-group btn-group-justified",
+                    "data-toggle"=>"buttons"
+                )
+            ))
+            ->add('isNew','checkbox')
+            ->add('keyword','text',array(
+                "attr"=>array(
+                    "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
+                )
+            ))
+            ->add('offset','text',array())
+            ->add('limit','text',array(
+                "data"=>24,
+            ))
+            ->add('sort','text',array())
+
+            ->getForm();
+            $form->add('submit', 'submit', array('label' => 'Search'));
+         //   $form->setMethod('GET');
+            $form->handleRequest($request);
+
+            return $form;
     }
 }
