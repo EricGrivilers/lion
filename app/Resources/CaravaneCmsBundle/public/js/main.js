@@ -99,7 +99,7 @@
 		        success:function(data, textStatus, jqXHR)
 		        {
 		        	if($('#list #detail').size()==0) {
-		        		$('#list').append("<div id='detail' lass='col-md-12'></div>");
+		        		$('#list').append("<div id='detail' class='col-md-12'></div>");
 		        	}
 		        	detail=$('#list div#detail');
 		        	//detail.hide();
