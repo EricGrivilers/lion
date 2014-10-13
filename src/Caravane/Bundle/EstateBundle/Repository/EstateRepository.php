@@ -31,6 +31,7 @@ class EstateRepository extends EntityRepository
 
 		 $type=($datas['location']==1?'rent':'sale');
 
+
          if(isset($datas['reference'])) {
             if($estates=$this->findOneBy(array('reference'=>"030/".$datas['reference']))) {
                 return $estates;
@@ -117,6 +118,11 @@ class EstateRepository extends EntityRepository
 
         $query->setFirstResult($datas['offset']);
         $query->setMaxResults($datas['limit']);
+        if(!isset($datas['sort'])) {
+            $datas['sort']="prix asc";
+        }
+        $sort=explode(" ",$datas['sort']);
+        $query->orderBy("C.".$sort[0],$sort[1]);
       // echo $dql;
 //echo $datas['offset'];
 

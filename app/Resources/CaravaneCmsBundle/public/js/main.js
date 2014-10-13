@@ -2,7 +2,6 @@
 	$('#main_menu nav li a[rel="search"]').click(function(e) {
 		e.preventDefault();
 		$('#search').toggle();
-		//$('body').css('margin-top',$('header').height()+"px");
 	});
 
 
@@ -28,22 +27,17 @@
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=sale]").closest('.btn').hide();
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').show();
 			}
-
-			//alert($("input[name='caravane_bundle_estatebundle_search[location][]']").val())
 		});
 
+		prepareLinks();
 	});
 
-	/*$('#main_menu').on('affix-top.bs.affix', function() {
-		console.log($('header').height());
-		$('body').css({
-			paddingTop: $('header').height()
-		});
-	});*/
 
+	$('#form_sort').change(function() {
+		$("form#caravane_bundle_estatebundle_search input#form_offset").val(0);
+	});
 
 	$('#nextEstate').click(function() {
-
 		offset=$("form#caravane_bundle_estatebundle_search input#form_offset").val();
 		limit=$("form#caravane_bundle_estatebundle_search input#form_limit").val();
 		if(offset==undefined) {
@@ -63,6 +57,7 @@
 		            //data: return data from server
 		            html=$(data).find('#list')
 		            $('#list').append(html.html());
+		            prepareLinks();
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -73,8 +68,73 @@
 	});
 
 
+	$('#nextEstate').appear();
+	$(document.body).on('appear', '#nextEstate', function(e, $affected) {
+	    $("#nextEstate").click();
+	  });
+
+
+	function prepareLinks() {
+		$('#list div.estate a.estate').bind();
+		$('#list div.estate a.estate').click(function(e) {
+
+
+			$('.row.detail').remove();
+			e.preventDefault();
+			e.stopPropagation();
+			list=$(this).closest('#list');
+			element=$(this).closest('div.estate');
+			containerWidth=list.width();
+			elementWidth=element.width();
+			itemPerRow=parseInt(containerWidth/elementWidth);
+			index=element.index();
+			row=((index - (index)%itemPerRow)/itemPerRow)+1;
+			newIndex=(row*itemPerRow)-1;
+			lastElement=$("#list div.estate:eq('"+newIndex+"')");
+
+			$.ajax(
+		    {
+		        url : $(this).attr('href'),
+		        type: "GET",
+		        success:function(data, textStatus, jqXHR)
+		        {
+		        	if($('#list #detail').size()==0) {
+		        		$('#list').append("<div id='detail' lass='col-md-12'></div>");
+		        	}
+		        	detail=$('#list div#detail');
+		        	//detail.hide();
+
+		            lastElement.after(detail);
+		            detail.html(data);
+		          // $('body').scrollTo(element);
+		            //detail.slideDown();
+		        },
+		        error: function(jqXHR, textStatus, errorThrown)
+		        {
+		            //if fails
+		            console.log(data);
+		        }
+		    });
+		});
+	}
 
 
 
-
+$.fn.scrollTo = function( target, options, callback ){
+  if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
+  var settings = $.extend({
+    scrollTarget  : target,
+    offsetTop     : 50,
+    duration      : 500,
+    easing        : 'swing'
+  }, options);
+  return this.each(function(){
+    var scrollPane = $(this);
+    var scrollTarget = (typeof settings.scrollTarget == "number") ? settings.scrollTarget : $(settings.scrollTarget);
+    var scrollY = (typeof scrollTarget == "number") ? scrollTarget : scrollTarget.offset().top + scrollPane.scrollTop() - parseInt(settings.offsetTop);
+    scrollPane.animate({scrollTop : scrollY }, parseInt(settings.duration), settings.easing, function(){
+      if (typeof callback == 'function') { callback.call(this); }
+    });
+  });
+}
 

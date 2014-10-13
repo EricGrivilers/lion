@@ -61,3 +61,7 @@ caravane_estate_frontend_estate_sale_list:
 caravane_estate_frontend_estate_rent_list:
     path:   /location
     defaults: { _controller: "CaravaneEstateBundle:Estate:rentList" }
+
+caravane_estate_frontend_estate_detail:
+    path:   /estate/detail/{id}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:detail" }

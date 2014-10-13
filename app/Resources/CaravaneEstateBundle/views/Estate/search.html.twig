@@ -30,7 +30,7 @@
 	</section>
 	<section class='row' style="margin-bottom:10px">
 		<div class="col-sm-6  col-md-4">
-			{{form_row(search_form.isNew)}}
+
 			{{form_row(search_form.category)}}
 		</div>
 		<div class="col-sm-6  col-md-4">
@@ -40,6 +40,18 @@
 			{{form_row(search_form.prix)}}
 		</div>
 	</section>
+	<section class='row' style="margin-bottom:10px">
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.isNew)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.sort)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.submit)}}
+		</div>
+	</section>
+
 
 {% endblock %}
 {{ form_rest(search_form) }}

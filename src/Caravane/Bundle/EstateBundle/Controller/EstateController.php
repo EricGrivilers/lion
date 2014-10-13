@@ -312,7 +312,13 @@ class EstateController extends Controller
         ));
     }
 
-
+    public function detailAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        $estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id);
+        return $this->render('CaravaneEstateBundle:Frontend:estate_detail.html.twig', array(
+            'estate'      => $estate
+        ));
+    }
 
 
 
@@ -382,17 +388,31 @@ class EstateController extends Controller
                     "data-toggle"=>"buttons"
                 )
             ))
-            ->add('isNew','checkbox')
+            ->add('isNew','checkbox',array(
+                "label"=>"Biens neufs uniquement",
+                "attr"=>array(
+                    "class"=>"btn "
+                )
+            ))
             ->add('keyword','text',array(
                 "attr"=>array(
                     "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
                 )
             ))
-            ->add('offset','text',array())
-            ->add('limit','text',array(
+            ->add('offset','hidden',array(
+                "data"=>0))
+            ->add('limit','hidden',array(
                 "data"=>24,
             ))
-            ->add('sort','text',array())
+            ->add('sort','choice',array(
+                "label"=>"Ordonner les résultats par",
+                "choices"=>array(
+                    "prix asc"=>"Prix croissants",
+                    "prix desc"=>"Prix decroissants",
+                    "locfr asc"=>"Communes",
+                    "updatedOn desc"=>"Nouveautés",
+                )
+            ))
 
             ->getForm();
             $form->add('submit', 'submit', array('label' => 'Search'));
