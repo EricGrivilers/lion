@@ -47,7 +47,7 @@ class Estate
      */
     private $photo;
 
-
+    private $photos;
 
     /**
      * @var string
@@ -527,7 +527,7 @@ class Estate
                 return $this->summary;
             }
             $i=0;
-            $tA=explode(".",$this->description);
+            $tA=explode(".",strip_tags($this->description));
             if(is_array($tA)) {
                 while(strlen($this->summary)<150) {
                     $this->summary.=$tA[$i].". ";
@@ -1239,14 +1239,19 @@ class Estate
      */
     public function getPhotos()
     {
-
         foreach($this->photo as $photo) {
 
-           if(!file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())) {
+           if(
+            !file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename()) 
+            || $photo->getFilename()=='' 
+            || is_dir(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())
 
+            ) {
+                //$photo->setFilename("dummy.png");
                 $this->removePhoto($photo);
             }
         }
+
         return $this->photo;
     }
 
@@ -1257,9 +1262,23 @@ class Estate
      */
     public function getPhoto()
     {
-        if(count($this->photo)>0) {
-            return $this->photo[0];
+        $photos=$this->getPhotos();
+        //echo count($photos);
+
+        if(count($photos)==0) {
+            $photo=new \Caravane\Bundle\EstateBundle\Entity\Photo();
+            $photo->setFilename("dummy.png");
+            $photo->setEstate($this);
+            $photo->setRanking(1);
+            return $photo;
         }
+        else {
+            foreach($photos as $p) {
+                return $p;
+            }
+            
+        }
+
         return null;
     }
 

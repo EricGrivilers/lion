@@ -14,7 +14,7 @@
 {% block content %}
 
 		<!-- Content area 4 -->
-	<aside class='wrapper border-tb-white marble-color'>
+	<aside class='wrapper border-tb-white '>
 			<div class="container main" >
 			<div class="row" id="list">
 			{% for estate in estates %}
@@ -27,7 +27,7 @@
 										<header>
 											<div class="overlay tran03slinear"></div>
 											<div class="bg-black-045 tran03slinear"></div>
-												<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
+											<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
 												<p>{{estate.summary|raw }} </p>
 										</header>
 										<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />

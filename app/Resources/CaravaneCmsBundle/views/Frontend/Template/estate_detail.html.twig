@@ -1,38 +1,42 @@
-<div class="row">
+<div class="separator"></div>
+{% if estate.photos|length>0 %}
+	<div class="row" class="marble-color">
 
-	<div class="col-md-12">
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-		  <!-- Indicators -->
-		  <ol class="carousel-indicators">
-		  	{% for i in 0..estate.photos|length %}
-		    <li data-target="#carousel-example-generic" data-slide-to="{{i}}" class="{{loop.index==1?'active':''}}"></li>
-		    {% endfor %}
-		  </ol>
+		<div class="col-md-12">
+			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+			  	{% for i in 0..estate.photos|length %}
+			    <li data-target="#carousel-example-generic" data-slide-to="{{i}}" class="{{loop.index==1?'active':''}}"></li>
+			    {% endfor %}
+			  </ol>
 
-		  <!-- Wrapper for slides -->
-		  <div class="carousel-inner" style="height:750px; overflow: hidden">
-		  	{% for photo in estate.photos %}
-		    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
-		      <img src="{{asset(('photos/big/'~photo) |  imagine_filter('thumbnail_large')) }}" class="img-responsive" style="width:100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
-		    </div>
-		    {% endfor %}
-		  </div>
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner" style="height:750px; overflow: hidden">
+			  	{% for photo in estate.photos %}
+			    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
+			      <img src="{{asset(('photos/big/'~photo) |  imagine_filter('thumbnail_large')) }}" class="img-responsive" style="width:100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
+			    </div>
+			    {% endfor %}
+			  </div>
 
-		  <!-- Controls -->
-		  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-		    <span class="glyphicon glyphicon-chevron-left"></span>
-		  </a>
-		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-		    <span class="glyphicon glyphicon-chevron-right"></span>
-		  </a>
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="glyphicon glyphicon-chevron-left"></span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			    <span class="glyphicon glyphicon-chevron-right"></span>
+			  </a>
+			</div>
+
+
 		</div>
-
-
 	</div>
-</div>
+{% endif %}
 <div class="row">
 
 	<div class="col-md-offset-3 col-md-9">
+		{{estate.photo|length}}
 		<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
 	</div>
 </div>
@@ -81,3 +85,5 @@
 		<iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.be/?ie=UTF8&s=AARTsJqzARj-Z8VnW5pkPMLMmZbqrJcYpw&ll={{estate.area.LatLng}}&spn=0.016272,0.025749&z=15&output=embed"></iframe><br /><small><a href="http://maps.google.be/?ie=UTF8&ll={{estate.area.LatLng}}&spn=0.016272,0.025749&z=154&source=embed" style="color:#0000FF;text-align:left">Agrandir le plan</a></small>
 	</div>
 </div>
+
+<div class="separator"></div>

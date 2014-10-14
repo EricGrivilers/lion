@@ -46,3 +46,5 @@ web/old/photos/*
 
 /web/old
 /web/media/cache
+
+sftp-config.json
