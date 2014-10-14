@@ -40,6 +40,8 @@ caravane_estate_frontend_estate_search:
     path:     /estate/search
     defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
 
+
+
 caravane_estate_frontend_estate_search_from:
     path:     /estate/searchForm
     defaults: { _controller: "CaravaneEstateBundle:Estate:searchForm" }
@@ -65,3 +67,7 @@ caravane_estate_frontend_estate_rent_list:
 caravane_estate_frontend_estate_detail:
     path:   /estate/detail/{id}
     defaults: { _controller: "CaravaneEstateBundle:Estate:detail" }
+
+caravane_estate_frontend_estate_rows:
+    path:   /estate/rows
+    defaults: { _controller: "CaravaneEstateBundle:Estate:rows" }

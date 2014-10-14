@@ -436,32 +436,48 @@ h2.title {
 	color: #ffffff;
 }
 
+.btn.btn-red.active,
+.btn.btn-red:hover {
+	background-color: darken(@color_red, 5%);
+}
+
 .btn.btn-orange {
 	background-color: @color_orange;
 	color: #ffffff;
 }
-
+.btn.btn-orange.active,
+.btn.btn-orange:hover {
+	background-color: darken(@color_orange, 5%);
+}
 
 #detail {
 	.fa-facebook {
-	color: @color_facebook;
-	border-radius: 50%;
-	border: 2px solid @color_facebook;
-	padding: 8px;
-	height: 60px;
-	width:60px;
-	text-align: center;
+		color: @color_facebook;
+		border-radius: 50%;
+		border: 2px solid @color_facebook;
+		padding: 8px;
+		height: 60px;
+		width:60px;
+		text-align: center;
 
-}
-.fa-twitter {
-	color: @color_twitter;
-	border-radius: 50%;
-	border: 2px solid @color_twitter;
-	padding: 8px;
-	height: 60px;
-	width:60px;
-	text-align: center;
-}
+	}
+	.fa-facebook:hover {
+		color: darken(@color_facebook, 5%);
+		border-color: darken(@color_facebook, 5%);
+	}
+	.fa-twitter {
+		color: @color_twitter;
+		border-radius: 50%;
+		border: 2px solid @color_twitter;
+		padding: 8px;
+		height: 60px;
+		width:60px;
+		text-align: center;
+	}
+	.fa-twitter:hover {
+		color: darken(@color_twitter, 5%);
+		border-color: darken(@color_twitter, 5%);
+	}
 
 }
 

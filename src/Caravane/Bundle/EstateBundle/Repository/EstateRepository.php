@@ -129,8 +129,8 @@ class EstateRepository extends EntityRepository
         //$query = $this->getEntityManager()->createQuery($dql);
         //$entities = $query->getResult();
 
-        //$entities = $query->getQuery()->getResult();
-        $entities = new Paginator($query, $fetchJoinCollection = true);
+        $entities = $query->getQuery()->getResult();
+        //$entities = new Paginator($query, $fetchJoinCollection = true);
 
 
         return $entities;

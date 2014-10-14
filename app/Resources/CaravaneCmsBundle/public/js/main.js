@@ -37,7 +37,9 @@
 		$("form#caravane_bundle_estatebundle_search input#form_offset").val(0);
 	});
 
-	$('#nextEstate').click(function() {
+	$('#nextEstate').click(function(e) {
+		e.stopPropagation();
+		e.preventDefault();
 		offset=$("form#caravane_bundle_estatebundle_search input#form_offset").val();
 		limit=$("form#caravane_bundle_estatebundle_search input#form_limit").val();
 		if(offset==undefined) {
@@ -54,6 +56,9 @@
 		        data : postData,
 		        success:function(data, textStatus, jqXHR)
 		        {
+		        	if(data=="end") {
+		        		$('#nextEstate').hide();
+		        	}
 		            //data: return data from server
 		            html=$(data).find('#list')
 		            $('#list').append(html.html());
@@ -91,6 +96,13 @@
 			row=((index - (index)%itemPerRow)/itemPerRow)+1;
 			newIndex=(row*itemPerRow)-1;
 			lastElement=$("#list div.estate:eq('"+newIndex+"')");
+			if(lastElement.length==0) {
+				console.log('no end');
+				while($("#list div.estate:eq('"+newIndex+"')").length==0) {
+					newIndex--;
+				}
+				lastElement=$("#list div.estate:eq('"+newIndex+"')");
+			}
 
 			$.ajax(
 		    {
