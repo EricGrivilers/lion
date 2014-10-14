@@ -31,11 +31,12 @@ class EstateRepository extends EntityRepository
 
 		 $type=($datas['location']==1?'rent':'sale');
 
+
          if(isset($datas['reference'])) {
             if($estates=$this->findOneBy(array('reference'=>"030/".$datas['reference']))) {
                 return $estates;
             }
-            
+
          }
 
         if(!isset($datas['offset'])) {
@@ -61,7 +62,7 @@ class EstateRepository extends EntityRepository
             $query->andWhere('C.category IN (:category)')
             ->setParameter('category', $category);
         }
-		if(isset($datas['zone'])) {       
+		if(isset($datas['zone'])) {
         	$zone=implode(",",$datas['zone']);
         	//$dql.=" AND C.zone IN(".$zone.") ";
             $query->andWhere('C.zone IN (:zone)')
@@ -84,7 +85,7 @@ class EstateRepository extends EntityRepository
             }
     //        var_dump($pA);
 
-            
+
             $dqlA=array();
             foreach($datas['prix'] as $priceCode) {
                 $tA=explode('_',$priceCode);
@@ -107,7 +108,7 @@ class EstateRepository extends EntityRepository
                 }
                 //$prix=$pA[$id];
                 //echo $prix;
-                
+
             }
              $query->andWhere(implode(" OR ", $dqlA));
 
@@ -117,6 +118,11 @@ class EstateRepository extends EntityRepository
 
         $query->setFirstResult($datas['offset']);
         $query->setMaxResults($datas['limit']);
+        if(!isset($datas['sort'])) {
+            $datas['sort']="prix asc";
+        }
+        $sort=explode(" ",$datas['sort']);
+        $query->orderBy("C.".$sort[0],$sort[1]);
       // echo $dql;
 //echo $datas['offset'];
 
@@ -126,7 +132,7 @@ class EstateRepository extends EntityRepository
         //$entities = $query->getQuery()->getResult();
         $entities = new Paginator($query, $fetchJoinCollection = true);
 
-        
+
         return $entities;
 
 	}

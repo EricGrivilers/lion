@@ -23,12 +23,13 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
 
             new Liip\ImagineBundle\LiipImagineBundle(),
 
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
-            
+
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
             new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),

@@ -2,9 +2,9 @@
 
 
 
-<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="get" action="{{path('caravane_estate_frontend_estate_search')}}" role="form"><div id="caravane_bundle_estatebundle_search">
+<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="POST" action="{{path('caravane_estate_frontend_estate_search')}}" role="form"><div id="caravane_bundle_estatebundle_search">
 {% block body -%}
-	
+
 
 	<section class='row' style="margin-bottom:10px">
 		<div class="col-md-4 col-md-offset-4">
@@ -30,7 +30,7 @@
 	</section>
 	<section class='row' style="margin-bottom:10px">
 		<div class="col-sm-6  col-md-4">
-			{{form_row(search_form.isNew)}}
+
 			{{form_row(search_form.category)}}
 		</div>
 		<div class="col-sm-6  col-md-4">
@@ -39,15 +39,27 @@
 		<div class="col-sm-6  col-md-4">
 			{{form_row(search_form.prix)}}
 		</div>
-	</section>							
+	</section>
+	<section class='row' style="margin-bottom:10px">
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.isNew)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.sort)}}
+		</div>
+		<div class="col-sm-6  col-md-4">
+			{{form_row(search_form.submit)}}
+		</div>
+	</section>
+
 
 {% endblock %}
 {{ form_rest(search_form) }}
 </div></form>
 
 
-	
 
 
-        
+
+
 

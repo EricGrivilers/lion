@@ -312,6 +312,12 @@ class Estate
     private $lng;
 
 
+    private $shortReference;
+
+
+    public function getShortReference() {
+        return str_replace("030/",'',$this->reference);
+    }
 
 
     /**
@@ -494,7 +500,7 @@ class Estate
         return $this->locuk;
     }
 
-    
+
 
     /**
      * Set summary
@@ -528,9 +534,9 @@ class Estate
                     $i++;
                 }
             }
-            
+
         }
-        
+
         return $this->summary;
     }
 
@@ -1233,6 +1239,14 @@ class Estate
      */
     public function getPhotos()
     {
+
+        foreach($this->photo as $photo) {
+
+           if(!file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())) {
+
+                $this->removePhoto($photo);
+            }
+        }
         return $this->photo;
     }
 
