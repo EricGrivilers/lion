@@ -21,42 +21,63 @@
 	{#   NEW ITEMS #}
 	{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 6 } ) ) }}
 		<!-- Content area 4 -->
-	<aside class='wrapper border-tb-white marble-color'>
-			<div class='container'>
-				<div class='advantages'>
-					<section class='col-md-6'>
-						<div class='icon-content'>
-							<img src="/medias/iphone2.png" />
-						</div>
-					</section>
-					<section class='col-md-6'>
-						<a href='index.html'><h2 class='tran03slinear'>SUIVEZ-NOUS</h2>
-						</a>
-						<div class='icon-content'>
-							<ul class='socials-bottom clearfix'>
-								<li>
-									<a href='http://facebook.com' target="_blank" style="background-image: none; font-size: 52px;"><span class="fa fa-facebook"></span></a>
-									<div class='cloud'>Facebook<div class='helper'></div></div>
-								</li>
-								<li>
-									<a class='twitter' href='http://twitter.com/google' target="_blank" style="background-image: none; font-size: 52px;"><span class="fa fa-twitter"></span></a>
-									<div class='cloud'>Twitter<div class='helper'></div></div>
-								</li>
-							</ul></div>
+	<aside class='wrapper border-tb-white marble-color' id="home_infos">
+		<div class='container container-md-height'>
+			<div class="row row-md-height">
+				<div class='col-md-5 col-md-height col-bottom'>
+					<div style="position: relative;">
+						<img src="/medias/iphone2.png" class="img-responsive" style="bottom: 0" />
+					</div>
+				</div>
+				<div class="col-md-7 col-md-height col-top">
+					<div class="row">
+						<div class="col-md-12">
+							<h2>APPLICATION MOBILE</h2>
+							<p>
+								Pour toujours mieux vous accompagner dans le cadre de votre recherche immobilière, notre application mobile vous permet de recevoir instantanément les dernières offres,  de géo-localiser les biens à proximité ou de consulter toutes les informations relatives à ceux-ci.</p>
+								<p>
+L’application est disponible en téléchargement via l’ <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
+</p>
+							<p><a href="http://itunes.apple.com/be/app/id396510696?mt=8"><img src="{{asset('/bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
+							</p>
 							<br/>
-							<a href='index.html'><h2 class='tran03slinear'>NEWSLETTER</h2>
-							</a>
-							<div class='icon-content'>
+							<div class="separator"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							
+							<h2>SUIVEZ-NOUS</h2>
+
+								<ul class="social">
+									<li>
+									    <a class='fa fa-facebook' href='http://www.facebook.com/pages/Brussels-Belgium/Immobiliere-Le-Lion/117039664993793' title="Facebook" target="_blank"></a>
+									</li>
+									<li>
+									    <a class='fa fa-twitter' href='http://twitter.com/ImmoLeLion' title="Twitter" target="_blank"></a>
+									</li>
+									<li>
+										<a class='fa fa-pinterest ' href='http://www.pinterest.com/immolelion/' title="Pinterest" target="_blank"></a>
+									</li>
+								</ul>
+								<br/>
+						</div>
+						<div class="col-md-6">
+								<h2>NEWSLETTER</h2>
 								<div class="input-group text-center">
-									<label class="sr-only" for="caravane_bundle_crmbundle_newslettertype_email"></label><input type="text" id="caravane_bundle_crmbundle_newslettertype_email" name="caravane_bundle_crmbundle_newslettertype[email]" required="required" class=" form-control " placeholder="Email *
-									">
+									<label class="sr-only" for="caravane_bundle_crmbundle_newslettertype_email"></label>
+									<input type="text" id="caravane_bundle_crmbundle_newslettertype_email" name="caravane_bundle_crmbundle_newslettertype[email]" required="required" class=" form-control " placeholder="Email">
 									<span class="input-group-btn">
-									<button class="btn btn-default" type="submit">Subscribe</button>
+										<button class="btn btn-default" type="submit">Subscribe</button>
 									</span>
 								</div>
+								<br/>
 							</div>
-						</section>
-					</div>				</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
 	</aside>
 
 	{% include "CaravaneCmsBundle:Frontend:Widget/twitter.html.twig" %}

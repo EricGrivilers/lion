@@ -450,16 +450,47 @@ h2.title {
 	background-color: darken(@color_orange, 5%);
 }
 
-#detail {
-	.fa-facebook {
-		color: @color_facebook;
+
+#home_infos  {
+	padding:20px 0 0 0 ;
+	font-size: 1.2em;
+}
+
+
+.fa-facebook:hover {
+	color: darken(@color_facebook, 5%) !important;
+}
+.fa-twitter:hover {
+	color: darken(@color_twitter, 5%) !important;
+}
+.fa-instagram:hover {
+	color: darken(@color_instagram, 5%) !important;
+}
+.fa-pinterest:hover {
+	color: darken(@color_pinterest, 5%) !important;
+}
+
+
+#detail .social,
+ul.social {
+	margin:0;
+	padding:0;
+	.fa {
 		border-radius: 50%;
-		border: 2px solid @color_facebook;
 		padding: 8px;
 		height: 60px;
 		width:60px;
 		text-align: center;
-
+		margin-right:15px;
+		background-image: none; 
+		font-size: 42px;
+	}
+	a.fa:hover {
+		text-decoration: none;
+	}
+	.fa-facebook {
+		color: @color_facebook;
+		border: 2px solid @color_facebook;
 	}
 	.fa-facebook:hover {
 		color: darken(@color_facebook, 5%);
@@ -467,20 +498,35 @@ h2.title {
 	}
 	.fa-twitter {
 		color: @color_twitter;
-		border-radius: 50%;
 		border: 2px solid @color_twitter;
-		padding: 8px;
-		height: 60px;
-		width:60px;
-		text-align: center;
 	}
 	.fa-twitter:hover {
 		color: darken(@color_twitter, 5%);
 		border-color: darken(@color_twitter, 5%);
 	}
+	.fa-instagram {
+		color: @color_instagram;
+		border: 2px solid @color_instagram;
+	}
+	.fa-instagram:hover {
+		color: darken(@color_instagram, 5%);
+		border-color: darken(@color_instagram, 5%);
+	}
+	.fa-pinterest {
+		color: @color_pinterest;
+		border: 2px solid @color_pinterest;
+	}
+	.fa-pinterest:hover {
+		color: darken(@color_pinterest, 5%);
+		border-color: darken(@color_pinterest, 5%);
+	}
 
 }
 
+ul.social li{
+	display: inline;
+	list-style: none;
+}
 
 .numberCircle {
     border-radius: 50%;
@@ -499,5 +545,129 @@ h2.title {
 }
 
 
+#recent-tweets {
+	ul {
+		margin:0;
+		padding: adding:0;
+	}
+	ul,li {
+		list-style: none;
+	}
+	.message {
+		color: #ffffff;
+		a {
+			color: @color_twitter;
+		}
+		.time {
+			color: @color_orange;
+		}
+	}
+}
 
 
+footer {
+	.wrapper {
+
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* columns of same height styles */
+.container-xs-height,
+.container-md-height {
+    display:table;
+    padding-left:0px;
+    padding-right:0px;
+}
+.row-xs-height,
+.row-md-height {
+    display:table-row;
+}
+.col-xs-height,
+.col-md-height {
+    display:table-cell;
+    float:none;
+}
+
+@media (min-width: 168px) {
+    .container-md-height {
+        display:block;
+       
+    }
+    .row-md-height {
+        display:block;
+    }
+    .col-md-height {
+        display:block;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-md-height {
+        display:block;
+       
+    }
+    .row-md-height {
+        display:block;
+    }
+    .col-md-height {
+        display:block;
+    }
+}
+@media (min-width: 992px) {
+    .container-md-height {
+        display:table;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .row-md-height {
+        display:table-row;
+    }
+    .col-md-height {
+        display:table-cell;
+        float:none;
+    }
+}
+@media (min-width: 1200px) {
+    .container-lg-height {
+        display:table;
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .row-lg-height {
+        display:table-row;
+    }
+    .col-lg-height {
+        display:table-cell;
+        float:none;
+    }
+}
+
+
+/* firefox fix */
+.img-responsive {
+    width: 100%;
+}
+
+/* vertical alignment styles */
+.col-top {
+    vertical-align:top;
+}
+.col-middle {
+    vertical-align:middle;
+}
+.col-bottom {
+    vertical-align:bottom;
+}
