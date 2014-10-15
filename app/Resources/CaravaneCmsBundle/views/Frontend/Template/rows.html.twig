@@ -1,23 +1,22 @@
 {% for estate in estates %}
-					<div class="col-xs-6 col-sm-6 col-md-3 estate">
-						<div class="widget_out_stuff2 ">
-							<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate">
-								<article class="item-con-t1 blue-on-hover" style="opacity: 1;">
-									<div class="container-t1">
-										<div class="container-t1-margin">
-											<header>
-												<div class="overlay tran03slinear"></div>
-												<div class="bg-black-045 tran03slinear"></div>
-												<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
-													<p>{{estate.summary|raw }} </p>
-											</header>
-											<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
-										</div>
-									</div>
-									<div class="blue-line visible-on-hover tran03slinear"></div>
-								</article>
-							</a>
+	<div class="col-xs-6 col-sm-6 col-md-3 estate">
+		<div class="container">
+			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate">
+				<article >
+					<div class="container-inner">
+						<div class="">
+							<header>
+								<div class="bg"></div>
+								<div class="text">
+									<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
+									<p>{{estate.summary|raw }} </p>
+								</div>
+							</header>
+							<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
 						</div>
 					</div>
-
+				</article>
+			</a>
+		</div>
+	</div>
 {% endfor %}

@@ -262,7 +262,7 @@ class EstateController extends Controller
 
 
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
-        if(count($estates)<=0) {
+        if(count($estates)<=0 && $request->isXmlHttpRequest()) {
             return new Response('end');
         }
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
@@ -302,7 +302,7 @@ class EstateController extends Controller
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>0));
        // echo "----------------------".count($estates)."------------";
        // die();
-        if(count($estates)<=0) {
+        if(count($estates)<=0 && $request->isXmlHttpRequest()) {
             return new Response('end');
         }
 
@@ -319,7 +319,7 @@ class EstateController extends Controller
         $em = $this->getDoctrine()->getManager();
         //$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>true,"status"=>true));
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>1));
-        if(count($estates)<=0) {
+        if(count($estates)<=0 && $request->isXmlHttpRequest()) {
             return new Response('end');
         }
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(

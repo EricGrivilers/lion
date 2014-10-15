@@ -20,7 +20,13 @@
 				{% include "CaravaneCmsBundle:Frontend:Template/rows.html.twig" %}
 			</div>
 			<div class="row" style="text-align: center">
+				{% if estates|length>0 %}
 				<a id="nextEstate" ><img src="{{asset('/bundles/caravanecms/img/loader.gif')}}" style="margin: 10px" /></a>
+				{% else %}
+					<div class="alert alert-info">
+						{{"Aucun résulta ne correspond à votre requete"|trans}}
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</aside>
