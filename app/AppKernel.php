@@ -29,6 +29,7 @@ class AppKernel extends Kernel
 
             new Braincrafted\Bundle\BootstrapBundle\BraincraftedBootstrapBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
+            new SunCat\MobileDetectBundle\MobileDetectBundle(),
 
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),

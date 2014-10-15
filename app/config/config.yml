@@ -92,6 +92,12 @@ fos_user:
 braincrafted_bootstrap:
     less_filter: less
 
+mobile_detect:
+    redirect:
+        mobile: ~
+        tablet: ~
+    switch_device_view: ~
+
 
 liip_imagine:
     resolvers:
@@ -110,7 +116,15 @@ liip_imagine:
             filters:
                 thumbnail: { size: [220, 220], mode: outbound, allow_upscale: true }
                 background: { size: [220, 220], color: '#fff' }
-        thumbnail_large:
+        full_small:
+            quality: 100
+            filters:
+                thumbnail: { size: [768, 768], mode: inset, allow_upscale: true }
+        full_medium:
+            quality: 100
+            filters:
+                thumbnail: { size: [1024, 1024], mode: inset, allow_upscale: true }
+        full_large:
             quality: 100
             filters:
                 thumbnail: { size: [1280, 1280], mode: inset, allow_upscale: true }

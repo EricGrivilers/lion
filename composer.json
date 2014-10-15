@@ -35,7 +35,8 @@
         "bmatzner/fontawesome-bundle": "~4.1",
         "necolas/normalize.css":"dev-master",
         "WickyNilliams/enquire.js":"dev-master",
-        "liip/imagine-bundle": "dev-master"
+        "liip/imagine-bundle": "dev-master",
+        "suncat/mobile-detect-bundle": "0.9.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
