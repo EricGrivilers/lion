@@ -1,0 +1,41 @@
+@import '_variables.less';
+@import "../../../../../vendor/twbs/bootstrap/less/mixins.less";
+@import "../../../../../vendor/twbs/bootstrap/less/variables.less";
+
+
+
+#home_slider {
+	overflow: hidden;
+
+	.carousel {
+		min-height: 100%;
+		height:100%;
+		.carousel-inner {
+			height: 100%;
+
+			.item {
+				
+				text-align: center;
+				vertical-align: middle;
+				position: relative;
+				overflow: hidden;
+				height: 100%;
+				width: 100%;
+				
+				img {
+					min-height: 100%;
+					width:auto;
+					max-width: none;
+					min-width: 100%;
+					margin:0 auto;
+					vertical-align: middle;
+					position: relative;
+				}
+
+				div.img {
+					background-color: rgba(0, 0, 0, 0); background-image: url(http://www.immo-lelion.be/_new/medias/home/2.jpg); background-size: cover; width: 100%; height: 100%; visibility: inherit; opacity: 1; background-position: 50% 50%; background-repeat: no-repeat no-repeat;
+				}
+			}
+		}
+	}
+}
