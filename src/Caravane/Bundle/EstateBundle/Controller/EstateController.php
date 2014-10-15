@@ -420,7 +420,8 @@ class EstateController extends Controller
                 "data"=>24,
             ))
             ->add('sort','choice',array(
-                "label"=>"Ordonner les résultats par",
+                "label"=>false,
+                "empty_value" => 'Ordonner les résultats par',
                 "choices"=>array(
                     "prix asc"=>"Prix croissants",
                     "prix desc"=>"Prix decroissants",
@@ -430,7 +431,7 @@ class EstateController extends Controller
             ))
 
             ->getForm();
-            $form->add('submit', 'submit', array('label' => 'Search'));
+            $form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'btn-red pull-right')));
          //   $form->setMethod('GET');
             $form->handleRequest($request);
 

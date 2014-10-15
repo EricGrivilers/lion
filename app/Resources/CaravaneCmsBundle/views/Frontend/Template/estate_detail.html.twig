@@ -12,10 +12,10 @@
 			  </ol>
 
 			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner" style="height:750px; overflow: hidden">
+			  <div class="carousel-inner" style="overflow: hidden">
 			  	{% for photo in estate.photos %}
 			    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
-			      <img src="{{asset(('photos/big/'~photo) |  imagine_filter('thumbnail_large')) }}" class="img-responsive" style="width:100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
+			      <img src="{{asset(('photos/big/'~photo) |  imagine_filter('thumbnail_large')) }}"  style="width:auto; height: 100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
 			    </div>
 			    {% endfor %}
 			  </div>
