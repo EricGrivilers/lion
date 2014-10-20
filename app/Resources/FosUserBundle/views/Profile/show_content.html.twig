@@ -5,7 +5,9 @@
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
 </div>
 
+<h1>{{"Mes biens consultés"|trans}}</h1>
 <div class="row" id="list">
+	
 
     {% for estate2user in user.estate %}
     	{% set estate=estate2user.estate %}
