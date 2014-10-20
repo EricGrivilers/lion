@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
+use Caravane\Bundle\EstateBundle\Entity\UserEstate;
 use Caravane\Bundle\EstateBundle\Form\EstateType;
 use Caravane\Bundle\EstateBundle\Form\SearchType;
 
@@ -329,7 +330,28 @@ class EstateController extends Controller
 
     public function detailAction($id) {
         $em = $this->getDoctrine()->getManager();
-        $estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id);
+        if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
+            if($user=$this->getUser()) {
+                if(!$ue=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(
+                    array(
+                        'estate'=>$estate->getId(),
+                        'user'=>$user->getId()
+                    )
+                )) {
+                    $ue= new UserEstate();
+                    $ue->setUser($user);
+                    $ue->setEstate($estate);
+                    $ue->setCounter(0);
+                }
+                
+                $ue->setCounter($ue->getCounter()+1);
+                $ue->setDate(new \Datetime("now"));
+                $em->persist($ue);
+                $em->flush();
+            }
+        }
+        
+       
         return $this->render('CaravaneEstateBundle:Frontend:estate_detail.html.twig', array(
             'estate'      => $estate
         ));
@@ -339,9 +361,6 @@ class EstateController extends Controller
 
 
     public function searchForm($request) {
-
-
-
         $datas=array('location'=>0);
         $em = $this->getDoctrine()->getManager();
         $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();

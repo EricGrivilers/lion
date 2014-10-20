@@ -50,7 +50,9 @@ class Area
     private $zoom;
 
 
-
+    public function __toString() {
+        return $this->nomQuartier;
+    }
     /**
      * Get id
      *

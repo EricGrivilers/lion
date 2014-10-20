@@ -1,0 +1,12 @@
+parameters:
+#    caravane_hybrid_auth.example.class: Caravane\Bundle\HybridAuthBundle\Example
+
+services:
+    caravane_hybrid_auth.user:
+        class:        Caravane\Bundle\HybridAuthBundle\Manager\User
+        arguments: [@fos_user.user_manager, %caravane_hybrid_auth.config%]
+    caravane_hybrid_auth.login_event:
+        class: Caravane\Bundle\HybridAuthBundle\Manager\User
+        arguments: [@fos_user.user_manager, %caravane_hybrid_auth.config%]
+        tags: 
+            - { name: kernel.event_listener, event: caravane_hybrid_auth.events.login, method: onLoginEvent}

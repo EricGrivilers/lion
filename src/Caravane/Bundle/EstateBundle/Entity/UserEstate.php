@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UserEstate
  *
- * @ORM\Table(name="user_estate")
+ * @ORM\Table(name="UserEstate")
  * @ORM\Entity
  */
 class UserEstate
@@ -24,44 +24,39 @@ class UserEstate
     /**
      * @var integer
      *
-     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\UserBundle\Entity\User", inversedBy="estate")
      */
-    private $userId = '0';
+    private $user;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="estate_id", type="integer", nullable=true)
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", inversedBy="user")
      */
-    private $estateId = '0';
+    private $estate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime", nullable=false)
+     * @ORM\Column(name="date", type="datetime", nullable=true)
      */
-    private $date = '0000-00-00 00:00:00';
+    private $date;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="counter", type="integer", nullable=false)
+     * @ORM\Column(name="counter", type="integer", length=11, nullable=true)
      */
     private $counter;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="saved", type="integer", nullable=false)
+     * @ORM\Column(name="saved", type="boolean", nullable=true)
      */
     private $saved;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="view", type="boolean", nullable=false)
-     */
-    private $view;
+   
 
 
 
@@ -73,52 +68,6 @@ class UserEstate
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId
-     *
-     * @param integer $userId
-     * @return UserEstate
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set estateId
-     *
-     * @param integer $estateId
-     * @return UserEstate
-     */
-    public function setEstateId($estateId)
-    {
-        $this->estateId = $estateId;
-
-        return $this;
-    }
-
-    /**
-     * Get estateId
-     *
-     * @return integer 
-     */
-    public function getEstateId()
-    {
-        return $this->estateId;
     }
 
     /**
@@ -170,7 +119,7 @@ class UserEstate
     /**
      * Set saved
      *
-     * @param integer $saved
+     * @param boolean $saved
      * @return UserEstate
      */
     public function setSaved($saved)
@@ -183,7 +132,7 @@ class UserEstate
     /**
      * Get saved
      *
-     * @return integer 
+     * @return boolean 
      */
     public function getSaved()
     {
@@ -191,25 +140,48 @@ class UserEstate
     }
 
     /**
-     * Set view
+     * Set user
      *
-     * @param boolean $view
+     * @param \Caravane\Bundle\UserBundle\Entity\User $user
      * @return UserEstate
      */
-    public function setView($view)
+    public function setUser(\Caravane\Bundle\UserBundle\Entity\User $user = null)
     {
-        $this->view = $view;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get view
+     * Get user
      *
-     * @return boolean 
+     * @return \Caravane\Bundle\UserBundle\Entity\User 
      */
-    public function getView()
+    public function getUser()
     {
-        return $this->view;
+        return $this->user;
+    }
+
+    /**
+     * Set estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     * @return UserEstate
+     */
+    public function setEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate = null)
+    {
+        $this->estate = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Estate 
+     */
+    public function getEstate()
+    {
+        return $this->estate;
     }
 }

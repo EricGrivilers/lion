@@ -1,0 +1,15 @@
+#caravane_hybrid_auth_homepage:
+#    pattern:  /hello/{name}
+#    defaults: { _controller: CaravaneHybridAuthBundle:Default:index }
+
+caravane_hybrid_auth_endpoint:
+    pattern: /login/endpoint
+    defaults: { _controller: CaravaneHybridAuthBundle:Auth:endpoint }
+
+
+caravane_hybrid_auth_login:
+    pattern: /connect/{provider}
+    defaults: { _controller: CaravaneHybridAuthBundle:Auth:auth}
+
+
+

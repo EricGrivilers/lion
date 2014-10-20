@@ -25,6 +25,15 @@ class User extends BaseUser
     protected $contact;
 
 
+
+     /**
+     * @var integer
+     *
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\UserEstate", mappedBy="user")
+     */
+    protected $estate;
+
+
     public function __construct()
     {
         parent::__construct();
@@ -62,5 +71,38 @@ class User extends BaseUser
     public function getContact()
     {
         return $this->contact;
+    }
+
+    /**
+     * Add estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\UserEstate $estate
+     * @return User
+     */
+    public function addEstate(\Caravane\Bundle\EstateBundle\Entity\UserEstate $estate)
+    {
+        $this->estate[] = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Remove estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\UserEstate $estate
+     */
+    public function removeEstate(\Caravane\Bundle\EstateBundle\Entity\UserEstate $estate)
+    {
+        $this->estate->removeElement($estate);
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstate()
+    {
+        return $this->estate;
     }
 }

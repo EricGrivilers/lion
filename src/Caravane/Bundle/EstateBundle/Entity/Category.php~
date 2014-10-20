@@ -40,7 +40,9 @@ class Category
     private $typeEn = '';
 
 
-
+    public function __toString() {
+        return $this->name;
+    }
 
 
     /**
