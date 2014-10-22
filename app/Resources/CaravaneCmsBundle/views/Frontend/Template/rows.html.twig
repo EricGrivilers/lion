@@ -1,5 +1,5 @@
 {% for estate in estates %}
-	<div class="col-xs-6 col-sm-6 col-md-3 estate">
+	<div class="col-xs-12 col-sm-6 col-md-3 estate">
 		<div class="frame">
 			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate">
 				<article >

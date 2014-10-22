@@ -1,7 +1,9 @@
 
 	$('#main_menu nav li a[rel="search"]').click(function(e) {
 		e.preventDefault();
-		$('#search').toggle();
+		e.stopPropagation();
+		$('#search').show();
+		$('.navbar-collapse').hide();
 	});
 
 

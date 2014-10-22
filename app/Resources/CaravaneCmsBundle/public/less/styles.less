@@ -476,6 +476,10 @@ h2.title {
 .fa-pinterest:hover {
 	color: darken(@color_pinterest, 5%) !important;
 }
+.fa-google-plus:hover {
+	color: darken(@color_google, 5%) !important;
+}
+
 
 
 #detail .social,
@@ -484,13 +488,13 @@ ul.social {
 	padding:0;
 	.fa {
 		border-radius: 50%;
-		padding: 8px;
-		height: 60px;
-		width:60px;
+		padding: 6px;
+		height: 43px;
+		width:43px;
 		text-align: center;
-		margin-right:15px;
+		margin-right:10px;
 		background-image: none; 
-		font-size: 42px;
+		font-size: 28px;
 	}
 	a.fa:hover {
 		text-decoration: none;
@@ -526,6 +530,14 @@ ul.social {
 	.fa-pinterest:hover {
 		color: darken(@color_pinterest, 5%);
 		border-color: darken(@color_pinterest, 5%);
+	}
+	.fa-google-plus {
+		color: @color_google;
+		border: 2px solid @color_google;
+	}
+	.fa-google-plus:hover {
+		color: darken(@color_google, 5%);
+		border-color: darken(@color_google, 5%);
 	}
 
 }

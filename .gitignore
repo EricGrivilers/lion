@@ -25,6 +25,7 @@
 # Assets and user uploads
 /web/bundles/
 /web/uploads/
+web/media/cache
 
 # PHPUnit
 /app/phpunit.xml
@@ -37,14 +38,18 @@
 /composer.phar
 
 
-/web/photos/*
-web/photos/*
-web/old/photos/*
-/web/old/photos
+web/photos
+web/old/photos
+
+.DS_Store
+*.DS_Store
+*/.DS_Store
+*/*.DS_Store
 
 
 
-/web/old
-/web/media/cache
+
+web/old
+
 
 sftp-config.json
