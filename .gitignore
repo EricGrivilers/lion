@@ -37,7 +37,7 @@ web/media/cache
 # Composer PHAR
 /composer.phar
 
-
+photos
 web/photos
 web/old/photos
 
