@@ -1794,12 +1794,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "7d0e79706bbae63e09587d592bb96e7f5d9e43bd"
+                "reference": "fe51d50896434d4c1393a5de1504cc174b9049bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/7d0e79706bbae63e09587d592bb96e7f5d9e43bd",
-                "reference": "7d0e79706bbae63e09587d592bb96e7f5d9e43bd",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/fe51d50896434d4c1393a5de1504cc174b9049bd",
+                "reference": "fe51d50896434d4c1393a5de1504cc174b9049bd",
                 "shasum": ""
             },
             "require": {
@@ -1859,7 +1859,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-10-18 17:48:27"
+            "time": "2014-10-22 06:27:33"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -2799,12 +2799,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "8a6a253355ab1d26865bfbfffaa2a194e173a3aa"
+                "reference": "2df585ad6b9f0635d75eb479dc656119b590584f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/8a6a253355ab1d26865bfbfffaa2a194e173a3aa",
-                "reference": "8a6a253355ab1d26865bfbfffaa2a194e173a3aa",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/2df585ad6b9f0635d75eb479dc656119b590584f",
+                "reference": "2df585ad6b9f0635d75eb479dc656119b590584f",
                 "shasum": ""
             },
             "replace": {
@@ -2842,7 +2842,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-10-14 18:41:30"
+            "time": "2014-10-23 06:19:03"
         },
         {
             "name": "twig/extensions",
