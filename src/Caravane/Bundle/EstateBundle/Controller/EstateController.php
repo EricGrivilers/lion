@@ -267,11 +267,12 @@ class EstateController extends Controller
             return new Response('end');
         }
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-            'estates'      => $estates
+            'estates'      => $estates,
+            'type'=>$type
         ));
     }
 
-    
+
 
 
 
@@ -280,7 +281,8 @@ class EstateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
         return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
-            'estate'      => $estate
+            'estate'      => $estate,
+            'type'=>'sale'
         ));
     }
 
@@ -288,7 +290,8 @@ class EstateController extends Controller
         $em = $this->getDoctrine()->getManager();
         $estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
         return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
-            'estate'      => $estate
+            'estate'      => $estate,
+            'type'=>'rent'
         ));
     }
 
@@ -308,7 +311,8 @@ class EstateController extends Controller
         }
 
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-            'estates'      => $estates
+            'estates'      => $estates,
+            'type'=>'sale'
         ));
     }
 
@@ -324,9 +328,32 @@ class EstateController extends Controller
             return new Response('end');
         }
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-            'estates'      => $estates
+            'estates'      => $estates,
+            'type'=>'rent'
         ));
     }
+
+
+    public function newListAction(Request $request) {
+
+        if(!$datas=$request->query->get('c_s')) {
+            $datas=array();
+        }
+        $em = $this->getDoctrine()->getManager();
+        //$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
+
+        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('isNew'=>1));
+        if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+            return new Response('end');
+        }
+
+        return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+            'estates'      => $estates,
+            'type'=>'sale'
+        ));
+    }
+
+
 
     public function detailAction($id) {
         $em = $this->getDoctrine()->getManager();
@@ -343,15 +370,15 @@ class EstateController extends Controller
                     $ue->setEstate($estate);
                     $ue->setCounter(0);
                 }
-                
+
                 $ue->setCounter($ue->getCounter()+1);
                 $ue->setDate(new \Datetime("now"));
                 $em->persist($ue);
                 $em->flush();
             }
         }
-        
-       
+
+
         return $this->render('CaravaneEstateBundle:Frontend:estate_detail.html.twig', array(
             'estate'      => $estate
         ));
@@ -360,8 +387,8 @@ class EstateController extends Controller
 
 
 
-    public function searchForm($request) {
-        $datas=array('location'=>0);
+    public function searchForm($request, $type='sale') {
+        $datas=array('location'=>($type=='sale'?0:1));
         $em = $this->getDoctrine()->getManager();
         $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();
 
