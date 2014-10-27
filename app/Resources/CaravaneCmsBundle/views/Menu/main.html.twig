@@ -61,14 +61,15 @@
 									</li>
 					<li class="dropdown">
 			          {% if is_granted('ROLE_USER') -%}
-			            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Mon compte <span class="caret"></span></a>
+			            <a href="{{path('fos_user_profile_show')}}" >Mon compte</a>
+			            {#}
 			            <ul class="dropdown-menu" role="menu">
 			              <li><a href="#">Mes recherches</a></li>
 			              <li><a href="#">Ma selection</a></li>
 			              <li class="divider"></li>
 			              <li><a href="{{path('fos_user_profile_show')}}">Profile</a></li>
 			              <li><a href="{{path('fos_user_security_logout')}}">Me déconnecter</a></li>
-			            </ul>
+			            </ul>#}
 			          {% else %}
 			            <a href="{{path('fos_user_security_login')}}" >Se connecter</a>
 			          {% endif %}

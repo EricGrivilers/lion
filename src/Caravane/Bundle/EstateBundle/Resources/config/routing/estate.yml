@@ -90,3 +90,10 @@ caravane_estate_frontend_estate_detail:
 caravane_estate_frontend_estate_rows:
     path:   /estate/rows
     defaults: { _controller: "CaravaneEstateBundle:Estate:rows" }
+
+
+caravane_estate_frontend_estate_add_to_favorite:
+    path: /estate/{id}/favorite
+    defaults: { _controller: "CaravaneEstateBundle:Estate:addToFavorite" }
+    options:
+        expose: true

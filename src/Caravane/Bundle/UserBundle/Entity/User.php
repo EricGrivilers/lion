@@ -99,10 +99,23 @@ class User extends BaseUser
     /**
      * Get estate
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEstate()
     {
         return $this->estate;
+    }
+
+
+
+
+    public function hasEstate($estate) {
+        $estates=$this->getEstate();
+        foreach($estates as $es) {
+            if($es->getId()==$estate->getId() && $es->getSaved()==true) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -56,6 +56,9 @@
 		$(".carousel").swipeleft(function() {
 		    $(this).carousel('next');
 		});
+		$('.maps').click(function () {
+		    $('.maps iframe').css("pointer-events", "auto");
+		});
 
 
 	});
@@ -108,6 +111,7 @@
 
 
 	function prepareLinks() {
+
 		$('#list div.estate a.estate').bind();
 		$('#list div.estate a.estate').click(function(e) {
 
@@ -146,6 +150,9 @@
 
 		            lastElement.after(detail);
 		            detail.html(data);
+		            $('.maps').click(function () {
+				    $('.maps iframe').css("pointer-events", "auto");
+				});
 		          // $('body').scrollTo(element);
 		            //detail.slideDown();
 		        },

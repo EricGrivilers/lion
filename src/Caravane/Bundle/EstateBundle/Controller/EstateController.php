@@ -388,9 +388,35 @@ class EstateController extends Controller
     }
 
 
+    public function addToFavoriteAction($id) {
+        $em = $this->getDoctrine()->getManager();
+        if($user=$this->getUser()) {
+            if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
+                if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
+                    $userEstate=new UserEstate();
+                    $userEstate->setUser($user);
+                    $userEstate->setEstate($estate);
+                }
+                if($userEstate->getSaved()==true) {
+                    $userEstate->setSaved(false);
+                }
+                else {
+                    $userEstate->setSaved(true);
+                }
+                $em->persist($userEstate);
+                $em->flush();
+                return new Response('success');
+
+            }
+            else {
+                return new Response('no estate');
+            }
+        }
+        return new Response('no user');
+    }
 
 
-    public function searchForm($request, $type='sale') {
+    private function searchForm($request, $type='sale') {
         $datas=array('location'=>($type=='sale'?0:1));
         $em = $this->getDoctrine()->getManager();
         $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
