@@ -112,7 +112,7 @@ class User extends BaseUser
     public function hasEstate($estate) {
         $estates=$this->getEstate();
         foreach($estates as $es) {
-            if($es->getId()==$estate->getId() && $es->getSaved()==true) {
+            if($es->getEstate()->getId()==$estate->getId() && $es->getSaved()) {
                 return true;
             }
         }

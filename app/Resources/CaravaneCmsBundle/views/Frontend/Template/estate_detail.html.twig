@@ -75,8 +75,9 @@
 	</div>
 	<div class="col-md-3">
 		<div style="margfin-top:20px">
+
 			<a class="btn btn-red btn-block"><span class="fa fa-envelope"></span> Me contacter à propos du bien</a>
-			<a class="btn btn-orange btn-block addToFavorie" href="{{path('caravane_estate_frontend_estate_add_to_favorite',{'id':estate.id})}}" ><span class="fa fa-star"></span> {{app.user.hasEstate(estate)?"Supprimer ce bien de ":"Ajouter ce bien à"}} mes favoris</a>
+			<a class="btn btn-orange btn-block addToFavorite" href="{{path('caravane_estate_frontend_estate_add_to_favorite',{'id':estate.id})}}" ><span class="fa fa-star"></span> {{app.user.hasEstate(estate)?"Supprimer ce bien de ":"Ajouter ce bien à"}} mes favoris</a>
 			<a class="btn btn-primary btn-block"><span class="fa fa-print"></span> Imprimer la fiche du bien</a>
 		</div>
 

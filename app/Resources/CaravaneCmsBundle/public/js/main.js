@@ -112,6 +112,7 @@
 
 	function prepareLinks() {
 
+
 		$('#list div.estate a.estate').bind();
 		$('#list div.estate a.estate').click(function(e) {
 
@@ -150,6 +151,16 @@
 
 		            lastElement.after(detail);
 		            detail.html(data);
+		            $('a.addToFavorite').click(function(e) {
+		            	favBut=$(this);
+					e.preventDefault();
+					e.stopPropagation();
+					$.get($(this).attr('href'),function(data) {
+						if(data=='success') {
+							favBut.text("ee");
+						}
+					});
+				});
 		            $('.maps').click(function () {
 				    $('.maps iframe').css("pointer-events", "auto");
 				});
