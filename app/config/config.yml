@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @CaravaneUserBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -87,6 +88,12 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Caravane\Bundle\UserBundle\Entity\User
+    profile:
+        form:
+            type: caravane_user_profile
+    registration:
+        form:
+            type: caravane_user_registration
 
 
 braincrafted_bootstrap:
@@ -128,3 +135,20 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [1280, 1280], mode: inset, allow_upscale: true }
+
+jms_translation:
+    configs:
+        app:
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/Resources/translations
+            ignored_domains: [routes]
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]
+            extractors: [alias_of_the_extractor]
+
+
+services:
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension

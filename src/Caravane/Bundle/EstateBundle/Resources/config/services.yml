@@ -1,7 +1,0 @@
-
-
-services:
-    caravane_estate_bundle.form.type.search:
-        class: Acme\TaskBundle\Form\Type\TaskType
-        tags:
-            - { name: form.type, alias: task }

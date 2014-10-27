@@ -157,7 +157,12 @@
 					e.stopPropagation();
 					$.get($(this).attr('href'),function(data) {
 						if(data=='success') {
-							favBut.text("ee");
+							if( element.find('span.favorite').length<=0 ) {
+								element.prepend('<span class="favorite"><span class="fa fa-star"></span></span>');
+							}
+							element.find('span.favorite').toggle();
+							element.find('a.estate').click();
+
 						}
 					});
 				});
