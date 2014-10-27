@@ -2,15 +2,15 @@
 
 
 
-<form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="POST" action="{{path('caravane_estate_frontend_estate_search')}}" role="form" novalidate ><div id="caravane_bundle_estatebundle_search">
+<form name="caravane_bundle_estatebundle_search_{{type}}" id="caravane_bundle_estatebundle_search" method="POST" action="{{path('caravane_estate_frontend_estate_search')}}" role="form" novalidate ><div id="caravane_bundle_estatebundle_search">
 {% block body -%}
 
 
-	<section class='row' style="margin-bottom:10px">
+	{#<section class='row' style="margin-bottom:10px">
 		<div class="col-md-4 col-md-offset-4">
 			{{form_row(search_form.location)}}
 		</div>
-	</section>
+	</section>#}
 	<section class='row' style="margin-bottom:10px">
 		<div class='col-sm-6  col-md-4'>
 			<div class="input-group">

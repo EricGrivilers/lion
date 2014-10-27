@@ -1,8 +1,18 @@
 
-	$('#main_menu nav li a[rel="search"]').click(function(e) {
+	$('#main_menu nav li a.search').click(function(e) {
 		e.preventDefault();
 		e.stopPropagation();
-		if($(this).hasClass('rent')) {
+		type=$(this).attr('rel');
+		$('#main_menu nav li ').removeClass('active');
+		$('#main_menu nav li a.search[rel="'+type+'"]').closest('li').addClass('active');
+		route=Routing.generate('caravane_estate_frontend_estate_search_from',{'type':type});
+
+		$.get(route, function(data) {
+			$('#form_container').html(data);
+			$('#search').show();
+		$('.navbar-collapse').hide();
+		})
+		/*if($(this).hasClass('rent')) {
 			$("#caravane_bundle_estatebundle_search #form_location input#form_location_0").attr('checked','');
 			$("#caravane_bundle_estatebundle_search #form_location label:eq(0)").removeClass('active');
 			$("#caravane_bundle_estatebundle_search #form_location input#form_location_1").attr('checked','checked');
@@ -10,13 +20,13 @@
 			$("#caravane_bundle_estatebundle_search #form_prix input[value^=sale]").closest('.btn').hide();
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').show();
 		}
-		$('#search').show();
-		$('.navbar-collapse').hide();
+	*/
+
 	});
 
 
 	$(document).ready(function() {
-		searchType=$("#caravane_bundle_estatebundle_search #form_location input");
+		/*searchType=$("#caravane_bundle_estatebundle_search #form_location input");
 		if(searchType.val()==0) {
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').hide();
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=sale]").closest('.btn').show();
@@ -38,7 +48,7 @@
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').show();
 			}
 		});
-
+	*/
 		prepareLinks();
 		$(".carousel").swiperight(function() {
     		$(this).carousel('prev');

@@ -41,10 +41,25 @@ caravane_estate_frontend_estate_search:
     defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
 
 
+caravane_estate_frontend_estate_search_sale:
+    path:     /estate/search/sale
+    defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
+
+caravane_estate_frontend_estate_search_rent:
+    path:     /estate/search/rent
+    defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
+
+caravane_estate_frontend_estate_search_new:
+    path:     /estate/search/new
+    defaults: { _controller: "CaravaneEstateBundle:Estate:search" }
+
+
 
 caravane_estate_frontend_estate_search_from:
-    path:     /estate/searchForm
+    path:     /estate/searchForm/{type}
     defaults: { _controller: "CaravaneEstateBundle:Estate:searchForm" }
+    options:
+        expose: true
 
 
 

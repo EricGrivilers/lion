@@ -240,10 +240,11 @@ class EstateController extends Controller
     }
 
 
-    public function searchFormAction(Request $request, $oRequest) {
-        $search_form=$this->searchForm($oRequest);
+    public function searchFormAction(Request $request, $type='sale') {
+        $search_form=$this->searchForm($request, $type);
         return $this->render('CaravaneEstateBundle:Estate:search.html.twig', array(
-            'search_form'   => $search_form->createView()
+            'search_form'   => $search_form->createView(),
+            'type'=>$type
         ));
     }
 
@@ -254,6 +255,7 @@ class EstateController extends Controller
         }
 
         $type=($datas['location']==1?'rent':'sale');
+        $search_form=$this->searchForm($request, $type);
         $em = $this->getDoctrine()->getManager();
         if(isset($datas['reference'])) {
             if($datas['reference']!="") {
@@ -268,6 +270,7 @@ class EstateController extends Controller
         }
         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
             'estates'      => $estates,
+           'search_form'   => $search_form->createView(),
             'type'=>$type
         ));
     }
@@ -390,7 +393,7 @@ class EstateController extends Controller
     public function searchForm($request, $type='sale') {
         $datas=array('location'=>($type=='sale'?0:1));
         $em = $this->getDoctrine()->getManager();
-        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices();
+        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
 
 
@@ -435,6 +438,8 @@ class EstateController extends Controller
                     "data-toggle"=>"buttons"
                 )
             ))
+            ->add('location','hidden')
+            /*
             ->add('location','choice', array(
                 "label"=>false,
                 "expanded"=>true,
@@ -448,7 +453,7 @@ class EstateController extends Controller
                     "class"=>"btn-group btn-group-justified",
                     "data-toggle"=>"buttons"
                 )
-            ))
+            ))*/
             ->add('isNew','checkbox',array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(

@@ -16,8 +16,11 @@ class PriceRepository extends EntityRepository
 
 
 
-	public function getPrices() {
-		return array("sale"=>$this->getPriceRanges('sale'),"rent"=> $this->getPriceRanges('rent'));
+	public function getPrices($type='sale') {
+		if($type=='new') {
+			$type='sale';
+		}
+		return array($this->getPriceRanges($type));
 	}
 
 
@@ -31,7 +34,7 @@ class PriceRepository extends EntityRepository
 		$i=0;
 		for($i=0;$i<count($tB);$i++) {
 			$price=$tB[$i];
-			
+
 			if($i==0) {
 				$key=$type."_".$price->getId()."_-";
 				$label=" - de ".$price->getPrice()." €";

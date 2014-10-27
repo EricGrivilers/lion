@@ -8,10 +8,10 @@
 		<link rel="pingback" href="xmlrpc.php.html" />
 		<meta name='robots' content='noindex,follow' />
 		{% block meta_facebook %}
-			<meta property="og:url" content="http://www.immo-lelion.be" /> 
+			<meta property="og:url" content="http://www.immo-lelion.be" />
 			<meta property="og:title" content="Immobilière Le Lion" />
-			<meta property="og:description" content="Une agence locale de qualité intégrée dans un réseau international de prestige." /> 
-			<meta property="og:image" content="{{asset('medias/logo.png')}}" /> 
+			<meta property="og:description" content="Une agence locale de qualité intégrée dans un réseau international de prestige." />
+			<meta property="og:image" content="{{asset('medias/logo.png')}}" />
 		{% endblock meta_facebook %}
 		{% include "CaravaneCmsBundle::stylesheet.html.twig" %}
 		<script src="{{ asset('js/jquery.js') }}"></script>
@@ -22,7 +22,7 @@
 			<header class='page-header '>
 				{#    MENU TOP  #}
 				{#% include "CaravaneCmsBundle:Menu:top.html.twig" %#}
-				
+
 				{#    MAIN MENU + SEARCH  #}
 				{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
 			</header>
@@ -34,11 +34,11 @@
 		{% endblock content %}
 				<!-- Content area 7 -->
 
-					
+
 			{#  FOOTER  #}
 
 			{% include "CaravaneCmsBundle:Menu:footer.html.twig" %}
-		
+
 
 			<a id="back_to_top" href="#"></a>
 			{% include "CaravaneCmsBundle::javascript.html.twig" %}
