@@ -153,7 +153,7 @@ class EstateRepository extends EntityRepository
         $query->setFirstResult($datas['offset']);
         $query->setMaxResults($datas['limit']);
         if(!isset($datas['sort'])) {
-            $datas['sort']="prix asc";
+            $datas['sort']="updatedOn desc";
         }
         $sort=explode(" ",$datas['sort']);
         $query->orderBy("C.".$sort[0],$sort[1]);

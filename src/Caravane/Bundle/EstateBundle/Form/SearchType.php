@@ -66,7 +66,7 @@ class SearchType extends AbstractType
             ))
             ->add('location','hidden')
 
-            ->add('isNew','checkbox',array(
+            ->add('isNewBuilding','checkbox',array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(
                     "class"=>"btn "

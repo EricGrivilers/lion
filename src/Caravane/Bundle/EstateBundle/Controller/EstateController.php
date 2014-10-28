@@ -428,7 +428,7 @@ class EstateController extends Controller
 
 
     private function searchForm($request, $type='sale') {
-        $datas=array('location'=>($type=='sale'?0:1));
+        $datas=array('location'=>($type=='sale'?0:1),"sort"=>"updatedOn desc");
         $em = $this->getDoctrine()->getManager();
         $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
@@ -491,7 +491,7 @@ class EstateController extends Controller
                     "data-toggle"=>"buttons"
                 )
             ))*/
-            ->add('isNew','checkbox',array(
+            ->add('isNew',($type=='sale'?'checkbox':'hidden'),array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(
                     "class"=>"btn "
