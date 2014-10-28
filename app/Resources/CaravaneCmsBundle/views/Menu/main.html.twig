@@ -60,7 +60,7 @@
 										<a class="fa fa-instagram " href="http://www.pinterest.com/immolelion/" title="Immobilière Le Lion on Instagram" target="_blank"></a>
 									</li>
 					<li class="dropdown">
-			          {% if is_granted('ROLE_USER') -%}
+			          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			            <a href="{{path('fos_user_profile_show')}}" >Mon compte</a>
 			            {#}
 			            <ul class="dropdown-menu" role="menu">

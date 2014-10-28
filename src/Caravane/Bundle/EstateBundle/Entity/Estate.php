@@ -243,9 +243,8 @@ class Estate
     /**
      * @var integer
      *
-     * @ORM\Column(name="isNew", type="boolean", nullable=true)
      */
-    private $isNew = false;
+    private $isNewBuilding = false;
 
 
     /**
@@ -313,6 +312,7 @@ class Estate
 
 
     private $shortReference;
+
 
 
     public function getShortReference() {
@@ -978,26 +978,26 @@ class Estate
     }
 
      /**
-     * Set isNew
+     * Set isNewBuilding
      *
-     * @param boolean $isNew
+     * @param boolean $isNewBuilding
      * @return Estate
      */
-    public function setIsNew($isNew)
+    public function setIsNewBuilding($isNewBuilding)
     {
-        $this->isNew = $isNew;
+        $this->isNewBuilding = $isNewBuilding;
 
         return $this;
     }
 
     /**
-     * Get isNew
+     * Get isNewBuilding
      *
      * @return boolean
      */
-    public function getIsNew()
+    public function getIsNewBuilding()
     {
-        return $this->isNew;
+        return $this->isNewBuilding;
     }
 
 
@@ -1242,8 +1242,8 @@ class Estate
         foreach($this->photo as $photo) {
 
            if(
-            !file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename()) 
-            || $photo->getFilename()=='' 
+            !file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())
+            || $photo->getFilename()==''
             || is_dir(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())
 
             ) {
@@ -1276,7 +1276,7 @@ class Estate
             foreach($photos as $p) {
                 return $p;
             }
-            
+
         }
 
         return null;
@@ -1352,6 +1352,21 @@ class Estate
         return $this->zone;
     }
 
+    public function isUpdated() {
+        $date = new \Datetime("now - 15 days");
+         if($this->updatedOn>$date) {
+            return true;
+        }
+        return false;
+    }
 
+
+    public function isNew() {
+        $date = new \Datetime("now - 15 days");
+        if($this->createdOn>$date) {
+            return true;
+        }
+        return false;
+    }
 
 }

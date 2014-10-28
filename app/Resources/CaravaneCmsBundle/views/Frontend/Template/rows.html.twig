@@ -5,7 +5,12 @@
 				<article >
 					<div class="container-inner">
 						<div class="">
-							{% if is_granted('ROLE_USER') %}
+							{% if estate.isNew %}
+								<span class="new">{{"nouveauté"|trans}}</span>
+							{% elseif estate.isUpdated %}
+								<span class="new update">{{"mis à jour"|trans}}</span>
+							{% endif %}
+							{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 								{% if app.user.hasEstate(estate) %}
 									<span class="favorite"><span class="fa fa-star"></span></span>
 								{% endif %}

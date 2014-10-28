@@ -5,96 +5,132 @@
 
 
 .list{
-  .estate {
-    margin-bottom:30px;
-    .frame {
-      margin:0;
-      padding:0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      article {
-        border:0;
-        padding:0;
-        margin:0;
-        display:block;
-        overflow: hidden;
-        .container-inner {
-          overflow: hidden;
-          display: block;
+		.estate {
+				margin-bottom:30px;
+				.frame {
+						margin:0;
+						padding:0;
+						width: 100%;
+						height: 100%;
+						overflow: hidden;
+						article {
+								border:0;
+								padding:0;
+								margin:0;
+								display:block;
+								overflow: hidden;
+								.container-inner {
+										span.favorite {
+												position: absolute;
+												width: 0;
+												height: 0;
+												right: 0;
+												border-style: solid;
+												border-width: 0 40px 40px 0;
+												border-color: transparent #ffffff transparent transparent;
+												line-height: 0px;
+												_border-color: #000000 #ffffff #000000 #000000;
+												_filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
 
-          padding: 0;
-          margin:0;
-          border:0;
-          height: auto;
-          width: 100%;
-          position: relative;
-          header {
-            bottom: 0;
-            height: 35%;
-            min-height: 90px;
-            line-height: 13px;
-            z-index: 2;
-            position: absolute;
-            display: block;
-            left: 0;
-            width: 100%;
-            opacity: 1;
-            text-align: left;
-            overflow: hidden;
+												.fa {
+														font-size: 20px;
+														color: @color_orange;
+														margin-left:20px;
+														margin-top: 3px;
+												}
+										}
+										span.new {
+											position: absolute;
+											left: 0;
+											top:10px;
+											padding: 3px 10px;
+											color: #ffffff;
+											background: @color_red;
+											font-weight: bold;
 
-            .text {
-              opacity: 1;
-              padding:10px;
-              color:#ffffff;
-              position: absolute;
-              z-index: 5;
-              h2 {
-                margin:0 0 15px 0;
-                font-size: 18px;
-                font-weight: 300;
-                color: #f3f3f3;
-                line-height: 1.1;
-              }
-              p {
-                display:none;
-                line-height: 1.2em;
-              }
-            }
+										}
+										span.update {
+											background: @color_orange;
+										}
+										overflow: hidden;
+										display: block;
 
-            .bg {
-              position: absolute;
-              display: block;
-              width: 100%;
-              height: 100%;
-              background: #000;
-              opacity: 0.45;
-              filter: alpha(opacity=45);
-              z-index: 1;
-            }
+										padding: 0;
+										margin:0;
+										border:0;
+										height: auto;
+										width: 100%;
+										position: relative;
+										header {
+												bottom: 0;
+												height: 30%;
+												min-height: 75px;
+												line-height: 13px;
+												z-index: 2;
+												position: absolute;
+												display: block;
+												left: 0;
+												width: 100%;
+												opacity: 1;
+												text-align: left;
+												overflow: hidden;
 
-          }
+												.text {
+														opacity: 1;
+														padding:10px;
+														color:#ffffff;
+														position: absolute;
+														z-index: 5;
+														font-size: 13px;
+														h2 {
+																margin:0 0 15px 0;
+																font-size: 18px;
+																font-weight: 300;
+																color: #f3f3f3;
+																line-height: 1.1;
 
-        }
-      }
 
-      a:hover {
-        header {
-          height:100%;
-          top:0;
-          .text {
-             p {
-                display:block;
-              }
-          }
-          .bg {
-            opacity: 0.65;
-            filter: alpha(opacity=65);
-            background: @color_red;
-          }
-        }
-      }
-    }
 
-  }
+														}
+														p {
+																display:none;
+																line-height: 1.2em;
+														}
+												}
+
+												.bg {
+														position: absolute;
+														display: block;
+														width: 100%;
+														height: 100%;
+														background: #000;
+														opacity: 0.45;
+														filter: alpha(opacity=45);
+														z-index: 1;
+												}
+
+										}
+
+								}
+						}
+
+						a:hover {
+								header {
+										height:100%;
+										top:0;
+										.text {
+													p {
+																display:block;
+														}
+										}
+										.bg {
+												opacity: 0.65;
+												filter: alpha(opacity=65);
+												background: @color_red;
+										}
+								}
+						}
+				}
+
+		}
 }
