@@ -10,7 +10,7 @@
 			<div class="container main">
 
                 <div class="col-md-4 col-md-offset-4">
-         
+
 
         				{% block fos_user_content %}
                             {% if error %}
@@ -20,7 +20,7 @@
                             <form action="{{ path("fos_user_security_check") }}" method="post">
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
                                 <div class="form-group">
-                                    <label for="username">{{ 'security.login.username'|trans }}</label>
+                                    <label for="username">{{ 'security.login.email'|trans }}</label>
                                     <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
                                 </div>
                                 <div class="form-group">
@@ -37,12 +37,12 @@
                             </form>
                         {% endblock fos_user_content %}
                     </div>
-                   
+
 
 		  </div>
 	</aside>
 
-	
+
 
 
 {% endblock content %}

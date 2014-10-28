@@ -5,8 +5,10 @@
 				<article >
 					<div class="container-inner">
 						<div class="">
-							{% if app.user.hasEstate(estate) %}
-								<span class="favorite"><span class="fa fa-star"></span></span>
+							{% if is_granted('ROLE_USER') %}
+								{% if app.user.hasEstate(estate) %}
+									<span class="favorite"><span class="fa fa-star"></span></span>
+								{% endif %}
 							{% endif %}
 							<header>
 								<div class="bg"></div>

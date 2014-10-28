@@ -515,7 +515,7 @@ class EstateController extends Controller
             ))
 
             ->getForm();
-            $form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'btn-red pull-right')));
+            $form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
          //   $form->setMethod('GET');
             $form->handleRequest($request);
 

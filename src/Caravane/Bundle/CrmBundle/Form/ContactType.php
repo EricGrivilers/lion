@@ -32,7 +32,7 @@ class ContactType extends AbstractType
             ->add('number')
             ->add('city')
             ->add('country')
-            ->add('company')
+           // ->add('company')
 
         ;
     }

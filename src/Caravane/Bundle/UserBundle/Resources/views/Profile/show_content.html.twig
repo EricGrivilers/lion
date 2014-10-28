@@ -1,8 +1,16 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+<div class="row">
+	<div class="col-md-12">
+	    <p>{{ user.contact.salutation }} {{ user.contact.firstname }} {{ user.contact.lastname }}</p>
+	    <p>{{user.contact.number }} {{ user.contact.street}}</p>
+	    <p>{{ user.contact.zip}} {{ user.contact.city}} {{user.contact.country }}</p>
+	    {% if user.contact.tel is defined %}<p>{{ 'phone'|trans }}: {{ user.contact.tel }}</p>{% endif %}
+	    {% if user.contact.fax is defined %}<p>{{ 'fax'|trans }}: {{ user.contact.fax }}</p>{% endif %}
+	    <p>
+	    	<a href="{{path('fos_user_profile_edit')}}">{{"modifier"|trans}}</a>
+	    </p>
+	</div>
 </div>
 
 <h1>{{"Mes favoris"|trans}}</h1>
@@ -70,8 +78,8 @@
 
 </div>
 
-{#
-<h1>{{"Votre dernière recherche"|trans}}</h1>
+{% if last_search_form %}
+<h1>{{"Ma dernière recherche"|trans}}</h1>
 <div class="form_container">
 
 
@@ -133,4 +141,4 @@
 
 
 </div>
-{#% endif %#}
+{% endif %}

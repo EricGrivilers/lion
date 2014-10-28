@@ -4,52 +4,36 @@
 
 
 {% block content %}
+	<aside class='wrapper border-tb-white marble-color' id="detail">
+		<div class="container main">
+			<div class="row">
+				<div class="col-md-12">
+					{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						{{ 'layout.logged_in_as'|trans}} {{app.user.email}} |
+						<a href="{{ path('fos_user_security_logout') }}">
+							{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+						</a>
+					{% else %}
+						<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+					{% endif %}
+				</div>
+				<br/><br/><br/>
+			</div>
 
-        <!-- Content area 4 -->
-    <aside class='wrapper border-tb-white marble-color' id="detail">
-            <div class="container main">
+			{% for type, messages in app.session.flashbag.all() %}
+			<div class="row"><div class="col-md-12">
+				{% for message in messages %}
+					<div class="flash-{{ type }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			</div></div>
+			{% endfor %}
+			{% block fos_user_content %}
 
-                <div class="col-md-12">
-
-
-
-
-
-
-            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
-                <a href="{{ path('fos_user_security_logout') }}">
-                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                </a>
-            {% else %}
-                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
-            {% endif %}
-        </div>
- <div class="col-md-12">
-        {% for type, messages in app.session.flashbag.all() %}
-            {% for message in messages %}
-                <div class="flash-{{ type }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-        </div>
-
-
-
-        
-                                       
-                </div>
-          </div>
-    </aside>
-
-    
-
-
+			{% endblock fos_user_content %}
+		</div>
+	</aside>
 {% endblock content %}
 
 
