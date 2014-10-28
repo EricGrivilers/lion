@@ -35,6 +35,9 @@
 
 
 	$(document).ready(function() {
+			$(".ellipsis").dotdotdot({
+			//	configuration goes here
+			});
 		/*searchType=$("#caravane_bundle_estatebundle_search #form_location input");
 		if(searchType.val()==0) {
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').hide();
@@ -71,6 +74,11 @@
 
 
 	});
+
+	$('#estate_last_updated').on('slid.bs.carousel', function () {
+	    $(".ellipsis").dotdotdot();
+	});
+
 
 
 	$('#form_sort').change(function() {

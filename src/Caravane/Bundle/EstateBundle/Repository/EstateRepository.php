@@ -4,6 +4,8 @@ namespace Caravane\Bundle\EstateBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * EstateRepository
  *
@@ -13,12 +15,44 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class EstateRepository extends EntityRepository
 {
 
-	public function findLastUpdated($limit=3) {
-		return $this->findBy(
+	public function findLastUpdated($limit=3, $user) {
+
+          $estates= $this->findBy(
 			array(),
 			array('updatedOn'=>'desc'),
 			$limit
 		);
+           if($user) {
+           	$ids=array();
+          		foreach($user->getEstate() as $ue) {
+          			if($estate=$ue->getEstate()) {
+          				if($estate->getStatus() && $ue->getSaved()) {
+	          				$ids[]=$estate->getId();
+	          			}
+				}
+          		}
+
+          		if(count($ids)>0) {
+
+          			 $query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
+        			->where('C.status = 1')
+        			->andWhere('C.id IN (:ids)')
+
+        			->setParameter("ids",$ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
+
+        			$result= $query->getQuery()->getResult();
+				$collection = new ArrayCollection(
+				    array_merge($result,$estates)
+				);
+				$estates=$collection;
+          		}
+          }
+
+          /*$collection3 = new ArrayCollection(
+    array_merge($collection1->toArray(), $collection2->toArray())
+);
+*/
+		return $estates;
 	}
 
 

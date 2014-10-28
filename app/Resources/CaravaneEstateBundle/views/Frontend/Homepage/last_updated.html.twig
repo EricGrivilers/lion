@@ -23,13 +23,13 @@
 							<div class="col-md-4">
 								<article class='estate'>
 									<div class="estate-photo">
-										<footer >
+										{#<footer >
 											<div class="background">
 											</div>
 											<p>
 												{{estate.category.name}} - {{estate.locfr}}
 											<p>
-										</footer>
+										</footer>#}
 										<a href="{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}"><img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
 										</a>
 									</div>
@@ -39,7 +39,8 @@
 										</div>#}
 										<header>
 											<a href='{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}'>
-												<p>{{estate.summary|raw }} </p>
+												<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
+												<p class="ellipsis">{{estate.summary|raw }} </p>
 											</a>
 										</header>
 									</div>

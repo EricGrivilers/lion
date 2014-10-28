@@ -42,26 +42,41 @@
 					.opacity(0.6);
 					z-index: 1;
 				}
-				
+
 			}
-			
-			
+
+
 		}
 		.estate-body {
 			.post-author {
 				float: left;
 			}
 			header {
-				
+
 				color: @color_link_1;
 				text-transform: none;
 				text-align: justify;
 				a, p {
-					text-decoration: none;	
+					text-decoration: none;
 					color: @color_text_1;
 					line-height: 1.3em;
 					font-size: 1.1em;
 					font-weight: 300;
+				}
+				h3 {
+					margin: 5px 0;
+
+				}
+				p {
+					overflow: hidden;
+  					text-overflow: ellipsis;
+  					line-height: 1.3em;
+  					display: -webkit-box;
+  					-webkit-line-clamp: (5*1.3*1.1)em;
+                            -webkit-box-orient: vertical;
+					display: block;
+					height:80px;
+
 				}
 				a:hover {
 					color: @color_link_1;
@@ -92,7 +107,7 @@ h2 {
 			bottom: auto;
 		}
 	}
-	
+
 }
 
 
