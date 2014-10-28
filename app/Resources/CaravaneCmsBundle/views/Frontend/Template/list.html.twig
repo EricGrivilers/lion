@@ -4,7 +4,11 @@
 {% block header %}
 	<header class='page-header '>
 		{#    MAIN MENU + SEARCH  #}
-		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
+		{% embed "CaravaneCmsBundle:Menu:main.html.twig" %}
+			{% block search_form %}
+				{% include "CaravaneEstateBundle:Estate:search.html.twig" %}
+			{% endblock search_form %}
+		{% endembed %}
 	</header>
 {% endblock header %}
 
@@ -31,3 +35,5 @@
 
 
 {% endblock content %}
+
+

@@ -11,27 +11,23 @@ class SearchType extends AbstractType
 
     protected $prices;
 
-    public function __construct($options) {
-        $this->prices=$options['prices'];
 
-    }
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if(isset($options['prices'])) {
+            $this->prices=$options['prices'];
+        }
+
+
         $builder
             ->add('prix','choice', array(
                 "label"=>false,
                 "expanded"=>true,
                 "multiple"=>true,
-                /*"choices"=>array(
-                    "option1"=>"- de 750.000 €",
-                    "option2"=>"de 750.000 à 1.500.000 €",
-                    "option3"=>"+ de 750.000 €"
-                ),*/
-/*"class"=>"Caravane\Bundle\EstateBundle\Entity\Price",*/
                 'choices' => $this->prices,
                 "attr"=>array(
                     "class"=>"btn-group btn-group-vertical",
@@ -68,55 +64,52 @@ class SearchType extends AbstractType
                     "data-toggle"=>"buttons"
                 )
             ))
-            ->add('location','choice', array(
-                "label"=>false,
-                "expanded"=>true,
-                "multiple"=>false,
-                "data"=>0,
-                "choices"=>array(
-                    "0"=>"Vente",
-                    "1"=>"Location"
-                ),
+            ->add('location','hidden')
+
+            ->add('isNew','checkbox',array(
+                "label"=>"Biens neufs uniquement",
                 "attr"=>array(
-                    "class"=>"btn-group btn-group-justified",
-                    "data-toggle"=>"buttons"
+                    "class"=>"btn "
                 )
             ))
-            ->add('isNew','checkbox')
             ->add('keyword','text',array(
-                "mapped" => false,
                 "attr"=>array(
                     "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
                 )
             ))
             ->add('offset','hidden',array(
-                "mapped" => false,
-            ))
+                "data"=>0))
             ->add('limit','hidden',array(
-                "mapped" => false,
                 "data"=>24,
             ))
-            ->add('sort','hidden',array(
-                "mapped" => false,
+            ->add('sort','choice',array(
+                "label"=>false,
+                "empty_value" => 'Ordonner les résultats par',
+                "choices"=>array(
+                    "prix asc"=>"Prix croissants",
+                    "prix desc"=>"Prix decroissants",
+                    "locfr asc"=>"Communes",
+                    "updatedOn desc"=>"Nouveautés",
+                )
             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Caravane\Bundle\EstateBundle\Entity\Estate'
-        ));
+        $resolver->setDefaults(array('prices'=>array()));
     }
+
+
 
     /**
      * @return string
      */
     public function getName()
     {
-        return 'c_s';
+        return 'search_form';
     }
 }

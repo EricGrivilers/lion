@@ -1,0 +1,6 @@
+services:
+    caravane_estate.form.type.search:
+        class: Caravane\Bundle\EstateBundle\Form\SearchType
+        tags:
+            - { name: form.type, alias: search_form }
+

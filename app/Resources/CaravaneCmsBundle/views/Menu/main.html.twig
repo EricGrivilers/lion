@@ -92,12 +92,9 @@
 				<h2 class='title'>RECHERCHE</h2>
 				<div class='separator'></div>
 				<div id="form_container">
-							{% if type is defined == false %}
-								{{ render(controller('CaravaneEstateBundle:Estate:searchForm',{'type':'sale'})) }}
-							{% else %}
-								{% include "CaravaneEstateBundle:Estate:search.html.twig" %}
-							{% endif %}
-
+					{% block search_form %}
+						{#{ render(controller('CaravaneEstateBundle:Estate:searchForm',{'type':'sale'})) }#}
+					{% endblock search_form %}
 
 
 				</div>

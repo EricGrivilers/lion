@@ -164,6 +164,9 @@
 							element.find('a.estate').click();
 
 						}
+						else if(data=="no user") {
+							alert("Vous devez être enregistré pour utiliser cette option");
+						}
 					});
 				});
 		            $('.maps').click(function () {

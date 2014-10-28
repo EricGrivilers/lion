@@ -263,6 +263,13 @@ class EstateController extends Controller
             }
         }
 
+        if($user=$this->getUser()) {
+            if($contact=$user->getContact()) {
+                $contact->setLastSearch(json_encode($datas));
+                $em->persist($contact);
+                $em->flush();
+            }
+        }
 
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
         if(count($estates)<=0 && $request->isXmlHttpRequest()) {

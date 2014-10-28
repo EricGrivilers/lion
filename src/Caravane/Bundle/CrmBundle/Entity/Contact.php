@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Contact
  *
- * @ORM\Table(name="Contact", uniqueConstraints={@ORM\UniqueConstraint(name="email", columns={"email"})})
+ * @ORM\Table(name="Contact")
  * @ORM\Entity
  */
 class Contact
@@ -26,112 +26,111 @@ class Contact
     */
     private $user;
 
-
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=100, nullable=false)
+     * @ORM\Column(name="language", type="string", length=2, nullable=true)
      */
-    private $password = '';
+    private $language;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=100, nullable=false)
+     * @ORM\Column(name="firstname", type="string", length=100, nullable=true)
      */
-    private $email = '';
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="language", type="string", length=2, nullable=false)
+     * @ORM\Column(name="lastname", type="string", length=100, nullable=true)
      */
-    private $language = '';
+    private $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=100, nullable=false)
+     * @ORM\Column(name="tel", type="string", length=20, nullable=true)
      */
-    private $firstname = '';
+    private $tel;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=100, nullable=false)
+     * @ORM\Column(name="zip", type="string", length=10, nullable=true)
      */
-    private $lastname = '';
+    private $zip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=20, nullable=false)
+     * @ORM\Column(name="fax", type="string", length=20, nullable=true)
      */
-    private $tel = '';
+    private $fax;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zip", type="string", length=10, nullable=false)
+     * @ORM\Column(name="street", type="string", length=255, nullable=true)
      */
-    private $zip = '';
+    private $street;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=20, nullable=false)
+     * @ORM\Column(name="number", type="string", length=10, nullable=true)
      */
-    private $fax = '';
+    private $number;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="street", type="string", length=255, nullable=false)
+     * @ORM\Column(name="city", type="string", length=100, nullable=true)
      */
-    private $street = '';
+    private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string", length=10, nullable=false)
+     * @ORM\Column(name="country", type="string", length=100, nullable=true)
      */
-    private $number = '';
+    private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=100, nullable=false)
+     * @ORM\Column(name="company", type="string", length=200, nullable=true)
      */
-    private $city = '';
+    private $company;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=100, nullable=false)
+     * @ORM\Column(name="salutation", type="string", length=3, nullable=true)
      */
-    private $country = '';
+    private $salutation;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="company", type="string", length=200, nullable=false)
-     */
-    private $company = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="salutation", type="string", length=3, nullable=false)
-     */
-    private $salutation = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="date", type="string", length=8, nullable=false)
+     * @ORM\Column(name="date", type="string", nullable=true)
      */
     private $date;
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="createdOn", type="datetime", nullable=true)
+     */
+    private $createdOn;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastSearch", type="text",  nullable=true)
+     */
+    private $lastSearch;
 
 
 
@@ -143,29 +142,6 @@ class Contact
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return Contact
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**
@@ -467,7 +443,51 @@ class Contact
         return $this->date;
     }
 
+    /**
+     * Set createdOn
+     *
+     * @param \DateTime $createdOn
+     * @return Contact
+     */
+    public function setCreatedOn($createdOn)
+    {
+        $this->createdOn = $createdOn;
 
+        return $this;
+    }
+
+    /**
+     * Get createdOn
+     *
+     * @return \DateTime
+     */
+    public function getCreatedOn()
+    {
+        return $this->createdOn;
+    }
+
+    /**
+     * Set lastSearch
+     *
+     * @param string $lastSearch
+     * @return Contact
+     */
+    public function setLastSearch($lastSearch)
+    {
+        $this->lastSearch = $lastSearch;
+
+        return $this;
+    }
+
+    /**
+     * Get lastSearch
+     *
+     * @return string
+     */
+    public function getLastSearch()
+    {
+        return $this->lastSearch;
+    }
 
     /**
      * Set user
@@ -490,28 +510,5 @@ class Contact
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return Contact
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 }
