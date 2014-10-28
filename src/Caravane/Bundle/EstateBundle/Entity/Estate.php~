@@ -240,12 +240,12 @@ class Estate
     private $status = true;
 
 
-    /**
-     * @var integer
+     /**
+     * @var string
      *
-     * @ORM\Column(name="isNew", type="boolean", nullable=true)
+     * @ORM\Column(name="isNewBuilding", type="boolean", nullable=true)
      */
-    private $isNew = false;
+    private $isNewBuilding = false;
 
 
     /**
@@ -313,6 +313,7 @@ class Estate
 
 
     private $shortReference;
+
 
 
     public function getShortReference() {
@@ -977,28 +978,6 @@ class Estate
         return $this->status;
     }
 
-     /**
-     * Set isNew
-     *
-     * @param boolean $isNew
-     * @return Estate
-     */
-    public function setIsNew($isNew)
-    {
-        $this->isNew = $isNew;
-
-        return $this;
-    }
-
-    /**
-     * Get isNew
-     *
-     * @return boolean
-     */
-    public function getIsNew()
-    {
-        return $this->isNew;
-    }
 
 
 
@@ -1242,8 +1221,8 @@ class Estate
         foreach($this->photo as $photo) {
 
            if(
-            !file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename()) 
-            || $photo->getFilename()=='' 
+            !file_exists(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())
+            || $photo->getFilename()==''
             || is_dir(__DIR__."/../../../../../web/photos/big/".$photo->getFilename())
 
             ) {
@@ -1276,7 +1255,7 @@ class Estate
             foreach($photos as $p) {
                 return $p;
             }
-            
+
         }
 
         return null;
@@ -1352,6 +1331,21 @@ class Estate
         return $this->zone;
     }
 
+    public function isUpdated() {
+        $date = new \Datetime("now - 15 days");
+         if($this->updatedOn>$date) {
+            return true;
+        }
+        return false;
+    }
 
+
+    public function isNew() {
+        $date = new \Datetime("now - 15 days");
+        if($this->createdOn>$date) {
+            return true;
+        }
+        return false;
+    }
 
 }

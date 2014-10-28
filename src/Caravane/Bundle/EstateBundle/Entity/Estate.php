@@ -240,9 +240,10 @@ class Estate
     private $status = true;
 
 
-    /**
-     * @var integer
+     /**
+     * @var string
      *
+     * @ORM\Column(name="isNewBuilding", type="boolean", nullable=true)
      */
     private $isNewBuilding = false;
 
@@ -977,28 +978,6 @@ class Estate
         return $this->status;
     }
 
-     /**
-     * Set isNewBuilding
-     *
-     * @param boolean $isNewBuilding
-     * @return Estate
-     */
-    public function setIsNewBuilding($isNewBuilding)
-    {
-        $this->isNewBuilding = $isNewBuilding;
-
-        return $this;
-    }
-
-    /**
-     * Get isNewBuilding
-     *
-     * @return boolean
-     */
-    public function getIsNewBuilding()
-    {
-        return $this->isNewBuilding;
-    }
 
 
 
@@ -1369,4 +1348,27 @@ class Estate
         return false;
     }
 
+
+    /**
+     * Set isNewBuilding
+     *
+     * @param boolean $isNewBuilding
+     * @return Estate
+     */
+    public function setIsNewBuilding($isNewBuilding)
+    {
+        $this->isNewBuilding = $isNewBuilding;
+
+        return $this;
+    }
+
+    /**
+     * Get isNewBuilding
+     *
+     * @return boolean 
+     */
+    public function getIsNewBuilding()
+    {
+        return $this->isNewBuilding;
+    }
 }
