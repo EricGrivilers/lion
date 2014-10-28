@@ -17,7 +17,7 @@
 
 <h2 class="title">{{"Mes favoris"|trans}}</h2>
 <div class="separator"></div>
-<div class="row" id="list">
+<div class="row list">
 
  {% set t=0 %}
     {% for estate2user in user.estate %}
@@ -57,9 +57,9 @@
 
 <h2 class="title">{{"Autres biens consultés"|trans}}</h2>
 <div class="separator"></div>
-<div class="row" id="list">
+<div class="row list">
 
-
+ {% set t=0 %}
     {% for estate2user in user.estate %}
     		{% if estate2user.saved != true %}
     			{% set estate=estate2user.estate %}
@@ -83,8 +83,14 @@
 					</a>
 				</div>
 			</div>
+			{% set t=t + 1 %}
 		{% endif %}
     {% endfor %}
+    {% if t==0 %}
+		<div class="col-md-12">
+			<div class="alert alert-info">{{"Vous n'avez encore consulté aucun bien. "|trans}}</div>
+		</div>
+	{% endif %}
 
 </div>
 

@@ -100,8 +100,8 @@
 		        		$('#nextEstate').hide();
 		        	}
 		            //data: return data from server
-		            html=$(data).find('#list')
-		            $('#list').append(html.html());
+		            html=$(data).find('.list:last')
+		            $('.list:last').append(html.html());
 		            prepareLinks();
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
@@ -122,28 +122,29 @@
 	function prepareLinks() {
 
 
-		$('#list div.estate a.estate').bind();
-		$('#list div.estate a.estate').click(function(e) {
+		$('.list div.estate a.estate').bind();
+		$('.list div.estate a.estate').click(function(e) {
 
 
 			$('.row.detail').remove();
 			e.preventDefault();
 			e.stopPropagation();
-			list=$(this).closest('#list');
+			list=$(this).closest('.list');
 			element=$(this).closest('div.estate');
+			list=element.closest('.list');
 			containerWidth=list.width();
 			elementWidth=element.width();
 			itemPerRow=parseInt(containerWidth/elementWidth);
 			index=element.index();
 			row=((index - (index)%itemPerRow)/itemPerRow)+1;
 			newIndex=(row*itemPerRow)-1;
-			lastElement=$("#list div.estate:eq('"+newIndex+"')");
+			lastElement=list.find("div.estate:eq('"+newIndex+"')");
 			if(lastElement.length==0) {
-				console.log('no end');
-				while($("#list div.estate:eq('"+newIndex+"')").length==0) {
+				//console.log('no end');
+				while(list.find("div.estate:eq('"+newIndex+"')").length==0) {
 					newIndex--;
 				}
-				lastElement=$("#list div.estate:eq('"+newIndex+"')");
+				lastElement=list.find("div.estate:eq('"+newIndex+"')");
 			}
 
 			$.ajax(
@@ -152,10 +153,10 @@
 		        type: "GET",
 		        success:function(data, textStatus, jqXHR)
 		        {
-		        	if($('#list #detail').size()==0) {
-		        		$('#list').append("<div id='detail' class='col-md-12'></div>");
+		        	if(list.find('#detail').size()==0) {
+		        		list.append("<div id='detail' class='col-md-12'></div>");
 		        	}
-		        	detail=$('#list div#detail');
+		        	detail=list.find('div#detail');
 		        	//detail.hide();
 
 		            lastElement.after(detail);
