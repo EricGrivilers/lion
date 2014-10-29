@@ -28,6 +28,7 @@
 web/media/cache
 web/css
 web/js
+web/docs
 
 # PHPUnit
 /app/phpunit.xml
