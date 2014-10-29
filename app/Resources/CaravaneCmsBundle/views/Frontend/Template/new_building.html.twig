@@ -11,12 +11,18 @@
   	<div id="text">{{estate.description|raw }}</div>
 </div>
   <div class="tab-pane" id="estate_new_liste">
-  	<a href="{{asset('/docs/HAM_LISTE_01_14.pdf')}}">Liste</a>
-  </div>
+    <ul class="documents">
+      <li>
+        <div class="document">
+  	<a href="{{asset('/docs/HAM_LISTE_01_14.pdf')}}"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" /> <br/>Liste</a>
+  </div></li></ul>
+</div>
   <div class="tab-pane" id="estate_new_documents">
-  	<ul>
-  		<li><a href="{{asset('/docs/HAM-080513-cahier de charges.doc')}}" target="_blank">Cahier des charges</a></li>
+  	<ul class="documents">
   		<li>
+        <div class="document"><a href="{{asset('/docs/HAM-080513-cahier de charges.doc')}}" target="_blank"><img src="{{asset('/medias/icons/doc.png')}}" width="62" /><br/>Cahier des charges</a></div>
+        </li>
+  		<li><div class="document">
 
-  <a href="{{asset('/docs/HAM-090202-acte de base signé.pdf')}}" target="_blank">Acte de base</a></li></ul></div>
+  <a href="{{asset('/docs/HAM-090202-acte de base signé.pdf')}}" target="_blank"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" /><br/>Acte de base</a></div></li></ul></div>
 </div>
