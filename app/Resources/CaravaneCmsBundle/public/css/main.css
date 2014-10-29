@@ -2458,7 +2458,7 @@ body.headerstyle7 .page-header .menu>li:hover>a:after{
        -moz-box-sizing: border-box;
       -ms-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-  padding-right: 100px;
+
   min-height: 89px;
 }
 .two-headers h2,
