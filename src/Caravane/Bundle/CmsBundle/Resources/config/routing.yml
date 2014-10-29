@@ -3,6 +3,10 @@ caravane_cms_homepage:
     defaults: { _controller: CaravaneCmsBundle:Default:index }
 
 
+caravane_cms_contact:
+    path: /contact
+    defaults: { _controller: CaravaneCrmBundle:Default:contact }
+
 caravane_cms_page:
     defaults:  { _controller: CaravaneCmsBundle:Default:index }
     #pattern:   /cms/page/{id}

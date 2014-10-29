@@ -16,6 +16,11 @@
 		<div class="col-sm-6  col-md-4">
 
 			{{form_row(search_form.category)}}
+
+			{% if search_form.isNewBuilding is defined %}
+				{{form_row(search_form.isNewBuilding)}}
+			{% endif %}
+
 		</div>
 		<div class="col-sm-6  col-md-4">
 			{{form_row(search_form.zone)}}
@@ -43,9 +48,7 @@
 	</section>
 	<section class='row' style="margin-bottom:10px">
 		<div class="col-sm-6  col-md-4">
-			{% if search_form.isNewBuilding is defined %}
-				{{form_row(search_form.isNewBuilding)}}
-			{% endif %}
+			<div class="pull-right">{{"Ordonner les résultats par"|trans}}</div>
 		</div>
 		<div class="col-sm-6  col-md-4">
 			{{form_row(search_form.sort)}}

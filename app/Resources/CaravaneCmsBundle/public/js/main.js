@@ -154,9 +154,9 @@
 				}
 				lastElement=list.find("div.estate:eq('"+newIndex+"')");
 			}
-
+			document.location.hash=$(this).attr('href');
 			$.ajax(
-		    {
+		    		{
 		        url : $(this).attr('href'),
 		        type: "GET",
 		        success:function(data, textStatus, jqXHR)
@@ -196,7 +196,7 @@
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
 		            //if fails
-		            console.log(data);
+		            console.log(textStatus);
 		        }
 		    });
 		});

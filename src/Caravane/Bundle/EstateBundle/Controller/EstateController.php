@@ -491,7 +491,7 @@ class EstateController extends Controller
                     "data-toggle"=>"buttons"
                 )
             ))*/
-            ->add('isNew',($type=='sale'?'checkbox':'hidden'),array(
+            ->add('isNewBuilding',($type=='sale'?'checkbox':'hidden'),array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(
                     "class"=>"btn "
