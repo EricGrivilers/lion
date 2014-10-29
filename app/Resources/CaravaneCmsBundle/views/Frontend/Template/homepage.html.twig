@@ -18,8 +18,49 @@
 	{#   NEW ITEMS #}
 	{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 6 } ) ) }}
 		<!-- Content area 4 -->
-	<aside class='wrapper border-tb-white marble-color' id="home_infos">
+	<aside class='wrapper border-tb-white marble-color home_infos'  id="home_infos">
+		<div class='container'>
+
+			<div class="row ">
+
+
+<h2 class="title">IMMOBILIERE LE LION</h2>
+							<div class="separator"></div>
+						<div class="col-md-8">
+
+							<p>
+								L'immobilière LE LION est spécialisée depuis plus de 40 ans dans la vente et la location de biens de prestige à Bruxelles et ses environs. Si vous souhaitez mettre votre bien en vente ou en location, n'hésitez pas à consulter notre agence. Nous sommes à votre disposition pour toute estimation ou conseil gratuit sans aucun engagement de votre part. Faites-nous confiance et nous mettrons toute notre expérience et notre dynamisme à votre service.</p>
+
+<p>L’Immobilière Le Lion vous propose différentes manières pour vous aider dans votre recherche immobilière. Le plus efficace est de prendre contact directement avec nous par téléphone ou via notre page de contact en nous envoyant vos critères de recherche pour être automatiquement prévenu dès qu’un nouveau bien correspondant à vos attentes apparait.</p>
+
+
+						</div>
+						<div class="col-md-offset-1 col-md-3">
+							<img src="{{asset('/medias/logo_footer.png')}}" />
+							<br/>
+							<br/>
+							<div class="textwidget">
+							<address>
+								<ul class="address">
+									<li>Avenue Delleur 8</li>
+									<li>B-1170</li>
+									<li>Brussels, Belgium</li>
+								</ul>
+								<ul class="phone">
+									<li>Phone: +32 2 672 71 11</li>
+									<li>Fax: +32 2 672 67 17</li>
+								</ul>
+							</address>
+						</div>
+						</div>
+					</div>
+
+		</div>
+	</aside>
+	<aside class='wrapper border-tb-white home_infos'>
+
 		<div class='container container-md-height'>
+
 			<div class="row row-md-height">
 				<div class='col-md-5 col-md-height col-bottom'>
 					<div style="position: relative;">
@@ -29,27 +70,49 @@
 				<div class="col-md-7 col-md-height col-top">
 					<div class="row">
 						<div class="col-md-12">
-							<h2>APPLICATION MOBILE</h2>
-							<p>
-								Pour toujours mieux vous accompagner dans le cadre de votre recherche immobilière, notre application mobile vous permet de recevoir instantanément les dernières offres,  de géo-localiser les biens à proximité ou de consulter toutes les informations relatives à ceux-ci.</p>
-								<p>
-L’application est disponible en téléchargement via l’ <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
-</p>
-							<p><a href="http://itunes.apple.com/be/app/id396510696?mt=8"><img src="{{asset('/bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
-							</p>
-							<br/>
+							<h2 class="title">APPLICATION MOBILE</h2>
 							<div class="separator"></div>
+
+								<div class="col-md-12">
+									<p>
+										Pour toujours mieux vous accompagner dans le cadre de votre recherche immobilière, notre application mobile pour iPhone et iPad vous permet de recevoir instantanément les dernières offres, de géo-localiser les biens à proximité ou de consulter toutes les informations relatives à ceux-ci.</p>
+										<p>
+		L’application est disponible en téléchargement via l’ <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
+		</p>
+									<p><a href="http://itunes.apple.com/be/app/id396510696?mt=8"><img src="{{asset('/bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
+									</p>
+								</div>
+
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+	<aside class='wrapper border-tb-white marble-color home_infos' >
+		<div class='container'>
+			<div class="row ">
+				<div class="col-md-12">
+
+
 					<div class="row">
-						<div class="col-md-6">
 
-							<h2>SUIVEZ-NOUS</h2>
-
-								{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
-								<br/>
+						<div class="col-md-7">
+							<p>Vous pouvez également suivre de manière plus ludique les nouveautés de l’agence via les réseaux sociaux Facebook, Twitter et Google +.
+Via les réseaux Instagram et Pinterest, nous vous offrons d’aborder votre recherche immobilière via des photos inspirantes qui reflètent les différentes gammes et styles de biens disponibles dans notre portefeuille.</p>
 						</div>
-					</div>
+						<div class="col-md-offset-1 col-md-4">
+							<h2 class="title">SUIVEZ-NOUS</h2>
+							<div class="separator"></div>
+								<div style="text-align: center">
+									{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
+								</div>
+							</div>
+						</div>
+
+
+
+
 				</div>
 			</div>
 		</div>
