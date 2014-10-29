@@ -111,7 +111,8 @@ class EstateRepository extends EntityRepository
             //$dql.=" AND C.area=".$datas['area']." ";
 
             if(isset($datas['rayon'])) {
-
+            	$query->andWhere('C.area =:area')
+                ->setParameter('area', $datas['area']);
             }
             else {
                 $query->andWhere('C.area =:area')
