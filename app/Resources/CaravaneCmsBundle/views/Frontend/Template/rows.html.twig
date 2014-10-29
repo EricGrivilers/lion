@@ -18,7 +18,7 @@
 							<header>
 								<div class="bg"></div>
 								<div class="text">
-									<h2><b>{{estate.locfr}}</b><br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
+									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
 									<p>{{estate.summary|raw }} </p>
 								</div>
 							</header>

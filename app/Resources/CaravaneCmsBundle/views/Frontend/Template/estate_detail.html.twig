@@ -54,9 +54,9 @@
 					<li><label>Prix:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
 				{% endif %}
 				<li><label>Reférence du bien:</label> {{estate.reference}}</li>
-				<li><label>Supérficie:</label> {{estate.surface}} <label>m2</label></li>
-				<li><label>Chambre{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>
-				<li><label>Salle{{estate.bathrooms>1?"s":""}} d'eau:</label> {{estate.bathrooms}}</li>
+				{% if estate.surface %}<li><label>Supérficie:</label> {{estate.surface}} <label>m2</label></li>{% endif %}
+				{% if estate.rooms %}<li><label>Chambre{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>{% endif %}
+				{% if estate.bathrooms %}<li><label>Salle{{estate.bathrooms>1?"s":""}} d'eau:</label> {{estate.bathrooms}}</li>{% endif %}
 				{% if estate.garages %}
 					<li><label>Garage{{estate.garages>1?"s":""}}:</label> {{estate.garages}}</li>
 				{% endif %}
@@ -69,8 +69,11 @@
 	</div>
 	<div class="col-md-6">
 		<div class="descro">
-
-			<div id="text">{{estate.description|raw }}</div>
+			{% if estate.isNewBuilding %}
+				{% include "CaravaneCmsBundle:Frontend:Template/new_building.html.twig" %}
+			{% else %}
+				<div id="text">{{estate.description|raw }}</div>
+			{% endif %}
 		</div>
 	</div>
 	<div class="col-md-3">

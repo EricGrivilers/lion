@@ -37,7 +37,7 @@ class Estate
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updatedOn", type="datetime", nullable=false)
+     * @ORM\Column(name="updatedOn", type="datetime", nullable=true)
      */
     private $updatedOn;
 
@@ -59,7 +59,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="oldPrix", type="decimal", precision=8, scale=0, nullable=false)
+     * @ORM\Column(name="oldPrix", type="decimal", precision=8, scale=0, nullable=true)
      */
     private $oldprix;
 
@@ -179,14 +179,14 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="google_map", type="text", nullable=false)
+     * @ORM\Column(name="google_map", type="text", nullable=true)
      */
     private $googleMap;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="moredescrfr", type="text", nullable=false)
+     * @ORM\Column(name="moredescrfr", type="text", nullable=true)
      */
     private $moredescrfr;
 
@@ -228,7 +228,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="viewable", type="string", length=10, nullable=false)
+     * @ORM\Column(name="viewable", type="string", length=10, nullable=true)
      */
     private $viewable = '';
 
@@ -251,63 +251,63 @@ class Estate
     /**
      * @var integer
      *
-     * @ORM\Column(name="dayview", type="integer", nullable=false)
+     * @ORM\Column(name="dayview", type="integer", nullable=true)
      */
     private $dayview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="weekview", type="integer", nullable=false)
+     * @ORM\Column(name="weekview", type="integer", nullable=true)
      */
     private $weekview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="monthview", type="integer", nullable=false)
+     * @ORM\Column(name="monthview", type="integer", nullable=true)
      */
     private $monthview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="totalview", type="integer", nullable=false)
+     * @ORM\Column(name="totalview", type="integer", nullable=true)
      */
     private $totalview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="lastdayview", type="integer", nullable=false)
+     * @ORM\Column(name="lastdayview", type="integer", nullable=true)
      */
     private $lastdayview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="lastweekview", type="integer", nullable=false)
+     * @ORM\Column(name="lastweekview", type="integer", nullable=true)
      */
     private $lastweekview;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="lastmonthview", type="integer", nullable=false)
+     * @ORM\Column(name="lastmonthview", type="integer", nullable=true)
      */
     private $lastmonthview;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Lat", type="string", length=50, nullable=false)
+     * @ORM\Column(name="Lat", type="string", length=50, nullable=true)
      */
     private $lat;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Lng", type="string", length=50, nullable=false)
+     * @ORM\Column(name="Lng", type="string", length=50, nullable=true)
      */
     private $lng;
 
@@ -1365,7 +1365,7 @@ class Estate
     /**
      * Get isNewBuilding
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getIsNewBuilding()
     {

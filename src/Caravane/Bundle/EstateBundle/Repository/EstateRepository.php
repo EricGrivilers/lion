@@ -149,7 +149,9 @@ class EstateRepository extends EntityRepository
 
         //    $dql.=" AND (".implode(" OR ", $dqlA).") ";
         }
-
+        if($datas['isNewBuilding']) {
+            $query->andWhere("C.isNewBuilding=1");
+        }
         $query->setFirstResult($datas['offset']);
         $query->setMaxResults($datas['limit']);
         if(!isset($datas['sort'])) {

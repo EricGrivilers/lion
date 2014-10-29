@@ -1,0 +1,22 @@
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="#estate_new_description" role="tab" data-toggle="tab">Présentation</a></li>
+  <li><a href="#estate_new_liste" role="tab" data-toggle="tab">Liste</a></li>
+  <li><a href="#estate_new_documents" role="tab" data-toggle="tab">Documents</a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="estate_new_description">
+  	<div id="text">{{estate.description|raw }}</div>
+</div>
+  <div class="tab-pane" id="estate_new_liste">
+  	<a href="{{asset('/docs/HAM_LISTE_01_14.pdf')}}">Liste</a>
+  </div>
+  <div class="tab-pane" id="estate_new_documents">
+  	<ul>
+  		<li><a href="{{asset('/docs/HAM-080513-cahier de charges.doc')}}" target="_blank">Cahier des charges</a></li>
+  		<li>
+
+  <a href="{{asset('/docs/HAM-090202-acte de base signé.pdf')}}" target="_blank">Acte de base</a></li></ul></div>
+</div>
