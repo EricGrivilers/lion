@@ -466,9 +466,25 @@ class EstateController extends Controller
                     "data-toggle"=>"buttons"
                 )
             ))
+            ->add("rayon","choice",array(
+                "label"=>false,
+                "empty_value" => 'Rayon',
+                "choices"=>array(
+                    "1"=>"1 km",
+                    "5"=>"5 km",
+                    "10"=>"10 km",
+                    "20"=>"20 km",
+                    "50"=>"50 km"
+                )
+            ))
             ->add('reference',"text",array(
                 "attr"=>array(
                     "placeholder"=>"Reference"
+                )
+            ))
+             ->add('address',"text",array(
+                "attr"=>array(
+                    "placeholder"=>"Adresse"
                 )
             ))
             ->add('category','entity', array(

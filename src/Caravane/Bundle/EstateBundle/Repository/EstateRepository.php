@@ -2,10 +2,15 @@
 
 namespace Caravane\Bundle\EstateBundle\Repository;
 
+
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 use Doctrine\Common\Collections\ArrayCollection;
+
+
+
+
 /**
  * EstateRepository
  *
@@ -104,8 +109,14 @@ class EstateRepository extends EntityRepository
         }
         if(isset($datas['area'])) {
             //$dql.=" AND C.area=".$datas['area']." ";
-            $query->andWhere('C.area =:area')
-            ->setParameter('area', $datas['area']);
+
+            if(isset($datas['rayon'])) {
+
+            }
+            else {
+                $query->andWhere('C.area =:area')
+                ->setParameter('area', $datas['area']);
+            }
         }
         if(isset($datas['keyword'])) {
             //$dql.=" AND C.description LIKE \"%".$datas['keyword']."%\" ";
@@ -149,7 +160,7 @@ class EstateRepository extends EntityRepository
 
         //    $dql.=" AND (".implode(" OR ", $dqlA).") ";
         }
-        if($datas['isNewBuilding']) {
+        if(isset($datas['isNewBuilding'])) {
             $query->andWhere("C.isNewBuilding=1");
         }
         $query->setFirstResult($datas['offset']);

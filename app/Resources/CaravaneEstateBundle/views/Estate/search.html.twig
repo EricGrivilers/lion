@@ -31,29 +31,33 @@
 	</section>
 	<section class='row' style="margin-bottom:10px">
 		<div class='col-sm-6  col-md-4'>
-			<div class="input-group">
-				<span class="input-group-addon"><span class="fa  fa-search"></span></span>
-				{{form_widget(search_form.keyword)}}
-			</div>
-		</div>
-		<div class='col-sm-6  col-md-4'>
-			{{form_row(search_form.area)}}
-		</div>
-		<div class=' col-sm-6 col-md-4'>
-			<div class="input-group">
+			<div class="form-group input-group">
 				<span class="input-group-addon">030</span>
 				{{form_widget(search_form.reference)}}
 			</div>
+			<div class="form-group  input-group">
+				<span class="input-group-addon"><span class="fa  fa-search"></span></span>
+				{{form_widget(search_form.keyword)}}
+
+			</div>
+		</div>
+		<div class='col-sm-6  col-md-4'>
+			<div class="form-group  input-group">
+				<span class="input-group-addon"><span class="fa  fa-map-marker"></span></span>
+				{{form_widget(search_form.address)}}
+
+			</div>
+			{{form_row(search_form.area)}}
+			{{form_row(search_form.rayon)}}
+		</div>
+		<div class=' col-sm-6 col-md-4'>
+			{{"Ordonner les résultats par"|trans}}
+			{{form_row(search_form.sort)}}
 		</div>
 	</section>
 	<section class='row' style="margin-bottom:10px">
-		<div class="col-sm-6  col-md-4">
-			<div class="pull-right">{{"Ordonner les résultats par"|trans}}</div>
-		</div>
-		<div class="col-sm-6  col-md-4">
-			{{form_row(search_form.sort)}}
-		</div>
-		<div class="col-sm-6  col-md-4">
+
+		<div class="col-md-offset-8  col-md-4">
 			{{form_row(search_form.submit)}}
 		</div>
 	</section>

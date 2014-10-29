@@ -34,6 +34,8 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
 
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
             new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),

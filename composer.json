@@ -38,6 +38,9 @@
         "WickyNilliams/enquire.js":"dev-master",
         "liip/imagine-bundle": "dev-master",
         "suncat/mobile-detect-bundle": "0.9.*",
+        "egeloen/google-map-bundle": "~2.1",
+        "willdurand/geocoder": "*",
+        "widop/http-adapter-bundle": "1.1.*",
 
         "hybridauth/hybridauth": "dev-master"
     },
