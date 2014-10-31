@@ -293,9 +293,37 @@ class EstateController extends Controller
         ));
     }
 
+     public function searchByAreaAction(Request $request, $type,$id) {
+        $em=$this->getDoctrine()->getmanager();
+        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByArea($id);
+         $search_form=$this->searchForm($request, $type);
+
+         return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+            'estates'      => $estates,
+           'search_form'   => $search_form->createView(),
+            'type'=>$type
+        ));
+    }
+
+    public function searchByAreasAction(Request $request, $type="sale") {
+        $areas=array();
+        $em=$this->getDoctrine()->getmanager();
+        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByAreaGrouped($type);
 
 
+        foreach($estates as $k=>$area) {
+            if($area['latlng']) {
+                $tA=explode(',',$area['latlng']);
+                $areas[]=array('id'=>$area['id'],'num'=>$area[1],"lat"=>$tA[0],"lng"=>$tA[1]);
+            }
 
+        }
+        $response = new Response();
+        $response->setContent(json_encode($areas));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 
 
     public function saleViewAction($reference) {

@@ -61,6 +61,18 @@ caravane_estate_frontend_estate_search_from:
     options:
         expose: true
 
+caravane_estate_frontend_estate_search_by_area:
+    path:     /estate/search/area/{type}/{id}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:searchByArea" }
+    options:
+        expose: true
+
+caravane_estate_frontend_estate_search_count_by_area:
+    path:     /estate/search/count/{type}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:searchByAreas" }
+    options:
+        expose: true
+
 
 
 caravane_estate_frontend_estate_sale_show:

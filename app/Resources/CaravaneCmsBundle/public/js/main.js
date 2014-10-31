@@ -1,3 +1,44 @@
+var markers;
+var type;
+
+function initializeSearchMap() {
+		    var mapOptions = {
+		      center: new google.maps.LatLng(50.833555,4.39552),
+		      zoom: 13
+		    };
+		    var map = new google.maps.Map(document.getElementById("search_map"), mapOptions);
+		   i=0;
+		   $.each(markers,function(a,b) {
+
+				/*marker = new google.maps.Marker({
+			        position: new google.maps.LatLng(b.lat, b.lng),
+			        map: map
+			      });
+*/
+				 var marker = new MarkerWithLabel({
+				       position: new google.maps.LatLng(b.lat, b.lng),
+				       map: map,
+				        labelContent: a,
+				       labelAnchor: new google.maps.Point(20, 40),
+				       labelClass: "marker_label"
+				});
+
+
+
+				 google.maps.event.addListener(marker, 'click', (function(marker, i) {
+					return function() {
+						route=Routing.generate('caravane_estate_frontend_estate_search_by_area',{'type':type,'id': markers[i].id});
+						document.location=route;
+					}
+				}) (marker, i));
+				 i++;
+
+
+			});
+
+	}
+
+
 
 	$('#main_menu nav li a.search').click(function(e) {
 		e.preventDefault();
@@ -12,13 +53,27 @@
 		else {
 			$('#main_menu nav li ').removeClass('active');
 			$('#main_menu nav li a.search[rel="'+type+'"]').closest('li').addClass('active');
+
+
+
+
+
 			route=Routing.generate('caravane_estate_frontend_estate_search_from',{'type':type});
 
 			$.get(route, function(data) {
 				$('#form_container').html(data);
 				$('#search').show();
 				$('.navbar-collapse').hide();
+				route2=Routing.generate('caravane_estate_frontend_estate_search_count_by_area',{'type':type});
+				$.get(route2, function(data) {
+					markers=data;
+					initializeSearchMap();
+					google.maps.event.addDomListener(window, 'load', initializeSearchMap);
+
+				})
 			})
+
+
 		}
 
 		/*if($(this).hasClass('rent')) {
@@ -32,6 +87,8 @@
 	*/
 
 	});
+
+
 
 
 	$(document).ready(function() {

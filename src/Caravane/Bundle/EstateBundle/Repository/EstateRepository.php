@@ -149,8 +149,10 @@ $type=($datas['location']==1?'rent':'sale');
 			}
 			$query->andWhere(implode(" OR ", $dqlA));
 		}
-		if($datas['isNewBuilding']) {
-			$query->andWhere("C.isNewBuilding=1");
+		if(isset($datas['isNewBuilding'])) {
+			if($datas['isNewBuilding']==true) {
+				$query->andWhere("C.isNewBuilding=1");
+			}
 		}
 		$query->setFirstResult($datas['offset']);
 		$query->setMaxResults($datas['limit']);
@@ -163,5 +165,25 @@ $type=($datas['location']==1?'rent':'sale');
 		$entities = $query->getQuery()->getResult();
 
 		return $entities;
+	}
+
+
+
+	public function findByAreaGrouped($type) {
+		$location=0;
+		if($type=='rent') {
+			$location=1;
+		}
+		$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
+			->select('COUNT(C), C.id, area.id, area.latlng')
+			->leftJoin('C.area', 'area')
+			->where('C.status = 1')
+			->andWhere('C.location = :location')
+			->setParameter('location',$location)
+			->groupBy('C.area');
+		$entities = $query->getQuery()->getResult();
+
+		return $entities;
+
 	}
 }
