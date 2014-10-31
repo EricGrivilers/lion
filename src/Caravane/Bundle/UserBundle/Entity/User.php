@@ -20,7 +20,7 @@ class User extends BaseUser
 
 
     /**
-    * @ORM\OneToOne(targetEntity="Caravane\Bundle\CrmBundle\Entity\Contact" ,  mappedBy="user" )
+    * @ORM\OneToOne(targetEntity="Caravane\Bundle\CrmBundle\Entity\Contact" ,  mappedBy="user", cascade={"persist"} )
     */
     protected $contact;
 
@@ -38,6 +38,14 @@ class User extends BaseUser
     {
         parent::__construct();
         // your own logic
+    }
+
+
+
+    public function setEmail($email)
+    {
+             parent::setEmail($email);
+             $this->setUsername($email);
     }
 
     /**

@@ -11,6 +11,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // add your custom field
+         $builder->remove('username');  // we use email as the username
          $builder->add('contact', new ContactType());
     }
 

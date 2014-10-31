@@ -1,19 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<h2 class="title">{{"Mon profil"|trans}}</h2>
-<div class="separator"></div>
-<div class="row">
-	<div class="col-md-12">
-	    <p>{{ user.contact.salutation }} {{ user.contact.firstname }} {{ user.contact.lastname }}</p>
-	    <p>{{user.contact.number }} {{ user.contact.street}}</p>
-	    <p>{{ user.contact.zip}} {{ user.contact.city}} {{user.contact.country }}</p>
-	    {% if user.contact.tel is defined %}<p>{{ 'phone'|trans }}: {{ user.contact.tel }}</p>{% endif %}
-	    {% if user.contact.fax is defined %}<p>{{ 'fax'|trans }}: {{ user.contact.fax }}</p>{% endif %}
-	    <p>
-	    	<a href="{{path('fos_user_profile_edit')}}">{{"modifier"|trans}}</a>
-	    </p>
-	</div>
-</div>
 
 <h2 class="title">{{"Mes favoris"|trans}}</h2>
 <div class="separator"></div>
@@ -94,7 +80,7 @@
 
 </div>
 
-{% if last_search_form %}
+{% if last_search_form is defined %}
 <h2 class="title">{{"Ma dernière recherche"|trans}}</h2>
 <div class="separator"></div>
 <div class="form_container">
@@ -159,3 +145,40 @@
 
 </div>
 {% endif %}
+
+
+
+<h2 class="title">{{"Mon profil"|trans}}</h2>
+<div class="separator"></div>
+<div class="row">
+	<div class="col-md-12">
+		<p>
+		{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+						{{ 'layout.logged_in_as'|trans}} {{app.user.email}} |
+						<a href="{{ path('fos_user_security_logout') }}">
+							{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+						</a>
+		{% else %}
+			<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+		{% endif %}
+</p>
+
+
+
+		{% if user.contact %}
+		    <p>{{ user.contact.salutation }} {{ user.contact.firstname }} {{ user.contact.lastname }}</p>
+		    <p>{{user.contact.number }} {{ user.contact.street}}</p>
+		    <p>{{ user.contact.zip}} {{ user.contact.city}} {{user.contact.country }}</p>
+		    {% if user.contact.tel is defined %}<p>{{ 'phone'|trans }}: {{ user.contact.tel }}</p>{% endif %}
+		    {% if user.contact.fax is defined %}<p>{{ 'fax'|trans }}: {{ user.contact.fax }}</p>{% endif %}
+		{% else %}
+		<div class="alert alert-info">{{"Vous n'avez pas encore complété votre profil."|trans}}</div>
+	    {% endif %}
+	    <p>
+	    	<a href="{{path('fos_user_profile_edit')}}" class="btn btn-orange">{{"modifier"|trans}}</a>
+	    </p>
+	</div>
+</div>
+
+
+

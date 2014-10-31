@@ -28,28 +28,28 @@ class ProfileController extends BaseController
 			throw new AccessDeniedException('This user does not have access to this section.');
 		}
 
+		if($user->getContact()) {
+			if($lastSearch=json_decode($user->getContact()->getLastSearch(), true)) {
+				$type= "sale";
+				if($lastSearch['location']=='1') {
+					$type="rent";
+				}
 
-		if($lastSearch=json_decode($user->getContact()->getLastSearch(), true)) {
+				$em = $this->getDoctrine()->getManager();
+				$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
-			$type= "sale";
-			if($lastSearch['location']=='1') {
-				$type="rent";
+				$last_search_form = $this->createForm( 'search_form', null, array('prices'=>$prices));
+				$last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'btn-red pull-right')));
+				$lastSearch['offset']=0;
+				$last_search_form->setData($lastSearch);
+				 return $this->render('FOSUserBundle:Profile:show.html.twig', array(
+					'user' => $user,
+					'last_search_form'=>$last_search_form->createView(),
+					'type'=>$type
+				));
 			}
-
-			$em = $this->getDoctrine()->getManager();
-			$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
-
-			$last_search_form = $this->createForm( 'search_form', null, array('prices'=>$prices));
-			$last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'btn-red pull-right')));
-			$lastSearch['offset']=0;
-			$last_search_form->setData($lastSearch);
-			 return $this->render('FOSUserBundle:Profile:show.html.twig', array(
-				'user' => $user,
-				'last_search_form'=>$last_search_form->createView(),
-				'type'=>$type
-			));
-
 		}
+
 
 
 

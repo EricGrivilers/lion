@@ -2,15 +2,22 @@
 
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
    <div class="row">
-	<div class="col-md-6">
-		{{form_row(form.contact.language)}}
-		{{form_row(form.contact.salutation)}}
+	<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-6">
+				{{form_row(form.contact.language)}}
+			</div>
+			<div class="col-md-6">
+				{{form_row(form.contact.salutation)}}
+			</div>
+		</div>
+
+
 		{{form_row(form.contact.firstname)}}
 		{{form_row(form.contact.lastname)}}
-		{{form_row(form.email)}}
 		{{form_row(form.contact.tel)}}
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-4">
 		{{form_row(form.contact.street)}}
 		{{form_row(form.contact.number)}}
 		{{form_row(form.contact.zip)}}
@@ -18,8 +25,12 @@
 		{{form_row(form.contact.country)}}
 		{{form_row(form.contact.fax)}}
 	</div>
+	<div class="col-md-4">
+		 	 {{ form_rest(form) }}
+	</div>
 
-
+</div>
+<div class="row">
     <div class="col-md-12">
     	 {{ form_rest(form) }}
         <input type="submit" class="btn btn-red" value="{{ 'registration.submit'|trans }}" />

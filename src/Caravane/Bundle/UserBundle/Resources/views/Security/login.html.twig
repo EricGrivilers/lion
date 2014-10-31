@@ -35,6 +35,9 @@
                                     <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="form-control btn btn-red" />
                                 </div>
                             </form>
+                            <p>
+                                <a href="{{ path('fos_user_resetting_request') }}">{{"Mot de passe oublié?"|trans}}</a>
+                            </p>
                         {% endblock fos_user_content %}
                     </div>
                     <div class="col-md-4 col-md-offset-2">
