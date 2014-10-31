@@ -38,13 +38,46 @@ class ProfileController extends BaseController
 				$em = $this->getDoctrine()->getManager();
 				$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
-				$last_search_form = $this->createForm( 'search_form', null, array('prices'=>$prices));
-				$last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'btn-red pull-right')));
-				$lastSearch['offset']=0;
-				$last_search_form->setData($lastSearch);
+				$last_search_form = $this->createForm( 'search_form', null, array('prices'=>$prices,'type'=>$type));
+				 $last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
+        			$lastSearch['offset']=0;
+
+				foreach($lastSearch as $k=>$v) {
+					if($k!='_token' ) {
+						if($k=="zone") {
+							$zones=new \Doctrine\Common\Collections\ArrayCollection();
+							foreach($v as $i=>$u) {
+								if($entity=$em->getRepository('CaravaneEstateBundle:Zone')->find($u)) {
+									$zones->add($entity);
+								}
+							}
+							$last_search_form->get('zone')->setData($zones);
+						}
+						else if($k=="category") {
+							$categories=new \Doctrine\Common\Collections\ArrayCollection();
+							foreach($v as $i=>$u) {
+								if($entity=$em->getRepository('CaravaneEstateBundle:Category')->find($u)) {
+									$categories->add($entity);
+								}
+							}
+							$last_search_form->get('category')->setData($categories);
+						}
+						else if($k=="area") {
+							if($area=$em->getRepository('CaravaneEstateBundle:Area')->find($v)) {
+								$last_search_form->get('area')->setData($area);
+							}
+						}
+						else {
+							$last_search_form->get($k)->setData($v);
+						}
+
+					}
+
+				}
+		//		$last_search_form->setData($lastSearch);
 				 return $this->render('FOSUserBundle:Profile:show.html.twig', array(
 					'user' => $user,
-					'last_search_form'=>$last_search_form->createView(),
+					'search_form'=>$last_search_form->createView(),
 					'type'=>$type
 				));
 			}

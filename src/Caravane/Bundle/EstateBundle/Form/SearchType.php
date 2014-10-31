@@ -10,6 +10,10 @@ class SearchType extends AbstractType
 {
 
     protected $prices;
+    protected $type;
+
+    protected $location;
+    protected $isNewBuilding;
 
 
     /**
@@ -20,6 +24,12 @@ class SearchType extends AbstractType
     {
         if(isset($options['prices'])) {
             $this->prices=$options['prices'];
+        }
+        if(isset($options['type'])) {
+            $this->type=$options['type'];
+        }
+        else {
+            $this->type="sale";
         }
 
 
@@ -49,11 +59,30 @@ class SearchType extends AbstractType
                     "data-toggle"=>"buttons"
                 )
             ))
+            ->add("rayon","choice",array(
+                "label"=>false,
+                "empty_value" => 'Rayon',
+                "choices"=>array(
+                    "1"=>"1 km",
+                    "5"=>"5 km",
+                    "10"=>"10 km",
+                    "20"=>"20 km",
+                    "50"=>"50 km"
+                )
+            ))
+
             ->add('reference',"text",array(
                 "attr"=>array(
                     "placeholder"=>"Reference"
                 )
             ))
+
+            ->add('address',"text",array(
+                "attr"=>array(
+                    "placeholder"=>"Adresse"
+                )
+            ))
+
             ->add('category','entity', array(
                 "label"=>false,
                 "expanded"=>true,
@@ -66,7 +95,7 @@ class SearchType extends AbstractType
             ))
             ->add('location','hidden')
 
-            ->add('isNewBuilding','checkbox',array(
+             ->add('isNewBuilding',($this->type!='rent'?'checkbox':'hidden'),array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(
                     "class"=>"btn "
@@ -100,7 +129,12 @@ class SearchType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('prices'=>array()));
+        $resolver->setDefaults(array(
+            'prices'=>array(),
+            "type"=>"sale",
+            "location"=>0,
+            "isNewBuilding"=>false
+        ));
     }
 
 

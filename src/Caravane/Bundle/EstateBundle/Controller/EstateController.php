@@ -254,9 +254,13 @@ class EstateController extends Controller
 
     public function searchAction(Request $request) {
 
-        if(!$datas=$request->request->get('form')) {
+
+        if(!$datas=$request->request->get('search_form')) {
             $datas=array('location'=>0);
         }
+
+
+
 
         $type=($datas['location']==1?'rent':'sale');
 
@@ -275,6 +279,8 @@ class EstateController extends Controller
                 $em->flush();
             }
         }
+
+
 
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
         if(count($estates)<=0 && $request->isXmlHttpRequest()) {
@@ -429,7 +435,30 @@ class EstateController extends Controller
 
 
     private function searchForm($request, $type='sale') {
+        $em = $this->getDoctrine()->getManager();
+        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
+        $options=array('prices'=>$prices,'type'=>$type);
+        if($type=='rent') {
+            $options['location']=1;
+
+        }
+        else {
+            $options['location']=0;
+        }
+        $options['isNewBuilding']=0;
+         if($type=='new') {
+            $options['isNewBuilding']=1;
+            $options['location']=0;
+        }
+
+
+        $search_form = $this->createForm( 'search_form', null, $options);
+        $search_form->get('location')->setData($options['location']);
+        $search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
+        $search_form->handleRequest($request);
+        return $search_form;
+/*
         $datas=array('location'=>($type=='sale'?0:1),"sort"=>"updatedOn desc");
         if($type=='new') {
             $datas['isNewBuilding']=true;
@@ -498,21 +527,7 @@ class EstateController extends Controller
                 )
             ))
             ->add('location','hidden')
-            /*
-            ->add('location','choice', array(
-                "label"=>false,
-                "expanded"=>true,
-                "multiple"=>false,
-                "data"=>0,
-                "choices"=>array(
-                    "0"=>"Vente",
-                    "1"=>"Location"
-                ),
-                "attr"=>array(
-                    "class"=>"btn-group btn-group-justified",
-                    "data-toggle"=>"buttons"
-                )
-            ))*/
+
             ->add('isNewBuilding',($type!='rent'?'checkbox':'hidden'),array(
                 "label"=>"Biens neufs uniquement",
                 "attr"=>array(
@@ -546,5 +561,6 @@ class EstateController extends Controller
             $form->handleRequest($request);
 
             return $form;
+            */
     }
 }

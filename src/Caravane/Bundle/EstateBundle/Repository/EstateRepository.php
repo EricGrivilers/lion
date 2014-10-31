@@ -22,166 +22,136 @@ class EstateRepository extends EntityRepository
 
 	public function findLastUpdated($limit=3, $user) {
 
-          $estates= $this->findBy(
+		$estates= $this->findBy(
 			array(),
 			array('updatedOn'=>'desc'),
 			$limit
 		);
-           if($user) {
-           	$ids=array();
-          		foreach($user->getEstate() as $ue) {
-          			if($estate=$ue->getEstate()) {
-          				if($estate->getStatus() && $ue->getSaved()) {
-	          				$ids[]=$estate->getId();
-	          			}
+
+		if($user) {
+			$ids=array();
+			foreach($user->getEstate() as $ue) {
+				if($estate=$ue->getEstate()) {
+					if($estate->getStatus() && $ue->getSaved()) {
+						$ids[]=$estate->getId();
+					}
 				}
-          		}
+			}
+			if(count($ids)>0) {
+				$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
+						->where('C.status = 1')
+						->andWhere('C.id IN (:ids)')
+						->setParameter("ids",$ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
 
-          		if(count($ids)>0) {
-
-          			 $query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
-        			->where('C.status = 1')
-        			->andWhere('C.id IN (:ids)')
-
-        			->setParameter("ids",$ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
-
-        			$result= $query->getQuery()->getResult();
+				$result= $query->getQuery()->getResult();
 				$collection = new ArrayCollection(
-				    array_merge($result,$estates)
+					array_merge($result,$estates)
 				);
 				$estates=$collection;
-          		}
-          }
-
-          /*$collection3 = new ArrayCollection(
-    array_merge($collection1->toArray(), $collection2->toArray())
-);
-*/
+			}
+		}
 		return $estates;
 	}
 
 
 	public function getSearchResult($postDatas=array(), $options=array()) {
-		/*if(!$postDatas=$request->query->get('c_s')) {
-            $postDatas=array();
-		}*/
-        $datas=array_merge_recursive($postDatas, $options);
+
+		$datas=array_merge_recursive($postDatas, $options);
 
 
-		 $type=($datas['location']==1?'rent':'sale');
+		$type=($datas['location']==1?'rent':'sale');
+		if($datas['location']!=1) {
+			$datas['location']=0;
+		}
+$type=($datas['location']==1?'rent':'sale');
 
 
-         if(isset($datas['reference'])) {
-            if($estates=$this->findOneBy(array('reference'=>"030/".$datas['reference']))) {
-                return $estates;
-            }
+		if(isset($datas['reference'])) {
+			if($datas['reference']!='') {
+				if($estates=$this->findOneBy(array('reference'=>"030/".$datas['reference']))) {
+					return $estates;
+				}
+			}
+		}
 
-         }
+		if(!isset($datas['offset'])) {
+			$datas['offset']=0;
+		}
+		if(!isset($datas['limit'])) {
+			$datas['limit']=24;
+		}
 
-        if(!isset($datas['offset'])) {
-            $datas['offset']=0;
-        }
-        if(!isset($datas['limit'])) {
-            $datas['limit']=24;
-        }
-        $query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
-        ->where('C.status = :status')
-        ->andWhere('C.location = :type')
-        ->setParameter('status', 1)
-        ->setParameter('type', $datas['location']);
+		$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
+			->where('C.status = :status')
+			->andWhere('C.location = :type')
+			->setParameter('status', 1)
+			->setParameter('type', $datas['location']);
 
-        //$dql = "SELECT C FROM CaravaneEstateBundle:Estate C ";
-        //$dql.=" WHERE 1=1  ";
-        //$dql.=" AND C.status='1' ";
-        //$dql.=" AND C.location='".$datas['location']."' ";
-
-        if(isset($datas['category'])) {
-        	$category=implode(",",$datas['category']);
-        	//$dql.=" AND C.category IN(".$category.") ";
-            $query->andWhere('C.category IN (:category)')
-            ->setParameter('category', $category);
-        }
+		if(isset($datas['category'])) {
+			$category=implode(",",$datas['category']);
+			$query->andWhere('C.category IN (:category)')
+					->setParameter('category', $category);
+		}
 		if(isset($datas['zone'])) {
-        	$zone=implode(",",$datas['zone']);
-        	//$dql.=" AND C.zone IN(".$zone.") ";
-            $query->andWhere('C.zone IN (:zone)')
-            ->setParameter('zone', $zone);
-        }
-        if(isset($datas['area'])) {
-            //$dql.=" AND C.area=".$datas['area']." ";
+			$zone=implode(",",$datas['zone']);
+			$query->andWhere('C.zone IN (:zone)')
+					->setParameter('zone', $zone);
+		}
+		if(isset($datas['area'])) {
+			if(isset($datas['rayon'])) {
+				$query->andWhere('C.area =:area')
+						->setParameter('area', $datas['area']);
+			}
+			else {
+				$query->andWhere('C.area =:area')
+				->setParameter('area', $datas['area']);
+			}
+		}
+		if(isset($datas['keyword'])) {
+			if($datas['keyword']!="") {
+				$query->andWhere('C.description LIKE :keyword')
+					->setParameter('keyword', "%".$datas['keyword']."%");
+			}
+		}
+		if(isset($datas['prix'])) {
+			$prices=$this->getEntityManager()->getRepository('CaravaneEstateBundle:Price')->findBy(array('type'=>$type), array("price"=>"asc"));
+			foreach($prices as $price) {
+				$pA[$type."_".$price->getId()]=$price->getPrice();
+			}
 
-            if(isset($datas['rayon'])) {
-            	$query->andWhere('C.area =:area')
-                ->setParameter('area', $datas['area']);
-            }
-            else {
-                $query->andWhere('C.area =:area')
-                ->setParameter('area', $datas['area']);
-            }
-        }
-        if(isset($datas['keyword'])) {
-            //$dql.=" AND C.description LIKE \"%".$datas['keyword']."%\" ";
-            $query->andWhere('C.description LIKE :keyword')
-            ->setParameter('keyword', "%".$datas['keyword']."%");
-        }
-        if(isset($datas['prix'])) {
-            $prices=$this->getEntityManager()->getRepository('CaravaneEstateBundle:Price')->findBy(array('type'=>$type), array("price"=>"asc"));
-            foreach($prices as $price) {
-                $pA[$type."_".$price->getId()]=$price->getPrice();
-            }
-    //        var_dump($pA);
+			$dqlA=array();
+			foreach($datas['prix'] as $priceCode) {
+				$tA=explode('_',$priceCode);
+				$id=$tA[0]."_".$tA[1];
+				if($tA[2]=="-") {
+					$dqlA[]=" C.prix <= :p".$tA[1];
+					$query->setParameter("p".$tA[1], $pA[$id]);
+				}
+				else if($tA[2]=="+") {
+					$dqlA[]=" C.prix >= :p".$tA[1];
+					$query->setParameter("p".$tA[1], $pA[$id]);
+				}
+				else {
+					$dqlA[]=" ( C.prix >= :p".$tA[1]." AND C.prix <= :p".$tA[2].") ";
+					$query->setParameter("p".$tA[1], $pA[$id]);
+					$query->setParameter("p".$tA[2], $pA[$type."_".$tA[2]]);
+				}
+			}
+			$query->andWhere(implode(" OR ", $dqlA));
+		}
+		if($datas['isNewBuilding']) {
+			$query->andWhere("C.isNewBuilding=1");
+		}
+		$query->setFirstResult($datas['offset']);
+		$query->setMaxResults($datas['limit']);
+		if(!isset($datas['sort'])) {
+			$datas['sort']="updatedOn desc";
+		}
+		$sort=explode(" ",$datas['sort']);
+		$query->orderBy("C.".$sort[0],$sort[1]);
 
+		$entities = $query->getQuery()->getResult();
 
-            $dqlA=array();
-            foreach($datas['prix'] as $priceCode) {
-                $tA=explode('_',$priceCode);
-                $id=$tA[0]."_".$tA[1];
-                if($tA[2]=="-") {
-                   // $dqlA[]=" C.prix <= ".$pA[$id];
-                    $dqlA[]=" C.prix <= :p".$tA[1];
-                    $query->setParameter("p".$tA[1], $pA[$id]);
-                }
-                else if($tA[2]=="+") {
-                 //   $dqlA[]=" C.prix >= ".$pA[$id];
-                    $dqlA[]=" C.prix >= :p".$tA[1];
-                    $query->setParameter("p".$tA[1], $pA[$id]);
-                }
-                else {
-                    //$dqlA[]=" ( C.prix >=".$pA[$id]." AND C.prix <= ".$pA[$type."_".$tA[2]].") ";
-                    $dqlA[]=" ( C.prix >= :p".$tA[1]." AND C.prix <= :p".$tA[2].") ";
-                    $query->setParameter("p".$tA[1], $pA[$id]);
-                    $query->setParameter("p".$tA[2], $pA[$type."_".$tA[2]]);
-                }
-                //$prix=$pA[$id];
-                //echo $prix;
-
-            }
-             $query->andWhere(implode(" OR ", $dqlA));
-
-
-        //    $dql.=" AND (".implode(" OR ", $dqlA).") ";
-        }
-        if(isset($datas['isNewBuilding'])) {
-            $query->andWhere("C.isNewBuilding=1");
-        }
-        $query->setFirstResult($datas['offset']);
-        $query->setMaxResults($datas['limit']);
-        if(!isset($datas['sort'])) {
-            $datas['sort']="updatedOn desc";
-        }
-        $sort=explode(" ",$datas['sort']);
-        $query->orderBy("C.".$sort[0],$sort[1]);
-      // echo $dql;
-//echo $datas['offset'];
-
-        //$query = $this->getEntityManager()->createQuery($dql);
-        //$entities = $query->getResult();
-
-        $entities = $query->getQuery()->getResult();
-        //$entities = new Paginator($query, $fetchJoinCollection = true);
-
-
-        return $entities;
-
+		return $entities;
 	}
 }

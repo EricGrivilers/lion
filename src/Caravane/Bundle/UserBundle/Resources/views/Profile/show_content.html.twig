@@ -80,66 +80,17 @@
 
 </div>
 
-{% if last_search_form is defined %}
+{% if search_form is defined %}
 <h2 class="title">{{"Ma dernière recherche"|trans}}</h2>
 <div class="separator"></div>
 <div class="form_container">
 
 
-{% form_theme last_search_form 'CaravaneCmsBundle:Form:fields.html.twig' %}
+{% form_theme search_form 'CaravaneCmsBundle:Form:fields.html.twig' %}
 
 
 
-<form name="caravane_bundle_estatebundle_search_{{type}}" id="caravane_bundle_estatebundle_search" method="POST" action="{{path('caravane_estate_frontend_estate_search')}}" role="form" novalidate ><div id="caravane_bundle_estatebundle_search">
-{% block body -%}
-
-
-
-	<section class='row' style="margin-bottom:10px">
-		<div class='col-sm-6  col-md-4'>
-			<div class="input-group">
-				<span class="input-group-addon"><span class="fa  fa-search"></span></span>
-				{{form_widget(last_search_form.keyword)}}
-			</div>
-		</div>
-		<div class='col-sm-6  col-md-4'>
-			{{form_row(last_search_form.area)}}
-		</div>
-		<div class=' col-sm-6 col-md-4'>
-			<div class="input-group">
-				<span class="input-group-addon">030</span>
-				{{form_widget(last_search_form.reference)}}
-			</div>
-		</div>
-	</section>
-	<section class='row' style="margin-bottom:10px">
-		<div class="col-sm-6  col-md-4">
-
-			{{form_row(last_search_form.category)}}
-		</div>
-		<div class="col-sm-6  col-md-4">
-			{{form_row(last_search_form.zone)}}
-		</div>
-		<div class="col-sm-6  col-md-4">
-			{{form_row(last_search_form.prix)}}
-		</div>
-	</section>
-	<section class='row' style="margin-bottom:10px">
-		<div class="col-sm-6  col-md-4">
-			{{form_row(last_search_form.isNew)}}
-		</div>
-		<div class="col-sm-6  col-md-4">
-			{{form_row(last_search_form.sort)}}
-		</div>
-		<div class="col-sm-6  col-md-4">
-			{{form_row(last_search_form.submit)}}
-		</div>
-	</section>
-
-
-{% endblock %}
-{{ form_rest(last_search_form) }}
-</div></form>
+{% include "CaravaneEstateBundle:Estate:search.html.twig" %}
 
 
 

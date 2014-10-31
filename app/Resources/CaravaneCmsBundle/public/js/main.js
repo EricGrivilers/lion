@@ -5,7 +5,7 @@
 		type=$(this).attr('rel');
 		isLocation=(type=='sale'?0:1);
 
-		if($('#form_location').val()==isLocation) {
+		if($('#search_form_location').val()==isLocation) {
 			$('#search').show();
 			$('.navbar-collapse').hide();
 		}
@@ -82,18 +82,18 @@
 
 
 	$('#form_sort').change(function() {
-		$("form#caravane_bundle_estatebundle_search input#form_offset").val(0);
+		$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(0);
 	});
 
 	$('#nextEstate').click(function(e) {
 		e.stopPropagation();
 		e.preventDefault();
-		offset=$("form#caravane_bundle_estatebundle_search input#form_offset").val();
-		limit=$("form#caravane_bundle_estatebundle_search input#form_limit").val();
+		offset=$("form#caravane_bundle_estatebundle_search input#search_form_offset").val();
+		limit=$("form#caravane_bundle_estatebundle_search input#search_form_limit").val();
 		if(offset==undefined) {
 			offset=0;
 		}
-		$("form#caravane_bundle_estatebundle_search input#form_offset").val(parseInt(offset)+parseInt(limit));
+		$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(parseInt(offset)+parseInt(limit));
 		var postData = $('form#caravane_bundle_estatebundle_search').serializeArray();
 		var formURL = $('form#caravane_bundle_estatebundle_search').attr("action");
 
