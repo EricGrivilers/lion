@@ -25,27 +25,33 @@
 					<h2 class="title">IMMOBILIERE LE LION</h2>
 					<div class="separator"></div>
 					<p>
-						L'immobilière LE LION est spécialisée depuis plus de 40 ans dans la vente et la location de biens de prestige à Bruxelles et ses environs. Si vous souhaitez mettre votre bien en vente ou en location, n'hésitez pas à consulter notre agence. Nous sommes à votre disposition pour toute estimation ou conseil gratuit sans aucun engagement de votre part. Faites-nous confiance et nous mettrons toute notre expérience et notre dynamisme à votre service.</p>
+						L'immobilière LE LION est <b>spécialisée depuis plus de 40 ans dans la vente et la location de biens de prestige</b> à Bruxelles et ses environs. Si vous souhaitez mettre votre bien en vente ou en location, n'hésitez pas à consulter notre agence. Nous sommes à votre disposition pour toute estimation ou conseil gratuit sans aucun engagement de votre part. Faites-nous confiance et nous mettrons toute notre expérience et notre dynamisme à votre service.</p>
 
-					<p>L’Immobilière Le Lion vous propose différentes manières pour vous aider dans votre recherche immobilière. Le plus efficace est de prendre contact directement avec nous par téléphone ou via notre page de contact en nous envoyant vos critères de recherche pour être automatiquement prévenu dès qu’un nouveau bien correspondant à vos attentes apparait.</p>
+					<p>L’Immobilière Le Lion vous propose différentes manières pour vous aider dans votre recherche immobilière. Le plus efficace est de prendre contact directement avec nous par téléphone ou via notre page de <a href='{{path('caravane_cms_contact')}}'  >contact</a> en nous envoyant vos critères de recherche pour être automatiquement prévenu dès qu’un nouveau bien correspondant à vos attentes apparait.</p>
 				</div>
 				<div class="col-md-offset-1 col-md-3">
+					<div style="text-align: center">
 					<img src="{{asset('/medias/logo_footer.png')}}" style="margin-top:80px"/>
 					<br/>
 					<br/>
 					<div class="textwidget">
 						<address>
+							<ul class="phone">
+								<li><b class="phone">Tel: <a href="tel:+32 2 672 71 11">+32 2 672 71 11</a></b></li>
+							</ul>
 							<ul class="address">
 								<li>Avenue Delleur 8</li>
 								<li>B-1170</li>
 								<li>Brussels, Belgium</li>
 							</ul>
-							<ul class="phone">
-								<li>Phone: +32 2 672 71 11</li>
-								<li>Fax: +32 2 672 67 17</li>
-							</ul>
+
 						</address>
 					</div>
+				</div>
+					<br/>
+					<p>
+						<a href='{{path('caravane_cms_contact')}}' class="btn btn-lg btn-red btn-block" >{{"Nous contacter"|trans}}</a>
+					</p>
 				</div>
 			</div>
 		</div>
@@ -59,7 +65,8 @@
 
 				</div>
 				<div class="col-md-offset-1 col-md-3">
-					<a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-orange" >Créer mon profil</a>
+					<br/>
+					<a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-orange btn-block" >Créer mon profil</a>
 				</div>
 			</div>
 		</div>
