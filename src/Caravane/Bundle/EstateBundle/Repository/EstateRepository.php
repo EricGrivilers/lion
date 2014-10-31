@@ -29,6 +29,15 @@ class EstateRepository extends EntityRepository
 		);
 
 		if($user) {
+			if($user->getContact()) {
+				$lastSearch=json_decode($user->getContact()->getLastSearch(), true);
+				$lastSearchResults=$this->getSearchResult($lastSearch);
+			}
+			$collection = new ArrayCollection(
+				array_merge($lastSearchResults,$estates)
+			);
+			$estates=$collection;
+			/*
 			$ids=array();
 			foreach($user->getEstate() as $ue) {
 				if($estate=$ue->getEstate()) {
@@ -49,6 +58,7 @@ class EstateRepository extends EntityRepository
 				);
 				$estates=$collection;
 			}
+			*/
 		}
 		return $estates;
 	}
