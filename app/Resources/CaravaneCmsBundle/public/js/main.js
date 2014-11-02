@@ -15,10 +15,11 @@ function initializeSearchMap() {
 			        map: map
 			      });
 */
-				 var marker = new MarkerWithLabel({
+			if(b.num>0) {
+				var marker = new MarkerWithLabel({
 				       position: new google.maps.LatLng(b.lat, b.lng),
 				       map: map,
-				        labelContent: a,
+				        labelContent: b.num,
 				       labelAnchor: new google.maps.Point(20, 40),
 				       labelClass: "marker_label"
 				});
@@ -27,11 +28,16 @@ function initializeSearchMap() {
 
 				 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 					return function() {
-						route=Routing.generate('caravane_estate_frontend_estate_search_by_area',{'type':type,'id': markers[i].id});
-						document.location=route;
+						$('#form_container form')[0].reset();
+						$('#form_container form #search_form_area').val(markers[i].id);
+						$('#form_container form')[0].submit();
+						//route=Routing.generate('caravane_estate_frontend_estate_search_by_area',{'type':type,'id': markers[i].id});
+						//document.location=route;
 					}
 				}) (marker, i));
-				 i++;
+			}
+
+			i++;
 
 
 			});
@@ -49,6 +55,13 @@ function initializeSearchMap() {
 		if($('#search_form_location').val()==isLocation) {
 			$('#search').show();
 			$('.navbar-collapse').hide();
+			route2=Routing.generate('caravane_estate_frontend_estate_search_count_by_area',{'type':type});
+				$.get(route2, function(data) {
+					markers=data;
+					initializeSearchMap();
+					google.maps.event.addDomListener(window, 'load', initializeSearchMap);
+
+				})
 		}
 		else {
 			$('#main_menu nav li ').removeClass('active');
