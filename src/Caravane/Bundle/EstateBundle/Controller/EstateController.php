@@ -292,7 +292,7 @@ class EstateController extends Controller
             'type'=>$type
         ));
     }
-
+/*
      public function searchByAreaAction(Request $request, $type,$id) {
         $em=$this->getDoctrine()->getmanager();
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByArea($id);
@@ -304,7 +304,7 @@ class EstateController extends Controller
             'type'=>$type
         ));
     }
-
+*/
     public function searchByAreasAction(Request $request, $type="sale") {
         $areas=array();
         $em=$this->getDoctrine()->getmanager();

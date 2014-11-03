@@ -37,28 +37,6 @@ class EstateRepository extends EntityRepository
 				array_merge($lastSearchResults,$estates)
 			);
 			$estates=$collection;
-			/*
-			$ids=array();
-			foreach($user->getEstate() as $ue) {
-				if($estate=$ue->getEstate()) {
-					if($estate->getStatus() && $ue->getSaved()) {
-						$ids[]=$estate->getId();
-					}
-				}
-			}
-			if(count($ids)>0) {
-				$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
-						->where('C.status = 1')
-						->andWhere('C.id IN (:ids)')
-						->setParameter("ids",$ids, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
-
-				$result= $query->getQuery()->getResult();
-				$collection = new ArrayCollection(
-					array_merge($result,$estates)
-				);
-				$estates=$collection;
-			}
-			*/
 		}
 		return $estates;
 	}
@@ -174,11 +152,17 @@ $type=($datas['location']==1?'rent':'sale');
 		if($type=='rent') {
 			$location=1;
 		}
+		if($type=="new") {
+			$location=0;
+		}
 		$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
 			->select('COUNT(C), C.id, area.id, area.latlng')
 			->leftJoin('C.area', 'area')
-			->where('C.status = 1')
-			->andWhere('C.location = :location')
+			->where('C.status = 1');
+			if($type=="new") {
+				$query->andWhere('C.isNewBuilding = 1');
+			}
+			$query->andWhere('C.location = :location')
 			->setParameter('location',$location)
 			->groupBy('C.area');
 		$entities = $query->getQuery()->getResult();

@@ -30,6 +30,9 @@ function initializeSearchMap() {
 					return function() {
 						$('#form_container form')[0].reset();
 						$('#form_container form #search_form_area').val(markers[i].id);
+						if(type=='new') {
+							$('#form_container form #search_form_isNewBuilding').attr('checked',true);
+						}
 						$('#form_container form')[0].submit();
 						//route=Routing.generate('caravane_estate_frontend_estate_search_by_area',{'type':type,'id': markers[i].id});
 						//document.location=route;
