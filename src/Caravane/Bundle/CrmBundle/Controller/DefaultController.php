@@ -22,19 +22,32 @@ class DefaultController extends Controller
     private function contactForm($request) {
         $datas=array();
         $form = $this->createFormBuilder($datas)
-        ->add('name', 'text',array(
+        ->add('lastname', 'text',array(
             "label"=>"Nom",
+            "required"=>true
+        ))
+        ->add('firstname', 'text',array(
+            "label"=>"Prénom",
             "required"=>true
         ))
         ->add('email','email',array(
             "label"=>"Email",
             "required"=>true
         ))
+        ->add('phone','text',array(
+            "label"=>"Téléphone",
+            "required"=>true
+        ))
         ->add('address','text',array("label"=>"Adresse"))
+        ->add('zip','text',array("label"=>"Code postal"))
         ->add('city','text',array("label"=>"Ville"))
-        ->add('country','country',array("label"=>"Pays"))
+        ->add('country','country',array(
+            "label"=>"Pays",
+            "data"=>"BE",
+            'preferred_choices' => array('BE','FR','NL','GB','IT','ES','DE','LU','PT','CH','MC','US','CA','IE','GR','AT'),
+            ))
         ->add('location','text',array(
-            "label"=>"Pour une demande d'estimation, veuillez préciser la localité du bien :"
+            "label"=>"Pour une demande d'estimation, veuillez préciser la localisation du bien :"
         ))
         ->add('comments','textarea',array("label"=>"Message"))
         ->getForm();

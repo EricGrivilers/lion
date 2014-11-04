@@ -53,9 +53,9 @@ function initializeSearchMap() {
 		e.preventDefault();
 		e.stopPropagation();
 		type=$(this).attr('rel');
-		isLocation=(type=='sale'?0:1);
+		isLocation=(type=='location'?1:0);
 
-		if($('#search_form_location').val()==isLocation) {
+		if($('#search_form_location').val()==isLocation &&  $('#search_form_type').val() == type) {
 			$('#search').show();
 			$('.navbar-collapse').hide();
 			route2=Routing.generate('caravane_estate_frontend_estate_search_count_by_area',{'type':type});

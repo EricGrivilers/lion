@@ -97,10 +97,13 @@ class SearchType extends AbstractType
 
              ->add('isNewBuilding',($this->type!='rent'?'checkbox':'hidden'),array(
                 "label"=>"Biens neufs uniquement",
+                "data"=>($this->type=='new'?true:false),
                 "attr"=>array(
                     "class"=>"btn "
                 )
             ))
+             ->add('type','hidden',array(
+                "data"=>$this->type))
             ->add('keyword','text',array(
                 "attr"=>array(
                     "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
