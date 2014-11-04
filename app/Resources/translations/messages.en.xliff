@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="908d508dfc49c29b2accfa6c99bb62cca10d53c7" resname="NOUVEAUX BIENS">
         <source>NOUVEAUX BIENS</source>
-        <target>NEW BUILDINGS</target>
+        <target>NEW</target>
         <jms:reference-file line="4">Frontend/Homepage/last_updated.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="974d7b47440b41c5a38c8a8a7493b836416d6958" resname="Supprimer ce bien de ">
