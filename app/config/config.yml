@@ -139,11 +139,11 @@ liip_imagine:
 jms_translation:
     configs:
         app:
-            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src, %kernel.root_dir%/../app/Resources]
             output_dir: %kernel.root_dir%/Resources/translations
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]
-            excluded_dirs: [cache, data, logs]
+            excluded_dirs: [cache, data, logs, translations]
             extractors: [alias_of_the_extractor]
 
 

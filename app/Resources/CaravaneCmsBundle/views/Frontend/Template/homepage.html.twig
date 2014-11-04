@@ -1,5 +1,5 @@
 {% extends "CaravaneCmsBundle::layout.html.twig" %}
-
+{% trans_default_domain 'CaravaneCmsBundle' %}
 
 {% block header %}
 	<header class='page-header '>
@@ -25,9 +25,10 @@
 					<h2 class="title">IMMOBILIERE LE LION</h2>
 					<div class="separator"></div>
 					<p>
-						L'immobilière LE LION est <b>spécialisée depuis plus de 40 ans dans la vente et la location de biens de prestige</b> à Bruxelles et ses environs. Si vous souhaitez mettre votre bien en vente ou en location, n'hésitez pas à consulter notre agence. Nous sommes à votre disposition pour toute estimation ou conseil gratuit sans aucun engagement de votre part. Faites-nous confiance et nous mettrons toute notre expérience et notre dynamisme à votre service.</p>
+						{{"homepage.intro.paragraph.1"|trans|raw}}
+					</p>
 
-					<p>L’Immobilière Le Lion vous propose différentes manières pour vous aider dans votre recherche immobilière. Le plus efficace est de prendre contact directement avec nous par téléphone ou via notre page de <a href='{{path('caravane_cms_contact')}}'  >contact</a> en nous envoyant vos critères de recherche pour être automatiquement prévenu dès qu’un nouveau bien correspondant à vos attentes apparait.</p>
+					<p>{{"homepage.intro.paragraph.2"|trans}}</p>
 				</div>
 				<div class="col-md-offset-1 col-md-3">
 					<div style="text-align: center">
@@ -61,12 +62,13 @@
 		<div class='container'>
 			<div class="row ">
 				<div class="col-md-8">
-					<p>Créez votre profil sur notre site et vous pourrez sauvegarder les biens qui vous intéressent ainsi que vos critères de recherches. Vous retrouverez les nouveautés qui vous intéressent  directement sur notre page d’accueil  lors de votre prochaine visite.</p>
+					<p>{{"homepage.profile.creation"|trans}}
+						</p>
 
 				</div>
 				<div class="col-md-offset-1 col-md-3">
 					<br/>
-					<a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-orange btn-block" >Créer mon profil</a>
+					<a href="{{path('fos_user_registration_register')}}" class="btn btn-lg btn-orange btn-block" >{{"Créer mon profil"|trans}}</a>
 				</div>
 			</div>
 		</div>
@@ -86,13 +88,15 @@
 				<div class="col-md-7 col-md-height col-top">
 					<div class="row">
 						<div class="col-md-12">
-							<h2 class="title">APPLICATION MOBILE</h2>
+							<h2 class="title">{{"APPLICATION MOBILE"|trans}}</h2>
 							<div class="separator"></div>
 							<div class="col-md-12">
 								<p>
-									Pour toujours mieux vous accompagner dans le cadre de votre recherche immobilière, notre application mobile pour iPhone et iPad vous permet de recevoir instantanément les dernières offres, de géo-localiser les biens à proximité ou de consulter toutes les informations relatives à ceux-ci.</p>
+									{{"homepage.app.paragraph.1"|trans}}
+									</p>
 								<p>
-									L’application est disponible en téléchargement via l’ <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
+									{{"homepage.app.paragraph.2"|trans}}
+									 <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
 								</p>
 								<p><a href="http://itunes.apple.com/be/app/id396510696?mt=8"><img src="{{asset('/bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
 								</p>
@@ -106,6 +110,8 @@
 
 	<aside class='wrapper border-tb-white marble-color home_infos' >
 		<div class='container'>
+			<h2 class="title">{{"NOS PARTENAIRES"|trans}}</h2>
+							<div class="separator"></div>
 			<div class="row ">
 				<div class="col-md-offset-1 col-md-3">
 					<a href="http://www.luxuryportfolio.com/" target="_blank">
@@ -117,7 +123,8 @@
 				<div class="col-md-offset-1 col-md-6">
 
 
-					<p>L’<b>Immobilière Le Lion</b> est intégrée dans un réseau mondial de prestige, <a href="http://www.luxuryportfolio.com/" target="_blank">Leading Real Estates of The World</a>, avec qui elle partage les mêmes valeurs et la même qualité de service.</p>
+					<p>{{"homepage.partners.paragraph.1"|trans|raw}}
+						</p>
 				</div>
 			</div>
 			<div class="row ">
@@ -130,9 +137,7 @@
 				<div class="col-md-offset-1 col-md-6">
 
 
-					<p>
-L’agence a également noué un partenariat privilégié avec <a href="http://www.knightfrank.com/" target="_blank">Knight Frank International Property Sales</a>.
-Grâce à ces réseaux, l’<b>Immobilière Le Lion</b> offre la possibilité à ses clients de trouver un bien de qualité partout dans le monde. Elle propose également à ses clients internationaux une vitrine sur ses plus beaux biens en Belgique.</p>
+					<p>{{"homepage.partners.paragraph.2"|trans|raw}}</p>
 				</div>
 			</div>
 		</div>
@@ -145,11 +150,11 @@ Grâce à ces réseaux, l’<b>Immobilière Le Lion</b> offre la possibilité à
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-7">
-							<p>Vous pouvez également suivre de manière plus ludique les nouveautés de l’agence via les réseaux sociaux Facebook, Twitter et Google +.
-Via les réseaux Instagram et Pinterest, nous vous offrons d’aborder votre recherche immobilière via des photos inspirantes qui reflètent les différentes gammes et styles de biens disponibles dans notre portefeuille.</p>
+							<p>{{"homepage.social.paragraph.1"|trans}}
+								</p>
 						</div>
 						<div class="col-md-offset-1 col-md-4">
-							<h2 class="title">SUIVEZ-NOUS</h2>
+							<h2 class="title">{{"SUIVEZ-NOUS"|trans}}</h2>
 							<div class="separator"></div>
 							<div style="text-align: center">
 								{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}

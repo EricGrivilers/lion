@@ -1,3 +1,5 @@
+{% trans_default_domain 'CaravaneCmsBundle' %}
+
 <footer>
 	<div class='wrapper grey'>
 		<div class='container'>
@@ -24,7 +26,7 @@
 				</div>
 				<div class='col-md-3'>
 					<section>
-						<h2>Contact</h2>
+						<h2>{{"Contact"|trans}}</h2>
 						<div class="textwidget">
 							<address>
 								<ul class="phone">
@@ -41,7 +43,7 @@
 				</div>
 				<div class='col-md-3'>
 					<section>
-						<h2>Suivez-nous</h2>
+						<h2>{{"Suivez-nous"|trans}}</h2>
 						{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
 					</section>
 				</div>

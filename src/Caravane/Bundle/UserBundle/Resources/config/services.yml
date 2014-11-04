@@ -7,3 +7,9 @@ services:
         class: Caravane\Bundle\UserBundle\Form\Type\RegistrationFormType
         tags:
             - { name: form.type, alias: caravane_user_registration }
+
+      caravane.nooneat.locale.listener:
+        class: Caravane\Bundle\UserBundle\EventListener\LocaleListener
+        arguments: [%locale%]
+        tags:
+          - { name: kernel.event_subscriber}
