@@ -111,6 +111,7 @@ function initializeSearchMap() {
 			$(".ellipsis").dotdotdot({
 			//	configuration goes here
 			});
+			gapi.plusone.render('live-preview');
 		/*searchType=$("#caravane_bundle_estatebundle_search #form_location input");
 		if(searchType.val()==0) {
 				$("#caravane_bundle_estatebundle_search #form_prix input[value^=rent]").closest('.btn').hide();
@@ -261,6 +262,7 @@ function initializeSearchMap() {
 					});
 				});
 		            FB.XFBML.parse();
+		            gapi.plusone.render('live-preview');
 
 		            $('.maps').click(function () {
 				    $('.maps iframe').css("pointer-events", "auto");

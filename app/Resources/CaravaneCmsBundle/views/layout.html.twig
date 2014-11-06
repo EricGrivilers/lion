@@ -16,23 +16,27 @@
 		{% include "CaravaneCmsBundle::stylesheet.html.twig" %}
 		<script src="{{ asset('js/jquery.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.js') }}"></script>
-		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCi5ZVWFNJ5kvUuy30rrUOgW7mDiZEJ2t0&sensor=false">
+		<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCi5ZVWFNJ5kvUuy30rrUOgW7mDiZEJ2t0&sensor=false">
 		</script>
 	</head>
 	<body class="home page">
 
 
 		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
-		  var js, fjs = d.getElementsByTagName(s)[0];
-		  if (d.getElementById(id)) return;
-		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=384315421726673&version=v2.0";
-		  fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));</script>
+			<script>(function(d, s, id) {
+				  var js, fjs = d.getElementsByTagName(s)[0];
+				  if (d.getElementById(id)) return;
+				  js = d.createElement(s); js.id = id;
+				  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&appId=384315421726673&version=v2.0";
+				  fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
 
 
+			<!-- Placez cette balise dans l'en-tête ou juste avant la balise de fermeture du corps de texte. -->
+			<script type="text/javascript" src="//apis.google.com/js/plusone.js">
 
+			</script>
 
 
 		{% block header %}
