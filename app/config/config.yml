@@ -95,6 +95,16 @@ fos_user:
         form:
             type: caravane_user_registration
 
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        serialize_null: true
+        view_response_listener: force
+
+sensio_framework_extra:
+    view:    { annotations: false }
 
 braincrafted_bootstrap:
     less_filter: less

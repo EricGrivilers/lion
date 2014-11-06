@@ -36,6 +36,7 @@ class AppKernel extends Kernel
 
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
 
+
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),
             new Caravane\Bundle\CrmBundle\CaravaneCrmBundle(),

@@ -2,6 +2,11 @@ caravane_estate__admin_estate:
     resource: "@CaravaneEstateBundle/Resources/config/routing/estate.yml"
     prefix:   /
 
-caravane_estate_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: CaravaneEstateBundle:Default:index }
+caravane_estate_api_estate:
+    resource: "@CaravaneEstateBundle/Resources/config/routing/api.yml"
+    prefix:   /
+
+
+#caravane_estate_homepage:
+#    path:     /hello/{name}
+#    defaults: { _controller: CaravaneEstateBundle:Default:index }

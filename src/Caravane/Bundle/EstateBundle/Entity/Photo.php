@@ -2,6 +2,14 @@
 
 namespace Caravane\Bundle\EstateBundle\Entity;
 
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+
+
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="Photo", uniqueConstraints={@ORM\UniqueConstraint(name="item_id", columns={"estate_id", "filename"})})
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Photo
 {
@@ -32,6 +41,8 @@ class Photo
      * @var string
      *
      * @ORM\Column(name="filename", type="string", length=255, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $filename;
 

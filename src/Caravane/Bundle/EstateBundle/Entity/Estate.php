@@ -4,6 +4,10 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -15,6 +19,7 @@ use Gedmo\Translatable\Translatable;
  *
  * @ORM\Table(name="Estate")
  * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\EstateRepository")
+ *
  */
 class Estate
 {
@@ -24,6 +29,8 @@ class Estate
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $id;
 
@@ -38,12 +45,16 @@ class Estate
      * @var \DateTime
      *
      * @ORM\Column(name="updatedOn", type="datetime", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $updatedOn;
 
     /**
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", mappedBy="estate")
      * @ORM\OrderBy({"ranking" = "ASC"})
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $photo;
 
@@ -53,6 +64,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="prix", type="decimal", precision=8, scale=0, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $prix;
 
@@ -67,6 +80,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="locfr", type="string", length=50, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $locfr;
 
@@ -94,6 +109,8 @@ class Estate
      *
      * @ORM\Column(name="summary", type="string", length=255, nullable=false)
      * @Gedmo\Translatable
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $summary;
 
@@ -109,6 +126,8 @@ class Estate
      *
      * @ORM\Column(name="description", type="text", nullable=true)
      * @Gedmo\Translatable
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $description;
 
@@ -166,6 +185,8 @@ class Estate
      * @var integer
      *
      * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Category")
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $category;
 
@@ -194,6 +215,8 @@ class Estate
      * @var integer
      *
      * @ORM\Column(name="surface", type="decimal", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $surface = '0';
 
@@ -201,6 +224,8 @@ class Estate
      * @var integer
      *
      * @ORM\Column(name="rooms", type="integer", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $rooms = '0';
 
@@ -208,6 +233,8 @@ class Estate
      * @var integer
      *
      * @ORM\Column(name="bathrooms", type="integer", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $bathrooms = '0';
 
@@ -215,6 +242,8 @@ class Estate
      * @var integer
      *
      * @ORM\Column(name="garages", type="integer", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $garages = '0';
 
@@ -222,6 +251,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="garden", type="string", length=10, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $garden = '';
 
@@ -244,6 +275,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="isNewBuilding", type="boolean", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $isNewBuilding = false;
 
@@ -314,12 +347,15 @@ class Estate
 
     private $shortReference;
 
+    private $isNew;
+
+    private $isUpdated;
+
 
 
     public function getShortReference() {
         return str_replace("030/",'',$this->reference);
     }
-
 
     /**
      * Get public
@@ -1347,6 +1383,8 @@ class Estate
         }
         return false;
     }
+
+
 
 
     /**
