@@ -260,6 +260,8 @@ function initializeSearchMap() {
 						}
 					});
 				});
+		            FB.XFBML.parse();
+
 		            $('.maps').click(function () {
 				    $('.maps iframe').css("pointer-events", "auto");
 				});
