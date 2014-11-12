@@ -4,3 +4,8 @@ services:
         tags:
             - { name: form.type, alias: search_form }
 
+#    caravane_estate.listener.serialization_listener:
+#        class: Caravane\Bundle\EstateBundle\Listener\SerializationListener
+#        tags:
+#            - { name: serializer.pre_serialize, event: serializer.pre_serialize, method: onPreSerialize }
+

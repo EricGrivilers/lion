@@ -8,6 +8,7 @@ use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
 
 
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -94,6 +95,8 @@ class Estate
 
     /**
      * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Area", inversedBy="estate")
+    * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $area;
 
@@ -149,6 +152,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="ondemand", type="boolean", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $ondemand;
 
@@ -462,6 +467,7 @@ class Estate
      * Get prix
      *
      * @return string
+     * @PreSerialize
      */
     public function getPrix()
     {

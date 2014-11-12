@@ -1,11 +1,11 @@
 caravane_estate_frontend_api_estate_search_sale:
-    path:     /api/estate/search/sale
+    path:     /api/estate/search/{type}
     defaults: { _controller: "CaravaneEstateBundle:Api:search", _format: json }
 
-caravane_estate_frontend_api_estate_search_rent:
-    path:     /api/estate/search/rent
-    defaults: { _controller: "CaravaneEstateBundle:Api:search", _format: json }
 
-caravane_estate_frontend_api_estate_search_new:
-    path:     /api/estate/search/new
-    defaults: { _controller: "CaravaneEstateBundle:Api:search", _format: json }
+caravane_estate_frontend_api_estate_pict_show:
+    path:     /api/estate/pict/{filter}/{relativePath}
+    defaults: { _controller: "CaravaneEstateBundle:Api:getPict" }
+    requirements:
+        relativePath: ".+"
+        

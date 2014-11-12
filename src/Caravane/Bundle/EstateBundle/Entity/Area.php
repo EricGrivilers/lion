@@ -4,6 +4,15 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
+
+
 /**
  * Area
  *
@@ -39,6 +48,8 @@ class Area
      * @var string
      *
      * @ORM\Column(name="LatLng", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $latlng;
 

@@ -28,7 +28,7 @@ class ApiController extends RestController
     *   serializerGroups={"list"}
     * )
      */
-    public function searchAction(Request $request)
+    public function searchAction(Request $request, $type)
     {
         $datas=$_GET;
         if(!isset($datas['location'])) {
@@ -36,7 +36,18 @@ class ApiController extends RestController
         }
         //$datas==$request->request;
 
-        $type=($datas['location']==1?'rent':'sale');
+        //$type=($datas['location']==1?'rent':'sale');
+        if($type=="rent") {
+            $datas['location']=1;
+        }
+        if($type=="new") {
+            $datas['location']=0;
+            $datas['isNewBuilding']=1;
+        }
+
+        if(!isset($datas['sortby'])) {
+            $datas['sortby']="updatedOn desc";
+        }
 
         $em = $this->getDoctrine()->getManager();
         if(isset($datas['reference'])) {
@@ -56,6 +67,17 @@ class ApiController extends RestController
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
 
         return array('estates' => $estates);
+
+    }
+
+
+
+    public function getPictAction(Request $request, $filter="thumbnail_medium", $relativePath) {
+        $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/".$relativePath, $filter);
+        echo $url;
+       //die();
+        return $this->redirect($url);
+        
 
     }
 }

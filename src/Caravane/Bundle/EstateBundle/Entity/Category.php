@@ -4,6 +4,14 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
+
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
@@ -29,6 +37,8 @@ class Category
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
      * @Gedmo\Translatable
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $name = '';
 
