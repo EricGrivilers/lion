@@ -99,6 +99,10 @@ fos_rest:
     param_fetcher_listener: true
     body_listener: true
     format_listener: true
+    format_listener:
+       rules:
+           - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+           - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
     view:
         serialize_null: true
         view_response_listener: force
@@ -162,3 +166,10 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - name: twig.extension
+
+
+lexik_jwt_authentication:
+    private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
+    public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
+    pass_phrase:      'caravane'                                      # ssh key pass phrase
+    token_ttl:        86400

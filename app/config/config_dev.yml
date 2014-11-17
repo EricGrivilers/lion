@@ -11,6 +11,14 @@ web_profiler:
     toolbar: "%debug_toolbar%"
     intercept_redirects: "%debug_redirects%"
 
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      smtp.caravanemedia.com
+    username:  eric@caravanemedia.com
+    password:  8645
+
+
+
 monolog:
     handlers:
         main:
@@ -32,5 +40,5 @@ monolog:
 assetic:
     use_controller: "%use_assetic_controller%"
 
-#swiftmailer:
-#    delivery_address: me@example.com
+swiftmailer:
+    delivery_address: eric@caravanemedia.com

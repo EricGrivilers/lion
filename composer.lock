@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "02d64be24f522edd55f37ddefe687211",
+    "hash": "eb2c49ed2b895fc7a0239e22de8e32dd",
     "packages": [
         {
             "name": "WickyNilliams/enquire.js",
@@ -1181,12 +1181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "b313d460825e5de44a5917503d4eb203381f48b4"
+                "reference": "1b161fb779ce352592fc0499b9a89713623a8ae5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/b313d460825e5de44a5917503d4eb203381f48b4",
-                "reference": "b313d460825e5de44a5917503d4eb203381f48b4",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/1b161fb779ce352592fc0499b9a89713623a8ae5",
+                "reference": "1b161fb779ce352592fc0499b9a89713623a8ae5",
                 "shasum": ""
             },
             "require": {
@@ -1222,20 +1222,20 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-11-06 19:13:45"
+            "time": "2014-11-16 17:11:52"
         },
         {
             "name": "imagine/imagine",
-            "version": "v0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/avalanche123/Imagine.git",
-                "reference": "725279fd560faa1c7012a80b427b31d7f08f36ff"
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/725279fd560faa1c7012a80b427b31d7f08f36ff",
-                "reference": "725279fd560faa1c7012a80b427b31d7f08f36ff",
+                "url": "https://api.github.com/repos/avalanche123/Imagine/zipball/83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
+                "reference": "83ca8babede0e54f935ec09d55a726bf4b0a3f7c",
                 "shasum": ""
             },
             "require": {
@@ -1252,7 +1252,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-develop": "0.6-dev"
+                    "dev-develop": "0.7-dev"
                 }
             },
             "autoload": {
@@ -1279,7 +1279,7 @@
                 "image manipulation",
                 "image processing"
             ],
-            "time": "2014-06-16 20:53:48"
+            "time": "2014-11-11 11:36:02"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2177,18 +2177,88 @@
             "time": "2014-10-14 14:45:32"
         },
         {
+            "name": "lexik/jwt-authentication-bundle",
+            "version": "dev-master",
+            "target-dir": "Lexik/Bundle/JWTAuthenticationBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
+                "reference": "32ab07d92ca23094ae3e4580157da31e73d7f089"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/32ab07d92ca23094ae3e4580157da31e73d7f089",
+                "reference": "32ab07d92ca23094ae3e4580157da31e73d7f089",
+                "shasum": ""
+            },
+            "require": {
+                "namshi/jose": "~1.1",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.3",
+                "symfony/symfony": "~2.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Lexik\\Bundle\\JWTAuthenticationBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeremy Barthe",
+                    "email": "j.barthe@lexik.fr"
+                },
+                {
+                    "name": "Dev Lexik",
+                    "email": "dev@lexik.fr"
+                },
+                {
+                    "name": "Cedric Girard",
+                    "email": "c.girard@lexik.fr"
+                },
+                {
+                    "name": "Nicolas Cabot",
+                    "email": "n.cabot@lexik.fr"
+                }
+            ],
+            "description": "This bundle provides JWT authentication for your Symfony2 REST API",
+            "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
+            "keywords": [
+                "Authentication",
+                "JWS",
+                "Symfony2",
+                "api",
+                "bundle",
+                "jwt",
+                "rest"
+            ],
+            "time": "2014-11-13 08:02:15"
+        },
+        {
             "name": "liip/imagine-bundle",
             "version": "dev-master",
             "target-dir": "Liip/ImagineBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "c8b6eca46635a0d99260e5d459ae73876c930c2f"
+                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/c8b6eca46635a0d99260e5d459ae73876c930c2f",
-                "reference": "c8b6eca46635a0d99260e5d459ae73876c930c2f",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
+                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
                 "shasum": ""
             },
             "require": {
@@ -2248,7 +2318,7 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-10-29 18:56:25"
+            "time": "2014-11-12 10:15:02"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -2373,6 +2443,55 @@
                 "psr-3"
             ],
             "time": "2014-09-30 13:30:58"
+        },
+        {
+            "name": "namshi/jose",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/namshi/jose.git",
+                "reference": "cc2160c746bc2feb30de4723fc8c8dbfe72b1df7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/namshi/jose/zipball/cc2160c746bc2feb30de4723fc8c8dbfe72b1df7",
+                "reference": "cc2160c746bc2feb30de4723fc8c8dbfe72b1df7",
+                "shasum": ""
+            },
+            "require": {
+                "lib-openssl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Namshi\\JOSE": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Nadalin",
+                    "email": "alessandro.nadalin@gmail.com"
+                }
+            ],
+            "description": "JSON Object Signing and Encryption library for PHP.",
+            "keywords": [
+                "JSON Web Signature",
+                "JSON Web Token",
+                "JWS",
+                "json",
+                "jwt",
+                "token"
+            ],
+            "time": "2014-09-27 19:22:54"
         },
         {
             "name": "necolas/normalize.css",
@@ -2621,17 +2740,17 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "target-dir": "Sensio/Bundle/FrameworkExtraBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f"
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/9b22aaee517e80aad3238ea0328458b6f964066f",
-                "reference": "9b22aaee517e80aad3238ea0328458b6f964066f",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/b829a8097a41ccbd7d35683b1750043b23d682f5",
+                "reference": "b829a8097a41ccbd7d35683b1750043b23d682f5",
                 "shasum": ""
             },
             "require": {
@@ -2672,7 +2791,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2014-09-02 07:11:30"
+            "time": "2014-11-10 14:50:31"
         },
         {
             "name": "sensiolabs/security-checker",
@@ -3182,12 +3301,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "c4847c8f6ba39c331e4f0bfcd4f8d02ba4fa2fa6"
+                "reference": "450a9ece107a2010e7d0c4eddafc58bad697b569"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/c4847c8f6ba39c331e4f0bfcd4f8d02ba4fa2fa6",
-                "reference": "c4847c8f6ba39c331e4f0bfcd4f8d02ba4fa2fa6",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/450a9ece107a2010e7d0c4eddafc58bad697b569",
+                "reference": "450a9ece107a2010e7d0c4eddafc58bad697b569",
                 "shasum": ""
             },
             "replace": {
@@ -3225,7 +3344,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-10 07:12:02"
+            "time": "2014-11-17 10:13:21"
         },
         {
             "name": "twig/extensions",
@@ -3673,7 +3792,8 @@
         "necolas/normalize.css": 20,
         "wickynilliams/enquire.js": 20,
         "liip/imagine-bundle": 20,
-        "hybridauth/hybridauth": 20
+        "hybridauth/hybridauth": 20,
+        "lexik/jwt-authentication-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

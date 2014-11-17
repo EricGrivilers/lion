@@ -21,7 +21,7 @@ class EstateRepository extends EntityRepository
 {
 
 	public function findLastUpdated($limit=3, $user) {
-
+		$lastSearchResults=array();
 		$estates= $this->findBy(
 			array(),
 			array('updatedOn'=>'desc'),
@@ -32,6 +32,9 @@ class EstateRepository extends EntityRepository
 			if($user->getContact()) {
 				$lastSearch=json_decode($user->getContact()->getLastSearch(), true);
 				$lastSearchResults=$this->getSearchResult($lastSearch);
+				if(!is_array($lastSearchResults)) {
+					$lastSearchResults=array();
+				}
 			}
 			$collection = new ArrayCollection(
 				array_merge($lastSearchResults,$estates)

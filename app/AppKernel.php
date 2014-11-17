@@ -33,6 +33,7 @@ class AppKernel extends Kernel
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\AopBundle\JMSAopBundle(),
+            new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
 
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
 

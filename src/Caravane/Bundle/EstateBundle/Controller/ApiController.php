@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 //use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use FOS\RestBundle\Controller\Annotations\View as Rest;
 use FOS\RestBundle\View\View;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
 
@@ -21,6 +21,26 @@ use Caravane\Bundle\EstateBundle\Entity\Estate;
 
 class ApiController extends RestController
 {
+
+
+    public function loginAction(Request $request)
+    {
+
+        var_dump($request->headers);
+        $username = $request->request->get('_username');
+        $password = $request->request->get('_password');
+
+        $user_manager = $this->get('fos_user.user_manager');
+        $factory = $this->get('security.encoder_factory');
+        $user = $user_manager->loadUserByUsername($username);
+        $encoder = $factory->getEncoder($user);
+        $bool = ($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())) ? "true" : "false";
+
+        return new JsonResponse();
+    }
+
+
+
     /**
      * Get the list of articles
      *
@@ -30,6 +50,10 @@ class ApiController extends RestController
      */
     public function searchAction(Request $request, $type)
     {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+
         $datas=$_GET;
         if(!isset($datas['location'])) {
             $datas['location']=0;
@@ -77,7 +101,7 @@ class ApiController extends RestController
         echo $url;
        //die();
         return $this->redirect($url);
-        
+
 
     }
 }

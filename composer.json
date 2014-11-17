@@ -42,7 +42,8 @@
         "willdurand/geocoder": "*",
         "widop/http-adapter-bundle": "1.1.*",
 
-        "hybridauth/hybridauth": "dev-master"
+        "hybridauth/hybridauth": "dev-master",
+        "lexik/jwt-authentication-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

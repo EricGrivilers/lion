@@ -33,7 +33,7 @@
 			</script>
 
 
-			<!-- Placez cette balise dans l'en-tête ou juste avant la balise de fermeture du corps de texte. -->
+
 			<script type="text/javascript" src="//apis.google.com/js/plusone.js">
 
 			</script>
@@ -41,10 +41,7 @@
 
 		{% block header %}
 			<header class='page-header '>
-				{#    MENU TOP  #}
-				{#% include "CaravaneCmsBundle:Menu:top.html.twig" %#}
 
-				{#    MAIN MENU + SEARCH  #}
 				{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
 			</header>
 		{% endblock header %}
@@ -53,10 +50,10 @@
 
 
 		{% endblock content %}
-				<!-- Content area 7 -->
 
 
-			{#  FOOTER  #}
+
+
 
 			{% include "CaravaneCmsBundle:Menu:footer.html.twig" %}
 
@@ -65,4 +62,4 @@
 			{% include "CaravaneCmsBundle::javascript.html.twig" %}
 		</body>
 	</html>
-	<!-- Localized -->
+
