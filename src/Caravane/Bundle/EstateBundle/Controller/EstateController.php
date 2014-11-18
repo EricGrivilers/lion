@@ -260,8 +260,6 @@ class EstateController extends Controller
         }
 
 
-
-
         $type=($datas['location']==1?'rent':'sale');
 
         $search_form=$this->searchForm($request, $type);

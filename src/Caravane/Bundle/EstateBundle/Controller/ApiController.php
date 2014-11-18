@@ -15,6 +15,7 @@ use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
+use Caravane\Bundle\EstateBundle\Form\SearchType;
 
 
 
@@ -90,6 +91,13 @@ class ApiController extends RestController
 
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
 
+        if(isset($datas['search_form'])) {
+            $search_form=$this->getForm($type);
+            return array(
+                'estates' => $estates,
+                'search_form' => $search_form
+            );
+        }
         return array('estates' => $estates);
 
     }
@@ -103,5 +111,58 @@ class ApiController extends RestController
         return $this->redirect($url);
 
 
+    }
+
+    public function getForm($type) {
+        $em = $this->getDoctrine()->getManager();
+        $search_form=array();
+        switch($type) {
+            default:
+            case "vente":
+                $ntype="sale";
+            break;
+            case "location":
+                $ntype="rent";
+            break;
+        }
+
+        $prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($ntype);
+        $search_form['prix']=$prices;
+
+        $categories=$em->getRepository('CaravaneEstateBundle:Category')->findAll(array(),array('name'=>"asc"));
+        $search_form['category']=array();
+        foreach($categories as $cat) {
+            $search_form['category'][]=array("id"=>$cat->getId(),"name"=>$cat->getName());
+        }
+       
+
+        $zones=$em->getRepository('CaravaneEstateBundle:Zone')->findAll(array(),array('name'=>"asc"));
+        $search_form['zone']=array();
+        foreach($zones as $zone) {
+            $search_form['zone'][]=array("id"=>$zone->getId(),"name"=>$zone->getName());
+        }
+
+        $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll(array(),array('name'=>"asc"));
+        $search_form['area']=array();
+        foreach($areas as $area) {
+            $search_form['area'][]=array("id"=>$area->getId(),"name"=>$area->getName());
+        }
+
+        $search_form['rayon']=array(
+            "1"=>"1 km",
+            "5"=>"5 km",
+            "10"=>"10 km",
+            "20"=>"20 km",
+            "50"=>"50 km"
+        );
+
+        $search_form['sort']=array(
+            "prix asc"=>"Prix croissants",
+            "prix desc"=>"Prix decroissants",
+            "locfr asc"=>"Communes",
+            "updatedOn desc"=>"Nouveautés",
+        );
+
+        return $search_form;
     }
 }

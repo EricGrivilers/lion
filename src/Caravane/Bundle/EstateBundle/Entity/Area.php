@@ -64,6 +64,12 @@ class Area
     public function __toString() {
         return $this->nomQuartier;
     }
+
+
+    public function getName()
+    {
+        return $this->getNomQuartier();
+    }
     /**
      * Get id
      *
