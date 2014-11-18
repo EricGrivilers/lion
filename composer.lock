@@ -3301,12 +3301,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "450a9ece107a2010e7d0c4eddafc58bad697b569"
+                "reference": "403799023709c0cba0375258b7d8fb59356a4bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/450a9ece107a2010e7d0c4eddafc58bad697b569",
-                "reference": "450a9ece107a2010e7d0c4eddafc58bad697b569",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/403799023709c0cba0375258b7d8fb59356a4bf8",
+                "reference": "403799023709c0cba0375258b7d8fb59356a4bf8",
                 "shasum": ""
             },
             "replace": {
@@ -3344,7 +3344,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-17 10:13:21"
+            "time": "2014-11-18 02:19:55"
         },
         {
             "name": "twig/extensions",

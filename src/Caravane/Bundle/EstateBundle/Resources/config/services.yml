@@ -9,3 +9,7 @@ services:
 #        tags:
 #            - { name: serializer.pre_serialize, event: serializer.pre_serialize, method: onPreSerialize }
 
+    fix_authentication_header_listener:
+        class: Caravane\Bundle\EstateBundle\Listener\AuthenticationHeaderListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }
