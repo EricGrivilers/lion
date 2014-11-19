@@ -55,7 +55,10 @@ class ApiController extends RestController
             throw new AccessDeniedException();
         }
 
-        $datas=$_GET;
+        $datas=$_POST;
+
+
+
         if(!isset($datas['location'])) {
             $datas['location']=0;
         }
@@ -69,10 +72,51 @@ class ApiController extends RestController
             $datas['location']=0;
             $datas['isNewBuilding']=1;
         }
-
+/*
         if(!isset($datas['sortby'])) {
             $datas['sortby']="updatedOn desc";
         }
+*/
+        if($datas['sort']=='') {
+            unset($datas['sort']);
+        }
+
+        if($datas['category']!='') {
+            $d=explode(",",$datas['category']);
+            $datas['category']=array_filter($d, function($k) {
+                return $k>0;
+            });
+        }else {
+            unset($datas['category']);
+        }
+
+        if($datas['zone']!='') {
+            $d=explode(",",$datas['zone']);
+            $datas['zone']=array_filter($d, function($k) {
+                return $k>0;
+            });
+
+        }else {
+            unset($datas['zone']);
+        }
+
+        if($datas['area']=='') {
+            unset($datas['area']);
+           
+        }
+
+        if($datas['prix']!='') {
+            $d=explode(",",$datas['prix']);
+            $datas['prix']=array_filter($d, function($k) {
+                return ($k!='' && $k!=false);
+            });
+        }else {
+            unset($datas['prix']);
+        }
+
+
+
+       
 
         $em = $this->getDoctrine()->getManager();
         if(isset($datas['reference'])) {
@@ -91,13 +135,13 @@ class ApiController extends RestController
 
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
 
-        if(isset($datas['search_form'])) {
+        //if(isset($datas['search_form'])) {
             $search_form=$this->getForm($type);
             return array(
                 'estates' => $estates,
                 'search_form' => $search_form
             );
-        }
+        //}
         return array('estates' => $estates);
 
     }
@@ -114,6 +158,8 @@ class ApiController extends RestController
     }
 
     public function getForm($type) {
+
+
         $em = $this->getDoctrine()->getManager();
         $search_form=array();
         switch($type) {
@@ -122,6 +168,7 @@ class ApiController extends RestController
                 $ntype="sale";
             break;
             case "location":
+            case "rent":
                 $ntype="rent";
             break;
         }
