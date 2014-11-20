@@ -59,6 +59,14 @@ class Estate
      */
     private $photo;
 
+
+    /**
+    * @Groups({"list","detail","search"})
+    * @Expose
+    */
+    private $defaultPict;
+
+
     private $photos;
 
     /**
@@ -95,7 +103,7 @@ class Estate
 
     /**
      * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Area", inversedBy="estate")
-    * @Expose
+     * @Expose
      * @Groups({"list","detail","search"})
      */
     private $area;
@@ -1301,6 +1309,12 @@ class Estate
         }
 
         return null;
+    }
+
+    public function getDefaultPict()
+    {
+        $this->getPhotos();
+        return $this->getPhoto();
     }
 
     /**

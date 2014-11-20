@@ -33,15 +33,21 @@ class SerializationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            array('event' => 'serializer.pre_serialize', 'method' => 'onPreSerialize'),
+            array('event' => 'serializer.pre_serialize', 'class' => 'Caravane\Bundle\EstateBundle\Entity\Estate', 'method' => 'onPreSerialize'),
+            array('event' => 'serializer.post_serialize', 'class' => 'Caravane\Bundle\EstateBundle\Entity\Estate', 'method' => 'onPostSerialize'),
         );
     }
 
     public function onPreSerialize(PreSerializeEvent $event)
     {
-        echo "e";
+        
         $entity = $event->getObject();
-        $event->getVisitor()->addData('prix',"eee");
+        $event->getVisitor()->addData('defaultPict');
+    }
+
+    public function onPostSerialize(ObjectEvent $event)
+    {
+        $event->getVisitor()->addData('defaultPict','someValue');
     }
 }
 
