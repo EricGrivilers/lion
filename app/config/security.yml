@@ -22,7 +22,10 @@ security:
                 password_parameter: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-
+        api_pict:
+            pattern:  ^/api/estate/pict
+            stateless: true
+            anonymous: true
         api:
             pattern:   ^/api
             stateless: true
