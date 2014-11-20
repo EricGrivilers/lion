@@ -177,6 +177,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="reference", type="string", length=20, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $reference;
 
@@ -184,6 +186,8 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="enoption", type="string", length=1, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $enoption;
 
