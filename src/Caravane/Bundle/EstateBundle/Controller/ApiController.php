@@ -102,7 +102,7 @@ class ApiController extends RestController
 
         if($datas['area']=='') {
             unset($datas['area']);
-           
+
         }
 
         if($datas['prix']!='') {
@@ -116,14 +116,15 @@ class ApiController extends RestController
 
 
 
-       
+
 
         $em = $this->getDoctrine()->getManager();
-        if(isset($datas['reference'])) {
+       /* if(isset($datas['reference'])) {
             if($datas['reference']!="") {
                 return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
             }
         }
+        */
 
         if($user=$this->getUser()) {
             if($contact=$user->getContact()) {
@@ -150,9 +151,22 @@ class ApiController extends RestController
 
     public function getPictAction(Request $request, $filter="thumbnail_medium", $relativePath) {
         $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/".$relativePath, $filter);
-        echo $url;
-       //die();
         return $this->redirect($url);
+
+
+    }
+
+    public function getHomeAction(Request $request) {
+        $max=6;
+         $em = $this->getDoctrine()->getManager();
+
+           if(!$user=$this->getUser()) {
+                 $user=null;
+           }
+            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max, $user);
+             return array(
+                'estates'      => $estates
+            );
 
 
     }
@@ -181,7 +195,7 @@ class ApiController extends RestController
         foreach($categories as $cat) {
             $search_form['category'][]=array("id"=>$cat->getId(),"name"=>$cat->getName());
         }
-       
+
 
         $zones=$em->getRepository('CaravaneEstateBundle:Zone')->findAll(array(),array('name'=>"asc"));
         $search_form['zone']=array();

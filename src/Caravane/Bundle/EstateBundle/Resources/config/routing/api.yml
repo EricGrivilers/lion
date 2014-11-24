@@ -9,6 +9,9 @@ caravane_estate_frontend_api_estate_search_sale:
     defaults: { _controller: "CaravaneEstateBundle:Api:search", _format: json }
 
 
+caravane_estate_frontend_api_home:
+    path:     /api/home
+    defaults: { _controller: "CaravaneEstateBundle:Api:getHome", _format: json  }
 
 caravane_estate_frontend_api_estate_pict_show:
     path:     /api/estate/pict/{filter}/{relativePath}

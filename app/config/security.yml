@@ -26,6 +26,10 @@ security:
             pattern:  ^/api/estate/pict
             stateless: true
             anonymous: true
+        api_home:
+            pattern:  ^/api/home
+            stateless: true
+            anonymous: true
         api:
             pattern:   ^/api
             stateless: true
@@ -52,6 +56,7 @@ security:
 
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/home, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/estate/pict/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
