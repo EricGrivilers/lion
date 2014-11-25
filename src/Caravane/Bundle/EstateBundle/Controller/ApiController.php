@@ -150,7 +150,15 @@ class ApiController extends RestController
 
 
     public function getPictAction(Request $request, $filter="thumbnail_medium", $relativePath) {
-        $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/".$relativePath, $filter);
+        
+        $absolutePath = __DIR__."/../../../../../web/".$relativePath;
+       
+        if(file_exists($absolutePath) && !is_dir($absolutePath) ) {
+            $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/".$relativePath, $filter);
+        }
+        else {
+            $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/photos/big/dummy.png", $filter);
+        }
         return $this->redirect($url);
 
 
