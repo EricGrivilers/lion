@@ -43,7 +43,8 @@
         "widop/http-adapter-bundle": "1.1.*",
 
         "hybridauth/hybridauth": "dev-master",
-        "lexik/jwt-authentication-bundle": "dev-master"
+        "lexik/jwt-authentication-bundle": "dev-master",
+        "richsage/rms-push-notifications-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

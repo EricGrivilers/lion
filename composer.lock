@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eb2c49ed2b895fc7a0239e22de8e32dd",
+    "hash": "aee460cd274f50803e93e5e9080e165c",
     "packages": [
         {
             "name": "WickyNilliams/enquire.js",
@@ -1034,12 +1034,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65"
+                "reference": "3565dfb22df2b0791137d5244d34d528d887f73e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/9714a92e968f7e12431ccf5fecb1346f0d5adc65",
-                "reference": "9714a92e968f7e12431ccf5fecb1346f0d5adc65",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3565dfb22df2b0791137d5244d34d528d887f73e",
+                "reference": "3565dfb22df2b0791137d5244d34d528d887f73e",
                 "shasum": ""
             },
             "require": {
@@ -1093,7 +1093,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2014-10-20 09:15:23"
+            "time": "2014-11-19 10:34:13"
         },
         {
             "name": "gedmo/doctrine-extensions",
@@ -1181,12 +1181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "1b161fb779ce352592fc0499b9a89713623a8ae5"
+                "reference": "92db05d6d1ff263e1c814bcba74ff6e67eff870d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/1b161fb779ce352592fc0499b9a89713623a8ae5",
-                "reference": "1b161fb779ce352592fc0499b9a89713623a8ae5",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/92db05d6d1ff263e1c814bcba74ff6e67eff870d",
+                "reference": "92db05d6d1ff263e1c814bcba74ff6e67eff870d",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1222,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-11-16 17:11:52"
+            "time": "2014-11-24 23:26:32"
         },
         {
             "name": "imagine/imagine",
@@ -1480,12 +1480,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/JMSDiExtraBundle.git",
-                "reference": "49fd39537cd0cbc6f76e4261f2549562d753cd82"
+                "reference": "4a0db1a5469940f83cc7d9c156224469ec8b6c01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/49fd39537cd0cbc6f76e4261f2549562d753cd82",
-                "reference": "49fd39537cd0cbc6f76e4261f2549562d753cd82",
+                "url": "https://api.github.com/repos/schmittjoh/JMSDiExtraBundle/zipball/4a0db1a5469940f83cc7d9c156224469ec8b6c01",
+                "reference": "4a0db1a5469940f83cc7d9c156224469ec8b6c01",
                 "shasum": ""
             },
             "require": {
@@ -1512,7 +1512,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "1.5-dev"
                 }
             },
             "autoload": {
@@ -1536,7 +1536,7 @@
                 "annotations",
                 "dependency injection"
             ],
-            "time": "2014-09-26 09:56:26"
+            "time": "2014-11-24 08:56:26"
         },
         {
             "name": "jms/metadata",
@@ -2177,18 +2177,66 @@
             "time": "2014-10-14 14:45:32"
         },
         {
+            "name": "kriswallsmith/buzz",
+            "version": "v0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kriswallsmith/Buzz.git",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/487760b05d6269a4c2c374364325326cfa65b12c",
+                "reference": "487760b05d6269a4c2c374364325326cfa65b12c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Buzz": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris.wallsmith@gmail.com",
+                    "homepage": "http://kriswallsmith.net/"
+                }
+            ],
+            "description": "Lightweight HTTP client",
+            "homepage": "https://github.com/kriswallsmith/Buzz",
+            "keywords": [
+                "curl",
+                "http client"
+            ],
+            "time": "2014-09-15 12:42:36"
+        },
+        {
             "name": "lexik/jwt-authentication-bundle",
             "version": "dev-master",
             "target-dir": "Lexik/Bundle/JWTAuthenticationBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "32ab07d92ca23094ae3e4580157da31e73d7f089"
+                "reference": "b739b6adef30d217619dc879a176ef708299561f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/32ab07d92ca23094ae3e4580157da31e73d7f089",
-                "reference": "32ab07d92ca23094ae3e4580157da31e73d7f089",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/b739b6adef30d217619dc879a176ef708299561f",
+                "reference": "b739b6adef30d217619dc879a176ef708299561f",
                 "shasum": ""
             },
             "require": {
@@ -2244,7 +2292,7 @@
                 "jwt",
                 "rest"
             ],
-            "time": "2014-11-13 08:02:15"
+            "time": "2014-11-21 16:02:07"
         },
         {
             "name": "liip/imagine-bundle",
@@ -2253,12 +2301,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/liip/LiipImagineBundle.git",
-                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d"
+                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
-                "reference": "eacdae21cc9ce8e07ab64d20d5a92529ed49709d",
+                "url": "https://api.github.com/repos/liip/LiipImagineBundle/zipball/9a7f49505741d84d78929a99c9c4c45e17d0497a",
+                "reference": "9a7f49505741d84d78929a99c9c4c45e17d0497a",
                 "shasum": ""
             },
             "require": {
@@ -2318,26 +2366,27 @@
                 "image",
                 "imagine"
             ],
-            "time": "2014-11-12 10:15:02"
+            "time": "2014-11-18 13:03:01"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
-            "version": "2.7.9",
+            "version": "2.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/serbanghita/Mobile-Detect.git",
-                "reference": "610846237295e3e50a1923e7cc1639a956ead22a"
+                "reference": "c68901fb09227dcf04872f0d6a27b9f6e75ecf1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/610846237295e3e50a1923e7cc1639a956ead22a",
-                "reference": "610846237295e3e50a1923e7cc1639a956ead22a",
+                "url": "https://api.github.com/repos/serbanghita/Mobile-Detect/zipball/c68901fb09227dcf04872f0d6a27b9f6e75ecf1f",
+                "reference": "c68901fb09227dcf04872f0d6a27b9f6e75ecf1f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.0.0"
             },
             "require-dev": {
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
                 "phpunit/phpunit": "*"
             },
             "type": "library",
@@ -2357,7 +2406,7 @@
                 {
                     "name": "Serban Ghita",
                     "email": "serbanghita@gmail.com",
-                    "homepage": "http://ghita.org",
+                    "homepage": "http://mobiledetect.net",
                     "role": "Developer"
                 }
             ],
@@ -2370,7 +2419,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2014-03-07 13:33:54"
+            "time": "2014-11-23 13:08:17"
         },
         {
             "name": "monolog/monolog",
@@ -2686,18 +2735,71 @@
             "time": "2012-12-21 11:40:51"
         },
         {
+            "name": "richsage/rms-push-notifications-bundle",
+            "version": "dev-master",
+            "target-dir": "RMS/PushNotificationsBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/richsage/RMSPushNotificationsBundle.git",
+                "reference": "c4ef0575e6e2f143db2a68dbe1c29b90582b6bbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/richsage/RMSPushNotificationsBundle/zipball/c4ef0575e6e2f143db2a68dbe1c29b90582b6bbd",
+                "reference": "c4ef0575e6e2f143db2a68dbe1c29b90582b6bbd",
+                "shasum": ""
+            },
+            "require": {
+                "kriswallsmith/buzz": "*",
+                "php": ">=5.3.0",
+                "symfony/symfony": "2.*"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-0": {
+                    "RMS\\PushNotificationsBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rich Sage",
+                    "email": "rich.sage@gmail.com",
+                    "homepage": "http://www.richsage.co.uk/"
+                }
+            ],
+            "description": "Push notifications/messages for mobile devices",
+            "homepage": "https://github.com/richsage/RMSPushNotificationsBundle",
+            "keywords": [
+                "apns",
+                "blackberry",
+                "bundle",
+                "c2dm",
+                "gcm",
+                "ios",
+                "mpns",
+                "notification",
+                "push",
+                "windowsphone"
+            ],
+            "time": "2014-09-19 15:07:12"
+        },
+        {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.8",
+            "version": "v3.0.10",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5"
+                "reference": "ca188a500a7bef815a46f19f8616f0a775e7dbf2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/bc5e96bb4faf6bee7121085951d11b89488952f5",
-                "reference": "bc5e96bb4faf6bee7121085951d11b89488952f5",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ca188a500a7bef815a46f19f8616f0a775e7dbf2",
+                "reference": "ca188a500a7bef815a46f19f8616f0a775e7dbf2",
                 "shasum": ""
             },
             "require": {
@@ -2736,7 +2838,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-11-03 21:16:34"
+            "time": "2014-11-23 18:30:35"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -2901,21 +3003,21 @@
         },
         {
             "name": "suncat/mobile-detect-bundle",
-            "version": "v0.9.5",
+            "version": "v0.9.6",
             "target-dir": "SunCat/MobileDetectBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/suncat2000/MobileDetectBundle.git",
-                "reference": "d11a9cea4f15472e280de84d639c4ab17663b45b"
+                "reference": "abfab6653fcf37ceb60cc652d13ecea1ff174a6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/suncat2000/MobileDetectBundle/zipball/d11a9cea4f15472e280de84d639c4ab17663b45b",
-                "reference": "d11a9cea4f15472e280de84d639c4ab17663b45b",
+                "url": "https://api.github.com/repos/suncat2000/MobileDetectBundle/zipball/abfab6653fcf37ceb60cc652d13ecea1ff174a6b",
+                "reference": "abfab6653fcf37ceb60cc652d13ecea1ff174a6b",
                 "shasum": ""
             },
             "require": {
-                "mobiledetect/mobiledetectlib": "2.7.*",
+                "mobiledetect/mobiledetectlib": "2.8.*",
                 "php": ">=5.3.0",
                 "symfony/framework-bundle": ">=2.1,<3.0"
             },
@@ -2935,8 +3037,7 @@
             "authors": [
                 {
                     "name": "Nikolay Ivlev",
-                    "email": "nikolay.kotovsky@gmail.com",
-                    "homepage": "http://www.creotika.ru"
+                    "email": "nikolay.kotovsky@gmail.com"
                 }
             ],
             "description": "Symfony2 bundle for detect mobile devices, managing mobile view types, redirect to mobile version.",
@@ -2948,7 +3049,7 @@
                 "mobile view managing",
                 "symfony mobile"
             ],
-            "time": "2014-07-10 20:26:50"
+            "time": "2014-11-24 15:09:18"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3184,16 +3285,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.5.6",
+            "version": "v2.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210"
+                "reference": "dd4254fc39a702af22cd886a6790769541469da1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
-                "reference": "1a1b1e528935f15dd76169f8b1dc3ef97f0d6210",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/dd4254fc39a702af22cd886a6790769541469da1",
+                "reference": "dd4254fc39a702af22cd886a6790769541469da1",
                 "shasum": ""
             },
             "require": {
@@ -3254,7 +3355,7 @@
                 "ircmaxell/password-compat": "1.0.*",
                 "monolog/monolog": "~1.3",
                 "ocramius/proxy-manager": ">=0.3.1,<0.6-dev",
-                "propel/propel1": "1.6.*"
+                "propel/propel1": "~1.6"
             },
             "type": "library",
             "extra": {
@@ -3293,7 +3394,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2014-10-24 06:55:39"
+            "time": "2014-11-20 16:00:03"
         },
         {
             "name": "twbs/bootstrap",
@@ -3301,12 +3402,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "403799023709c0cba0375258b7d8fb59356a4bf8"
+                "reference": "c022d88ac5674410fbba00c1c869c4da16fc0067"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/403799023709c0cba0375258b7d8fb59356a4bf8",
-                "reference": "403799023709c0cba0375258b7d8fb59356a4bf8",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/c022d88ac5674410fbba00c1c869c4da16fc0067",
+                "reference": "c022d88ac5674410fbba00c1c869c4da16fc0067",
                 "shasum": ""
             },
             "replace": {
@@ -3344,7 +3445,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-18 02:19:55"
+            "time": "2014-11-24 14:46:14"
         },
         {
             "name": "twig/extensions",
@@ -3793,7 +3894,8 @@
         "wickynilliams/enquire.js": 20,
         "liip/imagine-bundle": 20,
         "hybridauth/hybridauth": 20,
-        "lexik/jwt-authentication-bundle": 20
+        "lexik/jwt-authentication-bundle": 20,
+        "richsage/rms-push-notifications-bundle": 20
     },
     "prefer-stable": false,
     "platform": {

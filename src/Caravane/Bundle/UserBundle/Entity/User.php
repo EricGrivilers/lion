@@ -34,6 +34,21 @@ class User extends BaseUser
     protected $estate;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="deviceId", type="string", length=255, nullable=true)
+     */
+    protected $deviceId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="deviceId", type="string", length=16, nullable=true)
+     */
+    protected $deviceOs;
+
+
     public function __construct()
     {
         parent::__construct();
