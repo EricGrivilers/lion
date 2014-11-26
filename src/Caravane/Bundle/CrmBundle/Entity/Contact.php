@@ -2,6 +2,12 @@
 
 namespace Caravane\Bundle\CrmBundle\Entity;
 
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="Contact")
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
 class Contact
 {
@@ -30,6 +37,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="language", type="string", length=2, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $language;
 
@@ -37,6 +46,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $firstname;
 
@@ -44,6 +55,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $lastname;
 
@@ -51,6 +64,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="tel", type="string", length=20, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $tel;
 
@@ -58,6 +73,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="zip", type="string", length=10, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $zip;
 
@@ -65,6 +82,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="fax", type="string", length=20, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $fax;
 
@@ -72,6 +91,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $street;
 
@@ -79,6 +100,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="number", type="string", length=10, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $number;
 
@@ -86,6 +109,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $city;
 
@@ -93,6 +118,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=100, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $country;
 
@@ -100,6 +127,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="company", type="string", length=200, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $company;
 
@@ -107,6 +136,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="salutation", type="string", length=3, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $salutation;
 
@@ -129,6 +160,8 @@ class Contact
      * @var string
      *
      * @ORM\Column(name="lastSearch", type="text",  nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $lastSearch;
 

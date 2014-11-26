@@ -2,12 +2,21 @@
 
 namespace Caravane\Bundle\UserBundle\Entity;
 
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
+
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ExclusionPolicy("all")
  */
 class User extends BaseUser
 {
@@ -21,6 +30,8 @@ class User extends BaseUser
 
     /**
     * @ORM\OneToOne(targetEntity="Caravane\Bundle\CrmBundle\Entity\Contact" ,  mappedBy="user", cascade={"persist"} )
+    * @Expose
+    * @Groups({"list","detail","search"})
     */
     protected $contact;
 
@@ -30,23 +41,10 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\UserEstate", mappedBy="user")
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     protected $estate;
-
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="deviceId", type="string", length=255, nullable=true)
-     */
-    protected $deviceId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="deviceId", type="string", length=16, nullable=true)
-     */
-    protected $deviceOs;
 
 
     public function __construct()

@@ -137,7 +137,7 @@ liip_imagine:
             filters:
                 thumbnail: { size: [220, 220], mode: outbound, allow_upscale: true }
                 background: { size: [220, 220], color: '#fff' }
-        
+
         full_medium:
             quality: 100
             filters:
@@ -146,7 +146,7 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [1280, 1280], mode: inset, allow_upscale: true }
-# api mobile 
+# api mobile
         thumbnail_api_square:
             quality: 90
             filters:
@@ -179,7 +179,7 @@ lexik_jwt_authentication:
     private_key_path: %kernel.root_dir%/var/jwt/private.pem   # ssh private key path
     public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
     pass_phrase:      'caravane'                                      # ssh key pass phrase
-    token_ttl:        86400
+    token_ttl:        604800
 
 
 rms_push_notifications:

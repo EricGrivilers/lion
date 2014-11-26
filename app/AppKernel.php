@@ -35,9 +35,8 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
-            
+
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
-            new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
 
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),
             new Caravane\Bundle\CmsBundle\CaravaneCmsBundle(),

@@ -20,6 +20,7 @@ use Gedmo\Translatable\Translatable;
  *
  * @ORM\Table(name="Estate")
  * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\EstateRepository")
+ * @ExclusionPolicy("all")
  *
  */
 class Estate

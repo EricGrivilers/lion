@@ -40,7 +40,12 @@ class ApiController extends RestController
         return new JsonResponse();
     }
 
-
+    public function getUserAction() {
+        //$user_manager = $this->get('fos_user.user_manager');
+        //$factory = $this->get('security.encoder_factory');
+        $user = $this->getUser();
+        return array('user' => $user);
+    }
 
     /**
      * Get the list of articles
@@ -150,9 +155,9 @@ class ApiController extends RestController
 
 
     public function getPictAction(Request $request, $filter="thumbnail_medium", $relativePath) {
-        
+
         $absolutePath = __DIR__."/../../../../../web/".$relativePath;
-       
+
         if(file_exists($absolutePath) && !is_dir($absolutePath) ) {
             $url = $this->get('liip_imagine.cache.manager')->getBrowserPath("/".$relativePath, $filter);
         }
