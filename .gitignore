@@ -56,4 +56,3 @@ web/old
 
 
 sftp-config.json
-app/var/apns/*.pem
