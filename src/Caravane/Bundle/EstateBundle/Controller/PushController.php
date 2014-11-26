@@ -2,6 +2,12 @@
 
 namespace Caravane\Bundle\EstateBundle\Controller;
 
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+
 use RMS\PushNotificationsBundle\Message\iOSMessage;
 
 class PushController extends Controller
@@ -10,10 +16,22 @@ class PushController extends Controller
     {
         $message = new iOSMessage();
         $message->setMessage('Oh my! A push notification!');
-        $message->setDeviceIdentifier('test012fasdf482asdfd63f6d7bc6d4293aedd5fb448fe505eb4asdfef8595a7');
+        $message->setDeviceIdentifier('d8ab431cd0d12cc2e4f7fe39437bdabbd51824b0');
 
-        $this->container->get('rms_push_notifications')->send($message);
+        if($s=$this->container->get('rms_push_notifications')->send($message)) {
 
-        return new Response('Push notification send!');
+
+	        $feedbackService = $this->container->get("rms_push_notifications.ios.feedback");
+			$uuids = $feedbackService->getDeviceUUIDs();
+
+
+
+	        return new Response('Push notification send!');
+	    }
+	    else {
+	    	var_dump($s);
+	    	return new Response('error!');
+	    }
     }
 }
+

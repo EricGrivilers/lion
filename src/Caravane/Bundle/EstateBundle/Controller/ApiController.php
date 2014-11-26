@@ -27,7 +27,7 @@ class ApiController extends RestController
     public function loginAction(Request $request)
     {
 
-        var_dump($request->headers);
+       // var_dump($request->headers);
         $username = $request->request->get('_username');
         $password = $request->request->get('_password');
 

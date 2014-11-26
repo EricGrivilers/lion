@@ -1181,12 +1181,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hybridauth/hybridauth.git",
-                "reference": "92db05d6d1ff263e1c814bcba74ff6e67eff870d"
+                "reference": "7dfbf2d8679174d1c75b2ebff70a9030fbe288ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/92db05d6d1ff263e1c814bcba74ff6e67eff870d",
-                "reference": "92db05d6d1ff263e1c814bcba74ff6e67eff870d",
+                "url": "https://api.github.com/repos/hybridauth/hybridauth/zipball/7dfbf2d8679174d1c75b2ebff70a9030fbe288ef",
+                "reference": "7dfbf2d8679174d1c75b2ebff70a9030fbe288ef",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1222,7 @@
                 "twitter",
                 "yahoo"
             ],
-            "time": "2014-11-24 23:26:32"
+            "time": "2014-11-25 18:30:08"
         },
         {
             "name": "imagine/imagine",
@@ -3402,12 +3402,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "c022d88ac5674410fbba00c1c869c4da16fc0067"
+                "reference": "d763e0e2a08ade0d36872cb9624813b5e4a5255b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/c022d88ac5674410fbba00c1c869c4da16fc0067",
-                "reference": "c022d88ac5674410fbba00c1c869c4da16fc0067",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/d763e0e2a08ade0d36872cb9624813b5e4a5255b",
+                "reference": "d763e0e2a08ade0d36872cb9624813b5e4a5255b",
                 "shasum": ""
             },
             "replace": {
@@ -3445,7 +3445,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-24 14:46:14"
+            "time": "2014-11-25 19:12:43"
         },
         {
             "name": "twig/extensions",
