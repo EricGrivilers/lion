@@ -180,3 +180,13 @@ lexik_jwt_authentication:
     public_key_path:  %kernel.root_dir%/var/jwt/public.pem    # ssh public key path
     pass_phrase:      'caravane'                                      # ssh key pass phrase
     token_ttl:        86400
+
+
+rms_push_notifications:
+    ios:
+        sandbox: false
+        pem: %kernel.root_dir%/var/apns/apnsCert.pem # can be absolute or relative path (from app directory)
+        passphrase: caravane8645
+
+
+
