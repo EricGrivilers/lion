@@ -16,6 +16,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
 use Caravane\Bundle\EstateBundle\Form\SearchType;
+use Caravane\Bundle\CrmBundle\Entity\Contact;
+
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Authentication\Token\JWTUserToken;
 
 
 
@@ -38,6 +41,61 @@ class ApiController extends RestController
         $bool = ($encoder->isPasswordValid($user->getPassword(),$password,$user->getSalt())) ? "true" : "false";
 
         return new JsonResponse();
+    }
+
+     public function registerAction(Request $request)
+    {
+
+        
+        $data=$_POST;
+ 
+        $user_manager = $this->get('fos_user.user_manager');
+        if($user = $user_manager->findUserByEmail($data['email'])) {
+            return array('error'=>"user exists");
+        }
+        if($data['first']!=$data['second'] || $data['first']=='' || $data['second']=='') {
+            return array('error'=>"wrong password");
+        }
+        $username=$data['email'];
+        $password=$data['first'];
+
+        $user = $user_manager->createUser();
+        $user->setUsername($username);
+        $user->setEmail($data['email']);
+        $user->setPlainPassword($password);
+        $user->addRole("ROLE_USER");
+
+        $em = $this->getDoctrine()->getManager();
+        $contact = new Contact();
+        $contact->setLanguage($data['language']);
+        $contact->setSalutation($data['salutation']);
+        $contact->setFirstname($data['firstname']);
+        $contact->setLastname($data['lastname']);
+        $contact->setNumber($data['number']);
+        $contact->setStreet($data['street']);
+        $contact->setCity($data['city']);
+        $contact->setZip($data['zip']);
+        $contact->setTel($data['tel']);
+        $contact->setFax($data['fax']);
+        $contact->setCountry($data['country']);
+        $em->persist($contact);
+        $em->flush();
+
+        $user->setContact($contact);
+        $user_manager->updateUser($user);
+
+        
+        $jwtManager=$this->get('lexik_jwt_authentication.jwt_manager');
+        //$user = $token->getUser();
+        $jwt  = $jwtManager->create($user);
+        
+
+//        $client = static::createClient();
+//        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
+
+        return array('token'=>$jwt);
+
+
     }
 
     public function getUserAction() {
