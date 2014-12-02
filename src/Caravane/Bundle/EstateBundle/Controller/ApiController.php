@@ -43,12 +43,54 @@ class ApiController extends RestController
         return new JsonResponse();
     }
 
+
+    public function recoverAction(Request $request)
+    {
+
+
+
+        $username = $request->request->get('username');
+
+
+
+
+
+        /** @var $user UserInterface */
+        $user = $this->get('fos_user.user_manager')->findUserByUsernameOrEmail($username);
+
+        if (null === $user) {
+            return $this->render('FOSUserBundle:Resetting:request.html.twig', array(
+                'invalid_username' => $username
+            ));
+        }
+
+        if ($user->isPasswordRequestNonExpired($this->container->getParameter('fos_user.resetting.token_ttl'))) {
+            return array('error'=>"already requested");
+        }
+
+        if (null === $user->getConfirmationToken()) {
+            /** @var $tokenGenerator \FOS\UserBundle\Util\TokenGeneratorInterface */
+            $tokenGenerator = $this->get('fos_user.util.token_generator');
+            $user->setConfirmationToken($tokenGenerator->generateToken());
+        }
+
+        $this->get('fos_user.mailer')->sendResettingEmailMessage($user);
+        $user->setPasswordRequestedAt(new \DateTime());
+        $this->get('fos_user.user_manager')->updateUser($user);
+
+         $email = $user->getEmail();
+        if (false !== $pos = strpos($email, '@')) {
+            $email = '...' . substr($email, $pos);
+        }
+        return array('email' => $email);
+    }
+
      public function registerAction(Request $request)
     {
 
-        
+
         $data=$_POST;
- 
+
         $user_manager = $this->get('fos_user.user_manager');
         if($user = $user_manager->findUserByEmail($data['email'])) {
             return array('error'=>"user exists");
@@ -84,11 +126,11 @@ class ApiController extends RestController
         $user->setContact($contact);
         $user_manager->updateUser($user);
 
-        
+
         $jwtManager=$this->get('lexik_jwt_authentication.jwt_manager');
         //$user = $token->getUser();
         $jwt  = $jwtManager->create($user);
-        
+
 
 //        $client = static::createClient();
 //        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
@@ -297,4 +339,5 @@ class ApiController extends RestController
 
         return $search_form;
     }
+
 }

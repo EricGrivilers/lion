@@ -2,6 +2,10 @@ caravane_estate_frontend_api_login:
     path:     /api/login_check
     defaults: { _controller: "CaravaneEstateBundle:Api:login", _format: json }
 
+caravane_estate_frontend_api_recover:
+    path:     /api/recover
+    defaults: { _controller: "CaravaneEstateBundle:Api:recover", _format: json }
+
 caravane_estate_frontend_api_register:
     path:     /api/register
     defaults: { _controller: "CaravaneEstateBundle:Api:register", _format: json }
