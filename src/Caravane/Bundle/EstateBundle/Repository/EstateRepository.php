@@ -54,7 +54,7 @@ class EstateRepository extends EntityRepository
 		if($datas['location']!=1) {
 			$datas['location']=0;
 		}
-$type=($datas['location']==1?'rent':'sale');
+		$type=($datas['location']==1?'rent':'sale');
 
 
 		if(isset($datas['reference'])) {
@@ -89,14 +89,37 @@ $type=($datas['location']==1?'rent':'sale');
 					->setParameter('zone', $zone);
 		}
 		if(isset($datas['area'])) {
+			$query->andWhere('C.area =:area')
+				->setParameter('area', $datas['area']);
 			if(isset($datas['rayon'])) {
 				$query->andWhere('C.area =:area')
 						->setParameter('area', $datas['area']);
 			}
-			else {
-				$query->andWhere('C.area =:area')
-				->setParameter('area', $datas['area']);
+		}
+		if(isset($datas['latlng'])) {
+			$latlng=explode(",", $datas['latlng']);
+			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
+				$datas['rayon']=1;
 			}
+			$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
+				//->having('distance < :distance')
+                ->setParameter('latitude', $latlng[0])
+                ->setParameter('longitude', $latlng[1])
+                ->setParameter('distance', $datas['rayon']);
+            
+                /*
+			$query->addSelect(
+            '( 3959 * acos(cos(radians(' . $latlng[0] . '))' .
+                '* cos( radians( C.Lat ) )' .
+                '* cos( radians( C.Lng )' .
+                '- radians(' . $latlng[1] . ') )' .
+                '+ sin( radians(' . $latlng[0] . ') )' .
+                '* sin( radians( C.Lat ) ) ) ) as distance'
+        	)
+        	->having('distance < :distance')
+        	->setParameter('distance', $datas['rayon']*1000);
+			//( 3959 * acos( cos( radians(37) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-122.517349) ) + sin( radians(37.780182) ) * sin( radians( lat ) ) ) ) AS distance
+			*/
 		}
 		if(isset($datas['keyword'])) {
 			if($datas['keyword']!="") {
@@ -111,24 +134,31 @@ $type=($datas['location']==1?'rent':'sale');
 			}
 
 			$dqlA=array();
+			
 			foreach($datas['prix'] as $priceCode) {
 				$tA=explode('_',$priceCode);
-				$id=$tA[0]."_".$tA[1];
-				if($tA[2]=="-") {
-					$dqlA[]=" C.prix <= :p".$tA[1];
-					$query->setParameter("p".$tA[1], $pA[$id]);
+				if(isset($tA[1])) {
+					$id=$tA[0]."_".$tA[1];
+					if($tA[2]=="-") {
+						$dqlA[]=" C.prix <= :p".$tA[1];
+						$query->setParameter("p".$tA[1], $pA[$id]);
+					}
+					else if($tA[2]=="+") {
+						$dqlA[]=" C.prix >= :p".$tA[1];
+						$query->setParameter("p".$tA[1], $pA[$id]);
+					}
+					else {
+						$dqlA[]=" ( C.prix >= :p".$tA[1]." AND C.prix <= :p".$tA[2].") ";
+						$query->setParameter("p".$tA[1], $pA[$id]);
+						$query->setParameter("p".$tA[2], $pA[$type."_".$tA[2]]);
+					}
 				}
-				else if($tA[2]=="+") {
-					$dqlA[]=" C.prix >= :p".$tA[1];
-					$query->setParameter("p".$tA[1], $pA[$id]);
-				}
-				else {
-					$dqlA[]=" ( C.prix >= :p".$tA[1]." AND C.prix <= :p".$tA[2].") ";
-					$query->setParameter("p".$tA[1], $pA[$id]);
-					$query->setParameter("p".$tA[2], $pA[$type."_".$tA[2]]);
-				}
+				
 			}
-			$query->andWhere(implode(" OR ", $dqlA));
+			if(count($dqlA)>0) {
+				$query->andWhere(implode(" OR ", $dqlA));
+			}
+			
 		}
 		if(isset($datas['isNewBuilding'])) {
 			if($datas['isNewBuilding']==true) {

@@ -160,77 +160,9 @@ class ApiController extends RestController
             throw new AccessDeniedException();
         }
 
-        $datas=$_POST;
-
-
-
-        if(!isset($datas['location'])) {
-            $datas['location']=0;
-        }
-        //$datas==$request->request;
-
-        //$type=($datas['location']==1?'rent':'sale');
-        if($type=="rent") {
-            $datas['location']=1;
-        }
-        if($type=="new") {
-            $datas['location']=0;
-            $datas['isNewBuilding']=1;
-        }
-/*
-        if(!isset($datas['sortby'])) {
-            $datas['sortby']="updatedOn desc";
-        }
-*/
-        if($datas['sort']=='') {
-            unset($datas['sort']);
-        }
-
-        if($datas['category']!='') {
-            $d=explode(",",$datas['category']);
-            $datas['category']=array_filter($d, function($k) {
-                return $k>0;
-            });
-        }else {
-            unset($datas['category']);
-        }
-
-        if($datas['zone']!='') {
-            $d=explode(",",$datas['zone']);
-            $datas['zone']=array_filter($d, function($k) {
-                return $k>0;
-            });
-
-        }else {
-            unset($datas['zone']);
-        }
-
-        if($datas['area']=='') {
-            unset($datas['area']);
-
-        }
-
-        if($datas['prix']!='') {
-            $d=explode(",",$datas['prix']);
-            $datas['prix']=array_filter($d, function($k) {
-                return ($k!='' && $k!=false);
-            });
-        }else {
-            unset($datas['prix']);
-        }
-
-
-
-
+        $datas=$this->parseSearch($_POST, $type);
 
         $em = $this->getDoctrine()->getManager();
-       /* if(isset($datas['reference'])) {
-            if($datas['reference']!="") {
-                return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
-            }
-        }
-        */
-
         if($user=$this->getUser()) {
             if($contact=$user->getContact()) {
                 $contact->setLastSearch(json_encode($datas));
@@ -238,22 +170,32 @@ class ApiController extends RestController
                 $em->flush();
             }
         }
-
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
-
-        //if(isset($datas['search_form'])) {
-            $search_form=$this->getForm($type);
-            return array(
-                'estates' => $estates,
-                'search_form' => $search_form
-            );
+        $search_form=$this->getForm($type);
+        return array(
+            'estates' => $estates,
+            'search_form' => $search_form
+        );
         //}
         return array('estates' => $estates);
 
     }
 
     public function searchAroundAction(Request $request) {
-        
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+        $search_form=$this->getForm($type);
+        $datas=$this->parseSearch($_POST);
+        if($_POST['pos']!='') {
+            $datas['pos']=$_POST['pos'];
+            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+            return array(
+                'estates' => $estates,
+                'search_form' => $search_form
+            );
+        }
+        return array('estates'=>array(), 'search_form' => $search_form);
     }
 
 
@@ -326,6 +268,7 @@ class ApiController extends RestController
         }
 
         $search_form['rayon']=array(
+            "0.5"=>"500 m",
             "1"=>"1 km",
             "5"=>"5 km",
             "10"=>"10 km",
@@ -341,6 +284,78 @@ class ApiController extends RestController
         );
 
         return $search_form;
+    }
+
+
+
+
+    private function parseSearch($datas, $type="sale") {
+        if(!isset($datas['location'])) {
+            $datas['location']=0;
+        }
+        //$datas==$request->request;
+
+        //$type=($datas['location']==1?'rent':'sale');
+        if($type=="rent") {
+            $datas['location']=1;
+        }
+        if($type=="new") {
+            $datas['location']=0;
+            $datas['isNewBuilding']=1;
+        }
+/*
+        if(!isset($datas['sortby'])) {
+            $datas['sortby']="updatedOn desc";
+        }
+*/
+        if($datas['sort']=='') {
+            unset($datas['sort']);
+        }
+
+        if($datas['category']!='') {
+            $d=explode(",",$datas['category']);
+            $datas['category']=array_filter($d, function($k) {
+                return $k>0;
+            });
+        }else {
+            unset($datas['category']);
+        }
+
+        if($datas['zone']!='') {
+            $d=explode(",",$datas['zone']);
+            $datas['zone']=array_filter($d, function($k) {
+                return $k>0;
+            });
+            if(count($datas['zone'])<=0) {
+                unset($datas['zone']);
+            }
+
+        }else {
+            unset($datas['zone']);
+        }
+
+        if(!$datas['latlng']!='') {
+            unset($datas['latlng']);
+        }
+
+        if($datas['area']=='') {
+            unset($datas['area']);
+
+        }
+
+        if($datas['prix']!='') {
+            $d=explode(",",$datas['prix']);
+            $datas['prix']=array_filter($d, function($k) {
+                return ($k!='' && $k!=false);
+            });
+             if(count($datas['prix'])<=0) {
+                unset($datas['prix']);
+            }
+        }else {
+            unset($datas['prix']);
+        }
+
+        return $datas;
     }
 
 }

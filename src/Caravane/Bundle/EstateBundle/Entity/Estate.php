@@ -369,6 +369,18 @@ class Estate
 
     private $isUpdated;
 
+    private $distance;
+
+
+
+    public function setDistance($distance) {
+        $this->distance = $distance;
+        return $this;
+    }
+
+    public function getDistance() {
+        return $this->distance;
+    }
 
 
     public function getShortReference() {

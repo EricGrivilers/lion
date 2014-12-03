@@ -63,6 +63,7 @@ class SearchType extends AbstractType
                 "label"=>false,
                 "empty_value" => 'Rayon',
                 "choices"=>array(
+                    "0.5"=>"500 m",
                     "1"=>"1 km",
                     "5"=>"5 km",
                     "10"=>"10 km",
