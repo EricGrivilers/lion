@@ -252,6 +252,9 @@ class ApiController extends RestController
 
     }
 
+    public function searchAroundAction(Request $request) {
+        
+    }
 
 
     public function getPictAction(Request $request, $filter="thumbnail_medium", $relativePath) {
