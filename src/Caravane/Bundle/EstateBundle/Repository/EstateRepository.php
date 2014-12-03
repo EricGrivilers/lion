@@ -88,14 +88,7 @@ class EstateRepository extends EntityRepository
 			$query->andWhere('C.zone IN (:zone)')
 					->setParameter('zone', $zone);
 		}
-		if(isset($datas['area'])) {
-			$query->andWhere('C.area =:area')
-				->setParameter('area', $datas['area']);
-			if(isset($datas['rayon'])) {
-				$query->andWhere('C.area =:area')
-						->setParameter('area', $datas['area']);
-			}
-		}
+		
 		if(isset($datas['latlng'])) {
 			$latlng=explode(",", $datas['latlng']);
 			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
@@ -106,21 +99,12 @@ class EstateRepository extends EntityRepository
                 ->setParameter('latitude', $latlng[0])
                 ->setParameter('longitude', $latlng[1])
                 ->setParameter('distance', $datas['rayon']);
-            
-                /*
-			$query->addSelect(
-            '( 3959 * acos(cos(radians(' . $latlng[0] . '))' .
-                '* cos( radians( C.Lat ) )' .
-                '* cos( radians( C.Lng )' .
-                '- radians(' . $latlng[1] . ') )' .
-                '+ sin( radians(' . $latlng[0] . ') )' .
-                '* sin( radians( C.Lat ) ) ) ) as distance'
-        	)
-        	->having('distance < :distance')
-        	->setParameter('distance', $datas['rayon']*1000);
-			//( 3959 * acos( cos( radians(37) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians(-122.517349) ) + sin( radians(37.780182) ) * sin( radians( lat ) ) ) ) AS distance
-			*/
 		}
+		else if(isset($datas['area'])) {
+			$query->andWhere('C.area =:area')
+				->setParameter('area', $datas['area']);
+		}
+
 		if(isset($datas['keyword'])) {
 			if($datas['keyword']!="") {
 				$query->andWhere('C.description LIKE :keyword')
