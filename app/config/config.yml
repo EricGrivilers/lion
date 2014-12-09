@@ -153,8 +153,8 @@ liip_imagine:
         thumbnail_api_square:
             quality: 90
             filters:
-                thumbnail: { size: [110, 110], mode: outbound, allow_upscale: true }
-                background: { size: [110, 110], color: '#fff' }
+                thumbnail: { size: [220, 220], mode: outbound, allow_upscale: true }
+                background: { size: [220, 220], color: '#fff' }
         full_api:
             quality: 90
             filters:
