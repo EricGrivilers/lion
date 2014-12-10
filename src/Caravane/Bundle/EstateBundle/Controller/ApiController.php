@@ -180,6 +180,50 @@ class ApiController extends RestController
 
     }
 
+
+     public function facebookAction(Request $request)
+    {
+
+
+        $data=$_POST;
+
+        $user_manager = $this->get('fos_user.user_manager');
+        if(!$user = $user_manager->findUserByEmail($data['email'])) {
+            $user = $user_manager->createUser();
+            $user->setUsername($data['email']);
+            $user->setEmail($data['email']);
+            $user->setPlainPassword(   substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8) );
+            $user->addRole("ROLE_USER");
+        }
+        if(!$contact = $user->getContact()) {
+            $contact=new Contact();
+            $l=explode('_',$data['language']);
+            $contact->setLanguage($l[0]);
+            $contact->setSalutation($data['gender']=='male'?"M":"Mme");
+            $contact->setFirstname($data['firstname']);
+            $contact->setLastname($data['lastname']);
+            $em->persist($contact);
+            $em->flush();
+            $user->setContact($contact);
+        }
+
+        $user_manager->updateUser($user);
+
+
+        $jwtManager=$this->get('lexik_jwt_authentication.jwt_manager');
+        //$user = $token->getUser();
+        $jwt  = $jwtManager->create($user);
+
+
+//        $client = static::createClient();
+//        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
+
+        return array('token'=>$jwt);
+
+
+    }
+
+
     public function getUserAction() {
         //$user_manager = $this->get('fos_user.user_manager');
         //$factory = $this->get('security.encoder_factory');

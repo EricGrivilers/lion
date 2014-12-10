@@ -10,6 +10,11 @@ caravane_estate_frontend_api_register:
     path:     /api/register
     defaults: { _controller: "CaravaneEstateBundle:Api:register", _format: json }
 
+caravane_estate_frontend_api_facebook:
+    path:     /api/facebook
+    defaults: { _controller: "CaravaneEstateBundle:Api:facebook", _format: json }
+
+
 caravane_estate_frontend_api_user:
     path:     /api/user
     defaults: { _controller: "CaravaneEstateBundle:Api:getUser", _format: json }
