@@ -126,6 +126,7 @@ class SearchType extends AbstractType
                 )
             ))
             ->add('around','hidden')
+            ->add('save','hidden')
         ;
     }
 
