@@ -15,6 +15,7 @@ use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
+use Caravane\Bundle\EstateBundle\Entity\UserEstate;
 use Caravane\Bundle\EstateBundle\Form\SearchType;
 use Caravane\Bundle\CrmBundle\Entity\Contact;
 
@@ -312,6 +313,40 @@ class ApiController extends RestController
 
 
     }
+
+
+    public function addEstateAction($id) {
+         $em = $this->getDoctrine()->getManager();
+         echo $_POST['save'];
+        if($user=$this->getUser()) {
+            if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
+                if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
+                    $userEstate=new UserEstate();
+                    $userEstate->setUser($user);
+                    $userEstate->setEstate($estate);
+                }
+                if($userEstate->getSaved()==true && $_POST['save']==true) {
+                    $userEstate->setSaved(false);
+                    $message="unsaved";
+                }
+                else if($_POST['save']=='true') {
+                    $userEstate->setSaved(true);
+                    $message="saved";
+                }
+                else {
+                    $userEstate->setSaved(false);
+                    $message="viewed";
+                }
+                $em->persist($userEstate);
+                $em->flush();
+                return array('success'=>'ok','message'=>$message);
+            }
+            return array('error'=>'no estate');
+        }
+        return array('error'=>'no user');
+        
+    }
+
 
     public function getForm($type) {
 

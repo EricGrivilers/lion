@@ -39,6 +39,11 @@ caravane_estate_frontend_api_estate_search_sale:
     path:     /api/user/estate/search/{type}
     defaults: { _controller: "CaravaneEstateBundle:Api:search", _format: json }
 
+caravane_estate_frontend_api_estate_add:
+    path:     /api/user/estate/add/{id}
+    defaults: { _controller: "CaravaneEstateBundle:Api:addEstate", _format: json }
+
+
 caravane_estate_frontend_api_estate_search_around:
     path:     /api/user/estate/searcharound
     defaults: { _controller: "CaravaneEstateBundle:Api:searchAround", _format: json }

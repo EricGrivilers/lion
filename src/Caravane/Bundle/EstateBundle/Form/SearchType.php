@@ -125,6 +125,7 @@ class SearchType extends AbstractType
                     "updatedOn desc"=>"Nouveautés",
                 )
             ))
+            ->add('around','hidden')
         ;
     }
 
