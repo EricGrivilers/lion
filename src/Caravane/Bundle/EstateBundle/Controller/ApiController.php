@@ -248,7 +248,8 @@ class ApiController extends RestController
         $datas=$this->parseSearch($_POST, $type);
 
         $em = $this->getDoctrine()->getManager();
-        if($user=$this->getUser()) {
+        if($user=$this->getUser() && $datas['save']!='') {
+            unset($datas['save']);
             if($contact=$user->getContact()) {
                 $contact->setLastSearch(json_encode($datas));
                 $em->persist($contact);
