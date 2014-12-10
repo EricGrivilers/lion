@@ -39,3 +39,8 @@ caravane_estate_frontend_api_estate_search_around:
     defaults: { _controller: "CaravaneEstateBundle:Api:searchAround", _format: json }
 
 
+caravane_estate_frontend_api_user_update:
+    path:     /api/user/update
+    defaults: { _controller: "CaravaneEstateBundle:Api:updateUser", _format: json }
+
+

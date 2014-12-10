@@ -140,6 +140,46 @@ class ApiController extends RestController
 
     }
 
+    public function updateUserAction(Request $request)
+    {
+
+
+        $data=$_POST;
+
+        $user_manager = $this->get('fos_user.user_manager');
+        //f(!$user = $user_manager->findUserByEmail($data['email'])) {
+        if(!$user = $this->getUser()) {
+            return array('error'=>"user doesn't exists");
+        }
+        
+        if(!$contact = $user->getContact()) {
+            $contact=new Contact();
+        }
+       
+        $em = $this->getDoctrine()->getManager();
+
+        $contact->setLanguage($data['language']);
+        $contact->setSalutation($data['salutation']);
+        $contact->setFirstname($data['firstname']);
+        $contact->setLastname($data['lastname']);
+        $contact->setNumber($data['number']);
+        $contact->setStreet($data['street']);
+        $contact->setCity($data['city']);
+        $contact->setZip($data['zip']);
+        $contact->setTel($data['tel']);
+        $contact->setFax($data['fax']);
+        $contact->setCountry($data['country']);
+        $em->persist($contact);
+        $em->flush();
+
+        $user->setContact($contact);
+        $user_manager->updateUser($user);
+
+        return array('success'=>'ok');
+
+
+    }
+
     public function getUserAction() {
         //$user_manager = $this->get('fos_user.user_manager');
         //$factory = $this->get('security.encoder_factory');
