@@ -306,11 +306,18 @@ class ApiController extends RestController
 
     public function getHomeAction(Request $request) {
         $max=6;
-         $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
+         
+        //$securityContext = $this->get('security.context');
+       //$token = $securityContext->getToken();
 
-           if(!$user=$this->getUser()) {
+
+
+           if(!$user = $this->getUser()) {
                  $user=null;
            }
+
+
             $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max, $user);
              return array(
                 'estates'      => $estates
@@ -322,7 +329,7 @@ class ApiController extends RestController
 
     public function addEstateAction($id) {
          $em = $this->getDoctrine()->getManager();
-         echo $_POST['save'];
+         
         if($user=$this->getUser()) {
             if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
                 if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
@@ -481,5 +488,8 @@ class ApiController extends RestController
 
         return $datas;
     }
+
+
+
 
 }

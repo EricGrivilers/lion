@@ -31,6 +31,9 @@ class EstateRepository extends EntityRepository
 		if($user) {
 			if($user->getContact()) {
 				$lastSearch=json_decode($user->getContact()->getLastSearch(), true);
+				$lastSearch['sort']="updatedOn desc";
+				$lastSearch['limit']=12;
+				$lastSearch['offset']=0;
 				$lastSearchResults=$this->getSearchResult($lastSearch);
 				if(!is_array($lastSearchResults)) {
 					$lastSearchResults=array();
