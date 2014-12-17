@@ -105,6 +105,7 @@ class ApiController extends RestController
         $user = $user_manager->createUser();
         $user->setUsername($username);
         $user->setEmail($data['email']);
+        $user->setEnabled(true);
         $user->setPlainPassword($password);
         $user->addRole("ROLE_USER");
 
@@ -193,6 +194,7 @@ class ApiController extends RestController
             $user = $user_manager->createUser();
             $user->setUsername($data['email']);
             $user->setEmail($data['email']);
+            $user->setEnabled(true);
             $user->setPlainPassword(   substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8) );
             $user->addRole("ROLE_USER");
         }
