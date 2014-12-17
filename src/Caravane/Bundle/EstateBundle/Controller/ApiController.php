@@ -468,6 +468,14 @@ class ApiController extends RestController
         if(!$datas['latlng']!='') {
             unset($datas['latlng']);
         }
+        if(!isset($datas['around'])) {
+            $datas['around']=0;
+        }
+        else {
+            if($datas['around']!=true || $datas['around']!=1) {
+                $datas['around']=0;
+            }
+        }
 
         if($datas['area']=='') {
             unset($datas['area']);
