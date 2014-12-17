@@ -152,11 +152,11 @@ class ApiController extends RestController
         if(!$user = $this->getUser()) {
             return array('error'=>"user doesn't exists");
         }
-        
+
         if(!$contact = $user->getContact()) {
             $contact=new Contact();
         }
-       
+
         $em = $this->getDoctrine()->getManager();
 
         $contact->setLanguage($data['language']);
@@ -250,14 +250,14 @@ class ApiController extends RestController
         $em = $this->getDoctrine()->getManager();
         if($user=$this->getUser()) {
             //unset($datas['save']);
-           
+
             if($contact=$user->getContact() ) {
                 if($datas['save']) {
                     $contact->setLastSearch(json_encode($datas));
                     $em->persist($contact);
                     $em->flush();
                 }
-                
+
             }
         }
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
@@ -307,7 +307,7 @@ class ApiController extends RestController
     public function getHomeAction(Request $request) {
         $max=6;
         $em = $this->getDoctrine()->getManager();
-         
+
         //$securityContext = $this->get('security.context');
        //$token = $securityContext->getToken();
 
@@ -329,7 +329,7 @@ class ApiController extends RestController
 
     public function addEstateAction($id) {
          $em = $this->getDoctrine()->getManager();
-         
+
         if($user=$this->getUser()) {
             if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
                 if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
@@ -337,17 +337,17 @@ class ApiController extends RestController
                     $userEstate->setUser($user);
                     $userEstate->setEstate($estate);
                 }
-                if($userEstate->getSaved()==true && $_POST['save']==true) {
-                    $userEstate->setSaved(false);
-                    $message="unsaved";
-                }
-                else if($_POST['save']=='true') {
-                    $userEstate->setSaved(true);
-                    $message="saved";
-                }
-                else {
-                    $userEstate->setSaved(false);
-                    $message="viewed";
+                $message="viewed";
+                if($_POST['save']==true) {
+                    if($userEstate->getSaved()==true) {
+                        $userEstate->setSaved(false);
+                        $message="unsaved";
+                    }
+                    else {
+                        $userEstate->setSaved(true);
+                        $message="saved";
+                    }
+
                 }
                 $em->persist($userEstate);
                 $em->flush();
@@ -356,7 +356,7 @@ class ApiController extends RestController
             return array('error'=>'no estate');
         }
         return array('error'=>'no user');
-        
+
     }
 
 
