@@ -1,3 +1,16 @@
+"host": "www.immo-lelion.be",
+    "user": "immo-lelion.be",
+    "password": "j9j2i69g",
+    //"port": "22",
+
+    "remote_path": "/www/"
+
+
+
+
+
+
+
 ALTER TABLE `items` CHANGE `num` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `locations` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `prices` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;

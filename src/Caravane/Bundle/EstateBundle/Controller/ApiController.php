@@ -443,11 +443,17 @@ class ApiController extends RestController
             unset($datas['sort']);
         }
 
+
         if($datas['category']!='') {
             $d=explode(",",$datas['category']);
             $datas['category']=array_filter($d, function($k) {
                 return $k>0;
             });
+            if(count($datas['category'])==0) {
+               unset($datas['category']);
+            }
+
+
         }else {
             unset($datas['category']);
         }
@@ -467,6 +473,14 @@ class ApiController extends RestController
 
         if(!$datas['latlng']!='') {
             unset($datas['latlng']);
+        }
+        if(!isset($datas['around'])) {
+            $datas['around']=0;
+        }
+        else {
+            if($datas['around']!=true || $datas['around']!=1) {
+                $datas['around']=0;
+            }
         }
 
         if($datas['area']=='') {

@@ -92,7 +92,7 @@ class EstateRepository extends EntityRepository
 					->setParameter('zone', $zone);
 		}
 		
-		if(isset($datas['latlng'])) {
+		if($datas['around']==1) {
 			$latlng=explode(",", $datas['latlng']);
 			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
 				$datas['rayon']=1;

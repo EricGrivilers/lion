@@ -153,12 +153,89 @@ liip_imagine:
         thumbnail_api_square:
             quality: 90
             filters:
-                thumbnail: { size: [220, 220], mode: outbound, allow_upscale: true }
-                background: { size: [220, 220], color: '#fff' }
+                thumbnail: { size: [300, 300], mode: outbound, allow_upscale: true }
+                background: { size: [300, 300], color: '#fff' }
         full_api:
             quality: 90
             filters:
-                thumbnail: { size: [500, 500], mode: inset, allow_upscale: true }
+                thumbnail: { size: [500, 300], mode: inset, allow_upscale: true }
+                background: { size: [500, 300], color: '#fff' }
+        home_api:
+            quality: 90
+            filters:
+                thumbnail: { size: [500, 250], mode: inset, allow_upscale: true }
+                background: { size: [500, 250], color: '#fff' }
+
+
+
+        home_320:
+            quality: 100
+            filters:
+                thumbnail: { size: [320, 171], mode: outbound, allow_upscale: true }
+                background: { size: [320, 171], color: '#fff' }
+        detail_320:
+            quality: 100
+            filters:
+                thumbnail: { size: [320, 214], mode: outbound, allow_upscale: true }
+                background: { size: [320, 214], color: '#fff' }
+        thumbnail_320:
+            quality: 100
+            filters:
+                thumbnail: { size: [160, 160], mode: outbound, allow_upscale: true }
+                background: { size: [160, 160], color: '#fff' }
+
+
+        home_375:
+            quality: 100
+            filters:
+                thumbnail: { size: [375, 200], mode: outbound, allow_upscale: true }
+                background: { size: [375, 200], color: '#fff' }
+        detail_375:
+            quality: 100
+            filters:
+                thumbnail: { size: [375, 250], mode: outbound, allow_upscale: true }
+                background: { size: [375, 250], color: '#fff' }
+        thumbnail_375:
+            quality: 100
+            filters:
+                thumbnail: { size: [190, 190], mode: outbound, allow_upscale: true }
+                background: { size: [190, 190], color: '#fff' }
+
+        home_414:
+            quality: 100
+            filters:
+                thumbnail: { size: [414, 220], mode: outbound, allow_upscale: true }
+                background: { size: [414, 220], color: '#fff' }
+        detail_414:
+            quality: 100
+            filters:
+                thumbnail: { size: [414, 276], mode: outbound, allow_upscale: true }
+                background: { size: [414, 276], color: '#fff' }
+        thumbnail_414:
+            quality: 100
+            filters:
+                thumbnail: { size: [207, 207], mode: outbound, allow_upscale: true }
+                background: { size: [207, 207], color: '#fff' }
+
+
+        home_768:
+            quality: 100
+            filters:
+                thumbnail: { size: [768, 410], mode: outbound, allow_upscale: true }
+                background: { size: [768, 410], color: '#fff' }
+        detail_768:
+            quality: 100
+            filters:
+                thumbnail: { size: [768, 512], mode: outbound, allow_upscale: true }
+                background: { size: [768, 512], color: '#fff' }
+        thumbnail_768:
+            quality: 100
+            filters:
+                thumbnail: { size: [384, 384], mode: outbound, allow_upscale: true }
+                background: { size: [384, 384], color: '#fff' }
+
+
+
 
 jms_translation:
     configs:
