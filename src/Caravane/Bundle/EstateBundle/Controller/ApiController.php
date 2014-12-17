@@ -443,19 +443,14 @@ class ApiController extends RestController
             unset($datas['sort']);
         }
 
-
+        
         if($datas['category']!='') {
-            if(preg_match(",",$datas['category'])) {
-                $d=explode(",",$datas['category']);
-                $datas['category']=array_filter($d, function($k) {
-                    return $k>0;
-                });
-            }
-            else {
-                unset($datas['category']);
-            }
-        }
-        else {
+            $d=explode(",",$datas['category']);
+            $datas['category']=array_filter($d, function($k) {
+                return $k>0;
+            });
+
+        }else {
             unset($datas['category']);
         }
 
