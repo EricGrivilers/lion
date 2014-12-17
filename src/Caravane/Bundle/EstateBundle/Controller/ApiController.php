@@ -338,7 +338,7 @@ class ApiController extends RestController
                     $userEstate->setEstate($estate);
                 }
                 $message="viewed";
-                if($_POST['save']==true) {
+                if($_POST['save']=="true") {
                     if($userEstate->getSaved()==true) {
                         $userEstate->setSaved(false);
                         $message="unsaved";
@@ -351,7 +351,7 @@ class ApiController extends RestController
                 }
                 $em->persist($userEstate);
                 $em->flush();
-                return array('success'=>'ok','message'=>$message);
+                return array('success'=>'ok','message'=>$message,'post'=>$_POST['save']);
             }
             return array('error'=>'no estate');
         }
