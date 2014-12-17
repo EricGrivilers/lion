@@ -108,6 +108,9 @@ class ApiController extends RestController
         $user->setEnabled(true);
         $user->setPlainPassword($password);
         $user->addRole("ROLE_USER");
+        $user_manager->updateUser($user);
+        $em->flush();
+
 
         $em = $this->getDoctrine()->getManager();
         $contact = new Contact();
@@ -197,6 +200,7 @@ class ApiController extends RestController
             $user->setEnabled(true);
             $user->setPlainPassword(   substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 8) );
             $user->addRole("ROLE_USER");
+            $user_manager->updateUser($user);
         }
         if(!$contact = $user->getContact()) {
             $contact=new Contact();
