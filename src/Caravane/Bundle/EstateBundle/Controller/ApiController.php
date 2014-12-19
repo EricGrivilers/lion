@@ -234,8 +234,24 @@ class ApiController extends RestController
     public function getUserAction() {
         //$user_manager = $this->get('fos_user.user_manager');
         //$factory = $this->get('security.encoder_factory');
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        return array('user' => $user);
+        $last_search=array();
+        $estates=array();
+        if($contact=$user->getContact()) {
+            $last_search=array("contact"=>true);
+            if($search=$contact->getLastSearch()) {
+                $last_search=array("last_search"=>true);
+                if($searchObj=json_decode($search, true)) {
+                    $last_search=$searchObj;
+                    $datas=$last_search;
+                    $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);;
+                    $datas['limit']=1000;
+                    $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+                }
+            }
+        }
+        return array('user' => $user, 'last_search'=>$last_search, 'last_search_count'=>count($estates));
     }
 
     /**
@@ -258,7 +274,7 @@ class ApiController extends RestController
             //unset($datas['save']);
 
             if($contact=$user->getContact() ) {
-                if($datas['save']) {
+                if($datas['save']=='true') {
                     $contact->setLastSearch(json_encode($datas));
                     $em->persist($contact);
                     $em->flush();
