@@ -2,6 +2,10 @@ caravane_estate_backend_estate:
     path:     /_admin/estate
     defaults: { _controller: "CaravaneEstateBundle:Estate:index" }
 
+caravane_estate_backend_estate_import:
+    path:     /_admin/estate/import
+    defaults: { _controller: "CaravaneEstateBundle:Estate:import" }
+
 caravane_estate_backend_estate_show:
     path:     /_admin/estate/{id}/show
     defaults: { _controller: "CaravaneEstateBundle:Estate:show" }

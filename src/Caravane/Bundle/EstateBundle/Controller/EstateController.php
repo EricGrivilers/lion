@@ -18,6 +18,61 @@ use Caravane\Bundle\EstateBundle\Form\SearchType;
 class EstateController extends Controller
 {
 
+    public function importAction() {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $rs = curl_init();
+        curl_setopt($rs,CURLOPT_URL,'http://www.evosys.be/Virtual/lelion/resultats.php?OxySeleOffr=V' );
+        curl_setopt($rs,CURLOPT_HEADER,0);
+        curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
+        $xml = curl_exec($rs);
+
+        $estates = new \SimpleXMLElement($xml);
+
+        foreach($estates as $k=>$listEstate) {
+            echo $listEstate->CLAS;
+            if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
+                $estate=new Estate;
+                $estate->setReference('030/'.$listEstate->CLAS);
+                $datetime = new \DateTime();
+                $datetime->createFromFormat('d/m/Y', $listEstate->MODI_DATE);
+                $estate->setCreatedOn($datetime);
+            }
+
+
+
+
+            $rs = curl_init();
+            curl_setopt($rs,CURLOPT_URL, 'http://www.esimmo.com/Virtual/lelion/offre.php?OxySeleCode='.$listEstate->CODE);
+            curl_setopt($rs,CURLOPT_HEADER,0);
+            curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
+            $xml = curl_exec($rs);
+            $xmlEstates = new \SimpleXMLElement($xml);
+            $xmlEstate=$xmlEstates->OFFRE[0];
+
+            $estate->setPrix($xmlEstate->PRIX);
+            $val = mb_check_encoding($val, 'UTF-8') ? $val : utf8_encode($val);
+            $estate->setSummary(substr((string)$xmlEstate->FLASH_FR,0,254));
+            $estate->setDescription("<p>".(string)$xmlEstate->FLASH_FR."</p>".(string)$xmlEstate->DESCR_FR);
+
+
+
+
+            $datetime = new \DateTime();
+            $datetime->createFromFormat('d/m/Y', $xmlEstate->MODI_DATE);
+            $estate->setUpdatedOn($datetime);
+
+            $em->persist($estate);
+        }
+        $em->flush();
+
+        return new Response($xml);
+    }
+
+
     /**
      * Lists all Estate entities.
      *

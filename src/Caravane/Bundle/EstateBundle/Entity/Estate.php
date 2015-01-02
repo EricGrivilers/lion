@@ -129,7 +129,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="shortdescren", type="string", length=255, nullable=false)
+     * @ORM\Column(name="shortdescren", type="string", length=255, nullable=true)
      */
     private $shortdescren;
 

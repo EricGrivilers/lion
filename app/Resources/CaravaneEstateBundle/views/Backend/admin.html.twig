@@ -1,0 +1,25 @@
+{% extends "CaravaneCmsBundle::layout.html.twig" %}
+{% trans_default_domain 'CaravaneCmsBundle' %}
+
+{% block header %}
+	<header class='page-header '>
+		{#    SLIDE SHOW  #}
+		{#    MAIN MENU + SEARCH  #}
+		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
+	</header>
+{% endblock header %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="row">
+	{% block body %}
+
+
+
+
+	{% endblock body %}
+		</div>
+	</div>
+
+{% endblock content %}
