@@ -28,7 +28,7 @@ class EstateController extends Controller
 
 
 /*temp */
-/*
+
     $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll();
     foreach($areas as $area) {
         $latlng=$area->getLatLng();
@@ -38,9 +38,7 @@ class EstateController extends Controller
         $em->persist($area);
     }
         $em->flush();
-        return new Response('areas updated');
-        die();
-*/
+
         $categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison');
         $categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement');
         $categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre');
