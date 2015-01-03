@@ -1,35 +1,35 @@
 caravane_estate_backend_estate:
-    path:     /_admin/estate
+    path:     /admin/estate
     defaults: { _controller: "CaravaneEstateBundle:Estate:index" }
 
 caravane_estate_backend_estate_import:
-    path:     /_admin/estate/import
+    path:     /admin/estate/import
     defaults: { _controller: "CaravaneEstateBundle:Estate:import" }
 
 caravane_estate_backend_estate_show:
-    path:     /_admin/estate/{id}/show
+    path:     /admin/estate/{id}/show
     defaults: { _controller: "CaravaneEstateBundle:Estate:show" }
 
 caravane_estate_backend_estate_new:
-    path:     /_admin/estate/new
+    path:     /admin/estate/new
     defaults: { _controller: "CaravaneEstateBundle:Estate:new" }
 
 caravane_estate_backend_estate_create:
-    path:     /_admin/estate/create
+    path:     /admin/estate/create
     defaults: { _controller: "CaravaneEstateBundle:Estate:create" }
     requirements: { _method: post }
 
 caravane_estate_backend_estate_edit:
-    path:     /_admin/estate/{id}/edit
+    path:     /admin/estate/{id}/edit
     defaults: { _controller: "CaravaneEstateBundle:Estate:edit" }
 
 caravane_estate_backend_estate_update:
-    path:     /_admin/estate/{id}/update
+    path:     /admin/estate/{id}/update
     defaults: { _controller: "CaravaneEstateBundle:Estate:update" }
     requirements: { _method: post|put }
 
 caravane_estate_backend_estate_delete:
-    path:     /_admin/estate/{id}/delete
+    path:     /admin/estate/{id}/delete
     defaults: { _controller: "CaravaneEstateBundle:Estate:delete" }
     requirements: { _method: post|delete }
 

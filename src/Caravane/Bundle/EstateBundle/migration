@@ -176,3 +176,6 @@ UPDATE `user_estate` SET date="0000000" WHERE date="";
 ALTER TABLE  `Estate` CHANGE  `zone`  `zone` INT( 11 ) NOT NULL ;
 ALTER TABLE  `Estate` CHANGE  `zone`  `zone_id` INT( 11 ) NOT NULL ;
 
+
+
+UPDATE `immolelionbe`.`Location` SET `fr` = 'Rhode-Saint-Genese' WHERE `location`.`id` = 28;

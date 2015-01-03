@@ -17,8 +17,9 @@ use JMS\Serializer\Annotation\PreSerialize;
  * Area
  *
  * @ORM\Table(name="Area", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom_quartier"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\AreaRepository")
  */
+
 class Area
 {
     /**
@@ -54,6 +55,24 @@ class Area
     private $latlng;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="lat", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $lat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lng", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $lng;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="zoom", type="integer", nullable=false)
@@ -74,7 +93,7 @@ class Area
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -97,7 +116,7 @@ class Area
     /**
      * Get nomQuartier
      *
-     * @return string 
+     * @return string
      */
     public function getNomQuartier()
     {
@@ -120,7 +139,7 @@ class Area
     /**
      * Get googlecode
      *
-     * @return string 
+     * @return string
      */
     public function getGooglecode()
     {
@@ -143,7 +162,7 @@ class Area
     /**
      * Get latlng
      *
-     * @return string 
+     * @return string
      */
     public function getLatlng()
     {
@@ -166,10 +185,56 @@ class Area
     /**
      * Get zoom
      *
-     * @return integer 
+     * @return integer
      */
     public function getZoom()
     {
         return $this->zoom;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param string $lat
+     * @return Area
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param string $lng
+     * @return Area
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return string
+     */
+    public function getLng()
+    {
+        return $this->lng;
     }
 }

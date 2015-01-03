@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Location
  *
  * @ORM\Table(name="Location")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\LocationRepository")
  */
 class Location
 {
@@ -61,7 +61,7 @@ class Location
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -84,7 +84,7 @@ class Location
     /**
      * Get zip
      *
-     * @return string 
+     * @return string
      */
     public function getZip()
     {
@@ -107,7 +107,7 @@ class Location
     /**
      * Get fr
      *
-     * @return string 
+     * @return string
      */
     public function getFr()
     {
@@ -130,7 +130,7 @@ class Location
     /**
      * Get nl
      *
-     * @return string 
+     * @return string
      */
     public function getNl()
     {
@@ -153,7 +153,7 @@ class Location
     /**
      * Get innercity
      *
-     * @return string 
+     * @return string
      */
     public function getInnercity()
     {
@@ -176,7 +176,7 @@ class Location
     /**
      * Get fixed
      *
-     * @return string 
+     * @return string
      */
     public function getFixed()
     {

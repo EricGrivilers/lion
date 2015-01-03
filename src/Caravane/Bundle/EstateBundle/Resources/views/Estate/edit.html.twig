@@ -1,16 +1,18 @@
-{#% extends '::base.html.twig' %#}
+{% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
 
 {% block body -%}
-    <h1>Estate edit</h1>
+    <h1>Edit</h1>
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('caravane_estate_backend_estate') }}">
-            Back to the list
+        <div class="row">
+        	<div class="col-md-6">
+        <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate') }}">
+            Retour à la liste
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+      </div>
+      <div class="col-md-6">
+    {{ form(delete_form) }}
+  </div>
+  </div>
 {% endblock %}

@@ -2,6 +2,13 @@
 
 {% block body -%}
 
+    <div >
+      <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate_new') }}">
+                Nouveau bien
+            </a>
+    </div>
+    <br/>
+
     <table class="records_list  table table-bordered table-condensed table-striped">
         <thead>
             <tr>
@@ -59,9 +66,9 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('caravane_estate_backend_estate_show', { 'id': entity.id }) }}">
-                    <img src="{{asset(('photos/big/'~entity.photo) | imagine_filter('thumbnail_320') ) }}"  alt="{{entity.category.name}} {{entity.locfr}}" style="width50%; height:50%" /></a></td>
-                <td><a href="{{ path('caravane_estate_backend_estate_show', { 'id': entity.id }) }}">{{ entity.reference }}</a></td>
+                <td><a href="{{ path('caravane_estate_backend_estate_edit', { 'id': entity.id }) }}">
+                    <img src="{{asset(('photos/big/'~entity.photo) | imagine_filter('thumbnail_320') ) }}"   style="width50%; height:50%" /></a></td>
+                <td><a href="{{ path('caravane_estate_backend_estate_edit', { 'id': entity.id }) }}">{{ entity.reference }}</a></td>
                 <td>{{ entity.name }}</td>
 
                 <td>{{ entity.prix }}</td>
@@ -112,11 +119,11 @@
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('caravane_estate_backend_estate_new') }}">
-                Create a new entry
+    <div >
+      <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate_new') }}">
+                Nouveau bien
             </a>
-        </li>
-    </ul>
+    </div>
+    <br/>
+
     {% endblock %}

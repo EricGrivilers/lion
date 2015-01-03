@@ -15,17 +15,17 @@ class EstateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('createdOn')
-            ->add('updatedOn')
+        //    ->add('createdOn')
+         //   ->add('updatedOn')
             ->add('prix')
             ->add('oldprix')
             ->add('locfr')
-            ->add('locuk')
+        //    ->add('locuk')
             ->add('zone')
             ->add('summary')
             ->add('shortdescren')
             ->add('description')
-            ->add('descren')
+       //     ->add('descren')
             ->add('sold')
             ->add('ondemand')
             ->add('location')
@@ -33,8 +33,8 @@ class EstateType extends AbstractType
             ->add('enoption')
             ->add('name')
             ->add('zip')
-            ->add('googleMap')
-            ->add('moredescrfr')
+        //    ->add('googleMap')
+        //    ->add('moredescrfr')
             ->add('surface')
             ->add('rooms')
             ->add('bathrooms')
@@ -42,20 +42,26 @@ class EstateType extends AbstractType
             ->add('garden')
             ->add('viewable')
             ->add('status')
-            ->add('dayview')
-            ->add('weekview')
-            ->add('monthview')
-            ->add('totalview')
-            ->add('lastdayview')
-            ->add('lastweekview')
-            ->add('lastmonthview')
+      //      ->add('dayview')
+       //     ->add('weekview')
+       //     ->add('monthview')
+       //     ->add('totalview')
+       //     ->add('lastdayview')
+       //     ->add('lastweekview')
+       //     ->add('lastmonthview')
             ->add('lat')
             ->add('lng')
-            ->add('area')
-            ->add('category')
+             ->add('area','entity',array(
+                'label'=>"Quartier",
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Area"
+            ))
+            ->add('category','entity',array(
+                'label'=>"Type",
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Category"
+            ))
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -91,7 +91,7 @@ class EstateRepository extends EntityRepository
 			$query->andWhere('C.zone IN (:zone)')
 					->setParameter('zone', $zone);
 		}
-		
+
 		if($datas['around']==1) {
 			$latlng=explode(",", $datas['latlng']);
 			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
@@ -121,7 +121,7 @@ class EstateRepository extends EntityRepository
 			}
 
 			$dqlA=array();
-			
+
 			foreach($datas['prix'] as $priceCode) {
 				$tA=explode('_',$priceCode);
 				if(isset($tA[1])) {
@@ -140,12 +140,12 @@ class EstateRepository extends EntityRepository
 						$query->setParameter("p".$tA[2], $pA[$type."_".$tA[2]]);
 					}
 				}
-				
+
 			}
 			if(count($dqlA)>0) {
 				$query->andWhere(implode(" OR ", $dqlA));
 			}
-			
+
 		}
 		if(isset($datas['isNewBuilding'])) {
 			if($datas['isNewBuilding']==true) {
@@ -190,4 +190,5 @@ class EstateRepository extends EntityRepository
 		return $entities;
 
 	}
+
 }

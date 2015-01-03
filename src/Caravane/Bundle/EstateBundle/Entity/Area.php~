@@ -4,6 +4,15 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
+
+
 /**
  * Area
  *
@@ -39,8 +48,28 @@ class Area
      * @var string
      *
      * @ORM\Column(name="LatLng", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $latlng;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lat", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $lat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lng", type="string", length=32, nullable=false)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $lng;
 
     /**
      * @var integer
@@ -50,13 +79,20 @@ class Area
     private $zoom;
 
 
+
     public function __toString() {
         return $this->nomQuartier;
+    }
+
+
+    public function getName()
+    {
+        return $this->getNomQuartier();
     }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -79,7 +115,7 @@ class Area
     /**
      * Get nomQuartier
      *
-     * @return string 
+     * @return string
      */
     public function getNomQuartier()
     {
@@ -102,7 +138,7 @@ class Area
     /**
      * Get googlecode
      *
-     * @return string 
+     * @return string
      */
     public function getGooglecode()
     {
@@ -125,7 +161,7 @@ class Area
     /**
      * Get latlng
      *
-     * @return string 
+     * @return string
      */
     public function getLatlng()
     {
@@ -148,7 +184,7 @@ class Area
     /**
      * Get zoom
      *
-     * @return integer 
+     * @return integer
      */
     public function getZoom()
     {
