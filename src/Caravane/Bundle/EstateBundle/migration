@@ -205,5 +205,7 @@ ALTER TABLE  `Estate` CHANGE  `zone`  `zone` INT( 11 ) NOT NULL ;
 ALTER TABLE  `Estate` CHANGE  `zone`  `zone_id` INT( 11 ) NOT NULL ;
 
 
+UPDATE Estate SET location=0 WHERE location='';
+UPDATE Estate SET enoption=0 WHERE enoption='';
 
 UPDATE `immolelionbe`.`Location` SET `fr` = 'Rhode-Saint-Genese' WHERE `location`.`id` = 28;

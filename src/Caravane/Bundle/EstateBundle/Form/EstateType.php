@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Caravane\Bundle\EstateBundle\Repository\LocationRepository;
+
 class EstateType extends AbstractType
 {
     /**
@@ -20,17 +22,20 @@ class EstateType extends AbstractType
             ->add('prix')
             ->add('oldprix')
             ->add('locfr')
+            ->add('locfr', 'entity', array(
+                 "class"=>"Caravane\Bundle\EstateBundle\Entity\Location"
+                ))
         //    ->add('locuk')
             ->add('zone')
-            ->add('summary')
-            ->add('shortdescren')
-            ->add('description')
+            ->add('summary','textarea')
+            //->add('shortdescren')
+            ->add('description','ckeditor')
        //     ->add('descren')
             ->add('sold')
             ->add('ondemand')
-            ->add('location')
+            ->add('location','checkbox')
             ->add('reference')
-            ->add('enoption')
+            ->add('enoption','checkbox')
             ->add('name')
             ->add('zip')
         //    ->add('googleMap')
@@ -39,9 +44,12 @@ class EstateType extends AbstractType
             ->add('rooms')
             ->add('bathrooms')
             ->add('garages')
-            ->add('garden')
+            ->add('garden','choice',array(
+                'required'    => false,
+                "choices"=>array("Jardin"=>"Jardin","Terrasse"=>"Terrasse")
+            ))
             ->add('viewable')
-            ->add('status')
+            ->add('status','checkbox')
       //      ->add('dayview')
        //     ->add('weekview')
        //     ->add('monthview')

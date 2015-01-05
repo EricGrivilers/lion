@@ -170,7 +170,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="location", type="string", length=1, nullable=true)
+     * @ORM\Column(name="location", type="boolean", nullable=true)
      */
     private $location;
 
@@ -186,7 +186,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="enoption", type="string", length=1, nullable=true)
+     * @ORM\Column(name="enoption", type="boolean", nullable=true)
      * @Expose
      * @Groups({"list","detail","search"})
      */

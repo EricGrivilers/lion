@@ -37,6 +37,7 @@ class AppKernel extends Kernel
             new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
 
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
 
 
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),

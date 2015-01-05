@@ -29,14 +29,14 @@ class EstateController extends Controller
 
 /*temp */
 
-    $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll();
-    foreach($areas as $area) {
-        $latlng=$area->getLatLng();
-        $t=explode(",",$latlng);
-        $area->setLat($t[0]);
-        $area->setLng($t[1]);
-        $em->persist($area);
-    }
+        $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll();
+        foreach($areas as $area) {
+            $latlng=$area->getLatLng();
+            $t=explode(",",$latlng);
+            $area->setLat($t[0]);
+            $area->setLng($t[1]);
+            $em->persist($area);
+        }
         $em->flush();
 
         $categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison');
@@ -230,17 +230,35 @@ class EstateController extends Controller
      * Lists all Estate entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $paginator  = $this->get('knp_paginator');
+      /*  $paginator  = $this->get('knp_paginator');
 
         $entities = $em->getRepository('CaravaneEstateBundle:Estate')->findAll();
 
         return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
             'entities' => $entities,
         ));
+
+
+*/
+    $dql   = "SELECT E FROM CaravaneEstateBundle:Estate E";
+    $query = $em->createQuery($dql);
+
+    $paginator  = $this->get('knp_paginator');
+    $entities = $paginator->paginate(
+        $query,
+        $request->query->get('page', 1)/*page number*/,
+        25,/*limit per page*/
+        array('defaultSortFieldName' => 'E.updatedOn', 'defaultSortDirection' => 'desc')
+
+    );
+
+    // parameters to template
+    return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array('entities' => $entities));
+
     }
     /**
      * Creates a new Estate entity.

@@ -39,6 +39,7 @@
         "liip/imagine-bundle": "dev-master",
         "suncat/mobile-detect-bundle": "0.9.*",
         "egeloen/google-map-bundle": "~2.1",
+        "egeloen/ckeditor-bundle": "~2.0",
         "willdurand/geocoder": "~2.8",
         "widop/http-adapter-bundle": "1.1.*",
 

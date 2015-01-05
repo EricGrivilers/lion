@@ -298,3 +298,8 @@ ivory_google_map:
         # Adapter class
         adapter: "Geocoder\HttpAdapter\BuzzHttpAdapter"
 
+
+
+knp_paginator:
+    template:
+        pagination: "KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig"

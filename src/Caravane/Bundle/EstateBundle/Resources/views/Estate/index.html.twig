@@ -9,6 +9,10 @@
     </div>
     <br/>
 
+<div class="navigation">
+    {{ knp_pagination_render(entities) }}
+</div>
+
     <table class="records_list  table table-bordered table-condensed table-striped">
         <thead>
             <tr>
@@ -20,13 +24,13 @@
             </tr>
             <tr>
                 <th></th>
-                <th>Reference</th>
-                <th>Nom</th>
+                <th>{{ knp_pagination_sortable(entities, 'Reférence', 'E.reference') }} </th>
+                <th>{{ knp_pagination_sortable(entities, 'Nom', 'E.name') }} </th>
 
-                <th>Prix</th>
-                 <th>Type</th>
+                <th>{{ knp_pagination_sortable(entities, 'Prix', 'E.prix') }} </th>
+                 <th>{{ knp_pagination_sortable(entities, 'Type', 'E.location') }}</th>
                 {#<th>Oldprix</th>#}
-                <th>Localité</th>
+                <th>{{ knp_pagination_sortable(entities, 'Localité', 'E.locfr') }}</th>
                {# <th>Locuk</th>#}
                 {#<th>Zone</th>#}
                 {#<th>Summary</th>
@@ -58,8 +62,8 @@
                 <th>Mois</th>#}
                 {#<th>Lat</th>
                 <th>Lng</th>#}
-                <th>Créé</th>
-                <th>Mis à jour</th>
+                <th>{{ knp_pagination_sortable(entities, 'Créé', 'E.createdOn') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Mis à jour', 'E.updatedOn' ) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -71,7 +75,7 @@
                 <td><a href="{{ path('caravane_estate_backend_estate_edit', { 'id': entity.id }) }}">{{ entity.reference }}</a></td>
                 <td>{{ entity.name }}</td>
 
-                <td>{{ entity.prix }}</td>
+                <td>{{ entity.prix }} </td>
                  <td>{{ entity.location=="1"?"Location":"Vente" }}</td>
                {# <td>{{ entity.oldprix }}</td>#}
                 <td>{{ entity.locfr }}</td>
@@ -119,6 +123,10 @@
         </tbody>
     </table>
 
+
+<div class="navigation">
+    {{ knp_pagination_render(entities) }}
+</div>
     <div >
       <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate_new') }}">
                 Nouveau bien
