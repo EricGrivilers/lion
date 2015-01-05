@@ -79,6 +79,13 @@ class Area
      */
     private $zoom;
 
+    /**
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", mappedBy="area")
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $estate;
+
 
 
     public function __toString() {

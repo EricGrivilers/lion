@@ -371,7 +371,12 @@ class Estate
 
     private $distance;
 
-
+     /**
+     * @var integer
+     *
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\UserEstate", mappedBy="estate")
+     */
+    private $user;
 
     public function setDistance($distance) {
         $this->distance = $distance;
