@@ -104,6 +104,8 @@ class Estate
 
     /**
      * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Area", inversedBy="estate")
+     * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $area;
 
