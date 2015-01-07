@@ -492,7 +492,7 @@ class ApiController extends RestController
             unset($datas['zone']);
         }
 
-        if(isset($datas['address'])) {
+        if(isset($datas['address']) && $datas['address']!="") {
             $geocoder = $this->get('ivory_google_map.geocoder');
                 $response = $geocoder->geocode($datas['address'].", bruxelles");
                 foreach($response->getResults() as $result)
