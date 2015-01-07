@@ -423,10 +423,9 @@ class ApiController extends RestController
         $search_form['rayon']=array(
             "0.5"=>"500 m",
             "1"=>"1 km",
+            "2"=>"2 km",
             "5"=>"5 km",
-            "10"=>"10 km",
-            "20"=>"20 km",
-            "50"=>"50 km"
+            "10"=>"10 km"
         );
 
         $search_form['sort']=array(
@@ -493,6 +492,19 @@ class ApiController extends RestController
             unset($datas['zone']);
         }
 
+        if(isset($datas['address'])) {
+            $geocoder = $this->get('ivory_google_map.geocoder');
+                $response = $geocoder->geocode($datas['address'].", bruxelles");
+                foreach($response->getResults() as $result)
+                {
+                    if($location=$result->getGeometry()->getLocation()) {
+                        $lat=$location->getLatitude();
+                        $lng=$location->getLongitude();
+                    }
+
+                }
+            $datas['latlng']=$lat.",".$lng;
+        }
         if(!$datas['latlng']!='') {
             unset($datas['latlng']);
         }
