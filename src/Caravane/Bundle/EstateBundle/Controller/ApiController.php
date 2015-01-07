@@ -493,6 +493,7 @@ class ApiController extends RestController
         }
 
         if(isset($datas['address']) && $datas['address']!="") {
+            unset($datas['around']);
             $geocoder = $this->get('ivory_google_map.geocoder');
                 $response = $geocoder->geocode($datas['address'].", bruxelles");
                 foreach($response->getResults() as $result)
@@ -505,7 +506,7 @@ class ApiController extends RestController
                 }
             $datas['latlng']=$lat.",".$lng;
         }
-        if(!$datas['latlng']!='') {
+        if($datas['latlng']=='') {
             unset($datas['latlng']);
         }
         if(!isset($datas['around'])) {
