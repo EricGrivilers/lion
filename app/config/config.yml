@@ -247,8 +247,8 @@ liip_imagine:
         thumbnail_1024:
             quality: 100
             filters:
-                thumbnail: { size: [512, 512], mode: outbound, allow_upscale: true }
-                background: { size: [512, 512], color: '#fff' }
+                thumbnail: { size: [384, 384], mode: outbound, allow_upscale: true }
+                background: { size: [384, 384], color: '#fff' }
 
 
 
