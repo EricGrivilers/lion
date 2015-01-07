@@ -245,9 +245,10 @@ class ApiController extends RestController
                 if($searchObj=json_decode($search, true)) {
                     $last_search=$searchObj;
                     $datas=$last_search;
-                    $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);;
+                    //$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);;
                     $datas['limit']=1000;
                     $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+
                 }
             }
         }
@@ -332,8 +333,6 @@ class ApiController extends RestController
 
         //$securityContext = $this->get('security.context');
        //$token = $securityContext->getToken();
-
-
 
            if(!$user = $this->getUser()) {
                  $user=null;

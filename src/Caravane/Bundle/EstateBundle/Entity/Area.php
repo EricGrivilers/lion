@@ -18,6 +18,7 @@ use JMS\Serializer\Annotation\PreSerialize;
  *
  * @ORM\Table(name="Area", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom_quartier"})})
  * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\AreaRepository")
+ * @ExclusionPolicy("all")
  */
 
 class Area
@@ -35,6 +36,8 @@ class Area
      * @var string
      *
      * @ORM\Column(name="nom_quartier", type="string", length=255, nullable=false)
+    * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $nomQuartier;
 
@@ -58,8 +61,6 @@ class Area
      * @var string
      *
      * @ORM\Column(name="lat", type="string", length=32, nullable=false)
-     * @Expose
-     * @Groups({"list","detail","search"})
      */
     private $lat;
 
@@ -67,8 +68,6 @@ class Area
      * @var string
      *
      * @ORM\Column(name="lng", type="string", length=32, nullable=false)
-     * @Expose
-     * @Groups({"list","detail","search"})
      */
     private $lng;
 
@@ -81,8 +80,6 @@ class Area
 
     /**
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", mappedBy="area")
-     * @Expose
-     * @Groups({"list","detail","search"})
      */
     private $estate;
 
