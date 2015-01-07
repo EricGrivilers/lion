@@ -39,6 +39,7 @@ web/docs
 
 # Composer PHAR
 /composer.phar
+/composer.lock
 
 photos
 web/photos
