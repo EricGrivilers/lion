@@ -105,9 +105,6 @@ class EstateRepository extends EntityRepository
 		}
 		else if(isset($datas['address'])) {
 			$latlng=explode(",", $datas['latlng']);
-			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
-				$datas['rayon']=1;
-			}
 			$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
 				//->having('distance < :distance')
                 ->setParameter('latitude', $latlng[0])
