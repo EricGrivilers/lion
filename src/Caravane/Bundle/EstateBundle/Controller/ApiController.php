@@ -407,7 +407,10 @@ class ApiController extends RestController
                     }
                 }
         }
-       
+        
+        if(count($estates)<=0) {
+            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
+        }
        
         return array(
             'estates'      => $estates
