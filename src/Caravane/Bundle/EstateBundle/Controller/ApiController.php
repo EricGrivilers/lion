@@ -370,19 +370,48 @@ class ApiController extends RestController
     public function getHomeAction(Request $request) {
         $max=6;
         $em = $this->getDoctrine()->getManager();
-
-        //$securityContext = $this->get('security.context');
-       //$token = $securityContext->getToken();
-
-           if(!$user = $this->getUser()) {
-                 $user=null;
-           }
+        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
+            return array(
+            'estates'      => $estates
+        );
+        
 
 
-            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max, $user);
-             return array(
+    }
+
+     public function getUserHomeAction(Request $request) {
+        $max=6;
+        $em = $this->getDoctrine()->getManager();
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
+                 return array(
                 'estates'      => $estates
             );
+        }
+        $user=null;
+        $estates=array();
+        if($user=$this->getUser()) {
+                //unset($datas['save']);
+                if($contact=$user->getContact()) {
+                    if($search=$contact->getLastSearch()) {
+                        if($searchObj=json_decode($search, true)) {
+                            $last_search=$searchObj;
+                            $datas=$last_search;
+                            $type=$datas['location']==1?'vente':'location';
+                            //$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);;
+                            $datas['limit']=8;
+                            $datas['offset']=0;
+                            $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+
+                        }
+                    }
+                }
+        }
+       
+       
+        return array(
+            'estates'      => $estates
+        );
 
 
     }

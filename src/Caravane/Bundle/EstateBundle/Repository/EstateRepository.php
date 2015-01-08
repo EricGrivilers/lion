@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class EstateRepository extends EntityRepository
 {
 
-	public function findLastUpdated($limit=3, $user) {
+	public function findLastUpdated($limit=3, $user=null) {
 		$lastSearchResults=array();
 		$estates= $this->findBy(
 			array(),

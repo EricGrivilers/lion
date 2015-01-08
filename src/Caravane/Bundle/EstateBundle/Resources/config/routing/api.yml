@@ -24,6 +24,12 @@ caravane_estate_frontend_api_home:
     path:     /api/home
     defaults: { _controller: "CaravaneEstateBundle:Api:getHome", _format: json  }
 
+caravane_estate_frontend_api_own_home:
+    path:     /api/user/home
+    defaults: { _controller: "CaravaneEstateBundle:Api:getUserHome", _format: json  }
+
+
+
 caravane_estate_push:
     path:     /notification/push
     defaults: { _controller: "CaravaneEstateBundle:Push:push"  }
