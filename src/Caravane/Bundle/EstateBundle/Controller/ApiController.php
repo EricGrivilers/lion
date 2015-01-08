@@ -461,9 +461,9 @@ class ApiController extends RestController
 
         $search_form['rayon']=array(
             "0.5"=>"500 m",
-            "1"=>"1 km",
-            "2"=>"2 km",
-            "5"=>"5 km",
+            "01"=>"1 km",
+            "02"=>"2 km",
+            "05"=>"5 km",
             "10"=>"10 km"
         );
 
