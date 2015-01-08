@@ -273,17 +273,56 @@ class ApiController extends RestController
         $em = $this->getDoctrine()->getManager();
         if($user=$this->getUser()) {
             //unset($datas['save']);
-
             if($contact=$user->getContact() ) {
                 if($datas['save']=='true') {
                     $contact->setLastSearch(json_encode($datas));
                     $em->persist($contact);
                     $em->flush();
                 }
-
             }
         }
         $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+        $search_form=$this->getForm($type);
+        return array(
+            'estates' => $estates,
+            'search_form' => $search_form,
+        );
+        //}
+        return array('estates' => $estates);
+
+    }
+
+
+    public function searchOwnAction(Request $request)
+    {
+        if (!$this->get('security.context')->isGranted('ROLE_USER')) {
+            throw new AccessDeniedException();
+        }
+
+        
+        $estates=array();
+        $em = $this->getDoctrine()->getManager();
+        $type="vente";
+        if($user=$this->getUser()) {
+            //unset($datas['save']);
+            if($contact=$user->getContact()) {
+                $last_search=array("contact"=>true);
+                if($search=$contact->getLastSearch()) {
+                    $last_search=array("last_search"=>true);
+                    if($searchObj=json_decode($search, true)) {
+
+                        $last_search=$searchObj;
+                        $datas=$last_search;
+                        $type=$datas['location']==1?'vente':'location';
+                        //$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);;
+                        $datas['limit']=24;
+                        $datas['offset']=$_POST['offset'];
+                        $estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+
+                    }
+                }
+            }
+        }
         $search_form=$this->getForm($type);
         return array(
             'estates' => $estates,
@@ -293,6 +332,7 @@ class ApiController extends RestController
         return array('estates' => $estates);
 
     }
+
 
     public function searchAroundAction(Request $request) {
         if (!$this->get('security.context')->isGranted('ROLE_USER')) {
@@ -381,7 +421,7 @@ class ApiController extends RestController
     }
 
 
-    public function getForm($type) {
+    public function getForm($type="vente") {
 
 
         $em = $this->getDoctrine()->getManager();

@@ -34,6 +34,9 @@ caravane_estate_frontend_api_estate_pict_show:
     requirements:
         relativePath: ".+"
 
+caravane_estate_frontend_api_estate_search_own:
+    path:     /api/user/estate/search/own
+    defaults: { _controller: "CaravaneEstateBundle:Api:searchOwn", _format: json }
 
 caravane_estate_frontend_api_estate_search_sale:
     path:     /api/user/estate/search/{type}
