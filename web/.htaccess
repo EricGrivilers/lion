@@ -3,6 +3,10 @@
 # mod_rewrite). Additionally, this reduces the matching process for the
 # start page (path "/") because otherwise Apache will apply the rewriting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
+
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+
 DirectoryIndex app.php
 
 <IfModule mod_rewrite.c>

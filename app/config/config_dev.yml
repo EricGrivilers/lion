@@ -41,4 +41,7 @@ assetic:
     use_controller: "%use_assetic_controller%"
 
 swiftmailer:
+    transport: gmail
+    username:  ericgrivilers@gmail.com
+    password:  absco8645
     delivery_address: eric@caravanemedia.com
