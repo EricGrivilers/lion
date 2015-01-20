@@ -88,7 +88,7 @@ class ApiController extends RestController
 
      public function registerAction(Request $request)
     {
-
+        $em = $this->getDoctrine()->getManager();
 
         $data=$_POST;
 
@@ -112,7 +112,7 @@ class ApiController extends RestController
         $em->flush();
 
 
-        $em = $this->getDoctrine()->getManager();
+        
         $contact = new Contact();
         $contact->setLanguage($data['language']);
         $contact->setSalutation($data['salutation']);
