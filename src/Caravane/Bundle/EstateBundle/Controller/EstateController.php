@@ -62,8 +62,9 @@ class EstateController extends Controller
 */
 
         $rs = curl_init();
+        //?OxySeleBiensParPage=1000
        // curl_setopt($rs,CURLOPT_URL,'http://www.evosys.be/Virtual/lelion/resultats.php?OxySeleOffr=V' );
-        curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php' );
+        curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
         curl_setopt($rs,CURLOPT_HEADER,0);
         curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
         curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
