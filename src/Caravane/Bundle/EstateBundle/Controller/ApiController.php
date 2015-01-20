@@ -125,6 +125,7 @@ class ApiController extends RestController
         $contact->setTel($data['tel']);
         $contact->setFax($data['fax']);
         $contact->setCountry($data['country']);
+        $contact->setUser($user);
         $em->persist($contact);
         $em->flush();
 
