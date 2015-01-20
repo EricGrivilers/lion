@@ -18,7 +18,8 @@ class LocationRepository extends EntityRepository {
 
      	$query = $this->createQueryBuilder('L')
         ->where('upper(L.fr) = upper(:name)')
-        ->setParameter('name', $name);
+        ->setParameter('name', $name)
+        ->setMaxResults(1);
 
         $location = $query->getQuery()->getOneOrNullResult();
 
