@@ -67,6 +67,9 @@ class ProfileController extends BaseController
 								$last_search_form->get('area')->setData($area);
 							}
 						}
+						else if($k=="latlng") {
+							$last_search_form->get('latlng')->setData(null);
+						}
 						else {
 							$last_search_form->get($k)->setData($v);
 						}
