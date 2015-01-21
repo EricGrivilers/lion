@@ -24,7 +24,7 @@ class Location
     /**
      * @var string
      *
-     * @ORM\Column(name="zip", type="string", length=4, nullable=false)
+     * @ORM\Column(name="zip", type="string", length=4, nullable=true)
      */
     private $zip = '';
 
@@ -38,26 +38,29 @@ class Location
     /**
      * @var string
      *
-     * @ORM\Column(name="nl", type="string", length=100, nullable=false)
+     * @ORM\Column(name="nl", type="string", length=100, nullable=true)
      */
     private $nl = '';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="innercity", type="string", length=10, nullable=false)
+     * @ORM\Column(name="innercity", type="string", length=10, nullable=true)
      */
     private $innercity = 'true';
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fixed", type="string", length=5, nullable=false)
+     * @ORM\Column(name="fixed", type="string", length=5, nullable=true)
      */
     private $fixed;
 
 
 
+    public function __toString() {
+        return $this->zip." ".$this->fr;
+    }
     /**
      * Get id
      *

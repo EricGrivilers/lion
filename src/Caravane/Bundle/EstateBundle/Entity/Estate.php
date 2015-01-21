@@ -1451,4 +1451,37 @@ class Estate
     {
         return $this->isNewBuilding;
     }
+
+    /**
+     * Add user
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\UserEstate $user
+     * @return Estate
+     */
+    public function addUser(\Caravane\Bundle\EstateBundle\Entity\UserEstate $user)
+    {
+        $this->user[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\UserEstate $user
+     */
+    public function removeUser(\Caravane\Bundle\EstateBundle\Entity\UserEstate $user)
+    {
+        $this->user->removeElement($user);
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
 }

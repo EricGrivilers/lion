@@ -55,6 +55,11 @@ assetic:
 
 
 # Doctrine Configuration
+
+th3mouk_doctrine_table_prefix:
+    prefix: vsf_
+
+
 doctrine:
     dbal:
         driver:   "%database_driver%"

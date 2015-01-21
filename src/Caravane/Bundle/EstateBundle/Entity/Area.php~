@@ -17,8 +17,10 @@ use JMS\Serializer\Annotation\PreSerialize;
  * Area
  *
  * @ORM\Table(name="Area", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom_quartier"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\AreaRepository")
+ * @ExclusionPolicy("all")
  */
+
 class Area
 {
     /**
@@ -34,20 +36,30 @@ class Area
      * @var string
      *
      * @ORM\Column(name="nom_quartier", type="string", length=255, nullable=false)
+    * @Expose
+     * @Groups({"list","detail","search"})
      */
     private $nomQuartier;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="googlecode", type="text", nullable=false)
+     * @ORM\Column(name="code", type="string", nullable=false)
+     */
+    private $code;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="googlecode", type="text", nullable=true)
      */
     private $googlecode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="LatLng", type="string", length=32, nullable=false)
+     * @ORM\Column(name="LatLng", type="string", length=32, nullable=true)
      * @Expose
      * @Groups({"list","detail","search"})
      */
@@ -56,27 +68,28 @@ class Area
     /**
      * @var string
      *
-     * @ORM\Column(name="lat", type="string", length=32, nullable=false)
-     * @Expose
-     * @Groups({"list","detail","search"})
+     * @ORM\Column(name="lat", type="string", length=32, nullable=true)
      */
     private $lat;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lng", type="string", length=32, nullable=false)
-     * @Expose
-     * @Groups({"list","detail","search"})
+     * @ORM\Column(name="lng", type="string", length=32, nullable=true)
      */
     private $lng;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="zoom", type="integer", nullable=false)
+     * @ORM\Column(name="zoom", type="integer", nullable=true)
      */
     private $zoom;
+
+    /**
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", mappedBy="area")
+     */
+    private $estate;
 
 
 
@@ -189,5 +202,51 @@ class Area
     public function getZoom()
     {
         return $this->zoom;
+    }
+
+    /**
+     * Set lat
+     *
+     * @param string $lat
+     * @return Area
+     */
+    public function setLat($lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    /**
+     * Get lat
+     *
+     * @return string
+     */
+    public function getLat()
+    {
+        return $this->lat;
+    }
+
+    /**
+     * Set lng
+     *
+     * @param string $lng
+     * @return Area
+     */
+    public function setLng($lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    /**
+     * Get lng
+     *
+     * @return string
+     */
+    public function getLng()
+    {
+        return $this->lng;
     }
 }

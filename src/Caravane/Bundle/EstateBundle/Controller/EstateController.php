@@ -29,7 +29,7 @@ class EstateController extends Controller
 
 /*temp */
 
-        $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll();
+ /*       $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll();
         foreach($areas as $area) {
             $latlng=$area->getLatLng();
             $t=explode(",",$latlng);
@@ -38,7 +38,7 @@ class EstateController extends Controller
             $em->persist($area);
         }
         $em->flush();
-
+*/
         $categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison');
         $categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement');
         $categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre');
@@ -48,7 +48,7 @@ class EstateController extends Controller
         $zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3);
         $zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4);
 
-/*
+
         $rs = curl_init();
         curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/secteurs.php' );
         curl_setopt($rs,CURLOPT_HEADER,0);
@@ -58,8 +58,16 @@ class EstateController extends Controller
         $areasXml = new \SimpleXMLElement($xml);
 
         foreach($areasXml as $k=>$areaXml) {
+            if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByNomQuartier($areaXml->LIBE_FR)) {
+                $area = new Area();
+                $libe=ltrim ($areaXml->LIBE_FR, '-');
+                $libe=trim($libe);
+                $area->setNomQuartier($libe);
+                $area->setCode($areaXml->CODE);
+                $em->persist($area);
+            }
         }
-*/
+        $em->flush();
 
         $rs = curl_init();
         //?OxySeleBiensParPage=1000
@@ -74,148 +82,160 @@ class EstateController extends Controller
 
         foreach($estates as $k=>$listEstate) {
             //echo $listEstate->CLAS;
+            $date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
+
             if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
                 $estate=new Estate;
                 $estate->setReference('030/'.$listEstate->CLAS);
 
-                $date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);
+                
                 //$datetime = new \DateTime();
                 //$datetime->createFromFormat('d/m/Y', $listEstate->MODI_DATE);
                 $estate->setCreatedOn($date);
+                $estate->setUpdatedOn(new \Datetime());
             }
+            echo $estate->getUpdatedOn()->format('Ymd');
+            echo "!=";
+            echo $date->format('Ymd');
 
+            if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd')) {
+                $estate->setBathrooms(intval($listEstate->BAIN_NBR));
 
-            $estate->setBathrooms(intval($listEstate->BAIN_NBR));
+                $geocoder = $this->get('ivory_google_map.geocoder');
+                $response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
 
-            $geocoder = $this->get('ivory_google_map.geocoder');
-            $response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
+                foreach($response->getResults() as $result)
+                {
+                    if($location=$result->getGeometry()->getLocation()) {
+                        $lat=$location->getLatitude();
+                        $lng=$location->getLongitude();
+                        $estate->setLat($lat);
+                        $estate->setLng($lng);
 
-            foreach($response->getResults() as $result)
-            {
-                if($location=$result->getGeometry()->getLocation()) {
-                    $lat=$location->getLatitude();
-                    $lng=$location->getLongitude();
-                    $estate->setLat($lat);
-                    $estate->setLng($lng);
+                       // $area=$em->getRepository('CaravaneEstateBundle:Area')->getClosestArea($lat,$lng);
+                       // $estate->setArea($area);
+                    }
 
-                    $area=$em->getRepository('CaravaneEstateBundle:Area')->getClosestArea($lat,$lng);
-                    $estate->setArea($area);
                 }
 
-            }
+                $rs = curl_init();
+                curl_setopt($rs,CURLOPT_URL, 'http://www.esimmo.com/Virtual/lelion/offre.php?OxySeleCode='.$listEstate->CODE);
+                curl_setopt($rs,CURLOPT_HEADER,0);
+                curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
+                curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
+                $xml = curl_exec($rs);
+                $xmlEstates = new \SimpleXMLElement($xml);
+                $xmlEstate=$xmlEstates->OFFRE[0];
+
+                $estate->setPrix($xmlEstate->PRIX);
+                $estate->setSummary(substr((string)$xmlEstate->FLASH_FR,0,254));
+                $estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".(string)$xmlEstate->DESCR_FR),"<p><br><a><i><u><ul><li>");
+                $estate->setName($xmlEstate->REFE);
+                $estate->setLocation($xmlEstate->OFFR=='L'?1:0);
+
+                if($area=$em->getRepository('CaravaneEstateBundle:Area')->findOneByCode($xmlEstate->TABLGEOG)) {
+                    $estate->setArea($area);
+                }
+                if(!$loc=$em->getRepository('CaravaneEstateBundle:Location')->findOneByFr($xmlEstate->COMM)) {
+                    $loc=new Location();
+                    $loc->setFr(ucfirst($xmlEstate->COMM));
+                    $em->persist($loc);
+                }
+                $estate->setLocFr($loc->getZip()." ".$loc->getFr());
+                $estate->setZip(intval($loc->getZip()));
+
+                if(substr($xmlEstate->TABLIMME,0,2)=='01') {
+                    $category=$categoryAppartement;
+                }
+                else if(substr($xmlEstate->TABLIMME,0,2)=='02') {
+                    $category=$categoryMaison;
+                }
+                else {
+                    $category=$categoryAutre;
+                }
+                $estate->setCategory($category);
+
+                $zone=null;
+                if(substr($xmlEstate->TABLGEOG,0,2)=='00' || substr($xmlEstate->TABLGEOG,0,2)=='01' || $xmlEstate->TABLGEOG=="0") {
+                    $zone=$zone1;
+                }
+                else if(substr($xmlEstate->TABLGEOG,0,2)=='02') {
+                    $zone=$zone2;
+                }
+                else if(substr($xmlEstate->TABLGEOG,0,2)=='10') {
+                    $zone=$zone3;
+                }
+                else if(substr($xmlEstate->TABLGEOG,0,2)=='11') {
+                    $zone=$zone4;
+                }
+                $estate->setZone($zone);
+
+                $estate->setRooms(intval($xmlEstate->CHBR_NBR));
+                $estate->setGarages(intval($xmlEstate->VOIT_NBR));
+                $estate->setSurface(intval($xmlEstate->SURF_HAB));
+                if($xmlEstate->JARD_ON!=0) {
+                    $garden="Jardin";
+                }
+                else if(intval($xmlEstate->SUPE_TER)>0) {
+                    $garden="Terrasse";
+                }
+                else {
+                    $garden="";
+                }
+                $estate->setGarden($garden);
 
 
-            $rs = curl_init();
-            curl_setopt($rs,CURLOPT_URL, 'http://www.esimmo.com/Virtual/lelion/offre.php?OxySeleCode='.$listEstate->CODE);
-            curl_setopt($rs,CURLOPT_HEADER,0);
-            curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
-            curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
-            $xml = curl_exec($rs);
-            $xmlEstates = new \SimpleXMLElement($xml);
-            $xmlEstate=$xmlEstates->OFFRE[0];
 
-            $estate->setPrix($xmlEstate->PRIX);
-            $estate->setSummary(substr((string)$xmlEstate->FLASH_FR,0,254));
-            $estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".(string)$xmlEstate->DESCR_FR),"<p><br><a><i><u><ul><li>");
-            $estate->setName($xmlEstate->REFE);
-            $estate->setLocation($xmlEstate->OFFR=='V'?0:1);
+                foreach($estate->getPhoto() as $photo) {
+                    $estate->removePhoto($photo);
+                }
+                for($i=1;$i<=20;$i++) {
+                    $id=($i<10?"0".$i:$i);
+                    $xmlPhoto="PHOTO_".$id;
+                    if($xmlUrl=$xmlEstate->$xmlPhoto) {
+                        //echo $xmlUrl;
+                        if(preg_match("/\//",$xmlUrl)) {
+                            $t=explode("/",$xmlUrl);
+                            $filename=$t[count($t)-1];
+                            if($ch = curl_init($xmlUrl)) {
+                                $fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
+                                curl_setopt($ch, CURLOPT_FILE, $fp);
+                                curl_setopt($ch, CURLOPT_HEADER, 0);
+                                curl_exec($ch);
+                                curl_close($ch);
+                                fclose($fp);
+                                if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+                                    $photo= new Photo();
+                                    $photo->setFilename($filename);
+                                    $photo->setRanking(intval(substr($filename,0,2)));
+                                    $photo->setEstate($estate);
+                                    $em->persist($photo);
+                                }
 
-            if(!$loc=$em->getRepository('CaravaneEstateBundle:Location')->findOneByFr($xmlEstate->COMM)) {
-                $loc=new Location();
-                $loc->setFr(ucfirst($xmlEstate->COMM));
-                $em->persist($loc);
-            }
-            $estate->setLocFr($loc->getZip()." ".$loc->getFr());
-            $estate->setZip(intval($loc->getZip()));
-
-            if(substr($xmlEstate->TABLIMME,0,2)=='01') {
-                $category=$categoryAppartement;
-            }
-            else if(substr($xmlEstate->TABLIMME,0,2)=='02') {
-                $category=$categoryMaison;
-            }
-            else {
-                $category=$categoryAutre;
-            }
-            $estate->setCategory($category);
-
-            $zone=null;
-            if(substr($xmlEstate->TABLGEOG,0,2)=='00' || substr($xmlEstate->TABLGEOG,0,2)=='01' || $xmlEstate->TABLGEOG=="0") {
-                $zone=$zone1;
-            }
-            else if(substr($xmlEstate->TABLGEOG,0,2)=='02') {
-                $zone=$zone2;
-            }
-            else if(substr($xmlEstate->TABLGEOG,0,2)=='10') {
-                $zone=$zone3;
-            }
-            else if(substr($xmlEstate->TABLGEOG,0,2)=='11') {
-                $zone=$zone4;
-            }
-            $estate->setZone($zone);
-
-            $estate->setRooms(intval($xmlEstate->CHBR_NBR));
-            $estate->setGarages(intval($xmlEstate->VOIT_NBR));
-            $estate->setSurface(intval($xmlEstate->SURF_HAB));
-            if($xmlEstate->JARD_ON!=0) {
-                $garden="Jardin";
-            }
-            else if(intval($xmlEstate->SUPE_TER)>0) {
-                $garden="Terrasse";
-            }
-            else {
-                $garden="";
-            }
-            $estate->setGarden($garden);
-
-
-
-            foreach($estate->getPhoto() as $photo) {
-                $estate->removePhoto($photo);
-            }
-            for($i=1;$i<=20;$i++) {
-                $id=($i<10?"0".$i:$i);
-                $xmlPhoto="PHOTO_".$id;
-                if($xmlUrl=$xmlEstate->$xmlPhoto) {
-                    //echo $xmlUrl;
-                    if(preg_match("/\//",$xmlUrl)) {
-                        $t=explode("/",$xmlUrl);
-                        $filename=$t[count($t)-1];
-                        if($ch = curl_init($xmlUrl)) {
-                            $fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
-                            curl_setopt($ch, CURLOPT_FILE, $fp);
-                            curl_setopt($ch, CURLOPT_HEADER, 0);
-                            curl_exec($ch);
-                            curl_close($ch);
-                            fclose($fp);
-                            if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
-                                $photo= new Photo();
-                                $photo->setFilename($filename);
-                                $photo->setRanking(intval(substr($filename,0,2)));
-                                $photo->setEstate($estate);
-                                $em->persist($photo);
+                                echo $filename."<br/>";
                             }
 
-                            echo $filename."<br/>";
                         }
 
                     }
 
                 }
 
+               // echo $listEstate->MODI_DATE;
+               // $datetime = new \DateTime();
+               // $datetime->createFromFormat('d/m/Y', $xmlEstate->MODI_DATE);
+               // $date=date_create_from_format('d/m/Y', $xmlEstate->MODI_DATE);
+               // echo " - ".$datetime->format('Y-m-d H:i:s')."<br/>";
+               // echo " - ".$date->format('Y-m-d H:i:s')."<br/>";
+                $estate->setUpdatedOn($date);
+
+                $em->persist($estate);
+                $em->flush();
             }
 
-           // echo $listEstate->MODI_DATE;
-           // $datetime = new \DateTime();
-           // $datetime->createFromFormat('d/m/Y', $xmlEstate->MODI_DATE);
-            $date=date_create_from_format('d/m/Y', $xmlEstate->MODI_DATE);
-           // echo " - ".$datetime->format('Y-m-d H:i:s')."<br/>";
-           // echo " - ".$date->format('Y-m-d H:i:s')."<br/>";
-            $estate->setUpdatedOn($date);
-
-            $em->persist($estate);
+            
         }
-        $em->flush();
+        
 
 
 

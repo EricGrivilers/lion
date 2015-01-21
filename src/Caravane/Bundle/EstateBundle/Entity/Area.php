@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation\PreSerialize;
 /**
  * Area
  *
- * @ORM\Table(name="Area", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom_quartier"})})
+ * @ORM\Table(name="Area")
  * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\AreaRepository")
  * @ExclusionPolicy("all")
  */
@@ -44,14 +44,22 @@ class Area
     /**
      * @var string
      *
-     * @ORM\Column(name="googlecode", type="text", nullable=false)
+     * @ORM\Column(name="code", type="string", nullable=false)
+     */
+    private $code;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="googlecode", type="text", nullable=true)
      */
     private $googlecode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="LatLng", type="string", length=32, nullable=false)
+     * @ORM\Column(name="LatLng", type="string", length=32, nullable=true)
      * @Expose
      * @Groups({"list","detail","search"})
      */
@@ -60,21 +68,21 @@ class Area
     /**
      * @var string
      *
-     * @ORM\Column(name="lat", type="string", length=32, nullable=false)
+     * @ORM\Column(name="lat", type="string", length=32, nullable=true)
      */
     private $lat;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lng", type="string", length=32, nullable=false)
+     * @ORM\Column(name="lng", type="string", length=32, nullable=true)
      */
     private $lng;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="zoom", type="integer", nullable=false)
+     * @ORM\Column(name="zoom", type="integer", nullable=true)
      */
     private $zoom;
 
@@ -240,5 +248,68 @@ class Area
     public function getLng()
     {
         return $this->lng;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->estate = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return Area
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Add estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     * @return Area
+     */
+    public function addEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate)
+    {
+        $this->estate[] = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Remove estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     */
+    public function removeEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate)
+    {
+        $this->estate->removeElement($estate);
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstate()
+    {
+        return $this->estate;
     }
 }
