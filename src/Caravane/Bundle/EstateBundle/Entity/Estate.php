@@ -119,7 +119,7 @@ class Estate
     /**
      * @var string
      *
-     * @ORM\Column(name="summary", type="string", length=255, nullable=false)
+     * @ORM\Column(name="summary", type="text", nullable=false)
      * @Gedmo\Translatable
      * @Expose
      * @Groups({"list","detail","search"})

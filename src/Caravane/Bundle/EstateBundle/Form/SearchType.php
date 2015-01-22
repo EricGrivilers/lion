@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Caravane\Bundle\EstateBundle\Repository\AreaRepository;
+
 class SearchType extends AbstractType
 {
 
@@ -47,8 +49,12 @@ class SearchType extends AbstractType
             ->add('area',"entity",array(
                 "label"=>false,
                 "empty_value" => 'Quartier',
-                "class"=>"Caravane\Bundle\EstateBundle\Entity\Area"
+                "class"=>"Caravane\Bundle\EstateBundle\Entity\Area",
+                'query_builder' => function(AreaRepository $er) {
+                    return $er->getAreasQuery();
+                },
             ))
+
             ->add('zone','entity', array(
                 "label"=>false,
                 "expanded"=>true,

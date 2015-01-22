@@ -29,4 +29,28 @@ class AreaRepository extends EntityRepository {
 		return $area[0];
 	}
 
+
+	function getAreas() {
+		return $this->getAreasQuery()->getQuery()->getResult();
+	}
+
+	function getAreasQuery() {
+		$query = $this->createQueryBuilder('A');
+
+		$query->leftJoin("A.estate","E")
+				->orderBy("A.nomQuartier","ASC")
+                ->groupBy("A.id")
+                ->having("count(E.id) > 0");
+
+
+		/*$query->innerJoin('A.estate', 'e')
+		->having(
+	        $query->expr()->gt(
+	            $query->expr()->count('e'), 1
+	        )
+	    );*/
+
+	    return $query;
+	}
+
 }

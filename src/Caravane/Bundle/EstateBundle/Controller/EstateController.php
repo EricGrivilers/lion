@@ -11,6 +11,8 @@ use Caravane\Bundle\EstateBundle\Entity\Photo;
 use Caravane\Bundle\EstateBundle\Entity\Location;
 use Caravane\Bundle\EstateBundle\Entity\Zone;
 use Caravane\Bundle\EstateBundle\Entity\Area;
+use Caravane\Bundle\EstateBundle\Entity\Category;
+use Caravane\Bundle\EstateBundle\Entity\Price;
 use Caravane\Bundle\EstateBundle\Entity\UserEstate;
 use Caravane\Bundle\EstateBundle\Form\EstateType;
 use Caravane\Bundle\EstateBundle\Form\SearchType;
@@ -20,7 +22,63 @@ use Caravane\Bundle\EstateBundle\Form\SearchType;
  *
  */
 class EstateController extends Controller
-{
+{   
+    private $communes = array(
+        "0"=>array("Bxl 19 Communes",""),
+        "00"=>array("BXl Centre",""),
+        "000"=>array("Quartier Sablon","50.840467, 4.355691"),
+        "0001"=>array("Quartier Dansaert","50.849559, 4.347024"),
+        "001"=>array("Quartier Grand Place","50.846788, 4.352351"),
+        "01"=>array("Bxl Sud",""),
+        "011"=>array("Uccle",""),
+        "0111"=>array("Molière","50.815486, 4.358386"),
+        "0111B"=>array("Uccle -Floride","50.806253, 4.366341"),
+        "0112"=>array("Uccle -Vert Chasseur","50.802235, 4.374309"),
+        "0112B"=>array("Uccle - Vivier d'Oie","50.795758, 4.372973"),
+        "0113"=>array("Uccle -Observatoire","50.798023, 4.358440"),
+        "0114"=>array("Uccle -Fort Jaco","50.790311, 4.374226"),
+        "0115"=>array("Uccle -Prince d'Orange","50.778783, 4.374577"),
+        "0116"=>array("Uccle -Wolvendael","50.800156, 4.345926"),
+        "0117"=>array("Uccle -Saint-Job","50.794227, 4.364771"),
+        "0019"=>array("Uccle -Parc Brugmann","50.810040, 4.350664"),
+        "0119B"=>array("Uccle -Lycée Français","50.788479, 4.345563"),
+        "0119C"=>array("Uccle -Maison Communale","50.803591, 4.333964"),
+        "012"=>array("Ixelles",""),
+        "0121"=>array("Ixelles - Jardin du Roy -Abbaye","50.820217, 4.370587"),
+        "0121A"=>array("Roosevelt","50.805934, 4.385855"),
+        "0121B"=>array("Place Brugmann","50.817282, 4.354584"),
+        "0122"=>array("Louise Stéphanie","50.828203, 4.362819"),
+        "0123"=>array("Ixelles - Etangs","50.823727, 4.373223"),
+        "0124"=>array("Ixelles - Quartier ULB","50.812051, 4.385271"),
+        "0126"=>array("Place du Chatelain","50.824415, 4.360192"),
+        "013"=>array("Forest","50.819480, 4.334367"),
+        "0131"=>array("Forest - Molière","50.815947, 4.344097"),
+        "014"=>array("Saint-Gilles","50.824765, 4.345661"),
+        "01B"=>array("Rhode-Saint-Genèse","50.746684, 4.361737"),
+        "01B1"=>array("Rhode-St-Genèse - Espinette Centrale","50.748391, 4.390887"),
+        "01B2"=>array("Rhode-St-Genèse - Ancien Golf","50.740908, 4.400689"),
+        "01H"=>array("Waterloo","50.710127, 4.401829"),
+        "01H1"=>array("Waterloo - Faubourg","50.729211, 4.403640"),
+        "020"=>array("Auderghem","50.815678, 4.428411"),
+        "020A"=>array("Quartier Institutions Européennes","50.843700, 4.382306"),
+        "021"=>array("Etterbeek","50.832914, 4.387832"),
+        "022"=>array("Woluwé-Saint-Lambert","50.841859, 4.430483"),
+        "023"=>array("Woluwé-Saint-Pierre","50.826376, 4.459541"),
+        "0231"=>array("WSP - Chant d'Oiseau","50.827414, 4.418471"),
+        "0232"=>array("WSP - Val Duchesse","50.823202, 4.436467"),
+        "0233"=>array("Stockel-Place Dumon","50.840570, 4.465425"),
+        "024"=>array("Schaerbeek","50.856389, 4.392840"),
+        "026"=>array("Watermael-Boisfort","50.797989, 4.417686"),
+        "027"=>array("Cinqauntenaire/Montgomery","50.838258, 4.402959"),
+        "103"=>array("Lasne","50.687517, 4.483315"),
+        "1033"=>array("Lasne - Ohain","50.699941, 4.467007"),
+        "1035"=>array("Lasne - Plancenoit","50.662851, 4.429671"),
+        "1037"=>array("Lasne - Maransart","50.658743, 4.466964"),
+        "1039"=>array("Lasne - Couture","50.674492, 4.472758"),
+        "111"=>array("Rixensart","50.712609, 4.533019"),
+        "113"=>array("Rixensart - Bourgeois","50.706712, 4.510832"),
+        "114"=>array("Rixensart - Genval","50.721497, 4.492950")
+    );
 
     public function importAction() {
 
@@ -39,14 +97,89 @@ class EstateController extends Controller
         }
         $em->flush();
 */
-        $categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison');
-        $categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement');
-        $categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre');
 
-        $zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1);
-        $zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2);
-        $zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3);
-        $zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4);
+        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(1)) {
+            $price=new Price();
+            $price->setPrice(750000);
+            $price->setType('sale');
+            $em->persist($price);
+            $em->flush();
+        }
+
+        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(2)) {
+            $price=new Price();
+            $price->setPrice(1500000);
+            $price->setType('sale');
+            $em->persist($price);
+            $em->flush();
+        }
+
+        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(3)) {
+            $price=new Price();
+            $price->setPrice(2000);
+            $price->setType('rent');
+            $em->persist($price);
+            $em->flush();
+        }
+        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(4)) {
+            $price=new Price();
+            $price->setPrice(4000);
+            $price->setType('rent');
+            $em->persist($price);
+            $em->flush();
+        }
+        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(5)) {
+            $price=new Price();
+            $price->setPrice(6000);
+            $price->setType('rent');
+            $em->persist($price);
+            $em->flush();
+        }
+
+        if(!$categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison')) {
+            $categoryMaison = new category();
+            $categoryMaison->setName("Maison");
+            $em->persist($categoryMaison);
+            $em->flush();
+        }
+        if(!$categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement')) {
+            $categoryAppartement = new category();
+            $categoryAppartement->setName("Appartement");
+            $em->persist($categoryAppartement);
+            $em->flush();
+        }
+        if(!$categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre')) {
+            $categoryAutre = new category();
+            $categoryAutre->setName("Autre");
+            $em->persist($categoryAutre);
+            $em->flush();
+        }
+
+        if(!$zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1)) {
+            $zone1=new Zone();
+            $zone1->setName("Bruxelles Sud et Centre");
+            $em->persist($zone1);
+            $em->flush();
+        }
+        if(!$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2)) {
+            $zone2=new Zone();
+            $zone2->setName("Bruxelles Est");
+            $em->persist($zone2);
+            $em->flush();
+        }
+        if(!$zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3)) {
+            $zone3=new Zone();
+            $zone3->setName("Périphérie bruxelloise");
+            $em->persist($zone3);
+            $em->flush();
+        }
+        if(!$zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4)) {
+            $zone4=new Zone();
+            $zone4->setName("Province");
+            $em->persist($zone4);
+            $em->flush();
+        }
+
 
 
         $rs = curl_init();
@@ -58,14 +191,32 @@ class EstateController extends Controller
         $areasXml = new \SimpleXMLElement($xml);
 
         foreach($areasXml as $k=>$areaXml) {
-            if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByNomQuartier($areaXml->LIBE_FR)) {
+            if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByCode($areaXml->CODE)) {
                 $area = new Area();
                 $libe=ltrim ($areaXml->LIBE_FR, '-');
                 $libe=trim($libe);
                 $area->setNomQuartier($libe);
                 $area->setCode($areaXml->CODE);
+
+                if(isset($this->communes[(string)$areaXml->CODE])) {
+                    echo "yes";
+                    $commune=$this->communes[(string)$areaXml->CODE];
+                    print_r($commune);
+                    if(isset($commune[1])) {
+                        $latlng=$commune[1];
+                        $area->setLatlng($latlng);
+                        $a=explode(",",$latlng);
+                        if(count($a)==2) {
+                            $area->setLat(trim($a[0]));
+                            $area->setLng(trim($a[1]));
+                        }
+                        $em->persist($area);
+                    }
+                }
+
                 $em->persist($area);
             }
+            
         }
         $em->flush();
 
@@ -94,11 +245,12 @@ class EstateController extends Controller
                 $estate->setCreatedOn($date);
                 $estate->setUpdatedOn(new \Datetime());
             }
-            echo $estate->getUpdatedOn()->format('Ymd');
-            echo "!=";
-            echo $date->format('Ymd');
+        //    echo $estate->getUpdatedOn()->format('Ymd');
+        //    echo "!=";
+        //    echo $date->format('Ymd');
 
-            if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd')) {
+            //if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd')) {
+            if($estate->getUpdatedOn()) {
                 $estate->setBathrooms(intval($listEstate->BAIN_NBR));
 
                 $geocoder = $this->get('ivory_google_map.geocoder');
@@ -128,8 +280,14 @@ class EstateController extends Controller
                 $xmlEstate=$xmlEstates->OFFRE[0];
 
                 $estate->setPrix($xmlEstate->PRIX);
-                $estate->setSummary(substr((string)$xmlEstate->FLASH_FR,0,254));
-                $estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".(string)$xmlEstate->DESCR_FR),"<p><br><a><i><u><ul><li>");
+                //$estate->setSummary(substr((string)$xmlEstate->FLASH_FR,0,254));
+                //echo htmlentities($xmlEstate->FLASH_FR);
+                //$summary=utf8_decode($xmlEstate->FLASH_FR);
+                //echo htmlentities($summary);
+                //die();
+                //$estate->setSummary((string)htmlentities($summary));
+                $estate->setSummary(utf8_encode(htmlentities($xmlEstate->FLASH_FR)));
+                $estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".nl2br((string)$xmlEstate->DESCR_FR),"<p><br><a><i><ul><li>"));
                 $estate->setName($xmlEstate->REFE);
                 $estate->setLocation($xmlEstate->OFFR=='L'?1:0);
 
@@ -153,6 +311,7 @@ class EstateController extends Controller
                 else {
                     $category=$categoryAutre;
                 }
+                echo  $xmlEstate->TABLIMME."-".$category->getName()."<br/>";
                 $estate->setCategory($category);
 
                 $zone=null;
@@ -241,7 +400,7 @@ class EstateController extends Controller
 
 
 
-
+die();
         return $this->redirect($this->generateUrl('caravane_estate_backend_estate'));
 
     }
@@ -836,4 +995,11 @@ class EstateController extends Controller
             return $form;
             */
     }
+
+
+
+
+
+
+    
 }

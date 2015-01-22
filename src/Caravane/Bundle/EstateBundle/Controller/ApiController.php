@@ -486,7 +486,7 @@ class ApiController extends RestController
             $search_form['zone'][]=array("id"=>$zone->getId(),"name"=>$zone->getName());
         }
 
-        $areas=$em->getRepository('CaravaneEstateBundle:Area')->findAll(array(),array('name'=>"asc"));
+        $areas=$em->getRepository('CaravaneEstateBundle:Area')->getAreas();
         $search_form['area']=array();
         foreach($areas as $area) {
             $search_form['area'][]=array("id"=>$area->getId(),"name"=>$area->getName());
