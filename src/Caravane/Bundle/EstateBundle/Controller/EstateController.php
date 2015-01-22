@@ -199,9 +199,9 @@ class EstateController extends Controller
                 $area->setCode($areaXml->CODE);
 
                 if(isset($this->communes[(string)$areaXml->CODE])) {
-                    echo "yes";
+                    //echo "yes";
                     $commune=$this->communes[(string)$areaXml->CODE];
-                    print_r($commune);
+                    //print_r($commune);
                     if(isset($commune[1])) {
                         $latlng=$commune[1];
                         $area->setLatlng($latlng);
@@ -371,7 +371,7 @@ class EstateController extends Controller
                                     $em->persist($photo);
                                 }
 
-                                echo $filename."<br/>";
+                                //echo $filename."<br/>";
                             }
 
                         }
