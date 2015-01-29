@@ -91,6 +91,9 @@ class EstateController extends Controller
 	public function importAction(Request $request) {
 
 		$force=$request->query->get('force');
+		$p=$request->query->get('p');
+		$t=$request->query->get('t');
+		//$t=p,V,L
 		$em = $this->getDoctrine()->getManager();
 		$this->setup();
 
@@ -103,58 +106,42 @@ class EstateController extends Controller
 
 /* ventes */
 
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$this->import($estates,"sale",$force);
 
-/* locations */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=L&OxySeleBiensParPage=1000' );
-		$xml = curl_exec($rs);
-		$estates = new \SimpleXMLElement($xml);
-		$this->import($estates,"rent",$force);
-
-/* neufs */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=p&OxySeleBiensParPage=1000' );
-		$xml = curl_exec($rs);
-		$estatesGroup = new \SimpleXMLElement($xml);
-		$this->import($estatesGroup,"new");
-
-		foreach($estatesGroup as $es) {
-			foreach($es->COMPS as $estates) {
-				$this->import($estates,"new",$force);
+		if($t=='p') {
+			$estatesGroup=$estates;
+			foreach($estatesGroup as $es) {
+				foreach($es->COMPS as $estates) {
+					$this->import($estates,"new",$force);
+				}
 			}
 		}
 
 
-/* ventes */
 
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
+
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$this->setGeo($estates,"sale",$force);
 
-/* locations */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=L&OxySeleBiensParPage=1000' );
-		$xml = curl_exec($rs);
-		$estates = new \SimpleXMLElement($xml);
-		$this->setGeo($estates,"rent",$force);
-
-/* neufs */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=p&OxySeleBiensParPage=1000' );
-		$xml = curl_exec($rs);
-		$estatesGroup = new \SimpleXMLElement($xml);
-		$this->setGeo($estatesGroup,"new");
-
-		foreach($estatesGroup as $es) {
-			foreach($es->COMPS as $estates) {
-				$this->setGeo($estates,"new",$force);
+		if($t=='p') {
+			$estatesGroup=$estates;
+			foreach($estatesGroup as $es) {
+				foreach($es->COMPS as $estates) {
+					$this->setGeo($estates,"new",$force);
+				}
 			}
 		}
 
 
 
-die();
+
+		$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
+		return new response($response);
 		return $this->redirect($this->generateUrl('caravane_estate_backend_estate'));
 	}
 
@@ -320,8 +307,11 @@ die();
 			}
 			$estate->setUpdatedOn($date);
 			echo $estate->getId();
-			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
-			if($estate) {
+			if(!$edate=$estate->getUpdatedOn()) {
+				$edate=new \Datetime("now");
+			}
+			if($edate->format('Ymd')!=$date->format('Ymd') || $force==true) {
+			//if($estate) {
 				$estate->setBathrooms(intval($listEstate->BAIN_NBR));
 /*
 				$geocoder = $this->get('ivory_google_map.geocoder');
@@ -430,7 +420,7 @@ die();
 
 
 				foreach($estate->getPhoto() as $photo) {
-					$estate->removePhoto($photo);
+					//$estate->removePhoto($photo);
 				}
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
@@ -439,21 +429,24 @@ die();
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
-							if($ch = curl_init($xmlUrl)) {
-								$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
-								curl_setopt($ch, CURLOPT_FILE, $fp);
-								curl_setopt($ch, CURLOPT_HEADER, 0);
-								curl_exec($ch);
-								curl_close($ch);
-								fclose($fp);
-								if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
-									$photo= new Photo();
-									$photo->setFilename($filename);
-									$photo->setRanking(intval(substr($filename,0,2)));
-									$photo->setEstate($estate);
-									$em->persist($photo);
+							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)) {
+								if($ch = curl_init($xmlUrl)) {
+									$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
+									curl_setopt($ch, CURLOPT_FILE, $fp);
+									curl_setopt($ch, CURLOPT_HEADER, 0);
+									curl_exec($ch);
+									curl_close($ch);
+									fclose($fp);
+									if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+										$photo= new Photo();
+										$photo->setFilename($filename);
+										$photo->setRanking(intval(substr($filename,0,2)));
+										$photo->setEstate($estate);
+										$em->persist($photo);
+									}
 								}
 							}
+
 						}
 					}
 				}
@@ -464,19 +457,21 @@ die();
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
-							if($ch = curl_init($xmlUrl)) {
-								$fp = fopen(__DIR__.'/../../../../../web/pdfs/'.$filename, 'wb');
-								curl_setopt($ch, CURLOPT_FILE, $fp);
-								curl_setopt($ch, CURLOPT_HEADER, 0);
-								curl_exec($ch);
-								curl_close($ch);
-								fclose($fp);
-								if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
-									$photo= new Photo();
-									$photo->setFilename($filename);
-									$photo->setRanking(intval(substr($filename,0,2)));
-									$photo->setEstate($estate);
-									$em->persist($photo);
+							if(!file_exists(__DIR__.'/../../../../../web/pdfs/'.$filename)) {
+								if($ch = curl_init($xmlUrl)) {
+									$fp = fopen(__DIR__.'/../../../../../web/pdfs/'.$filename, 'wb');
+									curl_setopt($ch, CURLOPT_FILE, $fp);
+									curl_setopt($ch, CURLOPT_HEADER, 0);
+									curl_exec($ch);
+									curl_close($ch);
+									fclose($fp);
+									if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+										$photo= new Photo();
+										$photo->setFilename($filename);
+										$photo->setRanking(intval(substr($filename,0,2)));
+										$photo->setEstate($estate);
+										$em->persist($photo);
+									}
 								}
 							}
 						}
@@ -501,31 +496,29 @@ die();
 		foreach($estates as $k=>$listEstate) {
 			$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
 			echo "<br/>p:".$listEstate->PRIX_WEB;
-			if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
-				$estate=new Estate;
-				$estate->setReference('030/'.$listEstate->CLAS);
-				$estate->setCreatedOn($date);
-				$estate->setUpdatedOn($date);
-			}
-			if($estate->getLat()=='' || $estate->getLng()=='') {
+			if($estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
+				if($estate->getLat()=='' || $estate->getLng()=='') {
 			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
-				$geocoder = $this->get('ivory_google_map.geocoder');
-				$response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
+					$geocoder = $this->get('ivory_google_map.geocoder');
+					$response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
 
-				foreach($response->getResults() as $result)
-				{
-					if($location=$result->getGeometry()->getLocation()) {
-						$lat=$location->getLatitude();
-						$lng=$location->getLongitude();
-						$estate->setLat($lat);
-						$estate->setLng($lng);
+					foreach($response->getResults() as $result)
+					{
+						if($location=$result->getGeometry()->getLocation()) {
+							$lat=$location->getLatitude();
+							$lng=$location->getLongitude();
+							$estate->setLat($lat);
+							$estate->setLng($lng);
+						}
+
 					}
+					$em->persist($estate);
+					$em->flush();
 
 				}
 
 			}
-			$em->persist($estate);
-				$em->flush();
+
 		}
 	}
 
