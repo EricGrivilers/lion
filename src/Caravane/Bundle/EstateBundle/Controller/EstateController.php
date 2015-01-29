@@ -100,28 +100,56 @@ class EstateController extends Controller
 		curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
 		curl_setopt($rs,CURLOPT_FRESH_CONNECT,true);
 
-echo $force;
+
 /* ventes */
 
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$this->import($estates,"sale",$force);
 
 /* locations */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=L&OxySeleBiensParPage=1000' );
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=L&OxySeleBiensParPage=1000' );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$this->import($estates,"rent",$force);
 
 /* neufs */
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=p&OxySeleBiensParPage=1000' );
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr=p&OxySeleBiensParPage=1000' );
 		$xml = curl_exec($rs);
 		$estatesGroup = new \SimpleXMLElement($xml);
 		$this->import($estatesGroup,"new");
 
-		foreach($estatesGroup->COMPS as $estates) {
-			$this->import($estates,"new",$force);
+		foreach($estatesGroup as $es) {
+			foreach($es->COMPS as $estates) {
+				$this->import($estates,"new",$force);
+			}
+		}
+
+
+/* ventes */
+
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=V&OxySeleBiensParPage=1000' );
+		$xml = curl_exec($rs);
+		$estates = new \SimpleXMLElement($xml);
+		$this->setGeo($estates,"sale",$force);
+
+/* locations */
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=L&OxySeleBiensParPage=1000' );
+		$xml = curl_exec($rs);
+		$estates = new \SimpleXMLElement($xml);
+		$this->setGeo($estates,"rent",$force);
+
+/* neufs */
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr=p&OxySeleBiensParPage=1000' );
+		$xml = curl_exec($rs);
+		$estatesGroup = new \SimpleXMLElement($xml);
+		$this->setGeo($estatesGroup,"new");
+
+		foreach($estatesGroup as $es) {
+			foreach($es->COMPS as $estates) {
+				$this->setGeo($estates,"new",$force);
+			}
 		}
 
 
@@ -272,16 +300,28 @@ die();
 
 		$em = $this->getDoctrine()->getManager();
 		foreach($estates as $k=>$listEstate) {
-			$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
-			echo "<br/>p:".$listEstate->PRIX_WEB;
-			if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
+			if($listEstate->MODI_DATE!='') {
+				$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
+			}
+			else {
+				$date=new \Datetime();
+			}
+			echo "<br/>p:".$listEstate->CODE;
+			$clas=$listEstate->CLAS;
+			$clas=str_replace("030/","",$clas);
+			if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$clas)) {
 				$estate=new Estate;
-				$estate->setReference('030/'.$listEstate->CLAS);
+				$estate->setReference('030/'.$clas);
 				$estate->setCreatedOn($date);
 				$estate->setUpdatedOn($date);
 			}
-			if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
-			//if($estate->getUpdatedOn()) {
+			else {
+				echo "exists";
+			}
+			$estate->setUpdatedOn($date);
+			echo $estate->getId();
+			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
+			if($estate) {
 				$estate->setBathrooms(intval($listEstate->BAIN_NBR));
 /*
 				$geocoder = $this->get('ivory_google_map.geocoder');
@@ -317,7 +357,9 @@ die();
 				}
 
 				$estate->setSummary(utf8_encode(htmlentities($xmlEstate->FLASH_FR)));
-				$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".nl2br((string)$xmlEstate->DESCR_FR),"<p><br><a><i><ul><li>"));
+				//$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".nl2br((string)$xmlEstate->DESCR_FR),"<p><br><a><i><ul><li>"));
+				$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
+
 				$estate->setName($xmlEstate->REFE);
 				if($iType=="rent") {
 					$estate->setLocation(true);
@@ -385,7 +427,7 @@ die();
 				}
 				$estate->setGarden($garden);
 
-/*
+
 
 				foreach($estate->getPhoto() as $photo) {
 					$estate->removePhoto($photo);
@@ -440,7 +482,7 @@ die();
 						}
 					}
 				}
-*/
+
 				$estate->setUpdatedOn($date);
 				$estate->setStatus(1);
 
@@ -450,6 +492,40 @@ die();
 			}
 			$em->persist($estate);
 			$em->flush();
+		}
+	}
+
+
+	public function setGeo($estates, $force=false) {
+		$em = $this->getDoctrine()->getManager();
+		foreach($estates as $k=>$listEstate) {
+			$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
+			echo "<br/>p:".$listEstate->PRIX_WEB;
+			if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$listEstate->CLAS)) {
+				$estate=new Estate;
+				$estate->setReference('030/'.$listEstate->CLAS);
+				$estate->setCreatedOn($date);
+				$estate->setUpdatedOn($date);
+			}
+			if($estate) {
+			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
+				$geocoder = $this->get('ivory_google_map.geocoder');
+				$response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
+
+				foreach($response->getResults() as $result)
+				{
+					if($location=$result->getGeometry()->getLocation()) {
+						$lat=$location->getLatitude();
+						$lng=$location->getLongitude();
+						$estate->setLat($lat);
+						$estate->setLng($lng);
+					}
+
+				}
+
+			}
+			$em->persist($estate);
+				$em->flush();
 		}
 	}
 
