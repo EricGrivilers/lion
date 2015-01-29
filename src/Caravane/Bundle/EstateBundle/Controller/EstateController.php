@@ -310,8 +310,8 @@ class EstateController extends Controller
 			if(!$edate=$estate->getUpdatedOn()) {
 				$edate=new \Datetime("now");
 			}
-			if($edate->format('Ymd')!=$date->format('Ymd') || $force==true) {
-			//if($estate) {
+			//if($edate->format('Ymd')!=$date->format('Ymd') || $force==true) {
+			if($estate) {
 				$estate->setBathrooms(intval($listEstate->BAIN_NBR));
 /*
 				$geocoder = $this->get('ivory_google_map.geocoder');
