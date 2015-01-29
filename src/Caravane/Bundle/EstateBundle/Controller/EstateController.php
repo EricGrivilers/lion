@@ -507,7 +507,7 @@ die();
 				$estate->setCreatedOn($date);
 				$estate->setUpdatedOn($date);
 			}
-			if($estate) {
+			if($estate->getLat()=='' || $estate->getLng()=='') {
 			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
 				$geocoder = $this->get('ivory_google_map.geocoder');
 				$response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);

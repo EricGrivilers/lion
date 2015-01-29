@@ -14,16 +14,19 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" style="overflow: hidden">
 			  	{% for photo in estate.photos %}
-			    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
-			    	{% if is_mobile() %}
-					    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_small')) %}
-					{% elseif is_tablet() %}
-					    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_medium')) %}
-					{% else  %}
-					    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_large')) %}
+			  		{% set a=photo|split('.') %}
+			  		{% if a[1]!='pdf' %}
+					    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
+					    	{% if is_mobile() %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_small')) %}
+							{% elseif is_tablet() %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_medium')) %}
+							{% else  %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_large')) %}
+							{% endif %}
+					      <img src="{{pict}}"  style="width:auto; height: 100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
+					    </div>
 					{% endif %}
-			      <img src="{{pict}}"  style="width:auto; height: 100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
-			    </div>
 			    {% endfor %}
 			  </div>
 
