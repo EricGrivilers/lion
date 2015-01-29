@@ -109,7 +109,7 @@ class EstateController extends Controller
 		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
-		$this->import($estates,"sale",$force);
+		$this->import($estates,$t,$force);
 
 		if($t=='p') {
 			$estatesGroup=$estates;
@@ -126,7 +126,7 @@ class EstateController extends Controller
 		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
-		$this->setGeo($estates,"sale",$force);
+		$this->setGeo($estates,$t,$force);
 
 		if($t=='p') {
 			$estatesGroup=$estates;
@@ -351,13 +351,13 @@ class EstateController extends Controller
 				$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
 
 				$estate->setName($xmlEstate->REFE);
-				if($iType=="rent") {
+				if($iType=="L") {
 					$estate->setLocation(true);
 					$estate->setIsNewBuilding(false);
 				}
 				else {
 					$estate->setLocation(false);
-					if($iType=="new") {
+					if($iType=="p") {
 						$estate->setIsNewBuilding(true);
 					}
 					else {
