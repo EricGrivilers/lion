@@ -16,7 +16,7 @@ use JMS\Serializer\Annotation\PreSerialize;
 /**
  * Area
  *
- * @ORM\Table(name="Area", uniqueConstraints={@ORM\UniqueConstraint(name="nom", columns={"nom_quartier"})})
+ * @ORM\Table(name="Area")
  * @ORM\Entity(repositoryClass="Caravane\Bundle\EstateBundle\Repository\AreaRepository")
  * @ExclusionPolicy("all")
  */
@@ -248,5 +248,68 @@ class Area
     public function getLng()
     {
         return $this->lng;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->estate = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     * @return Area
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Add estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     * @return Area
+     */
+    public function addEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate)
+    {
+        $this->estate[] = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Remove estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     */
+    public function removeEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate)
+    {
+        $this->estate->removeElement($estate);
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getEstate()
+    {
+        return $this->estate;
     }
 }

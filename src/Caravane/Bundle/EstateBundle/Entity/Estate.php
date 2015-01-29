@@ -61,6 +61,31 @@ class Estate
     private $photo;
 
 
+
+     /**
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Document", mappedBy="estate")
+     * @ORM\OrderBy({"ranking" = "ASC"})
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $document;
+
+
+    /**
+     * @ORM\ManyToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", inversedBy="children")
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", mappedBy="parent")
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $children;
+
+
     /**
     * @Groups({"list","detail","search"})
     * @Expose
@@ -69,6 +94,8 @@ class Estate
 
 
     private $photos;
+
+    private $pdfs;
 
     /**
      * @var string
@@ -273,6 +300,16 @@ class Estate
      * @Groups({"list","detail","search"})
      */
     private $garden = '';
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="refe", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $refe = '';
 
     /**
      * @var string
@@ -1478,10 +1515,124 @@ class Estate
     /**
      * Get user
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add document
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Document $document
+     * @return Estate
+     */
+    public function addDocument(\Caravane\Bundle\EstateBundle\Entity\Document $document)
+    {
+        $this->document[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Remove document
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Document $document
+     */
+    public function removeDocument(\Caravane\Bundle\EstateBundle\Entity\Document $document)
+    {
+        $this->document->removeElement($document);
+    }
+
+    /**
+     * Get document
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $parent
+     * @return Estate
+     */
+    public function setParent(\Caravane\Bundle\EstateBundle\Entity\Estate $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Estate
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add children
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $children
+     * @return Estate
+     */
+    public function addChild(\Caravane\Bundle\EstateBundle\Entity\Estate $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $children
+     */
+    public function removeChild(\Caravane\Bundle\EstateBundle\Entity\Estate $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+
+
+    /**
+     * Set refe
+     *
+     * @param string $refe
+     * @return Estate
+     */
+    public function setRefe($refe)
+    {
+        $this->refe = $refe;
+
+        return $this;
+    }
+
+    /**
+     * Get refe
+     *
+     * @return string 
+     */
+    public function getRefe()
+    {
+        return $this->refe;
     }
 }

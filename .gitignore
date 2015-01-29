@@ -43,6 +43,7 @@ web/docs
 
 photos
 web/photos
+web/pdfs
 web/old/photos
 
 .DS_Store

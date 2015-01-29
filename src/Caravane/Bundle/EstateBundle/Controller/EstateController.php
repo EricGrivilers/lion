@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
 use Caravane\Bundle\EstateBundle\Entity\Photo;
+use Caravane\Bundle\EstateBundle\Entity\Document;
 use Caravane\Bundle\EstateBundle\Entity\Location;
 use Caravane\Bundle\EstateBundle\Entity\Zone;
 use Caravane\Bundle\EstateBundle\Entity\Area;
@@ -31,62 +32,62 @@ class EstateController extends Controller
 	private $zone3;
 	private $zone4;
 
-		private $communes = array(
-				"0"=>array("Bxl 19 Communes",""),
-				"00"=>array("BXl Centre",""),
-				"000"=>array("Quartier Sablon","50.840467, 4.355691"),
-				"0001"=>array("Quartier Dansaert","50.849559, 4.347024"),
-				"001"=>array("Quartier Grand Place","50.846788, 4.352351"),
-				"01"=>array("Bxl Sud",""),
-				"011"=>array("Uccle",""),
-				"0111"=>array("Molière","50.815486, 4.358386"),
-				"0111B"=>array("Uccle -Floride","50.806253, 4.366341"),
-				"0112"=>array("Uccle -Vert Chasseur","50.802235, 4.374309"),
-				"0112B"=>array("Uccle - Vivier d'Oie","50.795758, 4.372973"),
-				"0113"=>array("Uccle -Observatoire","50.798023, 4.358440"),
-				"0114"=>array("Uccle -Fort Jaco","50.790311, 4.374226"),
-				"0115"=>array("Uccle -Prince d'Orange","50.778783, 4.374577"),
-				"0116"=>array("Uccle -Wolvendael","50.800156, 4.345926"),
-				"0117"=>array("Uccle -Saint-Job","50.794227, 4.364771"),
-				"0019"=>array("Uccle -Parc Brugmann","50.810040, 4.350664"),
-				"0119B"=>array("Uccle -Lycée Français","50.788479, 4.345563"),
-				"0119C"=>array("Uccle -Maison Communale","50.803591, 4.333964"),
-				"012"=>array("Ixelles",""),
-				"0121"=>array("Ixelles - Jardin du Roy -Abbaye","50.820217, 4.370587"),
-				"0121A"=>array("Roosevelt","50.805934, 4.385855"),
-				"0121B"=>array("Place Brugmann","50.817282, 4.354584"),
-				"0122"=>array("Louise Stéphanie","50.828203, 4.362819"),
-				"0123"=>array("Ixelles - Etangs","50.823727, 4.373223"),
-				"0124"=>array("Ixelles - Quartier ULB","50.812051, 4.385271"),
-				"0126"=>array("Place du Chatelain","50.824415, 4.360192"),
-				"013"=>array("Forest","50.819480, 4.334367"),
-				"0131"=>array("Forest - Molière","50.815947, 4.344097"),
-				"014"=>array("Saint-Gilles","50.824765, 4.345661"),
-				"01B"=>array("Rhode-Saint-Genèse","50.746684, 4.361737"),
-				"01B1"=>array("Rhode-St-Genèse - Espinette Centrale","50.748391, 4.390887"),
-				"01B2"=>array("Rhode-St-Genèse - Ancien Golf","50.740908, 4.400689"),
-				"01H"=>array("Waterloo","50.710127, 4.401829"),
-				"01H1"=>array("Waterloo - Faubourg","50.729211, 4.403640"),
-				"020"=>array("Auderghem","50.815678, 4.428411"),
-				"020A"=>array("Quartier Institutions Européennes","50.843700, 4.382306"),
-				"021"=>array("Etterbeek","50.832914, 4.387832"),
-				"022"=>array("Woluwé-Saint-Lambert","50.841859, 4.430483"),
-				"023"=>array("Woluwé-Saint-Pierre","50.826376, 4.459541"),
-				"0231"=>array("WSP - Chant d'Oiseau","50.827414, 4.418471"),
-				"0232"=>array("WSP - Val Duchesse","50.823202, 4.436467"),
-				"0233"=>array("Stockel-Place Dumon","50.840570, 4.465425"),
-				"024"=>array("Schaerbeek","50.856389, 4.392840"),
-				"026"=>array("Watermael-Boisfort","50.797989, 4.417686"),
-				"027"=>array("Cinqauntenaire/Montgomery","50.838258, 4.402959"),
-				"103"=>array("Lasne","50.687517, 4.483315"),
-				"1033"=>array("Lasne - Ohain","50.699941, 4.467007"),
-				"1035"=>array("Lasne - Plancenoit","50.662851, 4.429671"),
-				"1037"=>array("Lasne - Maransart","50.658743, 4.466964"),
-				"1039"=>array("Lasne - Couture","50.674492, 4.472758"),
-				"111"=>array("Rixensart","50.712609, 4.533019"),
-				"113"=>array("Rixensart - Bourgeois","50.706712, 4.510832"),
-				"114"=>array("Rixensart - Genval","50.721497, 4.492950")
-		);
+	private $communes = array(
+		"0"=>array("Bxl 19 Communes",""),
+		"00"=>array("BXl Centre",""),
+		"000"=>array("Quartier Sablon","50.840467, 4.355691"),
+		"0001"=>array("Quartier Dansaert","50.849559, 4.347024"),
+		"001"=>array("Quartier Grand Place","50.846788, 4.352351"),
+		"01"=>array("Bxl Sud",""),
+		"011"=>array("Uccle",""),
+		"0111"=>array("Molière","50.815486, 4.358386"),
+		"0111B"=>array("Uccle -Floride","50.806253, 4.366341"),
+		"0112"=>array("Uccle -Vert Chasseur","50.802235, 4.374309"),
+		"0112B"=>array("Uccle - Vivier d'Oie","50.795758, 4.372973"),
+		"0113"=>array("Uccle -Observatoire","50.798023, 4.358440"),
+		"0114"=>array("Uccle -Fort Jaco","50.790311, 4.374226"),
+		"0115"=>array("Uccle -Prince d'Orange","50.778783, 4.374577"),
+		"0116"=>array("Uccle -Wolvendael","50.800156, 4.345926"),
+		"0117"=>array("Uccle -Saint-Job","50.794227, 4.364771"),
+		"0019"=>array("Uccle -Parc Brugmann","50.810040, 4.350664"),
+		"0119B"=>array("Uccle -Lycée Français","50.788479, 4.345563"),
+		"0119C"=>array("Uccle -Maison Communale","50.803591, 4.333964"),
+		"012"=>array("Ixelles",""),
+		"0121"=>array("Ixelles - Jardin du Roy -Abbaye","50.820217, 4.370587"),
+		"0121A"=>array("Roosevelt","50.805934, 4.385855"),
+		"0121B"=>array("Place Brugmann","50.817282, 4.354584"),
+		"0122"=>array("Louise Stéphanie","50.828203, 4.362819"),
+		"0123"=>array("Ixelles - Etangs","50.823727, 4.373223"),
+		"0124"=>array("Ixelles - Quartier ULB","50.812051, 4.385271"),
+		"0126"=>array("Place du Chatelain","50.824415, 4.360192"),
+		"013"=>array("Forest","50.819480, 4.334367"),
+		"0131"=>array("Forest - Molière","50.815947, 4.344097"),
+		"014"=>array("Saint-Gilles","50.824765, 4.345661"),
+		"01B"=>array("Rhode-Saint-Genèse","50.746684, 4.361737"),
+		"01B1"=>array("Rhode-St-Genèse - Espinette Centrale","50.748391, 4.390887"),
+		"01B2"=>array("Rhode-St-Genèse - Ancien Golf","50.740908, 4.400689"),
+		"01H"=>array("Waterloo","50.710127, 4.401829"),
+		"01H1"=>array("Waterloo - Faubourg","50.729211, 4.403640"),
+		"020"=>array("Auderghem","50.815678, 4.428411"),
+		"020A"=>array("Quartier Institutions Européennes","50.843700, 4.382306"),
+		"021"=>array("Etterbeek","50.832914, 4.387832"),
+		"022"=>array("Woluwé-Saint-Lambert","50.841859, 4.430483"),
+		"023"=>array("Woluwé-Saint-Pierre","50.826376, 4.459541"),
+		"0231"=>array("WSP - Chant d'Oiseau","50.827414, 4.418471"),
+		"0232"=>array("WSP - Val Duchesse","50.823202, 4.436467"),
+		"0233"=>array("Stockel-Place Dumon","50.840570, 4.465425"),
+		"024"=>array("Schaerbeek","50.856389, 4.392840"),
+		"026"=>array("Watermael-Boisfort","50.797989, 4.417686"),
+		"027"=>array("Cinqauntenaire/Montgomery","50.838258, 4.402959"),
+		"103"=>array("Lasne","50.687517, 4.483315"),
+		"1033"=>array("Lasne - Ohain","50.699941, 4.467007"),
+		"1035"=>array("Lasne - Plancenoit","50.662851, 4.429671"),
+		"1037"=>array("Lasne - Maransart","50.658743, 4.466964"),
+		"1039"=>array("Lasne - Couture","50.674492, 4.472758"),
+		"111"=>array("Rixensart","50.712609, 4.533019"),
+		"113"=>array("Rixensart - Bourgeois","50.706712, 4.510832"),
+		"114"=>array("Rixensart - Genval","50.721497, 4.492950")
+	);
 
 	public function importAction(Request $request) {
 
@@ -104,24 +105,24 @@ class EstateController extends Controller
 		curl_setopt($rs,CURLOPT_FRESH_CONNECT,true);
 
 
-/* ventes */
+
 
 		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
-		$this->import($estates,$t,$force);
+		$n=$this->import($estates,$t,$force);
 
 		if($t=='p') {
 			$estatesGroup=$estates;
 			foreach($estatesGroup as $es) {
 				foreach($es->COMPS as $estates) {
-					$this->import($estates,"new",$force);
+					$n=$this->import($estates,$t,$force, $es->CLAS);
 				}
 			}
 		}
 
 
-
+/*
 
 		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
@@ -136,12 +137,14 @@ class EstateController extends Controller
 				}
 			}
 		}
+*/
 
 
+		if($n>0) {
+			$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
+			return new response($response);
 
-
-		$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
-		return new response($response);
+		}
 		return $this->redirect($this->generateUrl('caravane_estate_backend_estate'));
 	}
 
@@ -283,10 +286,12 @@ class EstateController extends Controller
 		$em->flush();
 	}
 
-	private function import($estates, $iType, $force=false) {
+	private function import($estates, $iType, $force=false, $parentClas=null) {
 
 		$em = $this->getDoctrine()->getManager();
+		$n=0;
 		foreach($estates as $k=>$listEstate) {
+			$n++;
 			if($listEstate->MODI_DATE!='') {
 				$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
 			}
@@ -356,11 +361,14 @@ class EstateController extends Controller
 					$estate->setIsNewBuilding(false);
 				}
 				else {
+					echo "vente";
 					$estate->setLocation(false);
 					if($iType=="p") {
+						echo "new";
 						$estate->setIsNewBuilding(true);
 					}
 					else {
+						echo "old";
 						$estate->setIsNewBuilding(false);
 					}
 				}
@@ -416,6 +424,37 @@ class EstateController extends Controller
 					$garden="";
 				}
 				$estate->setGarden($garden);
+				$estate->setRefe($listEstate->REFE);
+
+
+				$xmlUrl=$listEstate->PHOTO_01;
+				if(preg_match("/\//",$xmlUrl)) {
+					$t=explode("/",$xmlUrl);
+					$filename=$t[count($t)-1];
+					if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)) {
+						if($ch = curl_init($xmlUrl)) {
+							$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
+							curl_setopt($ch, CURLOPT_FILE, $fp);
+							curl_setopt($ch, CURLOPT_HEADER, 0);
+							curl_exec($ch);
+							curl_close($ch);
+							fclose($fp);
+							if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+								$photo= new Photo();
+								$photo->setFilename($filename);
+								$photo->setRanking(intval(substr($filename,0,2)));
+								$photo->setIsDefault(true);
+								$photo->setEstate($estate);
+								$em->persist($photo);
+							}
+
+						}
+					}
+					if($photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+						$photo->setIsDefault(true);
+						$em->persist($photo);
+					}
+				}
 
 
 
@@ -425,6 +464,7 @@ class EstateController extends Controller
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
 					$xmlPhoto="PHOTO_".$id;
+
 					if($xmlUrl=$xmlEstate->$xmlPhoto) {
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
@@ -453,10 +493,13 @@ class EstateController extends Controller
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
 					$xmlPhoto="PDF_".$id;
-					if($xmlUrl=$xmlEstate->$xmlPhoto) {
+					//echo $xmlPhoto;
+					//echo $listEstate->$xmlPhoto;
+					if($xmlUrl=$listEstate->$xmlPhoto) {
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
+							//echo $filename;
 							if(!file_exists(__DIR__.'/../../../../../web/pdfs/'.$filename)) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/pdfs/'.$filename, 'wb');
@@ -465,12 +508,12 @@ class EstateController extends Controller
 									curl_exec($ch);
 									curl_close($ch);
 									fclose($fp);
-									if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
-										$photo= new Photo();
-										$photo->setFilename($filename);
-										$photo->setRanking(intval(substr($filename,0,2)));
-										$photo->setEstate($estate);
-										$em->persist($photo);
+									if(!$document=$em->getRepository('CaravaneEstateBundle:Document')->findOneByFilename($filename)) {
+										$document= new Document();
+										$document->setFilename($filename);
+										$document->setRanking(intval(substr($filename,0,2)));
+										$document->setEstate($estate);
+										$em->persist($document);
 									}
 								}
 							}
@@ -478,19 +521,46 @@ class EstateController extends Controller
 					}
 				}
 
+				if($estate->getLat()=='' || $estate->getLng()=='') {
+			//if($estate->getUpdatedOn()->format('Ymd')!=$date->format('Ymd') || $force==true) {
+					$geocoder = $this->get('ivory_google_map.geocoder');
+					$response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
+
+					foreach($response->getResults() as $result)
+					{
+						if($location=$result->getGeometry()->getLocation()) {
+							$lat=$location->getLatitude();
+							$lng=$location->getLongitude();
+							$estate->setLat($lat);
+							$estate->setLng($lng);
+						}
+
+					}
+					$em->persist($estate);
+					$em->flush();
+
+				}
+
 				$estate->setUpdatedOn($date);
 				$estate->setStatus(1);
 
-			}
-			else {
-				$estate->setStatus(1);
+				if($parentClas) {
+					$parentClas=str_replace("030/","",$parentClas);
+					if($parentEstate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$parentClas)) {
+						$estate->setParent($parentEstate);
+						$parentEstate->addChild($estate);
+						$em->persist($parentEstate);
+					}
+				}
+
 			}
 			$em->persist($estate);
 			$em->flush();
 		}
+		return $n;
 	}
 
-
+/*
 	public function setGeo($estates, $force=false) {
 		$em = $this->getDoctrine()->getManager();
 		foreach($estates as $k=>$listEstate) {
@@ -521,7 +591,7 @@ class EstateController extends Controller
 
 		}
 	}
-
+*/
 		/**
 		 * Lists all Estate entities.
 		 *

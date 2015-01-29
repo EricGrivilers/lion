@@ -1,45 +1,62 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-  <li class="active"><a href="#estate_new_description" role="tab" data-toggle="tab">Présentation</a></li>
-  <li><a href="#estate_new_liste" role="tab" data-toggle="tab">Liste</a></li>
-  <li><a href="#estate_new_documents" role="tab" data-toggle="tab">Documents</a></li>
+	<li class="active"><a href="#estate_new_description" role="tab" data-toggle="tab">Présentation</a></li>
+	{% if estate.parent %}<li><a href="#estate_new_liste" role="tab" data-toggle="tab">Liste</a></li>{% endif %}
+	<li><a href="#estate_new_documents" role="tab" data-toggle="tab">Documents</a></li>
 </ul>
 
 <!-- Tab panes -->
 <div class="tab-content">
-  <div class="tab-pane active" id="estate_new_description">
-  	<div id="text">{{estate.description|raw }}</div>
-</div>
-  <div class="tab-pane" id="estate_new_liste">
-        <table class="table table-condensed table-striped table-bordered">
-      <thead>
-        <tr>
-          <th>
-Type</th><th>
-Et.</th><th>Surf. brute</th><th>Ch.</th><th>Jardin</th><th>Terrasse</th><th>Prix</th><th>Plans</th></tr></thead>
-<tbody>
-  <tr>
-    <td>
-App. </td><td>
-rdch.  </td><td> 164 m² </td><td>2 </td><td>203 m² </td><td>  82 m² </td><td>  790.000 €  </td><td></td></tr>
-<tr><td>
-App. </td><td>
-rdch.  </td><td> 165 m² </td><td>3 </td><td>424 m²   </td><td>85 m²  </td><td> 850.000 €</td><td></td></tr>
-</tbody>
-</table>
+	<div class="tab-pane active" id="estate_new_description">
+		<div id="text">{{estate.description|raw }}</div>
+	</div>
+	{% if estate.parent %}
+	<div class="tab-pane" id="estate_new_liste">
+		<table class="table table-condensed table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>
+						Lot</th><th>Surf. brute</th><th>Ch.</th><th>Prix</th><th>Detail</th></tr></thead>
+						<tbody>
+							{% if estate.parent %}
+								{% for es in estate.parent.children %}
+									<tr {{es.reference==estate.reference?"style='background: #666666; color: #ffffff'":""}} >
 
-    <ul class="documents">
-      <li>
-        <div class="document">
-  	<a href="{{asset('/docs/HAM_LISTE_01_14.pdf')}}"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" /> <br/>Liste</a>
-  </div></li></ul>
-</div>
-  <div class="tab-pane" id="estate_new_documents">
-  	<ul class="documents">
-  		<li>
-        <div class="document"><a href="{{asset('/docs/HAM-080513-cahier de charges.doc')}}" target="_blank"><img src="{{asset('/medias/icons/doc.png')}}" width="62" /><br/>Cahier des charges</a></div>
-        </li>
-  		<li><div class="document">
+										<td>
+										{{es.refe}}  </td>
+										<td> {{es.surface}} <label> m² </label></td>
+										<td>{{es.rooms}}</td>
 
-  <a href="{{asset('/docs/HAM-090202-acte de base signé.pdf')}}" target="_blank"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" /><br/>Acte de base</a></div></li></ul></div>
+										<td>  {{es.prix|number_format(0,'.', '.')}} <label>€</label>  </td>
+										<td><a href="{{url('caravane_estate_frontend_estate_sale_show', {'reference':es.shortReference} )}}" >{{es.reference}}</a></td>
+									</tr>
+								{% endfor %}
+							{% endif %}
+						</tbody>
+		</table>
+	</div>
+	{% endif %}
+	<div class="tab-pane" id="estate_new_documents">
+		<ul class="documents">
+			{% if estate.parent %}
+				{% for pdf in estate.parent.document %}
+					<li>
+						<div class="document"><a href="{{asset('/pdfs/'~pdf.filename)}}" target="_blank"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" />{#<br/>{{pdf.filename}}#}</a></div>
+					</li>
+				{% endfor %}
+			{% endif %}
+				{% for pdf in estate.document %}
+					<li>
+						<div class="document"><a href="{{asset('/pdfs/'~pdf.filename)}}" target="_blank"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" {#}br/>{{pdf.filename}}#}</a></div>
+					</li>
+				{% endfor %}
+		{#<li>
+			<div class="document"><a href="{{asset('/docs/HAM-080513-cahier de charges.doc')}}" target="_blank"><img src="{{asset('/medias/icons/doc.png')}}" width="62" /><br/>Cahier des charges</a></div>
+			</li>
+		<li><div class="document">
+
+<a href="{{asset('/docs/HAM-090202-acte de base signé.pdf')}}" target="_blank"><img src="{{asset('/medias/icons/pdf.png')}}" width="62" /><br/>Acte de base</a></div></li>#}
+
+		</ul>
+	</div>
 </div>

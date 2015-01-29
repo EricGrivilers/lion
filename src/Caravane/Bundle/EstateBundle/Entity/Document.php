@@ -13,13 +13,13 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Photo
+ * Document
  *
- * @ORM\Table(name="Photo")
+ * @ORM\Table(name="Document")
  * @ORM\Entity
  * @ExclusionPolicy("all")
  */
-class Photo
+class Document
 {
     /**
      * @var integer
@@ -33,7 +33,7 @@ class Photo
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", inversedBy="photo")
+     * @ORM\ManyToOne(targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate", inversedBy="document")
      */
     private $estate;
 
@@ -52,13 +52,6 @@ class Photo
      * @ORM\Column(name="ranking", type="integer", nullable=false)
      */
     private $ranking;
-
-     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="isDefault", type="boolean", nullable=true)
-     */
-    private $isDefault;
 
 
     public function __toString() {
@@ -144,28 +137,5 @@ class Photo
     public function getEstate()
     {
         return $this->estate;
-    }
-
-    /**
-     * Set isDefault
-     *
-     * @param boolean $isDefault
-     * @return Photo
-     */
-    public function setIsDefault($isDefault)
-    {
-        $this->isDefault = $isDefault;
-
-        return $this;
-    }
-
-    /**
-     * Get isDefault
-     *
-     * @return boolean
-     */
-    public function getIsDefault()
-    {
-        return $this->isDefault;
     }
 }

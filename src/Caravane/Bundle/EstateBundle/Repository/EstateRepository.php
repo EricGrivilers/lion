@@ -94,16 +94,18 @@ class EstateRepository extends EntityRepository
 					->setParameter('zone', $zone);
 		}
 
-		if($datas['around']==1) {
-			$latlng=explode(",", $datas['latlng']);
-			if(!isset($datas['rayon']) || $datas['rayon']<=0) {
-				$datas['rayon']=1;
+		if(isset($datas['around'])) {
+			if($datas['around']==1) {
+				$latlng=explode(",", $datas['latlng']);
+				if(!isset($datas['rayon']) || $datas['rayon']<=0) {
+					$datas['rayon']=1;
+				}
+				$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
+					//->having('distance < :distance')
+	                ->setParameter('latitude', $latlng[0])
+	                ->setParameter('longitude', $latlng[1])
+	                ->setParameter('distance', $datas['rayon']);
 			}
-			$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
-				//->having('distance < :distance')
-                ->setParameter('latitude', $latlng[0])
-                ->setParameter('longitude', $latlng[1])
-                ->setParameter('distance', $datas['rayon']);
 		}
 		else if(isset($datas['address'])) {
 			if(isset($datas['latlng'])) {
