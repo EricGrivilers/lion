@@ -400,6 +400,14 @@ class Estate
     private $lng;
 
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="stats", type="text", nullable=true)
+     */
+    private $stats;
+
+
     private $shortReference;
 
     private $isNew;
@@ -1612,4 +1620,27 @@ class Estate
     }
 
 
+
+    /**
+     * Set refe
+     *
+     * @param string $refe
+     * @return Estate
+     */
+    public function setRefe($refe)
+    {
+        $this->refe = $refe;
+
+        return $this;
+    }
+
+    /**
+     * Get refe
+     *
+     * @return string
+     */
+    public function getRefe()
+    {
+        return $this->refe;
+    }
 }

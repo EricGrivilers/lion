@@ -400,6 +400,14 @@ class Estate
     private $lng;
 
 
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="stats", type="text", nullable=true)
+     */
+    private $stats;
+
+
     private $shortReference;
 
     private $isNew;
@@ -1629,10 +1637,82 @@ class Estate
     /**
      * Get refe
      *
-     * @return string 
+     * @return string
      */
     public function getRefe()
     {
         return $this->refe;
+    }
+
+    /**
+     * Set stats
+     *
+     * @param string $stats
+     * @return Estate
+     */
+    public function setStats($stats)
+    {
+        $this->stats = $stats;
+
+        return $this;
+    }
+
+    /**
+     * Get stats
+     *
+     * @return string
+     */
+    public function getStats()
+    {
+        return $this->stats;
+    }
+
+
+
+    public function addVisit() {
+        $stats=json_decode($this->getStats());
+        if(!is_array($stats['year'])) {
+            $stats['year']=array();
+        }
+        if(!is_array($stats['month'])) {
+            $stats['month']=array();
+        }
+        if(!is_array($stats['week'])) {
+            $stats['week']=array();
+        }
+        if(!is_array($stats['day'])) {
+            $stats['day']=array();
+        }
+        if(!isset($stats['year'][date('Y')])) {
+            $stats['year'][date('Y')]= 0;
+            $stats['month'][date('m')]= 0;
+            $stats['week'][date('W')]= 0;
+            $stats['day'][date('d')]= 0;
+        }
+
+        $stats['year'][date('Y')]= $stats['year'][date('Y')]+1;
+        $stats['month'][date('m')]= $stats['month'][date('m')]+1;
+        $stats['week'][date('W')]= $stats['week'][date('W')]+1;
+        $stats['day'][date('d')]= $stats['day'][date('d')]+1;
+
+        $this->setStats(json_encode($stats));
+    }
+
+
+    public function getVisits() {
+        $stats=json_decode($this->getStats());
+         if(!is_array($stats['year'])) {
+            $stats['year']=array();
+        }
+        if(!is_array($stats['month'])) {
+            $stats['month']=array();
+        }
+        if(!is_array($stats['week'])) {
+            $stats['week']=array();
+        }
+        if(!is_array($stats['day'])) {
+            $stats['day']=array();
+        }
+        return $stats;
     }
 }

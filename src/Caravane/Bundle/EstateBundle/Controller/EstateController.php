@@ -351,7 +351,9 @@ class EstateController extends Controller
 					$estate->setOnDemand(true);
 				}
 
-				$estate->setSummary(utf8_encode(htmlentities($xmlEstate->FLASH_FR)));
+				//$estate->setSummary(utf8_encode(htmlentities($xmlEstate->FLASH_FR)));
+				$estate->setSummary(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
+
 				//$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".nl2br((string)$xmlEstate->DESCR_FR),"<p><br><a><i><ul><li>"));
 				$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
 
@@ -1015,6 +1017,9 @@ class EstateController extends Controller
 								$em->persist($ue);
 								$em->flush();
 						}
+					$estate->addVisit();
+					$em->persist($estate);
+					$em->flush();
 				}
 
 
