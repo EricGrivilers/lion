@@ -1188,7 +1188,28 @@ class EstateController extends Controller
 		}
 
 
+		function printAction(Request $request, $reference) {
+			$em = $this->getDoctrine()->getManager();
 
+			$entity = $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$reference);
+
+			if (!$entity) {
+					throw $this->createNotFoundException('Unable to find Estate entity.');
+			}
+
+			$html = $this->renderView('CaravaneCmsBundle:Frontend:Template/print.html.twig', array(
+					'estate'      => $entity
+			));
+
+			return new Response(
+			    $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+			    200,
+			    array(
+			        'Content-Type'          => 'application/pdf',
+			        'Content-Disposition'   => 'attachment; filename="'.$entity->getShortReference().'.pdf"'
+			    )
+			);
+		}
 
 
 

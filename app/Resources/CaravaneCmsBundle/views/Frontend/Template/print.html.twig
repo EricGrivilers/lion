@@ -1,0 +1,30 @@
+{% extends "CaravaneCmsBundle::layout.html.twig" %}
+
+{% block meta_facebook %}
+{% endblock meta_facebook %}
+
+{% block header %}
+
+{% endblock header %}
+
+{% block content %}
+
+		<!-- Content area 4 -->
+	<aside class='wrapper border-tb-white marble-color' id="detail">
+			<div class="container">
+
+
+
+				{% include "CaravaneEstateBundle:Frontend:estate_detail.html.twig" %}
+
+
+
+		</div>
+	</aside>
+
+	{% include "CaravaneCmsBundle:Frontend:Widget/twitter.html.twig" %}
+
+
+{% endblock content %}
+
+

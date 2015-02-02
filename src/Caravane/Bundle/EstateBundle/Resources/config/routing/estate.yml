@@ -81,7 +81,9 @@ caravane_estate_frontend_estate_search_count_by_area:
     options:
         expose: true
 
-
+caravane_estate_frontend_estate_print:
+    path:   /print/030/{reference}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:print" }
 
 caravane_estate_frontend_estate_sale_show:
     path:   /vente/030/{reference}
