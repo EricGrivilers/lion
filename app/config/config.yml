@@ -325,12 +325,11 @@ knp_paginator:
     template:
         pagination: "KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig"
 
-knp_snappy:
-    pdf:
-        enabled:    true
-        binary:     %kernel.root_dir%/../bin/wkhtmltopdf
-        options:    []
-    image:
-        enabled:    true
-        binary:     /usr/local/bin/wkhtmltoimage
-        options:    []
+
+ensepar_html2pdf:
+    orientation: P
+    format: A4
+    lang: en
+    unicode: true
+    encoding: UTF-8
+    margin: [10,15,10,15]

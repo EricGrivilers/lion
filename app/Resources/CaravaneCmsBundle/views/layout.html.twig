@@ -14,14 +14,19 @@
 			<meta property="og:image" content="{{asset('medias/logo.png')}}" />
 		{% endblock meta_facebook %}
 		{% include "CaravaneCmsBundle::stylesheet.html.twig" %}
+		{% block ie %}
+			{% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+		{% endblock ie %}
+		{% block header_scripts %}
 		<script src="{{ asset('js/jquery.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.js') }}"></script>
 		<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCi5ZVWFNJ5kvUuy30rrUOgW7mDiZEJ2t0&sensor=false">
 		</script>
+		{% endblock header_scripts %}
 	</head>
 	<body class="home page">
 
-
+		{% block script_facebook %}
 		<div id="fb-root"></div>
 			<script>(function(d, s, id) {
 				  var js, fjs = d.getElementsByTagName(s)[0];
@@ -37,7 +42,7 @@
 			<script type="text/javascript" src="//apis.google.com/js/plusone.js">
 
 			</script>
-
+		{% endblock script_facebook %}
 
 		{% block header %}
 			<header class='page-header '>
@@ -54,12 +59,14 @@
 
 
 
-
+		{% block footer %}
 			{% include "CaravaneCmsBundle:Menu:footer.html.twig" %}
-
+		{% endblock footer %}
 
 			<a id="back_to_top" href="#"></a>
-			{% include "CaravaneCmsBundle::javascript.html.twig" %}
+			{% block footer_scripts %}
+				{% include "CaravaneCmsBundle::javascript.html.twig" %}
+			{% endblock footer_scripts %}
 		</body>
 	</html>
 

@@ -1,0 +1,125 @@
+<page >
+
+
+<page_header> 
+	<img src="{{dir}}/medias/logo_footer.png" />
+</page_header> 
+
+<page_footer> 
+{% block footer %}
+<div style="text-align:center">
+<p>	Document informatif et non-contractuel, sous réserve de modification</p>
+<p>Immobilière Le LION s.a. Avenue Delleur 8 | B-1170 Bruxelles | Tel +32 2 672 71 11 - Fax +32 2 672 67 17<br/>
+ e-mail : info@immo-lelion.be - www.immo-lelion.be</p>
+</div>
+
+{% endblock footer %}
+</page_footer> 
+{% block content %}
+
+		<!-- Content area 4 -->
+	<div width="200mm" >
+		<div class="container">
+				{% if estate.photos|length>0 %}
+					<div width="200mm" >
+								 <img src="{{dir}}/media/cache/full_large/photos/big/{{estate.photos[0]}}"  style="width:200mm; height: auto;" width="200mm"    />						 
+					</div>
+				{% endif %}
+				<div class="row">
+					<div >
+						<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
+					</div>
+				</div>
+				<div width="200mm" style="margin-bottom:20px">
+						<div class="col-md-3">
+							<div class="infos">
+								<ul>
+									{% if estate.ondemand==false %}
+										<li><label>Prix:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
+									{% endif %}
+									<li><label>Reférence du bien:</label> {{estate.reference}}</li>
+									{% if estate.surface %}<li><label>Supérficie:</label> {{estate.surface}} <label>m2</label></li>{% endif %}
+									{% if estate.rooms %}<li><label>Chambre{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>{% endif %}
+									{% if estate.bathrooms %}<li><label>Salle{{estate.bathrooms>1?"s":""}} d'eau:</label> {{estate.bathrooms}}</li>{% endif %}
+									{% if estate.garages %}
+										<li><label>Garage{{estate.garages>1?"s":""}}:</label> {{estate.garages}}</li>
+									{% endif %}
+									{% if estate.garden %}
+										<li>{{estate.garden}} </li>
+									{% endif %}
+
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="descro">
+								{% if estate.isNewBuilding %}
+									<!-- Nav tabs -->
+										
+
+										<!-- Tab panes -->
+										<div >
+											<div class="tab-pane active" id="estate_new_description">
+												<div id="text" width="200mm" >{{estate.description|raw }}</div>
+											</div>
+											{% if estate.parent %}
+											<div class="tab-pane" id="estate_new_liste" style="margin-top:20px">
+												<table class="table table-condensed table-striped table-bordered" width="200mm" style="width:200mm">
+													<thead>
+														<tr>
+															<th>
+																Lot</th><th>Surf. brute</th><th>Ch.</th><th>Prix</th><th>Ref.</th></tr></thead>
+																<tbody>
+																	{% if estate.parent %}
+																		{% for es in estate.parent.children %}
+																			<tr>
+
+																				<td width="80mm" style="width:80mm">
+																				{{es.refe}}  </td>
+																				<td width="40mm" style="width:40mm" > {{es.surface}} <label> m² </label></td>
+																				<td width="20mm" style="width:20mm" >{{es.rooms}}</td>
+
+																				<td width="40mm" style="width:40mm" >  {{es.prix|number_format(0,'.', '.')}} <label>€</label>  </td>
+																				<td width="20mm" style="width:20mm" >{{es.reference}}</td>
+																			</tr>
+																		{% endfor %}
+																	{% endif %}
+																</tbody>
+												</table>
+											</div>
+											{% endif %}
+										</div>
+
+								{% else %}
+									<div id="text">{{estate.description|raw }}</div>
+								{% endif %}
+							</div>
+						</div>
+						<div class="col-md-3">
+							
+
+							
+						</div>
+					</div>
+					{% if estate.area.LatLng is defined %}
+					<div class="row">
+						<div class="col-md-12">
+							<div class="maps">
+								{#<img src="https://maps.googleapis.com/maps/api/staticmap?center={{estate.area.LatLng}}&zoom=15&size=640x300">#}
+							</div>
+						</div>
+					</div>
+					{% endif %}
+					<div class="separator"></div>
+
+
+
+
+		</div>
+	</div>
+
+
+
+{% endblock content %}
+</page>
+
