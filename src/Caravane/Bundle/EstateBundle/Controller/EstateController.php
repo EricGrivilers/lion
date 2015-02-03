@@ -145,6 +145,8 @@ class EstateController extends Controller
 			return new response($response);
 
 		}
+
+
 		return $this->redirect($this->generateUrl('caravane_estate_backend_estate'));
 	}
 
@@ -352,10 +354,15 @@ class EstateController extends Controller
 				}
 
 				//$estate->setSummary(utf8_encode(htmlentities($xmlEstate->FLASH_FR)));
-				$estate->setSummary(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
+				$summary=strip_tags((string)$xmlEstate->FLASH_FR,"<p><br><a><i><ul><li>");
+				$summary=str_replace("<p></p>","",$summary);
+				$description="<p>".$summary."</p>";
+				//echo "<textarea>".$description."</textarea>";
+
+				$estate->setSummary($summary);
 
 				//$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>".nl2br((string)$xmlEstate->DESCR_FR),"<p><br><a><i><ul><li>"));
-				$estate->setDescription(strip_tags("<p>".(string)$xmlEstate->FLASH_FR."</p>","<p><br><a><i><ul><li>"));
+				$estate->setDescription($description);
 
 				$estate->setName($xmlEstate->REFE);
 				if($iType=="L") {
@@ -429,7 +436,7 @@ class EstateController extends Controller
 				$estate->setRefe($listEstate->REFE);
 
 
-				$xmlUrl=$listEstate->PHOTO_01;
+				/*$xmlUrl=$listEstate->PHOTO_01;
 				if(preg_match("/\//",$xmlUrl)) {
 					$t=explode("/",$xmlUrl);
 					$filename=$t[count($t)-1];
@@ -457,6 +464,7 @@ class EstateController extends Controller
 						$em->persist($photo);
 					}
 				}
+				*/
 
 
 
@@ -484,6 +492,9 @@ class EstateController extends Controller
 										$photo->setFilename($filename);
 										$photo->setRanking(intval(substr($filename,0,2)));
 										$photo->setEstate($estate);
+										if($i==1) {
+											$photo->setIsDefault(true);
+										}
 										$em->persist($photo);
 									}
 								}
@@ -1212,9 +1223,9 @@ die();
 		    $response = new Response();
 	        $response->clearHttpHeaders();
 	        $response->setContent(file_get_contents($fichier));
-	        $response->headers->set('Content-Type', 'application/pdf'); 
+	        $response->headers->set('Content-Type', 'application/pdf');
 	        $response->headers->set('Content-disposition', 'attachment; filename="'.$entity->getShortReference().'.pdf"');
-	 
+
 	        return $response;
 		}
 

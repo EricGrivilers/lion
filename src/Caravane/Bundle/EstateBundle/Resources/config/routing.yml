@@ -7,6 +7,10 @@ caravane_estate_api_estate:
     prefix:   /
 
 
+
+install:
+    path:     /install
+    defaults: { _controller: "CaravaneEstateBundle:Default:install"}
 #caravane_estate_homepage:
 #    path:     /hello/{name}
 #    defaults: { _controller: CaravaneEstateBundle:Default:index }
