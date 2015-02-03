@@ -1198,17 +1198,24 @@ class EstateController extends Controller
 			}
 
 			$html = $this->renderView('CaravaneCmsBundle:Frontend:Template/print.html.twig', array(
-					'estate'      => $entity
+					'estate'      => $entity,
+					'dir'=>__DIR__."/../../../../../web"
 			));
 
-			return new Response(
-			    $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-			    200,
-			    array(
-			        'Content-Type'          => 'application/pdf',
-			        'Content-Disposition'   => 'attachment; filename="'.$entity->getShortReference().'.pdf"'
-			    )
-			);
+
+			$html2pdf = $this->get('html2pdf_factory')->create('P', 'A4', 'fr', true, 'UTF-8', array(10, 25, 10, 15));
+		    $html2pdf->pdf->SetDisplayMode('fullpage');
+		    $html2pdf->writeHTML($html);
+		    return $html2pdf->Output($entity->getShortReference().'Facture.pdf');
+die();
+
+		    $response = new Response();
+	        $response->clearHttpHeaders();
+	        $response->setContent(file_get_contents($fichier));
+	        $response->headers->set('Content-Type', 'application/pdf'); 
+	        $response->headers->set('Content-disposition', 'attachment; filename="'.$entity->getShortReference().'.pdf"');
+	 
+	        return $response;
 		}
 
 

@@ -88,7 +88,7 @@
 				{{"Ajouter ce bien à"|trans}}
 			{% endif %}
 			 mes favoris</a>
-			<a class="btn btn-primary btn-block"><span class="fa fa-print"></span> Imprimer la fiche du bien</a>
+			<a class="btn btn-primary btn-block" target="_blank" href="{{url("caravane_estate_frontend_estate_print", {'reference':estate.shortReference})}}"><span class="fa fa-print"></span> Imprimer la fiche du bien</a>
 		</div>
 
 		<div style="text-align: center; margin-top:20px" class="social">
