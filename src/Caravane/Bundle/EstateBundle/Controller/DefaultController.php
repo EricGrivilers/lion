@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Caravane\Bundle\CrmBundle\Entity\Contact;
 use Caravane\Bundle\EstateBundle\Entity\Estate;
 use Caravane\Bundle\EstateBundle\Entity\Photo;
+use Caravane\Bundle\EstateBundle\Entity\UserEstate;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class DefaultController extends Controller
@@ -18,6 +19,7 @@ class DefaultController extends Controller
 
 
     public function installAction() {
+    	echo "U";
 		$userManager = $this->get('fos_user.user_manager');
 		$em = $this->getDoctrine()->getManager();
 
@@ -88,6 +90,7 @@ class DefaultController extends Controller
 		}
 		$em->flush();
 
+		echo "E";
 
 		$zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1);
 		$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2);
@@ -193,9 +196,38 @@ class DefaultController extends Controller
 
 			$em->flush();
 
-			
-
 		}
+
+		echo "UE";
+
+		$sql = 'SELECT UI.*, U.email, I.reference  FROM users2items UI LEFT JOIN items I ON I.num=UI.itemId LEFT JOIN users U ON U.id=UI.userId WHERE UI.processed=0 AND I.reference IS NOT NULL LIMIT 0,100';
+		$rows = $conn->query($sql);
+		foreach($rows as $row) {
+			$email=$row['email'];
+			$reference=$row['reference'];
+			echo $email."/".$reference."<br/>";
+			if($user=$userManager->findUserByEmail($email)) {
+				if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($reference)) {
+					echo $user->getEmail()." <> ".$estate->getName()."<br/>";
+					
+					$ue=new UserEstate();
+					$ue->setUser($user);
+					$ue->setEstate($estate);
+					if($row['date']!="0000-00-00 00:00:00:" && $row['date']!='') {
+						$date=date_create_from_format('Y-m-d H:i:s', $row['date']);
+						$ue->setDate($date);
+					}
+					if($row['saved']==1) {
+						$ue->setSaved(true);
+					}
+					$em->persist($ue);
+				}
+			}
+			$sql2 = 'UPDATE users2items SET processed=1 WHERE userId="'.$row['userId'].'" AND itemId="'.$row['itemId'].'"';
+			$conn->query($sql2);
+			$em->flush();
+		}
+
 
     }
 }
