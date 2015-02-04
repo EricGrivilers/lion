@@ -1,69 +1,70 @@
-{% extends '::base.html.twig' %}
+{% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
 
 {% block body -%}
-    <h1>Contact list</h1>
 
-    <table class="records_list">
+    <div >
+      
+    </div>
+    <br/>
+
+<div class="navigation">
+    {{ knp_pagination_render(entities) }}
+</div>
+
+    <table class="records_list  table table-bordered table-condensed table-striped">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Password</th>
+                <th>{{ knp_pagination_sortable(entities, 'Id', 'E.id') }}</th>
+
+                <th>{{ knp_pagination_sortable(entities, 'Salutation', 'E.salutation') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Firstname', 'E.firstname') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Lastname', 'E.lastname') }}</th>
                 <th>Email</th>
-                <th>Language</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>{{ knp_pagination_sortable(entities, 'Language', 'E.language') }}</th>
                 <th>Tel</th>
-                <th>Zip</th>
+                {#<th>Zip</th>
                 <th>Fax</th>
                 <th>Street</th>
-                <th>Number</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Company</th>
-                <th>Salutation</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>Number</th>#}
+                <th>{{ knp_pagination_sortable(entities, 'City', 'E.city') }}</th>
+                <th>{{ knp_pagination_sortable(entities, 'Country', 'E.country') }}</th>
+                
+                <th>Viewed</th>
+                <th>Favorites</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('_crm_contact_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.password }}</td>
-                <td>{{ entity.email }}</td>
-                <td>{{ entity.language }}</td>
+                <td><a href="{{ path('caravane_crm_contact_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.salutation }}</td>
                 <td>{{ entity.firstname }}</td>
                 <td>{{ entity.lastname }}</td>
+                <td>{{ entity.user.email is defined?entity.user.email:'' }}</td>
+                <td>{{ entity.language }}</td>
+                
                 <td>{{ entity.tel }}</td>
-                <td>{{ entity.zip }}</td>
+                {#<td>{{ entity.zip }}</td>
                 <td>{{ entity.fax }}</td>
                 <td>{{ entity.street }}</td>
-                <td>{{ entity.number }}</td>
+                <td>{{ entity.number }}</td>#}
                 <td>{{ entity.city }}</td>
                 <td>{{ entity.country }}</td>
-                <td>{{ entity.company }}</td>
-                <td>{{ entity.salutation }}</td>
-                <td>{{ entity.date }}</td>
+                
+                <td>{% for e in entity.user.estate %} {% if e.saved != true %} <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}}</a>{% endif %} {% endfor %}</td>
+                <td>{% for e in entity.user.estate %} {% if e.saved == true %} <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}}</a>{% endif %} {% endfor %}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('_crm_contact_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('_crm_contact_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                        <a href="{{ path('caravane_crm_contact_edit', { 'id': entity.id }) }}"><span class="fa fa-edit"></span></a>
+
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('_crm_contact_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+<div class="navigation">
+    {{ knp_pagination_render(entities) }}
+</div>
+       
     {% endblock %}

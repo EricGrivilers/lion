@@ -19,15 +19,27 @@ class ContactController extends Controller
      * Lists all Contact entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CaravaneCrmBundle:Contact')->findAll();
+        $dql   = "SELECT E FROM CaravaneCrmBundle:Contact E";
+        $query = $em->createQuery($dql);
 
-        return $this->render('CaravaneCrmBundle:Contact:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        $paginator  = $this->get('knp_paginator');
+        $entities = $paginator->paginate(
+                $query,
+                $request->query->get('page', 1)/*page number*/,
+                25,/*limit per page*/
+                array('defaultSortFieldName' => 'E.createdOn', 'defaultSortDirection' => 'desc')
+
+        );
+
+        // parameters to template
+        return $this->render('CaravaneCrmBundle:Contact:index.html.twig', array('entities' => $entities));
+
+
+
     }
     /**
      * Creates a new Contact entity.

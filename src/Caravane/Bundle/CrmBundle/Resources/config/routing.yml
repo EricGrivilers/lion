@@ -1,6 +1,6 @@
 caravane_crm_contact:
     resource: "@CaravaneCrmBundle/Resources/config/routing/contact.yml"
-    prefix:   /_crm/contact
+    prefix:   /admin/contact
 
 caravane_crm_homepage:
     path:     /hello/{name}

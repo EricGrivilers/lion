@@ -62,6 +62,8 @@
                 <th>Mois</th>#}
                 {#<th>Lat</th>
                 <th>Lng</th>#}
+                <th>Viewed</th>
+                <th>Favorites</th>
                 <th>{{ knp_pagination_sortable(entities, 'Créé', 'E.createdOn') }}</th>
                 <th>{{ knp_pagination_sortable(entities, 'Mis à jour', 'E.updatedOn' ) }}</th>
                 <th></th>
@@ -110,6 +112,8 @@
                 <td>{{ entity.lastmonthview }}</td>#}
                 {#<td>{{ entity.lat }}</td>
                 <td>{{ entity.lng }}</td>#}
+                <td>{% for e in entity.user %} {% if e.saved != true %} <a href="{{ path('caravane_crm_contact_edit', { 'id': e.user.contact.id }) }}">{{e.user.contact.lastname}}</a>{% endif %} {% endfor %}</td>
+                <td>{% for e in entity.user %} {% if e.saved == true %} <a href="{{ path('caravane_crm_contact_edit', { 'id': e.user.contact.id }) }}">{{e.user.contact.lastname}}</a>{% endif %} {% endfor %}</td>
                 <td>{% if entity.createdOn %}{{ entity.createdOn|date('d/m/Y') }}{% endif %}</td>
                 <td>{% if entity.updatedOn %}{{ entity.updatedOn|date('d/m/Y') }}{% endif %}</td>
 

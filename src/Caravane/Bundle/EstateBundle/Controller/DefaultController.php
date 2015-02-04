@@ -19,8 +19,8 @@ class DefaultController extends Controller
 		$userManager = $this->get('fos_user.user_manager');
 		$em = $this->getDoctrine()->getManager();
 
-    		$conn = $this->get('database_connection');
-		$sql = 'SELECT * FROM User';
+    	$conn = $this->get('database_connection');
+		$sql = 'SELECT * FROM users WHERE processed!=1 LIMIT 0,50';
 		$rows = $conn->query($sql);
 
 		foreach($rows as $row) {
@@ -74,6 +74,14 @@ class DefaultController extends Controller
 				$user->setContact($contact);
 				$em->persist($contact);
 				$userManager->updateUser($user);
+
+				$sql2 = 'UPDATE users SET processed=1 WHERE email="'.$email.'"';
+				$conn->query($sql2);
+			}
+			else {
+				echo "exists ".$email."<br/>";
+				$sql2 = 'UPDATE users SET processed=1 WHERE email="'.$email.'"';
+				$conn->query($sql2);
 			}
 		}
 		$em->flush();

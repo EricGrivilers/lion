@@ -1043,26 +1043,40 @@ class EstateController extends Controller
 		public function addToFavoriteAction($id) {
 				$em = $this->getDoctrine()->getManager();
 				if($user=$this->getUser()) {
-						if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
-								if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
-										$userEstate=new UserEstate();
-										$userEstate->setUser($user);
-										$userEstate->setEstate($estate);
-								}
-								if($userEstate->getSaved()==true) {
-										$userEstate->setSaved(false);
-								}
-								else {
-										$userEstate->setSaved(true);
-								}
-								$em->persist($userEstate);
-								$em->flush();
-								return new Response('success');
-
+					if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
+						if(!$userEstate=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(array('user'=>$user,'estate'=>$estate))) {
+								$userEstate=new UserEstate();
+								$userEstate->setUser($user);
+								$userEstate->setEstate($estate);
+						}
+						if($userEstate->getSaved()==true) {
+								$userEstate->setSaved(false);
 						}
 						else {
-								return new Response('no estate');
+							$userEstate->setSaved(true);
+
+							$message = \Swift_Message::newInstance()
+						        ->setSubject('Website: Bien ajouté en favori')
+						        ->setFrom('contact@immo-lelion.be')
+						        ->setTo('eric@caravanemedia.com')
+						        ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_favorite.txt.twig', array('user' => $user, 'estate'=>$estate)))
+						    ;
+						    if(!$this->get('mailer')->send($message)) {
+						    	echo "error";
+						    }
+						    else {
+						    	echo "ok";
+						    }
 						}
+						$em->persist($userEstate);
+						$em->flush();
+						
+						return new Response('success');
+
+					}
+					else {
+						return new Response('no estate');
+					}
 				}
 				return new Response('no user');
 		}

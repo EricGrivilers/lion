@@ -147,6 +147,25 @@ function initializeSearchMap() {
 		});
 
 
+		$('a.addToFavorite').click(function(e) {
+        	favBut=$(this);
+			e.preventDefault();
+			e.stopPropagation();
+			$.get($(this).attr('href'),function(data) {
+				if(data=='success') {
+					if( element.find('span.favorite').length<=0 ) {
+						element.prepend('<span class="favorite"><span class="fa fa-star"></span></span>');
+					}
+					element.find('span.favorite').toggle();
+					element.find('a.estate').click();
+
+				}
+				else if(data=="no user") {
+					alert("Vous devez être enregistré pour utiliser cette option");
+				}
+			});
+		});
+
 	});
 
 	$('#estate_last_updated').on('slid.bs.carousel', function () {
@@ -245,22 +264,22 @@ function initializeSearchMap() {
 		            detail.html(data);
 		            $('a.addToFavorite').click(function(e) {
 		            	favBut=$(this);
-					e.preventDefault();
-					e.stopPropagation();
-					$.get($(this).attr('href'),function(data) {
-						if(data=='success') {
-							if( element.find('span.favorite').length<=0 ) {
-								element.prepend('<span class="favorite"><span class="fa fa-star"></span></span>');
-							}
-							element.find('span.favorite').toggle();
-							element.find('a.estate').click();
+						e.preventDefault();
+						e.stopPropagation();
+						$.get($(this).attr('href'),function(data) {
+							if(data=='success') {
+								if( element.find('span.favorite').length<=0 ) {
+									element.prepend('<span class="favorite"><span class="fa fa-star"></span></span>');
+								}
+								element.find('span.favorite').toggle();
+								element.find('a.estate').click();
 
-						}
-						else if(data=="no user") {
-							alert("Vous devez être enregistré pour utiliser cette option");
-						}
+							}
+							else if(data=="no user") {
+								alert("Vous devez être enregistré pour utiliser cette option");
+							}
+						});
 					});
-				});
 		            FB.XFBML.parse();
 		            gapi.plusone.render('live-preview');
 
