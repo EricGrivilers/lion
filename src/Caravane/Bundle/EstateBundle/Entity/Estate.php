@@ -1669,50 +1669,103 @@ class Estate
 
 
 
-    public function addVisit() {
-        $stats=json_decode($this->getStats());
-        if(!is_array($stats['year'])) {
-            $stats['year']=array();
+    public function addVisit($date=null, $startCount=0) {
+        if($date) {//for import not to use after
+            $t=explode("-",$date);
+            $year=(int)$t[0];
+            $month=(int)$t[1];
+            $day=(int)$t[2];
         }
-        if(!is_array($stats['month'])) {
-            $stats['month']=array();
-        }
-        if(!is_array($stats['week'])) {
-            $stats['week']=array();
-        }
-        if(!is_array($stats['day'])) {
-            $stats['day']=array();
-        }
-        if(!isset($stats['year'][date('Y')])) {
-            $stats['year'][date('Y')]= 0;
-            $stats['month'][date('m')]= 0;
-            $stats['week'][date('W')]= 0;
-            $stats['day'][date('d')]= 0;
+        else {
+            $year=(int)date('Y');
+            $month=(int)date('m');
+            $day=(int)date('d'); 
         }
 
-        $stats['year'][date('Y')]= $stats['year'][date('Y')]+1;
-        $stats['month'][date('m')]= $stats['month'][date('m')]+1;
-        $stats['week'][date('W')]= $stats['week'][date('W')]+1;
-        $stats['day'][date('d')]= $stats['day'][date('d')]+1;
+        if(!json_decode($this->getStats(), true)) { 
+            $stats=array(
+                $year=>array()      
+            );
+        }
+        else {
+            $stats=json_decode($this->getStats(), true);
+        }
+        if(!isset($stats[$year][$month])) {
+            $stats[$year][$month]= array();
+        }
+        if(!isset($stats[$year][$month][$day])) {
+            $stats[$year][$month][$day]= 0;
+        }
+
+        $count = (int)$stats[$year][$month][$day];
+        $count++;
+        if($startCount>0) {//for import not use after
+            $count=$startCount;
+        }
+        $stats[$year][$month][$day]=$count;
 
         $this->setStats(json_encode($stats));
+        
     }
 
 
     public function getVisits() {
-        $stats=json_decode($this->getStats());
-         if(!is_array($stats['year'])) {
-            $stats['year']=array();
+        $date=date('Y-m-d');
+        
+
+        $year=(int)date('Y');
+        $month=(int)date('m');
+        $day=(int)date('d');
+        if(!json_decode($this->getStats(), true)) { 
+            $stats=array(
+                $year=>array()      
+            );
         }
-        if(!is_array($stats['month'])) {
-            $stats['month']=array();
+        else {
+            $stats=json_decode($this->getStats(), true);
         }
-        if(!is_array($stats['week'])) {
-            $stats['week']=array();
+        if(!isset($stats[$year][$month])) {
+            $stats[$year][$month]= array();
         }
-        if(!is_array($stats['day'])) {
-            $stats['day']=array();
+        if(!isset($stats[$year][$month][$day])) {
+            $stats[$year][$month][$day]= 0;
         }
-        return $stats;
+
+        $nbDay=$stats[$year][$month][$day];
+        $nbMonth=0;
+        $nbTotal=0;
+        foreach($stats[$year][$month] as $k=>$dday) {
+            $nbMonth+=$dday;
+        }
+        foreach($stats as $year=>$b) {
+            foreach($stats[$year] as $n=>$mmonth) {
+                foreach($stats[$year][$n] as $k=>$dday) {
+                    $nbTotal+=$dday;
+                }
+            }
+        }
+
+        $nbWeek=0;
+        $Current = Date('N');
+        $tA=array();
+        //$tA[]=$date->modify('this week');
+        $DaysFromMonday = $Current - 1;
+        $date=date ( "Y-m-d" );
+//echo $DaysFromMonday;
+        $monday = strtotime ( '-'.$DaysFromMonday.' day' . $date ); 
+        //$monday = date('Y-m-d', strtotime('-'.$DaysFromMonday.' days', $date->format('Y-m-d')) );
+
+        $tA[]=$monday;
+        $date=date ( "Y-m-d", $monday );
+        for($i=1;$i<=6;$i++) {
+            $tA[]=strtotime ( '+'.$i.' day' . $date );
+        }
+        foreach($tA as $d) {
+            if(isset($stats[date('Y',$d)][(int)date('m',$d)][(int)date('d',$d)])) {
+                $nbWeek+=(int)$stats[date('Y',$d)][(int)date('m',$d)][(int)date('d',$d)];
+            }
+
+        }  
+        return array("total"=>$nbTotal,"month"=>$nbMonth,"week"=>$nbWeek,"day"=>$nbDay);
     }
 }

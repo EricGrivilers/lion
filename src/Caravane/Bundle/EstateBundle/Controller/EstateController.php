@@ -884,52 +884,52 @@ class EstateController extends Controller
 	}
 
 
-		public function searchFormAction(Request $request, $type='sale') {
-				$search_form=$this->searchForm($request, $type);
-				return $this->render('CaravaneEstateBundle:Estate:search.html.twig', array(
-						'search_form'   => $search_form->createView(),
-						'type'=>$type
-				));
-		}
+	public function searchFormAction(Request $request, $type='sale') {
+			$search_form=$this->searchForm($request, $type);
+			return $this->render('CaravaneEstateBundle:Estate:search.html.twig', array(
+					'search_form'   => $search_form->createView(),
+					'type'=>$type
+			));
+	}
 
-		public function searchAction(Request $request) {
-
-
-				if(!$datas=$request->request->get('search_form')) {
-						$datas=array('location'=>0);
-				}
+	public function searchAction(Request $request) {
 
 
-				$type=($datas['location']==1?'rent':'sale');
-
-				$search_form=$this->searchForm($request, $type);
-				$em = $this->getDoctrine()->getManager();
-				if(isset($datas['reference'])) {
-						if($datas['reference']!="") {
-								return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
-						}
-				}
-
-				if($user=$this->getUser()) {
-						if($contact=$user->getContact()) {
-								$contact->setLastSearch(json_encode($datas));
-								$em->persist($contact);
-								$em->flush();
-						}
-				}
+			if(!$datas=$request->request->get('search_form')) {
+					$datas=array('location'=>0);
+			}
 
 
+			$type=($datas['location']==1?'rent':'sale');
 
-				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
-				if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-						return new Response('end');
-				}
-				return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-						'estates'      => $estates,
-					 'search_form'   => $search_form->createView(),
-						'type'=>$type
-				));
-		}
+			$search_form=$this->searchForm($request, $type);
+			$em = $this->getDoctrine()->getManager();
+			if(isset($datas['reference'])) {
+					if($datas['reference']!="") {
+							return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
+					}
+			}
+
+			if($user=$this->getUser()) {
+					if($contact=$user->getContact()) {
+							$contact->setLastSearch(json_encode($datas));
+							$em->persist($contact);
+							$em->flush();
+					}
+			}
+
+
+
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+					return new Response('end');
+			}
+			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+					'estates'      => $estates,
+				 'search_form'   => $search_form->createView(),
+					'type'=>$type
+			));
+	}
 /*
 		 public function searchByAreaAction(Request $request, $type,$id) {
 				$em=$this->getDoctrine()->getmanager();
@@ -943,136 +943,150 @@ class EstateController extends Controller
 				));
 		}
 */
-		public function searchByAreasAction(Request $request, $type="sale") {
-				$areas=array();
-				$em=$this->getDoctrine()->getmanager();
-				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByAreaGrouped($type);
+	public function searchByAreasAction(Request $request, $type="sale") {
+			$areas=array();
+			$em=$this->getDoctrine()->getmanager();
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByAreaGrouped($type);
 
 
-				foreach($estates as $k=>$area) {
-						if($area['latlng']) {
-								$tA=explode(',',$area['latlng']);
-								$areas[]=array('id'=>$area['id'],'num'=>$area[1],"lat"=>$tA[0],"lng"=>$tA[1]);
-						}
+			foreach($estates as $k=>$area) {
+					if($area['latlng']) {
+							$tA=explode(',',$area['latlng']);
+							$areas[]=array('id'=>$area['id'],'num'=>$area[1],"lat"=>$tA[0],"lng"=>$tA[1]);
+					}
 
-				}
-				$response = new Response();
-				$response->setContent(json_encode($areas));
-				$response->headers->set('Content-Type', 'application/json');
+			}
+			$response = new Response();
+			$response->setContent(json_encode($areas));
+			$response->headers->set('Content-Type', 'application/json');
 
-				return $response;
+			return $response;
+	}
+
+
+	public function saleViewAction($reference) {
+			$em = $this->getDoctrine()->getManager();
+			$estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
+			$estate=$this->detailEstate($estate);
+			return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
+					'estate'      => $estate,
+					'type'=>'sale'
+			));
+	}
+
+	public function rentViewAction($reference) {
+			$em = $this->getDoctrine()->getManager();
+			$estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
+			$estate=$this->detailEstate($estate);
+			return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
+					'estate'      => $estate,
+					'type'=>'rent'
+			));
+	}
+
+	public function saleListAction(Request $request) {
+
+			if(!$datas=$request->query->get('c_s')) {
+					$datas=array();
+			}
+			$em = $this->getDoctrine()->getManager();
+			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
+
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>0));
+		 // echo "----------------------".count($estates)."------------";
+		 // die();
+			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+					return new Response('end');
+			}
+
+			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+					'estates'      => $estates,
+					'type'=>'sale'
+			));
+	}
+
+	public function rentListAction(Request $request) {
+
+			if(!$datas=$request->request->get('form')) {
+					$datas=array();
+			}
+			$em = $this->getDoctrine()->getManager();
+			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>true,"status"=>true));
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>1));
+			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+					return new Response('end');
+			}
+			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+					'estates'      => $estates,
+					'type'=>'rent'
+			));
+	}
+
+
+	public function newListAction(Request $request) {
+
+			if(!$datas=$request->query->get('c_s')) {
+					$datas=array();
+			}
+			$em = $this->getDoctrine()->getManager();
+			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
+
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('isNew'=>1));
+			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+					return new Response('end');
+			}
+
+			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+					'estates'      => $estates,
+					'type'=>'sale'
+			));
+	}
+
+
+
+	public function detailAction($id) {
+		$em = $this->getDoctrine()->getManager();
+		if(!$estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
+			throw $this->createNotFoundException('Unable to find Estate entity.');
 		}
+		$estate=$this->detailEstate($estate);
 
+		return $this->render('CaravaneEstateBundle:Frontend:estate_detail.html.twig', array(
+				'estate'      => $estate
+		));
+	}
 
-		public function saleViewAction($reference) {
-				$em = $this->getDoctrine()->getManager();
-				$estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
-				return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
-						'estate'      => $estate,
-						'type'=>'sale'
-				));
+	public function detailEstate($estate) {
+		$em = $this->getDoctrine()->getManager();
+		if($user=$this->getUser()) {
+			if(!$ue=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(
+					array(
+							'estate'=>$estate->getId(),
+							'user'=>$user->getId()
+					)
+			)) {
+					$ue= new UserEstate();
+					$ue->setUser($user);
+					$ue->setEstate($estate);
+					$ue->setCounter(1);
+			}
+
+			$ue->setCounter($ue->getCounter()+1);
+			$ue->setDate(new \Datetime("now"));
+			$em->persist($ue);
+			$em->flush();
 		}
-
-		public function rentViewAction($reference) {
-				$em = $this->getDoctrine()->getManager();
-				$estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneBy(array('reference'=>"030/".$reference,'status'=>true));
-				return $this->render('CaravaneEstateBundle:Frontend:one.html.twig', array(
-						'estate'      => $estate,
-						'type'=>'rent'
-				));
-		}
-
-		public function saleListAction(Request $request) {
-
-				if(!$datas=$request->query->get('c_s')) {
-						$datas=array();
-				}
-				$em = $this->getDoctrine()->getManager();
-				//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
-
-				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>0));
-			 // echo "----------------------".count($estates)."------------";
-			 // die();
-				if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-						return new Response('end');
-				}
-
-				return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-						'estates'      => $estates,
-						'type'=>'sale'
-				));
-		}
-
-		public function rentListAction(Request $request) {
-
-				if(!$datas=$request->request->get('form')) {
-						$datas=array();
-				}
-				$em = $this->getDoctrine()->getManager();
-				//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>true,"status"=>true));
-				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>1));
-				if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-						return new Response('end');
-				}
-				return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-						'estates'      => $estates,
-						'type'=>'rent'
-				));
-		}
-
-
-		public function newListAction(Request $request) {
-
-				if(!$datas=$request->query->get('c_s')) {
-						$datas=array();
-				}
-				$em = $this->getDoctrine()->getManager();
-				//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
-
-				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('isNew'=>1));
-				if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-						return new Response('end');
-				}
-
-				return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-						'estates'      => $estates,
-						'type'=>'sale'
-				));
-		}
-
-
-
-		public function detailAction($id) {
-				$em = $this->getDoctrine()->getManager();
-				if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->find($id)) {
-						if($user=$this->getUser()) {
-								if(!$ue=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(
-										array(
-												'estate'=>$estate->getId(),
-												'user'=>$user->getId()
-										)
-								)) {
-										$ue= new UserEstate();
-										$ue->setUser($user);
-										$ue->setEstate($estate);
-										$ue->setCounter(0);
-								}
-
-								$ue->setCounter($ue->getCounter()+1);
-								$ue->setDate(new \Datetime("now"));
-								$em->persist($ue);
-								$em->flush();
-						}
-					$estate->addVisit();
-					$em->persist($estate);
-					$em->flush();
-				}
-
-
-				return $this->render('CaravaneEstateBundle:Frontend:estate_detail.html.twig', array(
-						'estate'      => $estate
-				));
-		}
+		$estate->addVisit();
+		$visits=$estate->getVisits();
+		$estate->setDayview($visits['day']);
+		$estate->setWeekview($visits['week']);
+		$estate->setMonthview($visits['month']);
+		$estate->setTotalview($visits['total']);
+		$em->persist($estate);
+		$em->flush();
+		die();
+		return $estate;
+	}
 
 
 		public function addToFavoriteAction($id) {

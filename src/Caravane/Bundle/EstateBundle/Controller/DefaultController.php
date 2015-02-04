@@ -230,5 +230,43 @@ class DefaultController extends Controller
 		}
 
 
+
+		echo "stats";
+
+		$sql = 'SELECT ISt.*, I.reference FROM item_statsv2 ISt LEFT JOIN items I ON I.num=ISt.itemId WHERE ISt.processed=0 AND I.reference IS NOT NULL LIMIT 0,50';
+		$rows = $conn->query($sql);
+		foreach($rows as $row) {
+			$reference=$row['reference'];
+			if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($reference)) {
+				$days=explode(",",$row['days']);
+				$td=(int)date('z');
+				foreach($days as $k=>$v) {
+					if($k>0 && $v>0) {
+
+						if($k>$td) {//2014
+							$date=date_create_from_format('z-Y', $k."-2014");
+						}
+						else {//2015
+							$date=date_create_from_format('z-Y', $k."-2015");
+							
+						}
+						echo $date->format("Y-m-d")."<br/>";
+						$estate->addVisit($date->format("Y-m-d"), $v);
+						$visits=$estate->getVisits();
+						$estate->setDayview($visits['day']);
+						$estate->setWeekview($visits['week']);
+						$estate->setMonthview($visits['month']);
+						$estate->setTotalview($visits['total']);
+						$em->persist($estate);
+						$em->persist($estate);
+					}
+				}
+			}
+			$sql2 = 'UPDATE item_statsv2 SET processed=1 WHERE itemId="'.$row['itemId'].'"';
+			$conn->query($sql2);
+		}
+		
+		$em->flush();
+
     }
 }
