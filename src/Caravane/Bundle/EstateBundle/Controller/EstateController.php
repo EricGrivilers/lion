@@ -291,9 +291,23 @@ class EstateController extends Controller
 	private function import($estates, $iType, $force=false, $parentClas=null,$p=1) {
 		$em = $this->getDoctrine()->getManager();
 
-echo "page".$p."<br/>";
+	echo "page".$p."<br/>";
 		if($p==1) {
-			$q = $em->createQuery('update CaravaneEstateBundle:Estate E set E.status = 0');
+			$query='update CaravaneEstateBundle:Estate E set E.status = 0 ';
+			if($iType=="L") {
+				$query.=" WHERE E.location=1";
+			}
+			else {
+				$query.=" WHERE E.location=0";
+				if($iType=="p") {
+					$query.=" AND E.isNewBuilding=1 " ; 
+				}
+				else {
+					$query.=" AND E.isNewBuilding=0 " ; 
+				}
+			}
+
+			$q = $em->createQuery($query);
 			$numUpdated = $q->execute();
 		}
 		

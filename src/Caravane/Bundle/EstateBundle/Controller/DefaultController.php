@@ -122,8 +122,8 @@ class DefaultController extends Controller
 				$estate->setLocFr($row['locfr']);
 				$estate->setDescription($row['shortdescren']);
 				$estate->setSummary($row['shortdescren']);
-				$estate->setLocation($row['location']==1?true:false);
-				$estate->setOnDemand($row['surdemande']==1?true:false);
+				$estate->setLocation($row['location']=='Y'?true:false);
+				$estate->setOnDemand($row['surdemande']=='Y'?true:false);
 				$estate->setName($row['name']);
 
 				if($row['type']==1) {
