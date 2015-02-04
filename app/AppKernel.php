@@ -39,7 +39,7 @@ class AppKernel extends Kernel
 
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
             new Th3mouk\DoctrineTablePrefixBundle\Th3moukDoctrineTablePrefixBundle(),
 
             new Caravane\Bundle\EstateBundle\CaravaneEstateBundle(),

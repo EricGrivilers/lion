@@ -18,6 +18,7 @@ use Caravane\Bundle\EstateBundle\Entity\UserEstate;
 use Caravane\Bundle\EstateBundle\Form\EstateType;
 use Caravane\Bundle\EstateBundle\Form\SearchType;
 
+use Ob\HighchartsBundle\Highcharts\Highchart;
 /**
  * Estate controller.
  *
@@ -771,10 +772,49 @@ class EstateController extends Controller
 				$editForm = $this->createEditForm($entity);
 				$deleteForm = $this->createDeleteForm($id);
 
+				if(!json_decode($entity->getStats(), true)) { 
+		            $visits=array();
+		        }
+		        else {
+		            $visits=json_decode($entity->getStats(), true);
+		        ksort($visits);
+		        }
+
+		        $tA=array();
+		        $i=0;
+		        foreach($visits as $year=>$months) {
+		        	echo $year;
+		        	foreach($months as $month=>$days) {
+		        		foreach($days as $day=>$value) {
+		        			$tA[]=(int)$value;
+		        			$to=$day."/".$month."/".$year;
+		        			if($i==0) {
+		        				$from=$to;
+		        			}
+		        			$i++;
+		        		}
+		        	}
+		        }
+		        
+		        //$tA=array(5,6,7,8,7,1,2);
+		         $series = array(
+			        array("name" => "Visites",    "data" => $tA)
+			    );
+
+
+			    $ob = new Highchart();
+			    $ob->chart->renderTo('linechart');  // The #id of the div where to render the chart
+			    $ob->title->text('Stats');
+			    $ob->xAxis->title(array('text'  => "Du ".$from." au ".$to));
+			    $ob->yAxis->title(array('text'  => "Visites"));
+			    $ob->series($series);
+
+			   
 				return $this->render('CaravaneEstateBundle:Estate:edit.html.twig', array(
 						'entity'      => $entity,
 						'edit_form'   => $editForm->createView(),
 						'delete_form' => $deleteForm->createView(),
+						'chart' => $ob
 				));
 		}
 
@@ -1084,7 +1124,7 @@ class EstateController extends Controller
 		$estate->setTotalview($visits['total']);
 		$em->persist($estate);
 		$em->flush();
-		die();
+
 		return $estate;
 	}
 

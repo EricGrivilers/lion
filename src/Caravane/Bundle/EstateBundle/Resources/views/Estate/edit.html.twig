@@ -3,6 +3,14 @@
 {% import _self as mac %}
 
 {% block body -%}
+
+  <script src="//code.highcharts.com/4.0.1/highcharts.js"></script>
+<script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
+<script type="text/javascript">
+    {{ chart(chart) }}
+</script>
+
+
     <h1>Edit</h1>
 
     {{ form(edit_form) }}
@@ -20,7 +28,7 @@
 
 
 
-
+  <div id="linechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
 <div class="navigation">
 
