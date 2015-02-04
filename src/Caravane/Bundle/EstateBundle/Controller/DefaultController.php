@@ -213,6 +213,7 @@ class DefaultController extends Controller
 					$ue=new UserEstate();
 					$ue->setUser($user);
 					$ue->setEstate($estate);
+					$ue->SetCounter((int)$row['counter']<=1?1:(int)$row['counter']);
 					if($row['date']!="0000-00-00 00:00:00:" && $row['date']!='') {
 						$date=date_create_from_format('Y-m-d H:i:s', $row['date']);
 						$ue->setDate($date);
