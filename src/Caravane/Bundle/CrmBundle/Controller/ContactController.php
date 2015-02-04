@@ -75,7 +75,7 @@ class ContactController extends Controller
     private function createCreateForm(Contact $entity)
     {
         $form = $this->createForm(new ContactType(), $entity, array(
-            'action' => $this->generateUrl('_crm_contact_create'),
+            'action' => $this->generateUrl('caravane_crm_contact_create'),
             'method' => 'POST',
         ));
 
@@ -155,7 +155,7 @@ class ContactController extends Controller
     private function createEditForm(Contact $entity)
     {
         $form = $this->createForm(new ContactType(), $entity, array(
-            'action' => $this->generateUrl('_crm_contact_update', array('id' => $entity->getId())),
+            'action' => $this->generateUrl('caravane_crm_contact_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -184,7 +184,7 @@ class ContactController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_crm_contact_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('caravane_crm_contact_edit', array('id' => $id)));
         }
 
         return $this->render('CaravaneCrmBundle:Contact:edit.html.twig', array(
@@ -227,7 +227,7 @@ class ContactController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('_crm_contact_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('caravane_crm_contact_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

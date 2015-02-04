@@ -1,16 +1,71 @@
-{% extends '::base.html.twig' %}
+{% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
+
+{% import _self as mac %}
 
 {% block body -%}
-    <h1>Contact edit</h1>
+    <h1>Contact</h1>
 
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('_crm_contact') }}">
+
+<div class="navigation">
+
+	<h1>Bien sauvegardés</h1>
+		<div class="separator"></div>
+	<div class="row">
+		{% for e in entity.user.estate %}
+			{% if e.saved==true %}
+				{% set estate = e.estate %}
+				{{ mac.ro(estate)}} 
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>
+<div class="navigation">
+
+	<h1>Bien visités</h1>
+	<div class="separator"></div>
+	<div class="row">
+		{% for e in entity.user.estate %}
+			{% if e.saved!=true %}
+				{% set estate = e.estate %}
+				{{ mac.ro(estate)}} 
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>
+<br/>
+<div class="navigation">
+        <a href="{{ path('caravane_crm_contact') }}" class="btn btn-primary">
             Back to the list
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+</div>
 {% endblock %}
+
+
+
+
+
+{% macro ro(estate) %}
+    <div class="col-xs-12 col-sm-6 col-md-3 estate">
+		<div class="frame">
+
+			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate" rel="{{estate.id}}">
+				<article >
+					<div class="container-inner">
+						<div class="">
+							<header>
+								
+								<div class="text">
+									{{estate.reference}}
+									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.prix|number_format(0,'.', '.')~"€"}}</h2>
+								</div>
+							</header>
+							<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+						</div>
+					</div>
+				</article>
+			</a>
+		</div>
+	</div>
+{% endmacro %}

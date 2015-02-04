@@ -1,5 +1,7 @@
 {% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
 
+{% import _self as mac %}
+
 {% block body -%}
     <h1>Edit</h1>
 
@@ -15,4 +17,53 @@
     {{ form(delete_form) }}
   </div>
   </div>
+
+
+
+
+
+<div class="navigation">
+
+  <h1>Bien sauvegardé par</h1>
+    <div class="separator"></div>
+  <div class="row">
+    {% for e in entity.user %}
+      {% if e.saved==true %}
+        {% set user = e.user %}
+        {{ mac.ro(user)}} 
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class="navigation">
+
+  <h1>Bien visité par </h1>
+  <div class="separator"></div>
+  <div class="row">
+    {% for e in entity.user %}
+      {% if e.saved!=true %}
+        {% set user = e.user %}
+        {{ mac.ro(user)}} 
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<br/>
+
+
+
+
 {% endblock %}
+
+
+
+{% macro ro(user) %}
+    <div class="col-xs-12 col-sm-6 col-md-3 estate">
+      <a href="{{ path('caravane_crm_contact_edit', { 'id': user.contact.id }) }}">
+        {{user.contact.salutation}} {{user.contact.firstname}} {{user.contact.lastname}}<br/>
+      {{user.email}}<br/>
+        {{user.contact.tel}}<br/>
+       {{user.contact.city}} {{user.contact.country}}
+      </a>
+  </div>
+{% endmacro %}
