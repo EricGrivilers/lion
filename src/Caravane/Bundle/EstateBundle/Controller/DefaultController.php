@@ -4,6 +4,8 @@ namespace Caravane\Bundle\EstateBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Caravane\Bundle\CrmBundle\Entity\Contact;
+use Caravane\Bundle\EstateBundle\Entity\Estate;
+use Caravane\Bundle\EstateBundle\Entity\Photo;
 use Symfony\Component\Security\Core\Util\SecureRandom;
 
 class DefaultController extends Controller
@@ -85,5 +87,115 @@ class DefaultController extends Controller
 			}
 		}
 		$em->flush();
+
+
+		$zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1);
+		$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2);
+		$zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3);
+		$zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4);
+
+		$categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison');
+		$categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement');
+		$categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre');
+
+
+		$sql = 'SELECT * FROM items WHERE processed=0 LIMIT 0,5';
+		$rows = $conn->query($sql);
+		foreach($rows as $row) {
+			$reference=$row['reference'];
+			if(!$estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($reference)) {
+				$estate=new Estate;
+				$estate->setStatus(false);
+				$estate->setReference($reference);
+				if($row['datein']!="0000-00-00" && $row['datein']!='') {
+					$datein=date_create_from_format('Y-m-d', $row['datein']);
+					$estate->setCreatedOn($datein);
+				}
+				if($row['update']!="0000-00-00" && $row['update']!='') {
+					$update=date_create_from_format('Y-m-d', $row['update']);
+					$estate->setUpdatedOn($update);
+				}
+				$estate->setPrix($row['prix']);
+				$t="zone".$row['zone'];
+				$zone=$$t;
+				$estate->setZone($zone);
+				$estate->setLocFr($row['locfr']);
+				$estate->setDescription($row['shortdescren']);
+				$estate->setSummary($row['shortdescren']);
+				$estate->setLocation($row['location']==1?true:false);
+				$estate->setOnDemand($row['surdemande']==1?true:false);
+				$estate->setName($row['name']);
+
+				if($row['type']==1) {
+					$category= $categoryMaison;
+				}
+				else if($row['type']==2) {
+					$category= $categoryAppartement;
+				}
+				else {
+					$category= $categoryAutre;
+				}
+				$estate->setCategory($category);
+				$estate->setZip($row['zip']);
+				$estate->setRooms($row['rooms']);
+				$estate->setBathrooms($row['bathrooms']);
+				$estate->setGarden($row['garden']);
+				$estate->setGarages($row['garages']);
+				$estate->setSurface($row['area']);
+				$estate->setLat($row['Lat']);
+				$estate->setLng($row['Lng']);
+
+				$em->persist($estate);
+
+
+				$sql2 = 'SELECT * FROM photo2item WHERE item_id="'.$row['num'].'" ORDER BY ranking';
+				$photorows = $conn->query($sql);
+				foreach($photorows as $p) {
+					$filename=$p['photo'].".jpg";
+					$filename=str_replace(".jpg.jpg",'.jpg',$filename);
+					echo $filename."<br/>";
+					echo __DIR__.'/../../../../../web/photos/big/'.$filename."<br/>";
+					if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)) {
+						echo "http://www.immo-lelion.be/photos/big/".$filename."<br/>";
+						if($ch = curl_init("http://www.immo-lelion.be/photos/big/".$filename)) {
+							echo "curl<br/>";
+							$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
+							curl_setopt($ch, CURLOPT_FILE, $fp);
+							curl_setopt($ch, CURLOPT_HEADER, 0);
+							curl_exec($ch);
+							curl_close($ch);
+							fclose($fp);
+							$r=1;
+							if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+								$photo= new Photo();
+								$photo->setFilename($filename);
+								$photo->setRanking($r);
+								$r++;
+								$photo->setEstate($estate);
+								if($r==1) {
+									$photo->setIsDefault(true);
+								}
+								$em->persist($photo);
+							}
+						}
+					}
+
+				}
+				$sql2 = 'UPDATE items SET processed=1 WHERE reference="'.$reference.'"';
+				$conn->query($sql2);
+
+				
+			}
+			else {
+				$sql2 = 'UPDATE items SET processed=1 WHERE reference="'.$reference.'"';
+				$conn->query($sql2);
+			}
+
+			$em->flush();
+
+			
+
+		}
+
     }
 }

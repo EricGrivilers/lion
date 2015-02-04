@@ -110,13 +110,13 @@ class EstateController extends Controller
 		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
-		$n=$this->import($estates,$t,$force);
+		$n=$this->import($estates,$t,$force,null,$p);
 
 		if($t=='p') {
 			$estatesGroup=$estates;
 			foreach($estatesGroup as $es) {
 				foreach($es->COMPS as $estates) {
-					$n=$this->import($estates,$t,$force, $es->CLAS);
+					$n=$this->import($estates,$t,$force, $es->CLAS,$p);
 				}
 			}
 		}
@@ -288,9 +288,18 @@ class EstateController extends Controller
 		$em->flush();
 	}
 
-	private function import($estates, $iType, $force=false, $parentClas=null) {
-
+	private function import($estates, $iType, $force=false, $parentClas=null,$p=1) {
 		$em = $this->getDoctrine()->getManager();
+
+echo "page".$p."<br/>";
+		if($p==1) {
+			$q = $em->createQuery('update CaravaneEstateBundle:Estate E set E.status = 0');
+			$numUpdated = $q->execute();
+		}
+		
+
+
+		
 		$n=0;
 		foreach($estates as $k=>$listEstate) {
 			$n++;
@@ -298,7 +307,19 @@ class EstateController extends Controller
 				$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
 			}
 			else {
-				$date=new \Datetime();
+				if($parentClas) {
+					$parentClas=str_replace("030/","",$parentClas);
+					if($parentEstate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$parentClas)) {
+						if(!$date=$parentEstate->getUpdatedOn()) {
+							$date=new \Datetime();
+						}
+
+					}
+				}
+				else {
+					$date=new \Datetime();
+				}
+				
 			}
 			echo "<br/>p:".$listEstate->CODE;
 			$clas=$listEstate->CLAS;
