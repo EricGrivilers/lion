@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2014-11-04T23:32:20Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2015-02-05T10:17:41Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -11,25 +11,38 @@
         <target>MOBILE APPLICATION </target>
         <jms:reference-file line="91">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="5cb4c9d828175ed3931ec52305b32f47173a8e04" resname="Belgium">
+        <source>Belgium</source>
+        <target>Belgium</target>
+        <jms:reference-file line="46">Frontend/Template/homepage.html.twig</jms:reference-file>
+        <jms:reference-file line="38">views/Menu/footer.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="3a366b695c85cad77cfcc964aeca836ee64976ea" resname="Biens neufs">
         <source>Biens neufs</source>
         <target>New estate</target>
         <jms:reference-file line="35">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="2784e378f25501c5f51cb6421ff637f8616b4cb6" resname="Brussels">
+        <source>Brussels</source>
+        <target>Brussels</target>
+        <jms:reference-file line="45">Frontend/Template/homepage.html.twig</jms:reference-file>
+        <jms:reference-file line="37">views/Menu/footer.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="b37456c4530be810dc040f50da72eda09addfb0a" resname="Contact">
         <source>Contact</source>
-        <target state="new">Contact</target>
-        <jms:reference-file line="41">views/Menu/main.html.twig</jms:reference-file>
+        <target>Contact</target>
+        <jms:reference-file line="29">views/Menu/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="38">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="81b9675833d1fa4303dbc6db5e0c2feda8f54615" resname="Créer mon profil">
         <source>Créer mon profil</source>
         <target>Create a profile</target>
         <jms:reference-file line="71">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="bc440f645cdff406eed4e069bad2e5ce18261283" resname="International">
-        <source>International</source>
-        <target state="new">International</target>
-        <jms:reference-file line="38">views/Menu/main.html.twig</jms:reference-file>
+      <trans-unit id="e3c5eaf7c9230cbdc81e8f7b03dc6afaacff34f5" resname="Legal mentions">
+        <source>Legal mentions</source>
+        <target>Legal mentions</target>
+        <jms:reference-file line="57">views/Menu/footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d219c68101f532de10add2cf42fb9dbeca73d3be" resname="Location">
         <source>Location</source>
@@ -39,7 +52,7 @@
       <trans-unit id="b12c55699da5fcf2d4812aabe2ba770f5e5a1190" resname="Mon compte">
         <source>Mon compte</source>
         <target>My account</target>
-        <jms:reference-file line="65">views/Menu/main.html.twig</jms:reference-file>
+        <jms:reference-file line="62">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="6facd6778b124812c0d94108784acec0369e8da1" resname="NOS PARTENAIRES">
         <source>NOS PARTENAIRES</source>
@@ -48,7 +61,7 @@
       </trans-unit>
       <trans-unit id="958b0f27bd8667201f444e31306a3b29aea9478a" resname="Nos coordonnées">
         <source>Nos coordonnées</source>
-        <target state="new">Nos coordonnées</target>
+        <target>Contact us</target>
         <jms:reference-file line="62">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f02ffb674ac44ce29a4f17aa2a07a7e7457006f8" resname="Nous contacter">
@@ -59,8 +72,8 @@
       </trans-unit>
       <trans-unit id="9695aedbf63edf32ab250d845213cf4b90b3692c" resname="RECHERCHE">
         <source>RECHERCHE</source>
-        <target state="new">RECHERCHE</target>
-        <jms:reference-file line="93">views/Menu/main.html.twig</jms:reference-file>
+        <target>SEARCH</target>
+        <jms:reference-file line="90">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="98a9da89e389217d1125eb27d9554b23ece1d7e4" resname="SUIVEZ-NOUS">
         <source>SUIVEZ-NOUS</source>
@@ -70,12 +83,18 @@
       <trans-unit id="fedf2439f275db3b471d35c2e773398bfff1c9eb" resname="Se connecter">
         <source>Se connecter</source>
         <target>Sign in</target>
-        <jms:reference-file line="75">views/Menu/main.html.twig</jms:reference-file>
+        <jms:reference-file line="72">views/Menu/main.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="21662ed180a0dc8ccf970cf78f7c877b0c2d516a" resname="Suivez-nous">
+        <source>Suivez-nous</source>
+        <target>Follow us</target>
+        <jms:reference-file line="46">views/Menu/footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae849b0b55f0db384b9ebbef7e4ab35845a805b1" resname="Une agence locale de qualité intégrée dans un réseau international de prestige.">
         <source>Une agence locale de qualité intégrée dans un réseau international de prestige.</source>
         <target>A local quality real estate agency integrated in a prestigious global network.</target>
         <jms:reference-file line="9">views/Menu/main.html.twig</jms:reference-file>
+        <jms:reference-file line="11">views/Backend/admin.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e7753e0d6c3ff9599c4c4f0f9a2a06156a4f0de" resname="Vente">
         <source>Vente</source>
@@ -106,12 +125,13 @@ Trust us and we’ll put all our experience and dynamism at your service.</targe
       </trans-unit>
       <trans-unit id="2086a9c3241b88a88853133657f440c5a454c967" resname="homepage.partners.paragraph.1">
         <source>homepage.partners.paragraph.1</source>
-        <target state="new">homepage.partners.paragraph.1</target>
+        <target><![CDATA[L’<b>Immobilière Le Lion</b> est intégrée dans un réseau mondial de prestige, <a href="http://www.luxuryportfolio.com/" target="_blank">Leading Real Estates of The World</a>, avec qui elle partage les mêmes valeurs et la même qualité de service.]]></target>
         <jms:reference-file line="126">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="459e90c870157336e04708bbe9b126a94a11d3fc" resname="homepage.partners.paragraph.2">
         <source>homepage.partners.paragraph.2</source>
-        <target state="new">homepage.partners.paragraph.2</target>
+        <target><![CDATA[L’agence a également noué un partenariat privilégié avec <a href="http://www.knightfrank.com/" target="_blank">Knight Frank International Property Sales</a>.
+Grâce à ces réseaux, l’<b>Immobilière Le Lion</b> offre la possibilité à ses clients de trouver un bien de qualité partout dans le monde. Elle propose également à ses clients internationaux une vitrine sur ses plus beaux biens en Belgique.]]></target>
         <jms:reference-file line="140">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="87eb836c3f8c7019c7323e4ce7ca5f252b74c176" resname="homepage.profile.creation">

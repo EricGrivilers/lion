@@ -9,7 +9,7 @@
 						<img src="{{asset('medias/logo_footer.png')}}"  alt="">
 					</section>
 				</div>
-				<div class='col-md-3'>
+				{#<div class='col-md-3'>
 					<section>
 						<ul>
 							<li><a href="#">Immobilier de prestige</a></li>
@@ -23,8 +23,8 @@
 							<li><a href="#">Immobilier de luxe Luxury </a></li>
 						</ul>
 					</section>
-				</div>
-				<div class='col-md-3'>
+				</div>#}
+				<div class='col-md-4'>
 					<section>
 						<h2>{{"Contact"|trans}}</h2>
 						<div class="textwidget">
@@ -34,14 +34,14 @@
 							</ul>
 							<ul class="address">
 								<li>Avenue Delleur 8</li>
-								<li>B-1170</li>
-								<li>Brussels, Belgium</li>
+								<li>B-1170 {{"Brussels"|trans}}</li>
+								<li>{{"Belgium"|trans}}</li>
 							</ul>
 							</address>
 						</div>
 					</section>
 				</div>
-				<div class='col-md-3'>
+				<div class='col-md-5'>
 					<section>
 						<h2>{{"Suivez-nous"|trans}}</h2>
 						{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
@@ -54,7 +54,7 @@
 		<div class='container'>
 				<div class="row">
 					<div class='col-md-12'>
-						<span class='copyright'>© 2014 Immobilière Le Lion</span>
+						<span class='copyright'>© {{"now"|date('Y')}} Immobilière Le Lion - <a href="{{url('caravane_cms_legal')}}">{{"Legal mentions"|trans}}</a> </span> 
 					</div>
 				</div>
 		</div>

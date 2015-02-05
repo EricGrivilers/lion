@@ -266,7 +266,7 @@ jms_translation:
             ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]
             excluded_dirs: [cache, data, logs, translations]
-            extractors: [alias_of_the_extractor]
+            #extractors: [alias_of_the_extractor]
 
 
 services:

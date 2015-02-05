@@ -10,4 +10,10 @@ class DefaultController extends Controller
     {
         return $this->render('CaravaneCmsBundle:Frontend:Template/homepage.html.twig', array());
     }
+
+
+    public function legalAction() {
+    	return $this->render('CaravaneCmsBundle:Frontend:Template/legal.html.twig', array());
+    
+    }
 }

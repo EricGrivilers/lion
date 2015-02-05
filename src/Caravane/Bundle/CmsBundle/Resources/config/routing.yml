@@ -2,6 +2,9 @@ caravane_cms_homepage:
     path:     /
     defaults: { _controller: CaravaneCmsBundle:Default:index }
 
+caravane_cms_legal:
+    path:     /legal
+    defaults: { _controller: CaravaneCmsBundle:Default:legal }
 
 caravane_cms_contact:
     path: /contact
