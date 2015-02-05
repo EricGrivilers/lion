@@ -1318,7 +1318,7 @@ class EstateController extends Controller
 			));
 
 
-			$html2pdf = $this->get('html2pdf_factory')->create('P', 'A4', 'fr', true, 'UTF-8', array(10, 25, 10, 15));
+			$html2pdf = $this->get('html2pdf_factory')->create('P', 'A4', 'fr', true, 'UTF-8', array(10, 15, 10, 15));
 		    $html2pdf->pdf->SetDisplayMode('fullpage');
 		    $html2pdf->writeHTML($html);
 		    return $html2pdf->Output($entity->getShortReference().'Facture.pdf');

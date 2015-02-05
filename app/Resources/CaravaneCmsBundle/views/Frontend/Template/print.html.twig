@@ -20,16 +20,32 @@
 		<!-- Content area 4 -->
 	<div width="200mm" >
 		<div class="container">
+			<div class="row">
+					<div >
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+					</div>
+				</div>
+
 				{% if estate.photos|length>0 %}
 					<div width="200mm" >
-								 <img src="{{dir}}/media/cache/home_site_1024/photos/big/{{estate.photos[0]}}"  style="width:190mm; height: auto;" width="190mm"    />						 
+								 <img src="{{dir}}/media/cache/home_site_1024/photos/big/{{estate.photos[0]}}"   width="720"    />						 
 					</div>
 				{% endif %}
+				
 				<div class="row">
 					<div >
 						<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
 					</div>
 				</div>
+
 				<div width="200mm" style="margin-bottom:20px">
 						<div class="col-md-3">
 							<div class="infos">
@@ -52,7 +68,7 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="descro">
+							<div class="descro" >
 								{% if estate.isNewBuilding %}
 									<!-- Nav tabs -->
 										
@@ -60,7 +76,7 @@
 										<!-- Tab panes -->
 										<div >
 											<div class="tab-pane active" id="estate_new_description">
-												<div id="text" width="200mm" >{{estate.description|raw }}</div>
+												<div id="text" width="720" text-align="justify">{{estate.description|raw }}</div>
 											</div>
 											{% if estate.parent %}
 											<div class="tab-pane" id="estate_new_liste" style="margin-top:20px">
@@ -91,7 +107,7 @@
 										</div>
 
 								{% else %}
-									<div id="text">{{estate.description|raw }}</div>
+									<div id="text" width="720" text-align="justify">{{estate.description|raw }}</div>
 								{% endif %}
 							</div>
 						</div>

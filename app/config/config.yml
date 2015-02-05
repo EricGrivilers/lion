@@ -225,7 +225,7 @@ liip_imagine:
             filters:
                 thumbnail: { size: [207, 207], mode: outbound, allow_upscale: true }
                 background: { size: [207, 207], color: '#fff' }
-        home_site_1414:
+        home_site_414:
             quality: 100
             filters:
                 thumbnail: { size: [414, 414], mode: inset, allow_upscale: true }

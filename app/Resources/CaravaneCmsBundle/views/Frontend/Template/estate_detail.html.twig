@@ -19,7 +19,7 @@
 					    	{% if is_mobile() %}
 							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_375')) %}
 							{% elseif is_tablet() %}
-							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_1414')) %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_414')) %}
 							{% else  %}
 							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_1024')) %}
 							{% endif %}
