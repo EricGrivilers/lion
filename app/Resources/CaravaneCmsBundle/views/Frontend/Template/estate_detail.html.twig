@@ -17,11 +17,11 @@
 			  		{% set a=photo|split('.') %}
 					    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
 					    	{% if is_mobile() %}
-							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_small')) %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_375')) %}
 							{% elseif is_tablet() %}
-							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_medium')) %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_1414')) %}
 							{% else  %}
-							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('full_large')) %}
+							    {% set pict = asset(('photos/big/'~photo) |  imagine_filter('home_site_1024')) %}
 							{% endif %}
 					      <img src="{{pict}}"  style="width:auto; height: 100%;" alt="{{estate.category.name}} {{estate.locfr}}"   />
 					    </div>

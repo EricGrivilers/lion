@@ -4,7 +4,7 @@
 	<meta property="og:url" content="{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}" /> 
 	<meta property="og:title" content="{{estate.category.name}} - {{estate.locfr}}" />
 	<meta property="og:description" content="{{estate.summary|raw }}" /> 
-	<meta property="og:image" content="{{asset(estate.photos[0] | imagine_filter('full_large') )}}" /> 
+	<meta property="og:image" content="{{asset(estate.photos[0] | imagine_filter('home_site_1024') )}}" /> 
 {% endblock meta_facebook %}
 
 {% block header %}
