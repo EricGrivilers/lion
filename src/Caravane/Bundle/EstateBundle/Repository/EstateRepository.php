@@ -93,8 +93,23 @@ class EstateRepository extends EntityRepository
 			$query->andWhere('C.zone IN (:zone)')
 					->setParameter('zone', $zone);
 		}
-
 		if(isset($datas['around'])) {
+			if($datas['around']=='') {
+					unset($datas['around']);
+			}
+		}
+		if(isset($datas['address'])) {
+			if($datas['address']=='') {
+					unset($datas['address']);
+			}
+		}
+		if(isset($datas['area'])) {
+			if($datas['area']=='') {
+					unset($datas['area']);
+			}
+		}
+		if(isset($datas['around'])) {
+
 			if($datas['around']==1) {
 				$latlng=explode(",", $datas['latlng']);
 				if(!isset($datas['rayon']) || $datas['rayon']<=0) {

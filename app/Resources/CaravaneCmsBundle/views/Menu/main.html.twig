@@ -74,11 +74,11 @@
 			        </li>
 			        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{app.request.locale}} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-           <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a></li>
-								<li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a></li>
-          </ul>
-        </li>
+        <ul class="dropdown-menu" role="menu">
+			<li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a></li>
+			<li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a></li>
+        </ul>
+    </li>
 
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -98,6 +98,6 @@
 
 			</section>
 		</div>
-		<div id="search_map"  style="width:100%; height:300px;">
+		<div id="search_map"  style="width:100%; height:350px;">
 	</aside>
 </div>

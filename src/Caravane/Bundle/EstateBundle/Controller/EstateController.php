@@ -935,8 +935,9 @@ class EstateController extends Controller
 	public function searchAction(Request $request) {
 
 
+
 			if(!$datas=$request->request->get('search_form')) {
-					$datas=array('location'=>0);
+				$datas=array('location'=>0);
 			}
 
 
@@ -962,10 +963,10 @@ class EstateController extends Controller
 
 			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
 			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-					return new Response('end');
+				return new Response('end');
 			}
 			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-					'estates'      => $estates,
+				'estates'      => $estates,
 				 'search_form'   => $search_form->createView(),
 					'type'=>$type
 			));

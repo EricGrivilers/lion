@@ -4,7 +4,7 @@ var type;
 function initializeSearchMap() {
 		    var mapOptions = {
 		      center: new google.maps.LatLng(50.833555,4.39552),
-		      zoom: 13
+		      zoom: 12
 		    };
 		    var map = new google.maps.Map(document.getElementById("search_map"), mapOptions);
 		   i=0;
@@ -28,6 +28,7 @@ function initializeSearchMap() {
 
 				 google.maps.event.addListener(marker, 'click', (function(marker, i) {
 					return function() {
+						$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(0);
 						$('#form_container form')[0].reset();
 						$('#form_container form #search_form_area').val(markers[i].id);
 						if(type=='new') {
@@ -135,6 +136,9 @@ function initializeSearchMap() {
 			}
 		});
 	*/
+		$('#search_form_submit').click(function() {
+			$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(0);
+		});
 		prepareLinks();
 		$(".carousel").swiperight(function() {
     		$(this).carousel('prev');

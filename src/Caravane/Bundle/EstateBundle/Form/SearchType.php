@@ -48,6 +48,7 @@ class SearchType extends AbstractType
             ))
             ->add('area',"entity",array(
                 "label"=>false,
+                'required' => false,
                 "empty_value" => 'Quartier',
                 "class"=>"Caravane\Bundle\EstateBundle\Entity\Area",
                 'query_builder' => function(AreaRepository $er) {
@@ -59,6 +60,7 @@ class SearchType extends AbstractType
                 "label"=>false,
                 "expanded"=>true,
                 "multiple"=>true,
+                'required' => false,
                 "class"=>"Caravane\Bundle\EstateBundle\Entity\Zone",
                 "attr"=>array(
                     "class"=>"btn-group btn-group-vertical",
@@ -113,7 +115,7 @@ class SearchType extends AbstractType
                 "data"=>$this->type))
             ->add('keyword','text',array(
                 "attr"=>array(
-                    "placeholder"=>"Mot clef (ex.: piscine, brugmann)"
+                    "placeholder"=>"Mot clef (ex.: Molière, piscine)"
                 )
             ))
             ->add('offset','hidden',array(
@@ -123,7 +125,8 @@ class SearchType extends AbstractType
             ))
             ->add('sort','choice',array(
                 "label"=>false,
-                "empty_value" => 'Ordonner les résultats par',
+                //"empty_value" => 'Ordonner les résultats par',
+                'preferred_choices' => array('prix asc'),
                 "choices"=>array(
                     "prix asc"=>"Prix croissants",
                     "prix desc"=>"Prix decroissants",
