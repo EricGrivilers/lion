@@ -11,11 +11,6 @@ web_profiler:
     toolbar: "%debug_toolbar%"
     intercept_redirects: "%debug_redirects%"
 
-swiftmailer:
-    transport: "%mailer_transport%"
-    host:      smtp.caravanemedia.com
-    username:  eric@caravanemedia.com
-    password:  AbscO:8645
 
 
 
@@ -41,6 +36,7 @@ assetic:
     use_controller: "%use_assetic_controller%"
 
 swiftmailer:
+    host: smtp.caravanemedia.com
     transport: smtp
     port: 465
     encryption: ssl

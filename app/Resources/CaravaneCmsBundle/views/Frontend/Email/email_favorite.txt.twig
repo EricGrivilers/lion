@@ -1,9 +1,16 @@
 Bonjour,
 
-L'utilisateur\n
+L'utilisateur
 
-{{user.contact.salutation}} {{user.contact.firstname}} {{user.contact.lastname}}\n
+{{user.contact.salutation}} {{user.contact.firstname}} {{user.contact.lastname}}
 Language: {{user.contact.language}} 
 Email: {{user.email}}
 
-\n a ajouté le bien {{estate.reference}} ({{url('caravane_estate_frontend_estate_sale_show', {'reference':estate.shortReference})}}) a ses favoris.
+a ajouté le bien {{estate.reference}} a ses favoris.
+{{estate.name}}
+{#{estate.address}#}
+{#{estate.zip}#}
+{{estate.locfr}}
+
+
+Url: {{url('caravane_estate_frontend_estate_sale_show', {'reference':estate.shortReference})}}

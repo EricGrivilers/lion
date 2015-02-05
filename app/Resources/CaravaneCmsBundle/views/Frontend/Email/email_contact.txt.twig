@@ -1,0 +1,15 @@
+Bonjour,
+
+Nom: {{ data.lastname }}
+Prénom: {{ data.firstname }}
+Email: {{ data.email }}
+Tel.: {{ data.phone }}
+Adresse: {{ data.address }}
+Code postal: {{ data.zip }}
+Ville: {{ data.city }}
+Pays: {{ data.country }}
+{% if data.location!='' %} 
+Estimation pour l'adresse: {{data.location}}
+{% endif %}
+Message: {{data.comments}}
+       

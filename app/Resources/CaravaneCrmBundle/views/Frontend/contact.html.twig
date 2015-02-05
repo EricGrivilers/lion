@@ -15,9 +15,10 @@
 		<!-- Content area 4 -->
 	<aside class='wrapper border-tb-white '>
 		<div class="container main" >
-				<h2 class="title">{{"Nous contacter"|trans}}</h2>
-				<div class="separator"></div>
-				<form>
+			<h2 class="title">{{"Nous contacter"|trans}}</h2>
+			<div class="separator"></div>
+			{% if contact_form %}
+				<form method="POST" action="{{path('caravane_cms_contact')}}" no-validate >
 					<div class="row ">
 						<div class="col-md-6">
 							{{form_row(contact_form.lastname)}}
@@ -57,24 +58,29 @@
 
 					</div>
 				</form>
-
-
+			{% else %}
+				<div class="alert alert-success">
+					<p>
+						Votre message a bien été envoyé.<br/>Nous reviendrons vers vous dans les plus brefs délais.
+					</p>
+				</div>
+			{% endif %}
 			<h2 class="title">{{"Nos coordonnées"|trans}}</h2>
 			<div class="separator"></div>
 			<div class="row ">
 				<div class="col-md-6">
 					<address>
 						<h3>Immobilière Le Lion</h3>
-								<ul class="address">
-									<li>Avenue Delleur 8</li>
-									<li>B-1170</li>
-									<li>Brussels, Belgium</li>
-								</ul>
-								<ul class="phone">
-									<li>Phone: +32 2 672 71 11</li>
-									<li>Fax: +32 2 672 67 17</li>
-								</ul>
-							</address>
+						<ul class="address">
+							<li>Avenue Delleur 8</li>
+							<li>B-1170 {{"Brussels"|trans}}</li>
+							<li>{{"Belgium"|trans}}</li>
+						</ul>
+						<ul class="phone">
+							<li>{{"Téléphone"|trans}}: +32 2 672 71 11</li>
+							<li>Fax: +32 2 672 67 17</li>
+						</ul>
+					</address>
 				</div>
 				<div class="col-md-6">
 					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10087.776365117901!2d4.4118201!3d50.7951447!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3dad06c477e63%3A0xba60478e053cc0c9!2sAvenue+Delleur+8%2C+1170+Watermael-Boitsfort%2C+Belgique!5e0!3m2!1sfr!2sfr!4v1414577863836" width="100%" height="300" frameborder="0" style="border:0"></iframe>

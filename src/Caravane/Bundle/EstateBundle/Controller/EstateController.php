@@ -319,7 +319,7 @@ class EstateController extends Controller
 		foreach($estates as $k=>$listEstate) {
 			$n++;
 			if($listEstate->MODI_DATE!='') {
-				$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);;
+				$date=date_create_from_format('d/m/Y', $listEstate->MODI_DATE);
 			}
 			else {
 				if($parentClas) {
@@ -783,10 +783,15 @@ class EstateController extends Controller
 		        $tA=array();
 		        $i=0;
 		        foreach($visits as $year=>$months) {
-		        	echo $year;
+		        	//echo $year;
 		        	foreach($months as $month=>$days) {
 		        		foreach($days as $day=>$value) {
-		        			$tA[]=(int)$value;
+		        			$date=date_create_from_format('Y-m-d', $year."-".$month."-".$day);
+		        			//$tA[]="[Date.UTC(".$year.", ".$month.", ".$day."),".(int)$value."]";
+		        			//$tA[]=array($date->format('Y-m-d'),(int)$value);
+		        			//$tA[]=array(strtotime($year."-".$month."-".$day." 00:00:00"),(int)$value);
+		        			$tA[]=array($year."-".$month."-".$day,(int)$value);
+		        			//$tA[]=array("Date.UTC(".$year.",  ".$month.", ".$day.")",(int)$value);
 		        			$to=$day."/".$month."/".$year;
 		        			if($i==0) {
 		        				$from=$to;
@@ -798,7 +803,7 @@ class EstateController extends Controller
 		        
 		        //$tA=array(5,6,7,8,7,1,2);
 		         $series = array(
-			        array("name" => "Visites",    "data" => $tA)
+			        array("type"=>"spline","name" => "Visites",    "data" => $tA)
 			    );
 
 
@@ -806,6 +811,9 @@ class EstateController extends Controller
 			    $ob->chart->renderTo('linechart');  // The #id of the div where to render the chart
 			    $ob->title->text('Stats');
 			    $ob->xAxis->title(array('text'  => "Du ".$from." au ".$to));
+			    //$ob->xAxis->type("datetime");
+			    //$ob->chart->dateFormat('YYYY-mm-dd');
+			   	//$ob->xAxis->dateTimeLabelFormats(array('month'=>'%b %e, %Y','year'=>'%b'));
 			    $ob->yAxis->title(array('text'  => "Visites"));
 			    $ob->series($series);
 
@@ -1148,7 +1156,7 @@ class EstateController extends Controller
 							$message = \Swift_Message::newInstance()
 						        ->setSubject('Website: Bien ajouté en favori')
 						        ->setFrom('contact@immo-lelion.be')
-						        ->setTo('eric@caravanemedia.com')
+						        ->setTo('contact@immo-lelion.be')
 						        ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_favorite.txt.twig', array('user' => $user, 'estate'=>$estate)))
 						    ;
 						    if(!$this->get('mailer')->send($message)) {
