@@ -39,8 +39,8 @@ class ProfileController extends BaseController
 				$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
 				$last_search_form = $this->createForm( 'search_form', null, array('prices'=>$prices,'type'=>$type));
-				 $last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
-        			$lastSearch['offset']=0;
+				$last_search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
+        		$lastSearch['offset']=0;
 
 				foreach($lastSearch as $k=>$v) {
 					if($k!='_token' ) {
@@ -68,7 +68,10 @@ class ProfileController extends BaseController
 							}
 						}
 						else if($k=="latlng") {
-							$last_search_form->get('latlng')->setData(null);
+							if($last_search_form->get('latlng')) {
+								$last_search_form->get('latlng')->setData(null);
+							}
+							
 						}
 						else {
 							$last_search_form->get($k)->setData($v);
