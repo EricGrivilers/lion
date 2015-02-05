@@ -292,6 +292,9 @@ function initializeSearchMap() {
 				});
 		          // $('body').scrollTo(element);
 		            //detail.slideDown();
+		            $('html, body').animate({
+				        scrollTop: $("div#detail").offset().top - 40
+				    }, 1000);
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
