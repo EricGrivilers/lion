@@ -123,6 +123,9 @@ class SearchType extends AbstractType
             ->add('limit','hidden',array(
                 "data"=>24,
             ))
+            ->add('latlng','hidden',array(
+                "data"=>null,
+            ))
             ->add('sort','choice',array(
                 "label"=>false,
                 //"empty_value" => 'Ordonner les résultats par',
