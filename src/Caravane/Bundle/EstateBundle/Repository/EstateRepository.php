@@ -23,7 +23,7 @@ class EstateRepository extends EntityRepository
 	public function findLastUpdated($limit=3, $user=null) {
 		$lastSearchResults=array();
 		$estates= $this->findBy(
-			array(),
+			array('status'=>true),
 			array('updatedOn'=>'desc'),
 			$limit
 		);
