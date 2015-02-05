@@ -257,7 +257,9 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [1024, 683], mode: outbound, allow_upscale: true }
+                watermark: {image:   Resources/public/watermark.png, size: 0.1, position: bottomright }
                 background: { size: [1024, 683], color: '#fff' }
+
         thumbnail_1024:
             quality: 100
             filters:
