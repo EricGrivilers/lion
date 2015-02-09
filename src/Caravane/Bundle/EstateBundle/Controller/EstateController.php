@@ -1034,41 +1034,40 @@ class EstateController extends Controller
 	}
 
 	public function saleListAction(Request $request) {
+		if(!$datas=$request->query->get('c_s')) {
+				$datas=array();
+		}
+		$em = $this->getDoctrine()->getManager();
+		$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>0));
 
-			if(!$datas=$request->query->get('c_s')) {
-					$datas=array();
-			}
-			$em = $this->getDoctrine()->getManager();
-			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
+		if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+				return new Response('end');
+		}
 
-			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>0));
-		 // echo "----------------------".count($estates)."------------";
-		 // die();
-			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-					return new Response('end');
-			}
-
-			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-					'estates'      => $estates,
-					'type'=>'sale'
-			));
+		$search_form=$this->searchForm($request, "sale");
+		return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+			'estates'      => $estates,
+			'type'=>'sale',
+			'search_form'=>$search_form->createView(),
+		));
 	}
 
 	public function rentListAction(Request $request) {
-
-			if(!$datas=$request->request->get('form')) {
-					$datas=array();
-			}
-			$em = $this->getDoctrine()->getManager();
-			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>true,"status"=>true));
-			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>1));
-			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
-					return new Response('end');
-			}
-			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
-					'estates'      => $estates,
-					'type'=>'rent'
-			));
+		if(!$datas=$request->request->get('form')) {
+				$datas=array();
+		}
+		$em = $this->getDoctrine()->getManager();
+		//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>true,"status"=>true));
+		$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('location'=>1));
+		if(count($estates)<=0 && $request->isXmlHttpRequest()) {
+				return new Response('end');
+		}
+		$search_form=$this->searchForm($request, "rent");
+		return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
+			'estates'      => $estates,
+			'type'=>'rent',
+			'search_form'=>$search_form->createView(),
+		));
 	}
 
 
@@ -1085,9 +1084,11 @@ class EstateController extends Controller
 					return new Response('end');
 			}
 
+			$search_form=$this->searchForm($request, "sale");
 			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
 					'estates'      => $estates,
-					'type'=>'sale'
+					'type'=>'new',
+					'search_form'=>$search_form->createView(),
 			));
 	}
 

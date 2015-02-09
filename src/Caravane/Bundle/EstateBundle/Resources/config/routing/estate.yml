@@ -82,15 +82,23 @@ caravane_estate_frontend_estate_search_count_by_area:
         expose: true
 
 caravane_estate_frontend_estate_print:
-    path:   /print/030/{reference}
+    path:   /print/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:print" }
 
 caravane_estate_frontend_estate_sale_show:
-    path:   /vente/030/{reference}
+    path:   /vente/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:saleView" }
 
 caravane_estate_frontend_estate_rent_show:
-    path:   /location/030/{reference}
+    path:   /location/{reference}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:rentView" }
+
+caravane_estate_frontend_estate_sale_show:
+    path:   /sale/{reference}
+    defaults: { _controller: "CaravaneEstateBundle:Estate:saleView" }
+
+caravane_estate_frontend_estate_rent_show:
+    path:   /rent/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:rentView" }
 
 caravane_estate_frontend_estate_sale_list:
@@ -100,6 +108,16 @@ caravane_estate_frontend_estate_sale_list:
 caravane_estate_frontend_estate_rent_list:
     path:   /location
     defaults: { _controller: "CaravaneEstateBundle:Estate:rentList" }
+
+caravane_estate_frontend_estate_sale_list:
+    path:   /sale
+    defaults: { _controller: "CaravaneEstateBundle:Estate:saleList" }
+
+caravane_estate_frontend_estate_rent_list:
+    path:   /rent
+    defaults: { _controller: "CaravaneEstateBundle:Estate:rentList" }
+
+
 
 caravane_estate_frontend_estate_new_list:
     path:   /vente/bien-neuf

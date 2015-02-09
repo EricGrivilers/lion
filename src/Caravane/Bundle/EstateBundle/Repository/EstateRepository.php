@@ -84,14 +84,14 @@ class EstateRepository extends EntityRepository
 			->setParameter('type', $datas['location']);
 
 		if(isset($datas['category'])) {
-			$category=implode(",",$datas['category']);
+			//$category=implode(",",$datas['category']);
 			$query->andWhere('C.category IN (:category)')
-					->setParameter('category', $category);
+			->setParameter('category', $datas['category']);
 		}
 		if(isset($datas['zone'])) {
-			$zone=implode(",",$datas['zone']);
+			//$zone=implode(",",$datas['zone']);
 			$query->andWhere('C.zone IN (:zone)')
-					->setParameter('zone', $zone);
+					->setParameter('zone', $datas['zone']);
 		}
 		if(isset($datas['around'])) {
 			if($datas['around']=='') {
@@ -135,12 +135,12 @@ class EstateRepository extends EntityRepository
 		}
 		else if(isset($datas['area'])) {
 			$query->andWhere('C.area =:area')
-				->setParameter('area', $datas['area']);
+			->setParameter('area', $datas['area']);
 		}
 
 		if(isset($datas['keyword'])) {
 			if($datas['keyword']!="") {
-				$query->andWhere('C.description LIKE :keyword')
+				$query->andWhere('C.description LIKE :keyword OR C.summary LIKE :keyword')
 					->setParameter('keyword', "%".$datas['keyword']."%");
 			}
 		}

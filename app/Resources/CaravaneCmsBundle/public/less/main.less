@@ -180,14 +180,18 @@ footer .phone a {
 
 
 .marker_label {
-        color: @color_red;
-        background-color: white;
+  color: @color_red;
+  background-color: white;
 
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
-        width: 25px;
-        border: 1px solid #cccccc;
-        white-space: nowrap;
-      }
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  width: 25px;
+  border: 1px solid #cccccc;
+  white-space: nowrap;
+}
 
+
+.required:after {
+    content: "*";
+}

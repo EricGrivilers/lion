@@ -76,18 +76,20 @@ class DefaultController extends Controller
                 new NotBlank()
             )
         ))
-        ->add('address','text',array("label"=>"Adresse"))
-        ->add('zip','text',array("label"=>"Code postal"))
-        ->add('city','text',array("label"=>"Ville"))
+        ->add('address','text',array("label"=>"Adresse","required"=>false))
+        ->add('zip','text',array("label"=>"Code postal","required"=>false))
+        ->add('city','text',array("label"=>"Ville", "required"=>false))
         ->add('country','country',array(
+            "required"=>false,
             "label"=>"Pays",
             "data"=>"BE",
             'preferred_choices' => array('BE','FR','NL','GB','IT','ES','DE','LU','PT','CH','MC','US','CA','IE','GR','AT'),
         ))
         ->add('location','text',array(
+            "required"=>false,
             "label"=>"Pour une demande d'estimation, veuillez préciser la localisation du bien :"
         ))
-        ->add('comments','textarea',array("label"=>"Message"))
+        ->add('comments','textarea',array("label"=>"Message","required"=>false))
         ->getForm();
         $form->add('submit', 'submit', array('label' => 'Envoyer','attr'=>array('class'=>'form-control btn-red')));
          //   $form->setMethod('GET');
