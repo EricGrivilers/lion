@@ -107,7 +107,7 @@ function initializeSearchMap() {
 
 
 
-
+	var hashReference='';
 	$(document).ready(function() {
 			$(".ellipsis").dotdotdot({
 			//	configuration goes here
@@ -170,6 +170,13 @@ function initializeSearchMap() {
 			});
 		});
 
+		if(parseInt(document.location.hash.replace("#",""))>0) {
+			hashReference=document.location.hash.replace("#","");
+			if(estateIsListed(hashReference) ==false) {
+				$('#nextEstate').click();
+			}
+		}
+
 	});
 
 	$('#estate_last_updated').on('slid.bs.carousel', function () {
@@ -208,6 +215,11 @@ function initializeSearchMap() {
 		            html=$(data).find('.list:last')
 		            $('.list:last').append(html.html());
 		            prepareLinks();
+		            if(data!="end" && hashReference>0) {
+						if(estateIsListed(hashReference) ==false) {
+							$('#nextEstate').click();
+						}
+					}
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -232,6 +244,7 @@ function initializeSearchMap() {
 
 
 			$('.row.detail').remove();
+			reference=$(this).attr('data-reference');
 			e.preventDefault();
 			e.stopPropagation();
 			list=$(this).closest('.list');
@@ -251,7 +264,7 @@ function initializeSearchMap() {
 				}
 				lastElement=list.find("div.estate:eq('"+newIndex+"')");
 			}
-			document.location.hash=$(this).attr('href');
+			document.location.hash=reference;
 			$.ajax(
 		    		{
 		        url : $(this).attr('href'),
@@ -295,6 +308,7 @@ function initializeSearchMap() {
 		            $('html, body').animate({
 				        scrollTop: $("div#detail").offset().top - 40
 				    }, 1000);
+
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -305,6 +319,15 @@ function initializeSearchMap() {
 		});
 	}
 
+	function estateIsListed(reference) {
+		if($('a.estate[data-reference="'+hashReference+'"]').length>0) {
+
+			$('a.estate[data-reference="'+hashReference+'"]').click();
+			hashReference='';
+			return true;
+		}
+		return false;
+	}
 
 
 $.fn.scrollTo = function( target, options, callback ){

@@ -37,6 +37,7 @@ class SearchType extends AbstractType
 
         $builder
             ->add('prix','choice', array(
+                "required"=>false,
                 "label"=>false,
                 "expanded"=>true,
                 "multiple"=>true,
@@ -47,6 +48,7 @@ class SearchType extends AbstractType
                 )
             ))
             ->add('area',"entity",array(
+
                 "label"=>false,
                 'required' => false,
                 "empty_value" => 'Quartier',
@@ -68,6 +70,7 @@ class SearchType extends AbstractType
                 )
             ))
             ->add("rayon","choice",array(
+                "required"=>false,
                 "label"=>false,
                 "empty_value" => 'Rayon',
                 "choices"=>array(
@@ -81,18 +84,21 @@ class SearchType extends AbstractType
             ))
 
             ->add('reference',"text",array(
+                "required"=>false,
                 "attr"=>array(
                     "placeholder"=>"Reference"
                 )
             ))
 
             ->add('address',"text",array(
+                "required"=>false,
                 "attr"=>array(
                     "placeholder"=>"Adresse"
                 )
             ))
 
             ->add('category','entity', array(
+                "required"=>false,
                 "label"=>false,
                 "expanded"=>true,
                 "multiple"=>true,
@@ -102,9 +108,12 @@ class SearchType extends AbstractType
                     "data-toggle"=>"buttons"
                 )
             ))
-            ->add('location','hidden')
+            ->add('location','hidden',array(
+                "required"=>false,
+            ))
 
              ->add('isNewBuilding',($this->type!='rent'?'checkbox':'hidden'),array(
+                "required"=>false,
                 "label"=>"Biens neufs uniquement",
                 "data"=>($this->type=='new'?true:false),
                 "attr"=>array(
@@ -112,21 +121,27 @@ class SearchType extends AbstractType
                 )
             ))
              ->add('type','hidden',array(
+                "required"=>false,
                 "data"=>$this->type))
             ->add('keyword','text',array(
+                "required"=>false,
                 "attr"=>array(
                     "placeholder"=>"Mot clef (ex.: Molière, piscine)"
                 )
             ))
             ->add('offset','hidden',array(
+                "required"=>false,
                 "data"=>0))
             ->add('limit','hidden',array(
+                "required"=>false,
                 "data"=>24,
             ))
             ->add('latlng','hidden',array(
+                "required"=>false,
                 "data"=>null,
             ))
             ->add('sort','choice',array(
+                "required"=>false,
                 "label"=>false,
                 //"empty_value" => 'Ordonner les résultats par',
                 'preferred_choices' => array('prix asc'),
@@ -137,8 +152,14 @@ class SearchType extends AbstractType
                     "updatedOn desc"=>"Nouveautés",
                 )
             ))
-            ->add('around','hidden')
-            ->add('save','hidden')
+            ->add('around','hidden',array(
+                "required"=>false
+            ))
+            ->add('save','checkbox', array(
+                "label"=>"Sauvegarder ma recherche",
+                'data' => false,
+                "required"=>false
+            ))
         ;
     }
 

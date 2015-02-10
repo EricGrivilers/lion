@@ -53,6 +53,8 @@
 			<ul>
 				{% if estate.ondemand==false %}
 					<li><label>{{"Prix"|trans}}:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
+				{% else %}
+					<li><label>{{"Prix sur demande"|trans}}</label></li>
 				{% endif %}
 				<li><label>{{"Reférence du bien"|trans}}:</label> {{estate.reference}}</li>
 				{% if estate.surface %}<li><label>{{"Supérficie"|trans}}:</label> {{estate.surface}} <label>m2</label></li>{% endif %}
@@ -76,6 +78,39 @@
 				<div id="text">{{estate.description|raw }}</div>
 			{% endif %}
 		</div>
+
+		<div style="text-align: center; margin-top:20px" class="social">
+
+			
+
+
+
+
+
+			<!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
+			<div class="g-plusone" data-size="medium" data-href="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}" data-width="20"></div>
+
+
+
+
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}" data-text="{{estate.category.name|trans}} - {{estate.locfr}}" data-via="ImmoLelIon" data-hashtags="{{estate.locfr}} {{estate.category.name}}">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+
+
+			<a id="pin-it-button" href="//fr.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"  data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" data-pin-target="_blank" /></a>
+			<!-- Please call pinit.js only once per page -->
+			<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js" data-pin-build="parsePinBtns"></script>
+
+
+
+			<div class="fb-like" data-href="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}" data-width="1" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+
+			{#<a class="fa fa-facebook" href="http://www.facebook.com/plugins/like.php?href={{ app.request.getSchemeAndHttpHost() }}%2Fvente%2F{{estate.reference}}&width=1&layout=button_count&action=like&show_faces=true&share=false&height=21&appId=384315421726673" target="_blank"></a>
+			<a class="fa fa-twitter" href="http://twitter.com/" target="_blank" ></a>#}
+		</div>
+
 	</div>
 	<div class="col-md-3">
 		<div >
@@ -91,37 +126,7 @@
 			<a class="btn btn-primary btn-block" target="_blank" href="{{url("caravane_estate_frontend_estate_print", {'reference':estate.shortReference})}}"><span class="fa fa-print"></span> {{"Imprimer la fich"|trans}}</a>
 		</div>
 
-		<div style="text-align: center; margin-top:20px" class="social">
-
-			<div class="fb-like" data-href="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}" data-width="1" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
-
-
-
-
-
-			<!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
-			<div class="g-plusone" data-size="medium" data-href="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}"></div>
-
-
-
-
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="{{ app.request.getSchemeAndHttpHost() }}/vente/{{estate.reference}}" data-text="{{estate.category.name|trans}} - {{estate.locfr}}" data-via="ImmoLelIon" data-hashtags="{{estate.locfr}} {{estate.category.name}}">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-
-
-
-
-			<a id="pin-it-button" href="//fr.pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"  data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
-			<!-- Please call pinit.js only once per page -->
-			<script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js" data-pin-build="parsePinBtns"></script>
-
-
-
-
-
-			{#<a class="fa fa-facebook" href="http://www.facebook.com/plugins/like.php?href={{ app.request.getSchemeAndHttpHost() }}%2Fvente%2F{{estate.reference}}&width=1&layout=button_count&action=like&show_faces=true&share=false&height=21&appId=384315421726673" target="_blank"></a>
-			<a class="fa fa-twitter" href="http://twitter.com/" target="_blank" ></a>#}
-		</div>
+		
 	</div>
 </div>
 {% if estate.area.LatLng is defined %}

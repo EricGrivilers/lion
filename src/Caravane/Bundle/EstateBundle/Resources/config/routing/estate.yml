@@ -85,6 +85,10 @@ caravane_estate_frontend_estate_print:
     path:   /print/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:print" }
 
+caravane_estate_frontend_estate_new_list:
+    path:   /vente/bien-neuf
+    defaults: { _controller: "CaravaneEstateBundle:Estate:newList" }
+
 caravane_estate_frontend_estate_sale_show:
     path:   /vente/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:saleView" }
@@ -119,9 +123,7 @@ caravane_estate_frontend_estate_rent_list:
 
 
 
-caravane_estate_frontend_estate_new_list:
-    path:   /vente/bien-neuf
-    defaults: { _controller: "CaravaneEstateBundle:Estate:newList" }
+
 
 caravane_estate_frontend_estate_detail:
     path:   /estate/detail/{id}

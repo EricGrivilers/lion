@@ -49,6 +49,13 @@ class Category
      */
     private $typeEn = '';
 
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
+
 
     public function __toString() {
         return $this->name;
@@ -109,5 +116,10 @@ class Category
     public function getTypeEn()
     {
         return $this->typeEn;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

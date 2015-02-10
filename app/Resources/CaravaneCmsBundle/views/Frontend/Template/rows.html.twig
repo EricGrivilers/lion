@@ -1,7 +1,7 @@
 {% for estate in estates %}
 	<div class="col-xs-12 col-sm-6 col-md-3 estate">
 		<div class="frame">
-			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate" rel="{{estate.id}}">
+			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate" rel="{{estate.id}}" data-reference="{{estate.shortReference}}">
 				<article >
 					<div class="container-inner">
 						<div class="">
@@ -18,7 +18,7 @@
 							<header>
 								<div class="bg"></div>
 								<div class="text">
-									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":''}}</h2>
+									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":'Prix sur demande'|trans}}</h2>
 									<p>{{estate.summary|raw }} </p>
 								</div>
 							</header>

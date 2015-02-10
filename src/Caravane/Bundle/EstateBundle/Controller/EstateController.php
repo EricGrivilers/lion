@@ -203,6 +203,7 @@ class EstateController extends Controller
 			$em->persist($categoryMaison);
 			$em->flush();
 		}
+
 		$this->categoryMaison=$categoryMaison;
 
 		if(!$categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement')) {
@@ -659,6 +660,11 @@ class EstateController extends Controller
 
 
 */
+
+
+
+
+
 		$dql   = "SELECT E FROM CaravaneEstateBundle:Estate E";
 		$query = $em->createQuery($dql);
 
@@ -954,19 +960,37 @@ class EstateController extends Controller
 			$search_form=$this->searchForm($request, $type);
 			$em = $this->getDoctrine()->getManager();
 			if(isset($datas['reference'])) {
-					if($datas['reference']!="") {
-							return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
-					}
+				if($datas['reference']!="") {
+					return $this->redirect($this->generateUrl('caravane_estate_frontend_estate_'.$type.'_show',array('reference'=>$datas['reference'])));
+				}
 			}
 
 			if($user=$this->getUser()) {
-					if($contact=$user->getContact()) {
+				if($contact=$user->getContact()) {
+					if(isset($datas['save'])) {
+						if($datas['save']!=false) {
 							$contact->setLastSearch(json_encode($datas));
 							$em->persist($contact);
 							$em->flush();
+						}
 					}
+				}
 			}
 
+			if(isset($datas['address'])) {
+				$geocoder = $this->get('ivory_google_map.geocoder');
+				$response = $geocoder->geocode($datas['address'].", Belgique");
+
+				foreach($response->getResults() as $result)
+				{
+					if($location=$result->getGeometry()->getLocation()) {
+						$lat=$location->getLatitude();
+						$lng=$location->getLongitude();
+						$datas['latlng']=$lat.",".$lng;
+					}
+
+				}
+			}
 
 
 			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
@@ -1079,12 +1103,12 @@ class EstateController extends Controller
 			$em = $this->getDoctrine()->getManager();
 			//$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findBy(array("location"=>0,"status"=>true));
 
-			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('isNew'=>1));
+			$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas, array('isNewBuilding'=>1, 'location'=>0));
 			if(count($estates)<=0 && $request->isXmlHttpRequest()) {
 					return new Response('end');
 			}
 
-			$search_form=$this->searchForm($request, "sale");
+			$search_form=$this->searchForm($request, "new");
 			return $this->render('CaravaneEstateBundle:Frontend:list.html.twig', array(
 					'estates'      => $estates,
 					'type'=>'new',
@@ -1187,16 +1211,16 @@ class EstateController extends Controller
 
 				$options=array('prices'=>$prices,'type'=>$type);
 				if($type=='rent') {
-						$options['location']=1;
+					$options['location']=1;
 
 				}
 				else {
-						$options['location']=0;
+					$options['location']=0;
 				}
 				$options['isNewBuilding']=0;
-				 if($type=='new') {
-						$options['isNewBuilding']=1;
-						$options['location']=0;
+				if($type=='new') {
+					$options['isNewBuilding']=1;
+					$options['location']=0;
 				}
 
 

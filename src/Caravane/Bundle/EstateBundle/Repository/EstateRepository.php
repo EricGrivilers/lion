@@ -54,7 +54,6 @@ class EstateRepository extends EntityRepository
 
 		$datas=array_merge_recursive($postDatas, $options);
 
-
 		$type=($datas['location']==1?'rent':'sale');
 		if($datas['location']!=1) {
 			$datas['location']=0;
@@ -124,12 +123,18 @@ class EstateRepository extends EntityRepository
 		}
 		else if(isset($datas['address'])) {
 			if(isset($datas['latlng'])) {
+				if(!isset($datas['rayon'])) {
+					$datas['rayon']=0.5;
+				}
+				if($datas['rayon']<=0) {
+					$datas['rayon']=0.5;
+				}
 				$latlng=explode(",", $datas['latlng']);
-			$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
+				$query->andWhere('GEO(C.lat = :latitude, C.lng = :longitude)<=:distance')
 				//->having('distance < :distance')
                 ->setParameter('latitude', $latlng[0])
                 ->setParameter('longitude', $latlng[1])
-                ->setParameter('distance', 0.5);
+                ->setParameter('distance', $datas['rayon']);
 			}
 
 		}
@@ -186,6 +191,11 @@ class EstateRepository extends EntityRepository
 		$query->setMaxResults($datas['limit']);
 		if(!isset($datas['sort'])) {
 			$datas['sort']="updatedOn desc";
+		}
+		else {
+			if($datas['sort']=='') {
+				$datas['sort']="updatedOn desc";
+			}
 		}
 		$sort=explode(" ",$datas['sort']);
 		$query->orderBy("C.".$sort[0],$sort[1]);

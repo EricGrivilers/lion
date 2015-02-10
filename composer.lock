@@ -59,17 +59,17 @@
         },
         {
             "name": "bmatzner/fontawesome-bundle",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "target-dir": "Bmatzner/FontAwesomeBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bmatzner/BmatznerFontAwesomeBundle.git",
-                "reference": "c7f5e1632dea03c2043acff9a71e320282dd9918"
+                "reference": "8077deca421d26992f75c01e09bcc088d3b4d00d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bmatzner/BmatznerFontAwesomeBundle/zipball/c7f5e1632dea03c2043acff9a71e320282dd9918",
-                "reference": "c7f5e1632dea03c2043acff9a71e320282dd9918",
+                "url": "https://api.github.com/repos/bmatzner/BmatznerFontAwesomeBundle/zipball/8077deca421d26992f75c01e09bcc088d3b4d00d",
+                "reference": "8077deca421d26992f75c01e09bcc088d3b4d00d",
                 "shasum": ""
             },
             "require": {
@@ -102,7 +102,7 @@
                 "typography",
                 "webfonts"
             ],
-            "time": "2014-09-24 19:27:27"
+            "time": "2015-02-08 11:55:29"
         },
         {
             "name": "braincrafted/bootstrap-bundle",
@@ -3147,12 +3147,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/richsage/RMSPushNotificationsBundle.git",
-                "reference": "757b951a137f1af74ae5f51e542cf2f0aeb66fe2"
+                "reference": "afc843c8cb8df1cdd463e9b1d12dfbccbe491e76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/richsage/RMSPushNotificationsBundle/zipball/757b951a137f1af74ae5f51e542cf2f0aeb66fe2",
-                "reference": "757b951a137f1af74ae5f51e542cf2f0aeb66fe2",
+                "url": "https://api.github.com/repos/richsage/RMSPushNotificationsBundle/zipball/afc843c8cb8df1cdd463e9b1d12dfbccbe491e76",
+                "reference": "afc843c8cb8df1cdd463e9b1d12dfbccbe491e76",
                 "shasum": ""
             },
             "require": {
@@ -3196,7 +3196,7 @@
                 "push",
                 "windowsphone"
             ],
-            "time": "2015-01-02 14:27:34"
+            "time": "2015-02-04 17:27:34"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -3859,12 +3859,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "a0a00b25eee4a86f236c935c3b60976f537cbb07"
+                "reference": "81115cd089c452b3a69bbbec39ffd4a70dda3b2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a0a00b25eee4a86f236c935c3b60976f537cbb07",
-                "reference": "a0a00b25eee4a86f236c935c3b60976f537cbb07",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/81115cd089c452b3a69bbbec39ffd4a70dda3b2d",
+                "reference": "81115cd089c452b3a69bbbec39ffd4a70dda3b2d",
                 "shasum": ""
             },
             "replace": {
@@ -3902,7 +3902,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2015-01-30 16:07:53"
+            "time": "2015-02-10 08:50:57"
         },
         {
             "name": "twig/extensions",

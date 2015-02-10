@@ -80,7 +80,19 @@ doctrine:
             numeric_functions:
                 geo: Caravane\Bundle\EstateBundle\AST\Functions\Geo
         mappings:
-            StofDoctrineExtensionsBundle: ~
+            #StofDoctrineExtensionsBundle: ~
+            translatable:
+                type: annotation
+                alias: Gedmo
+                prefix: Gedmo\Translatable\Entity
+                # make sure vendor library location is correct
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+
+
+stof_doctrine_extensions:
+    default_locale: "%locale%"
+    translation_fallback: true
+    persist_default_translation: true
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -339,7 +351,6 @@ ivory_google_map:
 knp_paginator:
     template:
         pagination: "KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig"
-
 
 ensepar_html2pdf:
     orientation: P
