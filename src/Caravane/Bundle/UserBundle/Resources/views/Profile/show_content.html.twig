@@ -23,7 +23,7 @@
 											<p>{{estate.summary|raw }} </p>
 										</div>
 									</header>
-									<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+									<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name is defined? estate.category.name:''}} {{estate.locfr}}"  />
 								</div>
 							</div>
 						</article>
@@ -62,7 +62,7 @@
 											<p>{{estate.summary|raw }} </p>
 										</div>
 									</header>
-									<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+									<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name is defined?estate.category.name:''}} {{estate.locfr}}"  />
 								</div>
 							</div>
 						</article>

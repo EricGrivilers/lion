@@ -16,16 +16,16 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('language', 'choice', array(
+                "required"=>false,
                 'choices'=>array('en'=>"English",'fr'=>"Français",'nl'=>"Nederlands")
             ))
             ->add('salutation',"choice",array(
+                "required"=>false,
                 "choices"=>array(
                     "M"=>"M","Mme"=>"Mme","Mlle"=>"Mlle"
                 )
             ))
-            ->add('firstname','text',array(
-                "label"=>$trans->translate("First name")
-            ))
+            ->add('firstname')
             ->add('lastname')
             ->add('tel')
             ->add('zip')
