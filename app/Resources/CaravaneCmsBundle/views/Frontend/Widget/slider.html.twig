@@ -1,118 +1,36 @@
-		<div class='wrapper top-slider ' id="home_slider">
+<div class='wrapper top-slider ' id="home_slider">
 
-			<div class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			  	{% for i in 1..3 %}
-			    <li data-target="#carousel-example-generic" data-slide-to="{{loop.index-1}}" class="{{loop.index==1?'active':''}}"></li>
-			    {% endfor %}
-			  </ol>
+	<div class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+		<ol class="carousel-indicators">
+			{% for slide in slides %}
+				<li data-target="#carousel-example-generic" data-slide-to="{{loop.index-1}}" class="{{loop.index==1?'active':''}}"></li>
+			{% endfor %}
+		</ol>
 
-			  <!-- Wrapper for slides -->
-			  <div class="carousel-inner" style="overflow: hidden">
-			  	{% for i in 1..3 %}
-			  	{% if is_mobile() %}
-					    {% set pict = asset(('/medias/home/'~i~'.jpg') |  imagine_filter('home_site_375')) %}
-					{% elseif is_tablet() %}
-					    {% set pict = asset(('/medias/home/'~i~'.jpg') |  imagine_filter('home_site_414')) %}
-					{% else  %}
-					    {% set pict = asset(('/medias/home/'~i~'.jpg') |  imagine_filter('home_site_1024')) %}
-					{% endif %}
-			    <div class="item {{loop.index==1?'active':''}}" style="text-align: center">
-			    	<div class="img" style="background-image: url({{pict}})"  alt="slide{{i}}"></div>
-			    </div>
-			    {% endfor %}
-			  </div>
-{#}
-			  <!-- Controls -->
-			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left"></span>
-			  </a>
-			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right"></span>
-			  </a>
-			  #}
-			</div>
-
-
-
-
-
-{#}
-
-			<div id="rev_slider_1_2_wrapper" class="rev_slider_wrapper fullwidthbanner-container" style="margin:0px auto;background-color:#E9E9E9;padding:0px;margin-top:0px;margin-bottom:0px;max-height:450px;">
-							<div id="rev_slider_1_2" class="rev_slider fullwidthabanner" style="display:none;max-height:450px;height:450px;">
-								<ul>	<!-- SLIDE  -->
-								<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-									<!-- MAIN IMAGE -->
-									<img src="{{asset('/medias/home/1.jpg')}}"  alt="slide11"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-									<!-- LAYERS -->
-									<!-- LAYER NR. 1 -->
-									<div class="tp-caption transp_bg lfl"
-										data-x="405"
-										data-y="70"
-										data-speed="500"
-										data-start="500"
-										data-easing="easeOutExpo"
-										data-splitin="none"
-										data-splitout="none"
-										data-elementdelay="0"
-										data-endelementdelay="0"
-										data-end="8700"
-										data-endspeed="300"
-										style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>standing</b><br> & nature</h2>
-										<p>Waterloo</p>
-									</div>
-								</li>
-								<!-- SLIDE  -->
-								<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-									<!-- MAIN IMAGE -->
-									<img src="{{asset('/medias/home/2.jpg')}}"  alt="slide2_compressed-1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-									<!-- LAYERS -->
-									<!-- LAYER NR. 1 -->
-									<div class="tp-caption transp_bg lfl"
-										data-x="780"
-										data-y="135"
-										data-speed="500"
-										data-start="500"
-										data-easing="easeOutExpo"
-										data-splitin="none"
-										data-splitout="none"
-										data-elementdelay="0"
-										data-endelementdelay="0"
-										data-end="8700"
-										data-endspeed="300"
-										style="z-index: 2; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>LUXE</b><br>& tradition</h2>
-										<p>Ixelles</p>
-									</div>
-								</li>
-								<!-- SLIDE  -->
-								<li data-transition="fade" data-slotamount="7" data-masterspeed="300"  data-saveperformance="off" >
-									<!-- MAIN IMAGE -->
-									<img src="{{asset('/medias/home/3.jpg')}}"  alt="slide41"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
-									<!-- LAYERS -->
-									<!-- LAYER NR. 1 -->
-									<div class="tp-caption transp_bg lfl"
-										data-x="0"
-										data-y="128"
-										data-speed="500"
-										data-start="500"
-										data-easing="easeOutExpo"
-										data-splitin="none"
-										data-splitout="none"
-										data-elementdelay="0"
-										data-endelementdelay="0"
-										data-end="8700"
-										data-endspeed="300"
-										style="z-index: 4; max-width: auto; max-height: auto; white-space: nowrap;"><h2><b>moderne</b><br>& chaleureux</h2>
-										<p>Uccle</p>
-									</div>
-									<!-- LAYER NR. 4 -->
-								</li>
-							</ul>
-							<div class="tp-bannertimer"></div>	</div>
-						</div>
-#}
-
-						<!-- END REVOLUTION SLIDER -->
-					</div>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner" style="overflow: hidden">
+			{% for slide in slides %}
+				{% if is_mobile() %}
+					{% set pict = asset(('/photos/slide/'~slide.photo) |  imagine_filter('home_site_375')) %}
+				{% elseif is_tablet() %}
+					{% set pict = asset(('/photos/slide/'~slide.photo) |  imagine_filter('home_site_414')) %}
+				{% else  %}
+					{% set pict = asset(('/photos/slide/'~slide.photo) |  imagine_filter('home_site_1024')) %}
+				{% endif %}
+				<div class="item {{loop.index==1?'active':''}}" style="text-align: center">
+					<div class="img" style="background-image: url({{pict}})"  alt="slide{{loop.index}}"></div>
+				</div>
+			{% endfor %}
+		</div>
+		{#}
+		<!-- Controls -->
+		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		#}
+	</div>
+</div>

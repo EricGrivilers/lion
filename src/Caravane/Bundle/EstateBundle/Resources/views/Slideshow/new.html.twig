@@ -1,0 +1,19 @@
+{% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
+
+{% block body -%}
+    <h1>Slide</h1>
+
+    <div class="alert alert-info">
+    	<p>Image format : 1000px x 455px (min)</p>
+
+    </div>
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('slideshow') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

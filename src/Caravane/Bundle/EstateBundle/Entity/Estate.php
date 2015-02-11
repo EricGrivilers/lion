@@ -421,6 +421,10 @@ class Estate
      */
     private $user;
 
+
+    public function __toString() {
+        return $this->getShortReference()." " .$this->name;
+    }
     public function setDistance($distance) {
         $this->distance = $distance;
         return $this;

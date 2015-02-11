@@ -46,6 +46,17 @@ class Photo
      */
     private $filename;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $path;
+
+
     /**
      * @var integer
      *

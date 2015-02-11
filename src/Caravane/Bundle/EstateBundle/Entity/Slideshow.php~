@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Slideshow
  *
- * @ORM\Table(name="slideshow", uniqueConstraints={@ORM\UniqueConstraint(name="ranking", columns={"ranking"}), @ORM\UniqueConstraint(name="item_id", columns={"item_id"})})
+ * @ORM\Table(name="slideshow")
  * @ORM\Entity
  */
 class Slideshow
@@ -22,11 +22,20 @@ class Slideshow
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="item_id", type="integer", nullable=false)
+     * @ORM\OneToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Estate")
      */
-    private $itemId;
+    private $estate;
+
+    /**
+     * @ORM\OneToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo")
+     */
+    private $photo;
+
+    /**
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    private $content;
+
 
     /**
      * @var integer
@@ -34,6 +43,7 @@ class Slideshow
      * @ORM\Column(name="ranking", type="integer", nullable=false)
      */
     private $ranking;
+
 
 
 
@@ -48,26 +58,26 @@ class Slideshow
     }
 
     /**
-     * Set itemId
+     * Set content
      *
-     * @param integer $itemId
+     * @param string $content
      * @return Slideshow
      */
-    public function setItemId($itemId)
+    public function setContent($content)
     {
-        $this->itemId = $itemId;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get itemId
+     * Get content
      *
-     * @return integer 
+     * @return string 
      */
-    public function getItemId()
+    public function getContent()
     {
-        return $this->itemId;
+        return $this->content;
     }
 
     /**
@@ -91,5 +101,51 @@ class Slideshow
     public function getRanking()
     {
         return $this->ranking;
+    }
+
+    /**
+     * Set estate
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Estate $estate
+     * @return Slideshow
+     */
+    public function setEstate(\Caravane\Bundle\EstateBundle\Entity\Estate $estate = null)
+    {
+        $this->estate = $estate;
+
+        return $this;
+    }
+
+    /**
+     * Get estate
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Estate 
+     */
+    public function getEstate()
+    {
+        return $this->estate;
+    }
+
+    /**
+     * Set photo
+     *
+     * @param \Caravane\Bundle\EstateBundle\Entity\Photo $photo
+     * @return Slideshow
+     */
+    public function setPhoto(\Caravane\Bundle\EstateBundle\Entity\Photo $photo = null)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return \Caravane\Bundle\EstateBundle\Entity\Photo 
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
     }
 }

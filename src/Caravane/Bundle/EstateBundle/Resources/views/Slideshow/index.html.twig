@@ -1,0 +1,39 @@
+{% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
+
+{% block body -%}
+
+    <table class="table table-bordered table-condensed table-striped records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th style="width:80px" ></th>
+                {#<th>Content</th>#}
+                {#<th>Ranking</th>#}
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('slideshow_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                 <td>
+                    <img src="{{asset(('/photos/slide/'~entity.photo) |  imagine_filter('thumbnail_320'))}}" style="width:80px; height: auto" /> </td>
+                {#<td>{{ entity.content }}</td>#}
+                {#<td>{{ entity.ranking }}</td>#}
+                <td>
+                <a href="{{ path('slideshow_edit', { 'id': entity.id }) }}"><span class="fa fa-edit"></span></a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('slideshow_new') }}" class="btn">
+                Nouveau slide
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

@@ -1,3 +1,7 @@
+caravane_estate_slideshow:
+    resource: "@CaravaneEstateBundle/Resources/config/routing/slideshow.yml"
+    prefix:   /
+
 caravane_estate_admin_estate:
     resource: "@CaravaneEstateBundle/Resources/config/routing/estate.yml"
     prefix:   /

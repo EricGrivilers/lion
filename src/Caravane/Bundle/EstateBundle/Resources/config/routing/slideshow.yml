@@ -1,0 +1,35 @@
+slideshow:
+    path:     /admin/slideshow/
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:index" }
+
+slideshow_show:
+    path:     /admin/slideshow/{id}/show
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:show" }
+
+slideshow_new:
+    path:     /admin/slideshow/new
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:new" }
+
+slideshow_create:
+    path:     /admin/slideshow/create
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:create" }
+    requirements: { _method: post }
+
+slideshow_edit:
+    path:     /admin/slideshow/{id}/edit
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:edit" }
+
+slideshow_update:
+    path:     /admin/slideshow/{id}/update
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:update" }
+    requirements: { _method: post|put }
+
+slideshow_delete:
+    path:     /admin/slideshow/{id}/delete
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:delete" }
+    requirements: { _method: post|delete }
+
+
+slideshow_render:
+    path:     /slideshow/render
+    defaults: { _controller: "CaravaneEstateBundle:Slideshow:render" }

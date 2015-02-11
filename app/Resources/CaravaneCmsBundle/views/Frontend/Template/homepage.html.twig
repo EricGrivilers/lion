@@ -4,8 +4,8 @@
 {% block header %}
 	<header class='page-header '>
 		{#    SLIDE SHOW  #}
-		{% include "CaravaneCmsBundle:Frontend:Widget/slider.html.twig" %}
-
+		{#% include "CaravaneCmsBundle:Frontend:Widget/slider.html.twig" %#}
+		{{ render(controller('CaravaneEstateBundle:Slideshow:render' )) }}
 
 
 		{#    MAIN MENU + SEARCH  #}
