@@ -97,9 +97,9 @@ class EstateController extends Controller
 		$t=$request->query->get('t');
 		//$t=p,V,L
 		$em = $this->getDoctrine()->getManager();
-		if($request->query->get('setup')==true) {
+		//if($request->query->get('setup')==true) {
 			$this->setup();
-		}
+		//}
 		$rs = curl_init();
 		curl_setopt($rs,CURLOPT_HEADER,0);
 		curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
@@ -204,6 +204,7 @@ class EstateController extends Controller
 			$em->persist($categoryMaison);
 			$em->flush();
 		}
+		/*
 		$categoryMaison->setTranslatableLocale('en');
 		$em->refresh($categoryMaison);
 
@@ -215,7 +216,7 @@ class EstateController extends Controller
 		}
 		$categoryMaison->setTranslatableLocale('fr');
 		$em->refresh($categoryMaison);
-
+*/
 		$this->categoryMaison=$categoryMaison;
 
 		if(!$categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement')) {
@@ -224,6 +225,7 @@ class EstateController extends Controller
 			$em->persist($categoryAppartement);
 			$em->flush();
 		}
+		/*
 		$categoryAppartement->setTranslatableLocale('en');
 		$em->refresh($categoryAppartement);
 
@@ -235,7 +237,7 @@ class EstateController extends Controller
 		}
 		$categoryAppartement->setTranslatableLocale('fr');
 		$em->refresh($categoryAppartement);
-
+*/
 		$this->categoryAppartement = $categoryAppartement;
 
 		if(!$categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre')) {
@@ -244,7 +246,7 @@ class EstateController extends Controller
 			$em->persist($categoryAutre);
 			$em->flush();
 		}
-
+/*
 		$categoryAutre->setTranslatableLocale('en');
 		$em->refresh($categoryAutre);
 
@@ -256,7 +258,7 @@ class EstateController extends Controller
 		}
 		$categoryAutre->setTranslatableLocale('fr');
 		$em->refresh($categoryAutre);
-
+*/
 
 		$this->categoryAutre = $categoryAutre;
 
@@ -266,7 +268,7 @@ class EstateController extends Controller
 			$em->persist($zone1);
 			$em->flush();
 		}
-
+/*
 		$zone1->setTranslatableLocale('en');
 		$em->refresh($zone1);
 
@@ -279,7 +281,7 @@ class EstateController extends Controller
 		$zone1->setTranslatableLocale('fr');
 		$em->refresh($zone1);
 
-
+*/
 		$this->zone1 = $zone1;
 
 		if(!$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2)) {
@@ -288,7 +290,7 @@ class EstateController extends Controller
 			$em->persist($zone2);
 			$em->flush();
 		}
-
+/*
 		$zone2->setTranslatableLocale('en');
 		$em->refresh($zone2);
 
@@ -300,7 +302,7 @@ class EstateController extends Controller
 		}
 		$zone2->setTranslatableLocale('fr');
 		$em->refresh($zone2);
-
+*/
 		$this->zone2 = $zone2;
 
 		if(!$zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3)) {
@@ -309,7 +311,7 @@ class EstateController extends Controller
 			$em->persist($zone3);
 			$em->flush();
 		}
-
+/*
 		$zone3->setTranslatableLocale('en');
 		$em->refresh($zone3);
 
@@ -321,7 +323,7 @@ class EstateController extends Controller
 		}
 		$zone3->setTranslatableLocale('fr');
 		$em->refresh($zone3);
-
+*/
 
 		$this->zone3 = $zone3;
 
@@ -331,7 +333,7 @@ class EstateController extends Controller
 			$em->persist($zone4);
 			$em->flush();
 		}
-
+/*
 		$zone4->setTranslatableLocale('en');
 		$em->refresh($zone4);
 
@@ -343,7 +345,7 @@ class EstateController extends Controller
 		}
 		$zone4->setTranslatableLocale('fr');
 		$em->refresh($zone4);
-
+*/
 
 		$this->zone4 = $zone4;
 
