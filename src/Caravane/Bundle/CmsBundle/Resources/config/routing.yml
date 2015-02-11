@@ -1,3 +1,7 @@
+caravane_cms_node:
+    resource: "@CaravaneCmsBundle/Resources/config/routing/node.yml"
+    prefix:   /
+
 caravane_cms_homepage:
     path:     /
     defaults: { _controller: CaravaneCmsBundle:Default:index }

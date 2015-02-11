@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @CaravaneUserBundle/Resources/config/services.yml }
+    - { resource: doctrine_extensions.yml }
 
 framework:
     #esi:             ~
@@ -301,6 +302,8 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - name: twig.extension
+
+
 
 
 lexik_jwt_authentication:

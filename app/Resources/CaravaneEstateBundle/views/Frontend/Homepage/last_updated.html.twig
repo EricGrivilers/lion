@@ -1,7 +1,7 @@
 <aside class='wrapper default-bg'>
 	<div class='container'>
 		<section>
-			<h2 class='title'>{{"NOUVEAUX BIENS"|trans}}
+			<h2 class='title'>{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/new-property'} )) }}
 				{% if estates|length>3 %}
 				<span class="controls">
 					<a class="left carousel-control" href="#estate_last_updated" role="button" data-slide="prev">
@@ -30,7 +30,7 @@
 												{{estate.category.name}} - {{estate.locfr}}
 											<p>
 										</footer>#}
-										<a href="{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}"><img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+										<a href="{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}"><img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium') ) }}" class="img-responsive" alt="{{estate.category.name is defined?estate.category.name:''}} {{estate.locfr}}"  />
 										</a>
 									</div>
 									<div class='estate-body'>
@@ -39,7 +39,7 @@
 										</div>#}
 										<header>
 											<a href='{{path('caravane_estate_frontend_estate_'~(estate.location==1?'rent':'sale')~'_show',{'reference':estate.shortReference})}}'>
-												<h3>{{estate.category.name}} - {{estate.locfr}}</h3>
+												<h3>{{estate.category.name is defined? estate.category.name:''}} - {{estate.locfr}}</h3>
 												<p class="ellipsis">{{estate.summary|raw }} </p>
 											</a>
 										</header>

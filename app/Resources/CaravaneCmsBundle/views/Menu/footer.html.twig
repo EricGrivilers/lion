@@ -26,24 +26,15 @@
 				</div>#}
 				<div class='col-md-4'>
 					<section>
-						<h2>{{"Contact"|trans}}</h2>
+						<h2>{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/contact'} )) }}</h2>
 						<div class="textwidget">
-							<address>
-								<ul class="phone">
-								<li><b class="phone">Tel: <a href="tel:+32 2 672 71 11">+32 2 672 71 11</a></b></li>
-							</ul>
-							<ul class="address">
-								<li>Avenue Delleur 8</li>
-								<li>B-1170 {{"Brussels"|trans}}</li>
-								<li>{{"Belgium"|trans}}</li>
-							</ul>
-							</address>
+							{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/address'} )) }}
 						</div>
 					</section>
 				</div>
 				<div class='col-md-5'>
 					<section>
-						<h2>{{"Suivez-nous"|trans}}</h2>
+						<h2>{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/follow-us'} )) }}</h2>
 						{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
 					</section>
 				</div>

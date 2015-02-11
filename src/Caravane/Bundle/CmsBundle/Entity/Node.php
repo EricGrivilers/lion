@@ -1,9 +1,6 @@
 <?php
 
-namespace Caravane\Bundle\EstateBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-
+namespace Caravane\Bundle\CmsBundle\Entity;
 
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\ExclusionPolicy;
@@ -15,13 +12,17 @@ use JMS\Serializer\Annotation\PreSerialize;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Translatable\Translatable;
 
+
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Category
+ * Node
  *
- * @ORM\Table(name="Category")
+ * @ORM\Table(name="Node")
  * @ORM\Entity
+ * @ExclusionPolicy("all")
  */
-class Category implements Translatable
+class Node implements Translatable
 {
     /**
      * @var integer
@@ -33,23 +34,21 @@ class Category implements Translatable
     private $id;
 
     /**
-     * @var string
+     * @var text
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
      * @Gedmo\Translatable
-     * @Expose
-     * @Groups({"list","detail","search"})
+     * @ORM\Column(name="firstname", type="text", nullable=true)
      */
-    private $name = '';
+    private $content;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="type_en", type="string", length=100, nullable=false)
+     * @ORM\Column(name="uri", type="string", length=255, nullable=false)
      */
-    private $typeEn = '';
+    private $uri;
 
-    /**
+   /**
      * @Gedmo\Locale
      * Used locale to override Translation listener`s locale
      * this is not a mapped field of entity metadata, just a simple property
@@ -58,7 +57,7 @@ class Category implements Translatable
 
 
     public function __toString() {
-        return $this->name;
+        return $this->uri;
     }
 
 
@@ -72,54 +71,56 @@ class Category implements Translatable
         return $this->id;
     }
 
+
     /**
-     * Set name
+     * Set content
      *
-     * @param string $name
-     * @return Category
+     * @param string $content
+     * @return Node
      */
-    public function setName($name)
+    public function setContent($content)
     {
-        $this->name = $name;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get content
      *
      * @return string 
      */
-    public function getName()
+    public function getContent()
     {
-        return $this->name;
+        return $this->content;
     }
 
     /**
-     * Set typeEn
+     * Set uri
      *
-     * @param string $typeEn
-     * @return Category
+     * @param string $uri
+     * @return Node
      */
-    public function setTypeEn($typeEn)
+    public function setUri($uri)
     {
-        $this->typeEn = $typeEn;
+        $this->uri = $uri;
 
         return $this;
     }
 
     /**
-     * Get typeEn
+     * Get uri
      *
      * @return string 
      */
-    public function getTypeEn()
+    public function getUri()
     {
-        return $this->typeEn;
+        return $this->uri;
     }
 
     public function setTranslatableLocale($locale)
     {
         $this->locale = $locale;
     }
+
 }

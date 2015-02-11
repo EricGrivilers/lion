@@ -147,7 +147,6 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="summary", type="text", nullable=false)
-     * @Gedmo\Translatable
      * @Expose
      * @Groups({"list","detail","search"})
      */
@@ -164,7 +163,6 @@ class Estate
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
-     * @Gedmo\Translatable
      * @Expose
      * @Groups({"list","detail","search"})
      */

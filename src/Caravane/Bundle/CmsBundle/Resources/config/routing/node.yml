@@ -1,0 +1,38 @@
+node:
+    path:     /admin/node/
+    defaults: { _controller: "CaravaneCmsBundle:Node:index" }
+
+node_show:
+    path:     /node/{id}/show
+    defaults: { _controller: "CaravaneCmsBundle:Node:show" }
+
+node_new:
+    path:     /admin/node/new
+    defaults: { _controller: "CaravaneCmsBundle:Node:new" }
+
+node_create:
+    path:     /admin/node/create
+    defaults: { _controller: "CaravaneCmsBundle:Node:create" }
+    requirements: { _method: post }
+
+node_edit:
+    path:     /admin/node/{id}/edit
+    defaults: { _controller: "CaravaneCmsBundle:Node:edit" }
+
+node_update:
+    path:     /admin/node/{id}/update
+    defaults: { _controller: "CaravaneCmsBundle:Node:update" }
+    requirements: { _method: post|put }
+
+node_delete:
+    path:     /admin/node/{id}/delete
+    defaults: { _controller: "CaravaneCmsBundle:Node:delete" }
+    requirements: { _method: post|delete }
+
+
+caravane_cms_node_render:
+    defaults:  { _controller: CaravaneCmsBundle:Node:render }
+    #pattern:   /cms/page/{id}
+    pattern: /node/{uri}
+    requirements:
+      uri: ".+"

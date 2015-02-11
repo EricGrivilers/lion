@@ -97,8 +97,9 @@ class EstateController extends Controller
 		$t=$request->query->get('t');
 		//$t=p,V,L
 		$em = $this->getDoctrine()->getManager();
-		$this->setup();
-
+		if($request->query->get('setup')==true) {
+			$this->setup();
+		}
 		$rs = curl_init();
 		curl_setopt($rs,CURLOPT_HEADER,0);
 		curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
@@ -203,6 +204,17 @@ class EstateController extends Controller
 			$em->persist($categoryMaison);
 			$em->flush();
 		}
+		$categoryMaison->setTranslatableLocale('en');
+		$em->refresh($categoryMaison);
+
+		if($categoryMaison->getName()=='') {
+			$categoryMaison->setName('House');
+			$categoryMaison->setTranslatableLocale('en');
+			$em->persist($categoryMaison);
+			$em->flush();
+		}
+		$categoryMaison->setTranslatableLocale('fr');
+		$em->refresh($categoryMaison);
 
 		$this->categoryMaison=$categoryMaison;
 
@@ -212,6 +224,18 @@ class EstateController extends Controller
 			$em->persist($categoryAppartement);
 			$em->flush();
 		}
+		$categoryAppartement->setTranslatableLocale('en');
+		$em->refresh($categoryAppartement);
+
+		if($categoryAppartement->getName()=='') {
+			$categoryAppartement->setName('Apartment');
+			$categoryAppartement->setTranslatableLocale('en');
+			$em->persist($categoryAppartement);
+			$em->flush();
+		}
+		$categoryAppartement->setTranslatableLocale('fr');
+		$em->refresh($categoryAppartement);
+
 		$this->categoryAppartement = $categoryAppartement;
 
 		if(!$categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre')) {
@@ -220,6 +244,20 @@ class EstateController extends Controller
 			$em->persist($categoryAutre);
 			$em->flush();
 		}
+
+		$categoryAutre->setTranslatableLocale('en');
+		$em->refresh($categoryAutre);
+
+		if($categoryAutre->getName()=='') {
+			$categoryAutre->setName('Other');
+			$categoryAutre->setTranslatableLocale('en');
+			$em->persist($categoryAutre);
+			$em->flush();
+		}
+		$categoryAutre->setTranslatableLocale('fr');
+		$em->refresh($categoryAutre);
+
+
 		$this->categoryAutre = $categoryAutre;
 
 		if(!$zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1)) {
@@ -228,6 +266,20 @@ class EstateController extends Controller
 			$em->persist($zone1);
 			$em->flush();
 		}
+
+		$zone1->setTranslatableLocale('en');
+		$em->refresh($zone1);
+
+		if($zone1->getName()=='') {
+			$zone1->setName('South and Center Brussels');
+			$zone1->setTranslatableLocale('en');
+			$em->persist($zone1);
+			$em->flush();
+		}
+		$zone1->setTranslatableLocale('fr');
+		$em->refresh($zone1);
+
+
 		$this->zone1 = $zone1;
 
 		if(!$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2)) {
@@ -236,6 +288,19 @@ class EstateController extends Controller
 			$em->persist($zone2);
 			$em->flush();
 		}
+
+		$zone2->setTranslatableLocale('en');
+		$em->refresh($zone2);
+
+		if($zone2->getName()=='') {
+			$zone2->setName('East Brussels');
+			$zone2->setTranslatableLocale('en');
+			$em->persist($zone2);
+			$em->flush();
+		}
+		$zone2->setTranslatableLocale('fr');
+		$em->refresh($zone2);
+
 		$this->zone2 = $zone2;
 
 		if(!$zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3)) {
@@ -244,14 +309,42 @@ class EstateController extends Controller
 			$em->persist($zone3);
 			$em->flush();
 		}
+
+		$zone3->setTranslatableLocale('en');
+		$em->refresh($zone3);
+
+		if($zone3->getName()=='') {
+			$zone3->setName('Around Brussels');
+			$zone3->setTranslatableLocale('en');
+			$em->persist($zone3);
+			$em->flush();
+		}
+		$zone3->setTranslatableLocale('fr');
+		$em->refresh($zone3);
+
+
 		$this->zone3 = $zone3;
 
 		if(!$zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4)) {
 			$zone4=new Zone();
-			$zone4->setName("Province");
+			$zone4->setName("Country");
 			$em->persist($zone4);
 			$em->flush();
 		}
+
+		$zone4->setTranslatableLocale('en');
+		$em->refresh($zone4);
+
+		if($zone4->getName()=='') {
+			$zone4->setName('Province');
+			$zone4->setTranslatableLocale('en');
+			$em->persist($zone4);
+			$em->flush();
+		}
+		$zone4->setTranslatableLocale('fr');
+		$em->refresh($zone4);
+
+
 		$this->zone4 = $zone4;
 
 

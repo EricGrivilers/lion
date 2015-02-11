@@ -1,0 +1,54 @@
+<?php
+
+namespace Caravane\Bundle\CmsBundle\Entity;
+
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\PreSerialize;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Node
+ *
+ * @ORM\Table(name="Node")
+ * @ORM\Entity
+ * @ExclusionPolicy("all")
+ */
+class Node
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="language", type="string", length=2, nullable=true)
+     */
+    private $language;
+
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="firstname", type="text", nullable=true)
+     */
+    private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="uri", type="string", length=255, nullable=false)
+     */
+    private $uri;
+
+   
+}

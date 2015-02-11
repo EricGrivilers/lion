@@ -4,13 +4,17 @@ namespace Caravane\Bundle\EstateBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Translatable\Translatable;
+
+
 /**
  * Zone
  *
  * @ORM\Table(name="Zone")
  * @ORM\Entity
  */
-class Zone
+class Zone implements Translatable
 {
     /**
      * @var integer
@@ -25,10 +29,17 @@ class Zone
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Gedmo\Translatable
      */
     private $name;
 
-  
+    
+    /**
+     * @Gedmo\Locale
+     * Used locale to override Translation listener`s locale
+     * this is not a mapped field of entity metadata, just a simple property
+     */
+    private $locale;
 
 
     public function __toString() {
@@ -67,5 +78,8 @@ class Zone
         return $this->name;
     }
 
-    
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 }

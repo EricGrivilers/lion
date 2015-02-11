@@ -22,13 +22,9 @@
 		<div class='container'>
 			<div class="row ">
 				<div class="col-md-8">
-					<h2 class="title">IMMOBILIERE LE LION</h2>
+					<h2 class="title">{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/presentation'} )) }}</h2>
 					<div class="separator"></div>
-					<p>
-						{{"homepage.intro.paragraph.1"|trans|raw}}
-					</p>
-
-					<p>{{"homepage.intro.paragraph.2"|trans}}</p>
+					{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/presentation'} )) }}
 				</div>
 				<div class="col-md-offset-1 col-md-3">
 					<div style="text-align: center">
@@ -36,17 +32,7 @@
 					<br/>
 					<br/>
 					<div class="textwidget">
-						<address>
-							<ul class="phone">
-								<li><b class="phone">Tel: <a href="tel:+32 2 672 71 11">+32 2 672 71 11</a></b></li>
-							</ul>
-							<ul class="address">
-								<li>Avenue Delleur 8</li>
-								<li>B-1170 {{"Brussels"|trans}}</li>
-								<li>{{"Belgium"|trans}}</li>
-							</ul>
-
-						</address>
+						{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/address'} )) }}
 					</div>
 				</div>
 					<br/>
@@ -88,17 +74,11 @@
 				<div class="col-md-7 col-md-height col-top">
 					<div class="row">
 						<div class="col-md-12">
-							<h2 class="title">{{"APPLICATION MOBILE"|trans}}</h2>
+							<h2 class="title">{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/app'} )) }}</h2>
 							<div class="separator"></div>
 							<div class="col-md-12">
-								<p>
-									{{"homepage.app.paragraph.1"|trans}}
-									</p>
-								<p>
-									{{"homepage.app.paragraph.2"|trans}}
-									 <a href="http://itunes.apple.com/be/app/id396510696?mt=8">AppStore</a>.
-								</p>
-								<p><a href="http://itunes.apple.com/be/app/id396510696?mt=8"><img src="{{asset('bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
+								{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/app/presentation'} )) }}
+								<p><a href="https://itunes.apple.com/be/app/agence-immobiliere-le-lion/id945401475?l=fr&mt=8"><img src="{{asset('bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
 								</p>
 							</div>
 						</div>
@@ -110,7 +90,7 @@
 
 	<aside class='wrapper border-tb-white marble-color home_infos' >
 		<div class='container'>
-			<h2 class="title">{{"NOS PARTENAIRES"|trans}}</h2>
+			<h2 class="title">{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/partners'} )) }}</h2>
 							<div class="separator"></div>
 			<div class="row ">
 				<div class="col-md-offset-1 col-md-3">
@@ -123,8 +103,7 @@
 				<div class="col-md-offset-1 col-md-6">
 
 
-					<p>{{"homepage.partners.paragraph.1"|trans|raw}}
-						</p>
+					{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/partners/leading'} )) }}
 				</div>
 			</div>
 			<div class="row ">
@@ -137,7 +116,7 @@
 				<div class="col-md-offset-1 col-md-6">
 
 
-					<p>{{"homepage.partners.paragraph.2"|trans|raw}}</p>
+					{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/partners/knight'} )) }}
 				</div>
 			</div>
 		</div>
@@ -150,11 +129,10 @@
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-7">
-							<p>{{"homepage.social.paragraph.1"|trans}}
-								</p>
+							{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/social'} )) }}
 						</div>
 						<div class="col-md-offset-1 col-md-4">
-							<h2 class="title">{{"SUIVEZ-NOUS"|trans}}</h2>
+							<h2 class="title">{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/title/follo-us'} )) }}</h2>
 							<div class="separator"></div>
 							<div style="text-align: center">
 								{% include "CaravaneCmsBundle:Menu:social_list.html.twig" %}
