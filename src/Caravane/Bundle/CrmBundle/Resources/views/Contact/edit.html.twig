@@ -49,8 +49,7 @@
 {% macro ro(estate, date) %}
     <div class="col-xs-12 col-sm-6 col-md-3 estate" style="margin-bottom:10px">
 		<div class="frame">
-
-			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate" rel="{{estate.id}}">
+			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_backend_estate_edit',{'id':estate.id})}}" class="estate" rel="{{estate.id}}">
 				<article >
 					<div class="container-inner">
 						<div class="">

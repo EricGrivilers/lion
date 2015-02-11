@@ -11,20 +11,9 @@
 </script>
 
 
-    <h1>Edit</h1>
 
-    {{ form(edit_form) }}
 
-        <div class="row">
-        	<div class="col-md-6">
-        <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate') }}">
-            Retour à la liste
-        </a>
-      </div>
-      <div class="col-md-6">
-    {{ form(delete_form) }}
-  </div>
-  </div>
+   
 
 
 
@@ -89,7 +78,96 @@
 <br/>
 
 
+<h1>Edition</h1>
+    <div class="separator"></div>
+    <div class="alert alert-info">
+      Toute modification sera écrasée par  l'import bi-quotidien Evosys
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        {{form_row(edit_form.reference)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.category)}}
+      </div>
+      <div class="col-md-6">
+       {{form_row(edit_form.name)}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        {{form_row(edit_form.status)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.location)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.prix)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.ondemand)}}
+      </div>
+    </div>
+    <div class="row">
+      
+       <div class="col-md-3">
+        {{form_row(edit_form.rooms)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.bathrooms)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.garages)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.garden)}}
+      </div>
+    </div>
 
+     <div class="row">
+      
+       <div class="col-md-3">
+        {{form_row(edit_form.surface)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.locfr)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.zone)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.area)}}
+      </div>
+    </div>
+
+     <div class="row">
+      
+       <div class="col-md-3">
+        {{form_row(edit_form.zip)}}
+      </div>
+       <div class="col-md-3">
+        {{form_row(edit_form.lat)}}
+      </div>
+      <div class="col-md-3">
+        {{form_row(edit_form.lng)}}
+      </div>
+      <div class="col-md-3">
+        
+      </div>
+    </div>
+
+ {{ form(edit_form) }}
+
+        <div class="row">
+          <div class="col-md-6">
+            <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate') }}">
+                Retour à la liste
+            </a>
+          </div>
+          <div class="col-md-6">
+            {#{ form(delete_form) }#}
+          </div>
+      </div>
 
 {% endblock %}
 
