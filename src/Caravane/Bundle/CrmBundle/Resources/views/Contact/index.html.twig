@@ -37,7 +37,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('caravane_crm_contact_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('caravane_crm_contact_edit', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.salutation }}</td>
                 <td>{{ entity.firstname }}</td>
                 <td>{{ entity.lastname }}</td>
@@ -52,8 +52,8 @@
                 <td>{{ entity.city }}</td>
                 <td>{{ entity.country }}</td>
                 
-                <td>{% for e in entity.user.estate %} {% if e.saved != true %} <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}}</a>{% endif %} {% endfor %}</td>
-                <td>{% for e in entity.user.estate %} {% if e.saved == true %} <a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}}</a>{% endif %} {% endfor %}</td>
+                <td>{% for e in entity.user.estate %} {% if e.saved != true %} <li><a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}} ({{e.date|date('Y-m-d')}})</a></li>{% endif %} {% endfor %}</td>
+                <td>{% for e in entity.user.estate %} {% if e.saved == true %} <li><a href="{{ path('caravane_estate_backend_estate_edit', { 'id': e.estate.id }) }}">{{e.estate.shortReference}} ({{e.date|date('Y-m-d')}}) </a></li>{% endif %} {% endfor %}</td>
                 <td>
                         <a href="{{ path('caravane_crm_contact_edit', { 'id': entity.id }) }}"><span class="fa fa-edit"></span></a>
 

@@ -35,12 +35,27 @@
   <h1>Bien sauvegardé par</h1>
     <div class="separator"></div>
   <div class="row">
+    <div class="col-md-12">
+    <table class="records_list  table table-bordered table-condensed table-striped">
+      <thead>
+        <tr>
+      <th>Date</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Tel</th>
+      <th>Ville Pays</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for e in entity.user %}
       {% if e.saved==true %}
         {% set user = e.user %}
-        {{ mac.ro(user)}} 
+        {{ mac.ro(user, e.date)}} 
       {% endif %}
     {% endfor %}
+  </tbody>
+  </table>
+</div>
   </div>
 </div>
 <div class="navigation">
@@ -48,13 +63,28 @@
   <h1>Bien visité par </h1>
   <div class="separator"></div>
   <div class="row">
+    <div class="col-md-12">
+    <table class="records_list  table table-bordered table-condensed table-striped">
+      <thead>
+        <tr>
+      <th>Date</th>
+      <th>Nom</th>
+      <th>Email</th>
+      <th>Tel</th>
+      <th>Ville Pays</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for e in entity.user %}
       {% if e.saved!=true %}
         {% set user = e.user %}
-        {{ mac.ro(user)}} 
+        {{ mac.ro(user,e.date)}} 
       {% endif %}
     {% endfor %}
+  </tbody>
+  </table>
   </div>
+</div>
 </div>
 <br/>
 
@@ -65,13 +95,15 @@
 
 
 
-{% macro ro(user) %}
-    <div class="col-xs-12 col-sm-6 col-md-3 estate">
-      <a href="{{ path('caravane_crm_contact_edit', { 'id': user.contact.id }) }}">
-        {{user.contact.salutation}} {{user.contact.firstname}} {{user.contact.lastname}}<br/>
-      {{user.email}}<br/>
-        {{user.contact.tel}}<br/>
-       {{user.contact.city}} {{user.contact.country}}
-      </a>
+{% macro ro(user, date) %}
+    <tr>
+      <td>{{date|date('Y-m-d')}}</td>
+      <td><a href="{{ path('caravane_crm_contact_edit', { 'id': user.contact.id }) }}">
+        {{user.contact.salutation}} {{user.contact.firstname}} {{user.contact.lastname}}</a></td>
+      <td><a href="mailto:{{user.email}}">
+      {{user.email}}</a></td>
+        <td>{{user.contact.tel}}</td>
+       <td>{{user.contact.city}} {{user.contact.country}}</td>
+      </tr>
   </div>
 {% endmacro %}

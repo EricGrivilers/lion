@@ -41,6 +41,7 @@ class User extends BaseUser
      * @var integer
      *
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\UserEstate", mappedBy="user")
+     * @ORM\OrderBy({"date" = "DESC"})
      * @Expose
      * @Groups({"list","detail","search"})
      */

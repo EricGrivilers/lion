@@ -16,7 +16,7 @@
 		{% for e in entity.user.estate %}
 			{% if e.saved==true %}
 				{% set estate = e.estate %}
-				{{ mac.ro(estate)}} 
+				{{ mac.ro(estate, e.date)}} 
 			{% endif %}
 		{% endfor %}
 	</div>
@@ -29,7 +29,7 @@
 		{% for e in entity.user.estate %}
 			{% if e.saved!=true %}
 				{% set estate = e.estate %}
-				{{ mac.ro(estate)}} 
+				{{ mac.ro(estate, e.date)}} 
 			{% endif %}
 		{% endfor %}
 	</div>
@@ -46,8 +46,8 @@
 
 
 
-{% macro ro(estate) %}
-    <div class="col-xs-12 col-sm-6 col-md-3 estate">
+{% macro ro(estate, date) %}
+    <div class="col-xs-12 col-sm-6 col-md-3 estate" style="margin-bottom:10px">
 		<div class="frame">
 
 			<a title="{{estate.locfr}} - {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}" href="{{path('caravane_estate_frontend_estate_detail',{'id':estate.id})}}" class="estate" rel="{{estate.id}}">
@@ -57,11 +57,12 @@
 							<header>
 								
 								<div class="text">
-									{{estate.reference}}
-									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.prix|number_format(0,'.', '.')~"€"}}</h2>
+									
+									<h2><b>{{estate.locfr}}</b><br/> {% if estate.rooms>0 %}{{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.prix|number_format(0,'.', '.')~"€"}}</h2>
+									Ref. <b>{{estate.shortReference}}</b> visité le <b>{{date|date('Y-m-d')}}</b>
 								</div>
 							</header>
-							<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />
+							<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name is defined? estate.category.name:''}} {{estate.locfr}}"  />
 						</div>
 					</div>
 				</article>
