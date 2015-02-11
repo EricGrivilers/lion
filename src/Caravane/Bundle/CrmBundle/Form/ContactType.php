@@ -23,7 +23,9 @@ class ContactType extends AbstractType
                     "M"=>"M","Mme"=>"Mme","Mlle"=>"Mlle"
                 )
             ))
-            ->add('firstname')
+            ->add('firstname','text',array(
+                "label"=>$trans->translate("First name")
+            ))
             ->add('lastname')
             ->add('tel')
             ->add('zip')

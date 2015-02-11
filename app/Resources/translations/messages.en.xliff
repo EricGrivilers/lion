@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-05T12:47:12Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2015-02-11T13:15:02Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,45 +8,45 @@
     <body>
       <trans-unit id="85aef9b195fee3f58556deb83a61c0baf85d6374" resname="1 km">
         <source>1 km</source>
-        <target state="new">1 km</target>
-        <jms:reference-file line="75">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>1 km</target>
+        <jms:reference-file line="78">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="61864f467df3c10b6aa0ad78e963923454ea4c24" resname="10 km">
         <source>10 km</source>
-        <target state="new">10 km</target>
-        <jms:reference-file line="77">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>10 km</target>
+        <jms:reference-file line="80">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c89e036355d4d6032580684d59afe5cdb6927704" resname="20 km">
         <source>20 km</source>
-        <target state="new">20 km</target>
-        <jms:reference-file line="78">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>20 km</target>
+        <jms:reference-file line="81">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7bda6edd162a360fd79532f4b14f1927b7dc20bf" resname="5 km">
         <source>5 km</source>
-        <target state="new">5 km</target>
-        <jms:reference-file line="76">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>5 km</target>
+        <jms:reference-file line="79">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3fba1857c3dd673def52a1204235ea78bfdded38" resname="50 km">
         <source>50 km</source>
-        <target state="new">50 km</target>
-        <jms:reference-file line="79">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>50 km</target>
+        <jms:reference-file line="82">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35d445ed11a084c73ef34eb80ee9fb59c92ef6f1" resname="500 m">
         <source>500 m</source>
-        <target state="new">500 m</target>
-        <jms:reference-file line="74">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <target>500 m</target>
+        <jms:reference-file line="77">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="522e146679608203fc36e220c4e176063c0733f2" resname="Adresse">
         <source>Adresse</source>
         <target>Address</target>
-        <jms:reference-file line="41">CrmBundle/Controller/DefaultController.php</jms:reference-file>
-        <jms:reference-file line="91">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="79">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="96">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="98654523fc9e7348f29a4f84103050aee8747409" resname="Ajouter à">
         <source>Ajouter à</source>
         <target>Add to</target>
-        <jms:reference-file line="86">Frontend/Template/estate_detail.html.twig</jms:reference-file>
-        <jms:reference-file line="88">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="121">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="123">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f0c3e6d2ea646394b91177ef46d63c1012d32a9f" resname="Aucun résultat ne correspond à votre requete">
         <source>Aucun résultat ne correspond à votre requete</source>
@@ -56,63 +56,65 @@
       <trans-unit id="a70ed45a761ab71f1649a60f81e378c493c42d58" resname="Biens neufs uniquement">
         <source>Biens neufs uniquement</source>
         <target>New estate only</target>
-        <jms:reference-file line="108">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="117">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0bd77299d91b6df0020aa4b078e700e60b5a67f" resname="Chambre">
         <source>Chambre</source>
         <target>Room</target>
-        <jms:reference-file line="59">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="61">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="747791094b81444e09821a91f3ce4834cb07338e" resname="Code postal">
         <source>Code postal</source>
         <target>Postal code</target>
-        <jms:reference-file line="42">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="80">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="af11d5817e3480a50f24dc525556131b844994e6" resname="Communes">
         <source>Communes</source>
         <target>Cities</target>
-        <jms:reference-file line="136">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="151">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6e157c5da4410b7e9de85f5c93026b9176e69064" resname="Create">
         <source>Create</source>
         <target>Create</target>
+        <jms:reference-file line="99">CmsBundle/Controller/NodeController.php</jms:reference-file>
         <jms:reference-file line="82">CrmBundle/Controller/ContactController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f6fdbe48dc54dd86f63097a03bd24094dedd713a" resname="Delete">
         <source>Delete</source>
-        <target state="new">Delete</target>
+        <target>Delete</target>
+        <jms:reference-file line="252">CmsBundle/Controller/NodeController.php</jms:reference-file>
         <jms:reference-file line="232">CrmBundle/Controller/ContactController.php</jms:reference-file>
-        <jms:reference-file line="905">EstateBundle/Controller/EstateController.php</jms:reference-file>
+        <jms:reference-file line="1012">EstateBundle/Controller/EstateController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="84add5b2952787581cb9a8851eef63d1ec75d22b" resname="Email">
         <source>Email</source>
-        <target state="new">Email</target>
-        <jms:reference-file line="34">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <target>Email</target>
+        <jms:reference-file line="66">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="649df08a448ee3fa90f3746baaf6b0907df42c91" resname="English">
         <source>English</source>
-        <target state="new">English</target>
+        <target>English</target>
         <jms:reference-file line="19">CrmBundle/Form/ContactType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e9ce243b4a8ae133ab763a52b2f91b363b67e976" resname="Envoyer">
         <source>Envoyer</source>
-        <target state="new">Envoyer</target>
-        <jms:reference-file line="54">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <target>Envoyer</target>
+        <jms:reference-file line="94">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2ca514ebd7c3a61fe53823a0785c326287c4ede8" resname="Français">
         <source>Français</source>
-        <target state="new">Français</target>
+        <target>Français</target>
         <jms:reference-file line="19">CrmBundle/Form/ContactType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f614ac324abb74a228247af73545afac53e42a36" resname="Garage">
         <source>Garage</source>
-        <target state="new">Garage</target>
-        <jms:reference-file line="62">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <target>Garage</target>
+        <jms:reference-file line="64">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="624550f1c986875d9cbce12764f97f910cb3eb36" resname="Imprimer la fich">
         <source>Imprimer la fich</source>
         <target>Print</target>
-        <jms:reference-file line="91">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="126">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="04a06e0f2a760090096e6b3354ebd91856a489c7" resname="Jardin">
         <source>Jardin</source>
@@ -121,18 +123,18 @@
       </trans-unit>
       <trans-unit id="c63ae6dd4fc9f9dda66970e827d13f7c73fe841c" resname="M">
         <source>M</source>
-        <target state="new">M</target>
+        <target>M</target>
         <jms:reference-file line="23">CrmBundle/Form/ContactType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4b0e07be3491daa2d54357955ed4c1efcd374e84" resname="Me contacter">
         <source>Me contacter</source>
         <target>Contact me</target>
-        <jms:reference-file line="83">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="118">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="68f4145fee7dde76afceb910165924ad14cf0d00" resname="Message">
         <source>Message</source>
-        <target state="new">Message</target>
-        <jms:reference-file line="52">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <target>Message</target>
+        <jms:reference-file line="92">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a22670177470e889d6dab660cc7cd6f6743ab36" resname="Mlle">
         <source>Mlle</source>
@@ -147,37 +149,32 @@
       <trans-unit id="6578bf15ac54eadf476a564983b7d453918a0225" resname="Mot clef (ex.: Molière, piscine)">
         <source>Mot clef (ex.: Molière, piscine)</source>
         <target>Keywords (ex.: Molière, piscine)</target>
-        <jms:reference-file line="118">EstateBundle/Form/SearchType.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="908d508dfc49c29b2accfa6c99bb62cca10d53c7" resname="NOUVEAUX BIENS">
-        <source>NOUVEAUX BIENS</source>
-        <target>NEW</target>
-        <jms:reference-file line="4">Frontend/Homepage/last_updated.html.twig</jms:reference-file>
+        <jms:reference-file line="129">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f61c54c1d70775fd5bb25406d1186806fe1569a0" resname="Nederlands">
         <source>Nederlands</source>
-        <target state="new">Nederlands</target>
+        <target>Nederlands</target>
         <jms:reference-file line="19">CrmBundle/Form/ContactType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ff20370c8e04428109a1801a67963668dd6d1d0" resname="Nom">
         <source>Nom</source>
         <target>Name</target>
-        <jms:reference-file line="26">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="52">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2af3c640bbf7ce67262b830527c118a2882fbc6" resname="Nouveautés">
         <source>Nouveautés</source>
         <target>News</target>
-        <jms:reference-file line="137">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="152">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2a78f0e9eeb4969ad86a55df617e6bb0373df78f" resname="Pays">
         <source>Pays</source>
         <target>Country</target>
-        <jms:reference-file line="45">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="84">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="058a3df13cbf632cdf7bea7002a28b5fef367e35" resname="Pour une demande d'estimation, veuillez préciser la localisation du bien :">
         <source>Pour une demande d'estimation, veuillez préciser la localisation du bien :</source>
         <target>For an estimate, please provide estate location :</target>
-        <jms:reference-file line="50">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="90">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2d5eddef33c653b7ff8974e4f9942ec9c34f07e4" resname="Prix">
         <source>Prix</source>
@@ -187,65 +184,76 @@
       <trans-unit id="2b980147bcf7393b09c7a2773053ea6b2d3b025d" resname="Prix croissants">
         <source>Prix croissants</source>
         <target>Ascendant prices</target>
-        <jms:reference-file line="134">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="149">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="21f7d3605884d161a38b6085c23015b9806c0cfb" resname="Prix decroissants">
         <source>Prix decroissants</source>
         <target>Descendant prices</target>
-        <jms:reference-file line="135">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="150">EstateBundle/Form/SearchType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4521334acf2ea6cf30e6fda339ce2ff502b4e42b" resname="Prix sur demande">
+        <source>Prix sur demande</source>
+        <target>Price on request</target>
+        <jms:reference-file line="57">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="21">Frontend/Template/rows.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e4387ade0f0eb6dd33cbfd0cd6a5e1944cca7748" resname="Prénom">
         <source>Prénom</source>
         <target>Firstname</target>
-        <jms:reference-file line="30">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="59">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e3b5ef465a3a69492391d43ed047701fc9dc46ef" resname="Quartier">
         <source>Quartier</source>
         <target>Area</target>
         <jms:reference-file line="63">EstateBundle/Form/EstateType.php</jms:reference-file>
-        <jms:reference-file line="52">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="54">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3d06ec48be55db0a6e956a9427125caa68ea38ce" resname="Rayon">
         <source>Rayon</source>
         <target>Rayon</target>
-        <jms:reference-file line="72">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="75">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="91f7d3e9dc3d2d5dc14d7e5166efb31053866d21" resname="Rechercher">
         <source>Rechercher</source>
         <target>Search</target>
-        <jms:reference-file line="1196">EstateBundle/Controller/EstateController.php</jms:reference-file>
+        <jms:reference-file line="1322">EstateBundle/Controller/EstateController.php</jms:reference-file>
         <jms:reference-file line="42">UserBundle/Controller/ProfileController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="db1c784524e1b54011a95823026161f7c8517fe0" resname="Reference">
         <source>Reference</source>
         <target>Reference</target>
-        <jms:reference-file line="85">EstateBundle/Form/SearchType.php</jms:reference-file>
+        <jms:reference-file line="89">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d863689fc7f6b847b52ac32f7f9b0867be38666" resname="Reférence du bien">
         <source>Reférence du bien</source>
         <target>Reference</target>
-        <jms:reference-file line="57">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="59">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8539be07e8d3f7c4b809b3509f9f634260643c2" resname="Salle">
         <source>Salle</source>
         <target>Bathroom</target>
-        <jms:reference-file line="60">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="62">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="b4e59b1c481e1151cacaec217b58aad16cef8f49" resname="Sauvegarder ma recherche">
+        <source>Sauvegarder ma recherche</source>
+        <target>Save my search</target>
+        <jms:reference-file line="159">EstateBundle/Form/SearchType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="488731839dae8d0ff8d55dd3c8ac94d646ccb077" resname="Sauver">
         <source>Sauver</source>
         <target>Save</target>
-        <jms:reference-file line="716">EstateBundle/Controller/EstateController.php</jms:reference-file>
-        <jms:reference-file line="835">EstateBundle/Controller/EstateController.php</jms:reference-file>
+        <jms:reference-file line="815">EstateBundle/Controller/EstateController.php</jms:reference-file>
+        <jms:reference-file line="942">EstateBundle/Controller/EstateController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="63f2db31d0346e721dbdee1a64f77acd22aacee1" resname="Supprimer de ">
         <source>Supprimer de </source>
         <target>Remove from </target>
-        <jms:reference-file line="86">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="121">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="01854ae37a4eb85f2d3751c5dbcf1320e2256a5a" resname="Supérficie">
         <source>Supérficie</source>
         <target>Surface</target>
-        <jms:reference-file line="58">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="60">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="658270fd1ab0756b6695f6ecabcc6b23db378210" resname="Terrasse">
         <source>Terrasse</source>
@@ -254,33 +262,34 @@
       </trans-unit>
       <trans-unit id="3deb7456519697ecf4eefc455516c969a3681bae" resname="Type">
         <source>Type</source>
-        <target state="new">Type</target>
+        <target>Type</target>
         <jms:reference-file line="67">EstateBundle/Form/EstateType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d3b023eabc9c88f080cd07690201139b7ecfecfb" resname="Téléphone">
         <source>Téléphone</source>
         <target>Phone</target>
-        <jms:reference-file line="38">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="73">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb91e24fa52d8d2b32937bf04d843f730319a902" resname="Update">
         <source>Update</source>
-        <target state="new">Update</target>
+        <target>Update</target>
+        <jms:reference-file line="179">CmsBundle/Controller/NodeController.php</jms:reference-file>
         <jms:reference-file line="162">CrmBundle/Controller/ContactController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="972176113f903c45d3c3ae7331b3178a1f322bf8" resname="Ville">
         <source>Ville</source>
         <target>City</target>
-        <jms:reference-file line="43">CrmBundle/Controller/DefaultController.php</jms:reference-file>
+        <jms:reference-file line="81">CrmBundle/Controller/DefaultController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cdfe914416fd774ca2955ffc59936843b1fd012d" resname="d'eau">
         <source>d'eau</source>
         <target></target>
-        <jms:reference-file line="60">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="62">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8d89c841eb1f6162784f0de1787764711a4495dc" resname="mes favoris">
         <source>mes favoris</source>
         <target>my favorites</target>
-        <jms:reference-file line="90">Frontend/Template/estate_detail.html.twig</jms:reference-file>
+        <jms:reference-file line="125">Frontend/Template/estate_detail.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cc882068d874de63dc313e7aca2ddc2302380213" resname="mis à jour">
         <source>mis à jour</source>

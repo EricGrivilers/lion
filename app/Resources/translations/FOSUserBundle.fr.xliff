@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-05T12:42:36Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-02-11T13:13:55Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,47 +8,47 @@
     <body>
       <trans-unit id="bc3a36cbd35118cacd48af40b5345e463c57c0d4" resname="Autres biens consultés">
         <source>Autres biens consultés</source>
-        <target state="new">Autres biens consultés</target>
+        <target>Autres biens consultés</target>
         <jms:reference-file line="44">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4e8bf416252b7dccb9d3329f7c1238d4543b6fc5" resname="Ma dernière recherche">
         <source>Ma dernière recherche</source>
-        <target state="new">Ma dernière recherche</target>
+        <target>Ma dernière recherche</target>
         <jms:reference-file line="84">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8dd695c16f0e3ac8128637df78837ba91a71cef3" resname="Mes favoris">
         <source>Mes favoris</source>
-        <target state="new">Mes favoris</target>
+        <target>Mes favoris</target>
         <jms:reference-file line="4">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="faa6d321c7a69ecbf3e0d188365471250242c104" resname="Mon profil">
         <source>Mon profil</source>
-        <target state="new">Mon profil</target>
+        <target>Mon profil</target>
         <jms:reference-file line="102">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4e98e92f36b003841e90c4c08135704cfaea289e" resname="Mot de passe oublié?">
         <source>Mot de passe oublié?</source>
-        <target state="new">Mot de passe oublié?</target>
+        <target>Mot de passe oublié?</target>
         <jms:reference-file line="39">views/Security/login.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="961ca3cccd3a7cc5cd6e574630dff43e4e0c8d41" resname="Vous n'avez encore consulté aucun bien. ">
         <source>Vous n'avez encore consulté aucun bien. </source>
-        <target state="new">Vous n'avez encore consulté aucun bien. </target>
+        <target>Vous n'avez encore consulté aucun bien. </target>
         <jms:reference-file line="77">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5a822221eb10764bbf9a84c662b96131a914022f" resname="Vous n'avez encore sauvegardé aucun bien. ">
         <source>Vous n'avez encore sauvegardé aucun bien. </source>
-        <target state="new">Vous n'avez encore sauvegardé aucun bien. </target>
+        <target>Vous n'avez encore sauvegardé aucun bien. </target>
         <jms:reference-file line="38">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="464144537d756efb66dc6142b982e552250517e7" resname="Vous n'avez pas encore complété votre profil.">
         <source>Vous n'avez pas encore complété votre profil.</source>
-        <target state="new">Vous n'avez pas encore complété votre profil.</target>
+        <target>Vous n'avez pas encore complété votre profil.</target>
         <jms:reference-file line="126">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a5eba05921c11add89e9b68570149da22499c604" resname="change_password.submit">
         <source>change_password.submit</source>
-        <target state="new">change_password.submit</target>
+        <target>Envoyer</target>
         <jms:reference-file line="10">views/ChangePassword/changePassword_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="da41abc0db70b4ef01e4adf72e693cdb70113fd6" resname="fax">
@@ -81,34 +81,29 @@
         <target>Tél.</target>
         <jms:reference-file line="123">views/Profile/show_content.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="9741ffbcf8dbb31e1a2d32bd25cb0ccc5a6dea54" resname="profile.edit.submit">
-        <source>profile.edit.submit</source>
-        <target>Sauver</target>
-        <jms:reference-file line="37">views/Profile/edit_content.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="4ef79d57e94b4b74349d6533a231e09dc5be0ce2" resname="registration.submit">
         <source>registration.submit</source>
-        <target state="new">registration.submit</target>
+        <target>Envoyer</target>
         <jms:reference-file line="36">views/Registration/register_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c3474ad1b73a0d0db019eec986ee675e8afaf640" resname="resetting.request.invalid_username">
         <source>resetting.request.invalid_username</source>
-        <target state="new">resetting.request.invalid_username</target>
+        <target>resetting.request.invalid_username</target>
         <jms:reference-file line="11">views/Resetting/request_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e1470b3c202d9a4fa8e1afa7ed8695917f060ccd" resname="resetting.request.submit">
         <source>resetting.request.submit</source>
-        <target state="new">resetting.request.submit</target>
+        <target>resetting.request.submit</target>
         <jms:reference-file line="17">views/Resetting/request_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7ad41bf8fb30013eb0f31ca027ca8d1dc7a3d96f" resname="resetting.request.username">
         <source>resetting.request.username</source>
-        <target state="new">resetting.request.username</target>
+        <target>resetting.request.username</target>
         <jms:reference-file line="13">views/Resetting/request_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="921fd7a5cc7f9e46eab31822855a22d9808b0477" resname="resetting.reset.submit">
         <source>resetting.reset.submit</source>
-        <target state="new">resetting.reset.submit</target>
+        <target>resetting.reset.submit</target>
         <jms:reference-file line="10">views/Resetting/reset_content.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4a30c1f7a7651c7d30bdb2b7fc9b37e16fa281c7" resname="security.login.email">

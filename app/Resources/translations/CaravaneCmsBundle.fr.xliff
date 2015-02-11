@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2015-02-05T12:42:36Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2015-02-11T13:15:41Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="9935c76ceac2f344c8619f4f686f50a90ad58da8" resname="APPLICATION MOBILE">
-        <source>APPLICATION MOBILE</source>
-        <target>APPLICATION MOBILE</target>
-        <jms:reference-file line="91">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="5cb4c9d828175ed3931ec52305b32f47173a8e04" resname="Belgium">
         <source>Belgium</source>
         <target>Belgique</target>
-        <jms:reference-file line="46">Frontend/Template/homepage.html.twig</jms:reference-file>
-        <jms:reference-file line="38">views/Menu/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="77">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3a366b695c85cad77cfcc964aeca836ee64976ea" resname="Biens neufs">
         <source>Biens neufs</source>
@@ -25,24 +19,22 @@
       <trans-unit id="2784e378f25501c5f51cb6421ff637f8616b4cb6" resname="Brussels">
         <source>Brussels</source>
         <target>Bruxelles</target>
-        <jms:reference-file line="45">Frontend/Template/homepage.html.twig</jms:reference-file>
-        <jms:reference-file line="37">views/Menu/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="76">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b37456c4530be810dc040f50da72eda09addfb0a" resname="Contact">
         <source>Contact</source>
         <target>Contact</target>
-        <jms:reference-file line="29">views/Menu/footer.html.twig</jms:reference-file>
         <jms:reference-file line="38">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="81b9675833d1fa4303dbc6db5e0c2feda8f54615" resname="Créer mon profil">
         <source>Créer mon profil</source>
         <target>Créer mon profil</target>
-        <jms:reference-file line="71">Frontend/Template/homepage.html.twig</jms:reference-file>
+        <jms:reference-file line="57">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e3c5eaf7c9230cbdc81e8f7b03dc6afaacff34f5" resname="Legal mentions">
         <source>Legal mentions</source>
         <target>Mentions légales</target>
-        <jms:reference-file line="57">views/Menu/footer.html.twig</jms:reference-file>
+        <jms:reference-file line="48">views/Menu/footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d219c68101f532de10add2cf42fb9dbeca73d3be" resname="Location">
         <source>Location</source>
@@ -54,20 +46,15 @@
         <target>Mon compte</target>
         <jms:reference-file line="62">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="6facd6778b124812c0d94108784acec0369e8da1" resname="NOS PARTENAIRES">
-        <source>NOS PARTENAIRES</source>
-        <target>NOS PARTENAIRES</target>
-        <jms:reference-file line="113">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="958b0f27bd8667201f444e31306a3b29aea9478a" resname="Nos coordonnées">
         <source>Nos coordonnées</source>
         <target>Nos coordonnées</target>
-        <jms:reference-file line="62">views/Frontend/contact.html.twig</jms:reference-file>
+        <jms:reference-file line="68">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f02ffb674ac44ce29a4f17aa2a07a7e7457006f8" resname="Nous contacter">
         <source>Nous contacter</source>
         <target>Nous contacter</target>
-        <jms:reference-file line="54">Frontend/Template/homepage.html.twig</jms:reference-file>
+        <jms:reference-file line="40">Frontend/Template/homepage.html.twig</jms:reference-file>
         <jms:reference-file line="18">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9695aedbf63edf32ab250d845213cf4b90b3692c" resname="RECHERCHE">
@@ -75,20 +62,15 @@
         <target>RECHERCHE</target>
         <jms:reference-file line="90">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="98a9da89e389217d1125eb27d9554b23ece1d7e4" resname="SUIVEZ-NOUS">
-        <source>SUIVEZ-NOUS</source>
-        <target>SUIVEZ-NOUS</target>
-        <jms:reference-file line="157">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="fedf2439f275db3b471d35c2e773398bfff1c9eb" resname="Se connecter">
         <source>Se connecter</source>
         <target>Se connecter</target>
         <jms:reference-file line="72">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="21662ed180a0dc8ccf970cf78f7c877b0c2d516a" resname="Suivez-nous">
-        <source>Suivez-nous</source>
-        <target>Suivez-nous</target>
-        <jms:reference-file line="46">views/Menu/footer.html.twig</jms:reference-file>
+      <trans-unit id="d3b023eabc9c88f080cd07690201139b7ecfecfb" resname="Téléphone">
+        <source>Téléphone</source>
+        <target>Téléphone</target>
+        <jms:reference-file line="80">views/Frontend/contact.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae849b0b55f0db384b9ebbef7e4ab35845a805b1" resname="Une agence locale de qualité intégrée dans un réseau international de prestige.">
         <source>Une agence locale de qualité intégrée dans un réseau international de prestige.</source>
@@ -101,48 +83,10 @@
         <target>Vente</target>
         <jms:reference-file line="29">views/Menu/main.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="9de015f20cf285d0f7f4676ec4622afad1b94644" resname="homepage.app.paragraph.1">
-        <source>homepage.app.paragraph.1</source>
-        <target>Pour toujours mieux vous accompagner dans le cadre de votre recherche immobilière, notre application mobile pour iPhone et iPad vous permet de recevoir instantanément les dernières offres, de géo-localiser les biens à proximité ou de consulter toutes les informations relatives à ceux-ci.</target>
-        <jms:reference-file line="95">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="24625426d0c8e919fd76836785ab9de7e55198b8" resname="homepage.app.paragraph.2">
-        <source>homepage.app.paragraph.2</source>
-        <target>L’application est disponible en téléchargement via l’</target>
-        <jms:reference-file line="98">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="b2fbc92aaec8d83c3c4d052a79a49f232b055ec5" resname="homepage.intro.paragraph.1">
-        <source>homepage.intro.paragraph.1</source>
-        <target><![CDATA[L'immobilière LE LION est <b>spécialisée depuis plus de 40 ans dans la vente et la location de biens de prestige</b> à Bruxelles et ses environs. Si vous souhaitez mettre votre bien en vente ou en location, n'hésitez pas à consulter notre agence. Nous sommes à votre disposition pour toute estimation ou conseil gratuit sans aucun engagement de votre part. Faites-nous confiance et nous mettrons toute notre expérience et notre dynamisme à votre service.]]></target>
-        <jms:reference-file line="28">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="4eddaf4701b3ac7927df2413dd142d9bbaa28aff" resname="homepage.intro.paragraph.2">
-        <source>homepage.intro.paragraph.2</source>
-        <target>L’Immobilière Le Lion vous propose différentes manières pour vous aider dans votre recherche immobilière. Le plus efficace est de prendre contact directement avec nous par téléphone ou via notre page de  en nous envoyant vos critères de recherche pour être automatiquement prévenu dès qu’un nouveau bien correspondant à vos attentes apparait.</target>
-        <jms:reference-file line="31">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="2086a9c3241b88a88853133657f440c5a454c967" resname="homepage.partners.paragraph.1">
-        <source>homepage.partners.paragraph.1</source>
-        <target><![CDATA[L’<b>Immobilière Le Lion</b> est intégrée dans un réseau mondial de prestige, <a href="http://www.luxuryportfolio.com/" target="_blank">Leading Real Estates of The World</a>, avec qui elle partage les mêmes valeurs et la même qualité de service.]]></target>
-        <jms:reference-file line="126">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="459e90c870157336e04708bbe9b126a94a11d3fc" resname="homepage.partners.paragraph.2">
-        <source>homepage.partners.paragraph.2</source>
-        <target><![CDATA[
-L’agence a également noué un partenariat privilégié avec <a href="http://www.knightfrank.com/" target="_blank">Knight Frank International Property Sales</a>.
-Grâce à ces réseaux, l’<b>Immobilière Le Lion</b> offre la possibilité à ses clients de trouver un bien de qualité partout dans le monde. Elle propose également à ses clients internationaux une vitrine sur ses plus beaux biens en Belgique.]]></target>
-        <jms:reference-file line="140">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
       <trans-unit id="87eb836c3f8c7019c7323e4ce7ca5f252b74c176" resname="homepage.profile.creation">
         <source>homepage.profile.creation</source>
         <target>Créez votre profil sur notre site et vous pourrez sauvegarder les biens qui vous intéressent ainsi que vos critères de recherches. Vous retrouverez les nouveautés qui vous intéressent  directement sur notre page d’accueil  lors de votre prochaine visite.</target>
-        <jms:reference-file line="65">Frontend/Template/homepage.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="b7737473bfb19d31ac8f77a81d67189f55cde949" resname="homepage.social.paragraph.1">
-        <source>homepage.social.paragraph.1</source>
-        <target>Vous pouvez également suivre de manière plus ludique les nouveautés de l’agence via les réseaux sociaux Facebook, Twitter et Google +.
-Via les réseaux Instagram et Pinterest, nous vous offrons d’aborder votre recherche immobilière via des photos inspirantes qui reflètent les différentes gammes et styles de biens disponibles dans notre portefeuille.</target>
-        <jms:reference-file line="153">Frontend/Template/homepage.html.twig</jms:reference-file>
+        <jms:reference-file line="51">Frontend/Template/homepage.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>
