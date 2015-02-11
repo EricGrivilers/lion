@@ -3,9 +3,9 @@
 {% import _self as mac %}
 
 {% block body -%}
-    <h1>Contact</h1>
+    <h1>{{entity.salutation}} {{entity.firstname}} {{entity.lastname}}</h1>
 
-    {{ form(edit_form) }}
+    
 
 
 <div class="navigation">
@@ -40,6 +40,14 @@
             Back to the list
         </a>
 </div>
+
+<h1>Edition</h1>
+    <div class="separator"></div>
+    <div class="">
+
+{{ form(edit_form) }}
+</div>
+
 {% endblock %}
 
 
