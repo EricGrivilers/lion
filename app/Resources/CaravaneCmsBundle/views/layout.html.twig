@@ -25,7 +25,13 @@
 		{% endblock header_scripts %}
 	</head>
 	<body class="home page">
-
+		<div id="downloadApp" style="display:none">
+			<div class="alert alert-info">
+				{{ render(controller('CaravaneCmsBundle:Node:render', { 'uri': '/home/app/presentation'} )) }}
+				<p><a href="https://itunes.apple.com/be/app/agence-immobiliere-le-lion/id945401475?l=fr&mt=8"><img src="{{asset('bundles/caravanecms/img/appstore_button_fr.png')}}" /></a>
+				</p>
+			</div>
+		</div>
 		{% block script_facebook %}
 		<div id="fb-root"></div>
 			<script>(function(d, s, id) {

@@ -1,6 +1,17 @@
 var markers;
 var type;
 
+var i = 0,
+    iOS = false,
+    iDevice = ['iPad', 'iPhone', 'iPod'];
+
+for ( ; i < iDevice.length ; i++ ) {
+    if( navigator.platform === iDevice[i] ){ 
+    	iOS = true;
+    	break; 
+    }
+}
+
 function initializeSearchMap() {
 		    var mapOptions = {
 		      center: new google.maps.LatLng(50.833555,4.39552),
@@ -177,6 +188,18 @@ function initializeSearchMap() {
 			}
 		}
 
+
+		if(iOS==true) {
+			if (document.cookie.indexOf("mobile") < 0) {
+	    		date = new Date();
+	    		expiry = new Date();
+	            expiry.setTime(date.getTime()+1000000); 
+
+	             //First time here - show a message, set a cookie and redirect etc.
+	            document.cookie = "mobile=yes; expires=" + expiry.toGMTString();
+	            $('#downloadApp').show();
+	    	}
+		}
 	});
 
 	$('#estate_last_updated').on('slid.bs.carousel', function () {

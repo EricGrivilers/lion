@@ -53,7 +53,7 @@ class SlideshowController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('slideshow_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('slideshow', array('id' => $entity->getId())));
         }
 
         return $this->render('CaravaneEstateBundle:Slideshow:new.html.twig', array(
