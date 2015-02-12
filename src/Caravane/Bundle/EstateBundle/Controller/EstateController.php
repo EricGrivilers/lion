@@ -64,11 +64,6 @@ class EstateController extends Controller
 		"013"=>array("Forest","50.819480, 4.334367"),
 		"0131"=>array("Forest - Molière","50.815947, 4.344097"),
 		"014"=>array("Saint-Gilles","50.824765, 4.345661"),
-		"01B"=>array("Rhode-Saint-Genèse","50.746684, 4.361737"),
-		"01B1"=>array("Rhode-St-Genèse - Espinette Centrale","50.748391, 4.390887"),
-		"01B2"=>array("Rhode-St-Genèse - Ancien Golf","50.740908, 4.400689"),
-		"01H"=>array("Waterloo","50.710127, 4.401829"),
-		"01H1"=>array("Waterloo - Faubourg","50.729211, 4.403640"),
 		"020"=>array("Auderghem","50.815678, 4.428411"),
 		"020A"=>array("Quartier Institutions Européennes","50.843700, 4.382306"),
 		"021"=>array("Etterbeek","50.832914, 4.387832"),
@@ -79,15 +74,24 @@ class EstateController extends Controller
 		"0233"=>array("Stockel-Place Dumon","50.840570, 4.465425"),
 		"024"=>array("Schaerbeek","50.856389, 4.392840"),
 		"026"=>array("Watermael-Boisfort","50.797989, 4.417686"),
-		"027"=>array("Cinqauntenaire/Montgomery","50.838258, 4.402959"),
-		"103"=>array("Lasne","50.687517, 4.483315"),
-		"1033"=>array("Lasne - Ohain","50.699941, 4.467007"),
-		"1035"=>array("Lasne - Plancenoit","50.662851, 4.429671"),
-		"1037"=>array("Lasne - Maransart","50.658743, 4.466964"),
-		"1039"=>array("Lasne - Couture","50.674492, 4.472758"),
-		"111"=>array("Rixensart","50.712609, 4.533019"),
-		"113"=>array("Rixensart - Bourgeois","50.706712, 4.510832"),
-		"114"=>array("Rixensart - Genval","50.721497, 4.492950")
+		"027"=>array("Cinquantenaire/Montgomery","50.838258, 4.402959"),
+
+		"0330"=>array("Lasne","50.687517, 4.483315"),
+		"0331"=>array("Lasne","50.687517, 4.483315"),
+		"0332"=>array("Lasne - Ohain","50.699941, 4.467007"),
+		"0333"=>array("Lasne - Plancenoit","50.662851, 4.429671"),
+		"0334"=>array("Lasne - Maransart","50.658743, 4.466964"),
+		"0335"=>array("Lasne - Couture","50.674492, 4.472758"),
+		"0340"=>array("Rixensart","50.712609, 4.533019"),
+		"0341"=>array("Rixensart","50.712609, 4.533019"),
+		"0342"=>array("Rixensart - Bourgeois","50.706712, 4.510832"),
+		"0343"=>array("Rixensart - Genval","50.721497, 4.492950"),
+
+		"0301"=>array("Rhode-Saint-Genèse","50.746684, 4.361737"),
+		"0302"=>array("Rhode-St-Genèse - Espinette Centrale","50.748391, 4.390887"),
+		"0303"=>array("Rhode-St-Genèse - Ancien Golf","50.740908, 4.400689"),
+		"0320"=>array("Waterloo","50.710127, 4.401829"),
+		"0321"=>array("Waterloo - Faubourg","50.729211, 4.403640")
 	);
 
 	public function importAction(Request $request) {
@@ -359,10 +363,12 @@ class EstateController extends Controller
 		$areasXml = new \SimpleXMLElement($xml);
 
 		foreach($areasXml as $k=>$areaXml) {
+			$libe=ltrim ($areaXml->LIBE_FR, '-');
+			$libe=ltrim ($libe, '-');
+			$libe=trim($libe);
 			if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByCode($areaXml->CODE)) {
 				$area = new Area();
-				$libe=ltrim ($areaXml->LIBE_FR, '-');
-				$libe=trim($libe);
+				
 				$area->setNomQuartier($libe);
 				$area->setCode($areaXml->CODE);
 
@@ -379,8 +385,27 @@ class EstateController extends Controller
 						$em->persist($area);
 					}
 				}
-				$em->persist($area);
+
+				
 			}
+			if($area->getLat()=='' || $area->getLng()=='' || $area->getLatLng()=='') {
+				$geocoder = $this->get('ivory_google_map.geocoder');
+				$response = $geocoder->geocode($libe.", Belgique");
+
+				foreach($response->getResults() as $result)
+				{
+					if($location=$result->getGeometry()->getLocation()) {
+						$lat=$location->getLatitude();
+						$lng=$location->getLongitude();
+						$area->setLat($lat);
+						$area->setLng($lng);
+						$area->setLatLng($lat.", ".$lng);
+						break;
+					}
+
+				}
+			}
+			$em->persist($area);
 		}
 		$em->flush();
 	}
@@ -544,12 +569,18 @@ class EstateController extends Controller
 				else if(substr($xmlEstate->TABLGEOG,0,2)=='02') {
 					$zone=$this->zone2;
 				}
-				else if(substr($xmlEstate->TABLGEOG,0,2)=='10') {
+				/*else if(substr($xmlEstate->TABLGEOG,0,2)=='10') {
+					$zone=$this->zone3;
+				}*/
+				else if(substr($xmlEstate->TABLGEOG,0,2)=='03') {
 					$zone=$this->zone3;
 				}
-				else if(substr($xmlEstate->TABLGEOG,0,2)=='11') {
+				else {
 					$zone=$this->zone4;
 				}
+				/*else if(substr($xmlEstate->TABLGEOG,0,2)=='11') {
+					$zone=$this->zone4;
+				}*/
 				$estate->setZone($zone);
 
 				$estate->setRooms(intval($xmlEstate->CHBR_NBR));
