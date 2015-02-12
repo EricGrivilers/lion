@@ -96,7 +96,7 @@
 
     <table class="records_list  table table-bordered table-condensed table-striped">
         <thead>
-            {#<tr>
+            <tr>
                 <th style="width:80px"></th>
                 <th colspan="8"></th>
                 <th colspan="4">Visites</th>
@@ -106,11 +106,11 @@
             </tr>
             <tr>
                 <th></th>
-                <th>{{ knp_pagination_sortable(entities, 'Reférence', 'E.reference') }} </th>
-                <th>{{ knp_pagination_sortable(entities, 'Nom', 'E.name') }} </th>
-                <th>{{ knp_pagination_sortable(entities, 'Prix', 'E.prix') }} </th>
-                <th>{{ knp_pagination_sortable(entities, 'Type', 'E.location') }}</th>
-                <th>{{ knp_pagination_sortable(entities, 'Localité', 'E.locfr') }}</th>
+                <th>Reférence</th>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Type</th>
+                <th>Localité</th>
                 <th>Actif</th>
                 <th>Jour</th>
                 <th>Sem.</th>
@@ -118,10 +118,10 @@
                 <th>Total</th>
                 <th>Viewed</th>
                 <th>Favorites</th>
-                <th>{{ knp_pagination_sortable(entities, 'Créé', 'E.createdOn') }}</th>
-                <th>{{ knp_pagination_sortable(entities, 'Mis à jour', 'E.updatedOn' ) }}</th>
+                <th>Créé</th>
+                <th>Mis à jour</th>
                 <th></th>
-            </tr>#}
+            </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
