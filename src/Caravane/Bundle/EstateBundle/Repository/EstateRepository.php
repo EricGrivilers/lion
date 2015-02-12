@@ -77,11 +77,12 @@ class EstateRepository extends EntityRepository
 		}
 
 		$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
-			->where('C.status = :status')
-			->andWhere('C.location = :type')
-			->setParameter('status', 1)
+			->where('C.location = :type')
 			->setParameter('type', $datas['location']);
-
+		if($datas['status']!='any') {
+			$query->andWhere('C.status = :status')
+			->setParameter('status', 1);
+		}
 		if(isset($datas['category'])) {
 			//$category=implode(",",$datas['category']);
 			$query->andWhere('C.category IN (:category)')

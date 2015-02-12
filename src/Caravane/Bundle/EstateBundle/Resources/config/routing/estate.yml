@@ -1,6 +1,6 @@
 caravane_estate_backend:
     path:     /admin
-    defaults: { _controller: "CaravaneEstateBundle:Estate:index" }
+    defaults: { _controller: "CaravaneEstateBundle:Estate:adminSearch" }
 
 caravane_estate_backend_estate:
     path:     /admin/estate

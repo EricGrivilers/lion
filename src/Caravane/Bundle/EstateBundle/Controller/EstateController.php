@@ -96,20 +96,75 @@ class EstateController extends Controller
 
 
 	private $oldCodes=array(
+		"01"=>"010",
+	//	"00"=>"01A",
 		"01B"=>"0301",
 		"01B1"=>"0302",
 		"01B2"=>"0303",
 		"01H"=>"0320",
 		"01H1"=>"0321",
+		
+		"000"=>"01 A1",
+		"0000"=>"01 A2",
+		"0001"=>"01 A3",
+		"001"=>"01 A4",
 
-		"103"=>"0331",
+		"01F"=>"0311",
+		"01D"=>"0310",
+
+		"03"=>"04",
+		"031"=>"041",
+		"033"=>"043",
+		"034"=>"044",
+		"035"=>"045",
+		"036"=>"046",
+		"037"=>"047",
+		"038"=>"048",
+		"039"=>"049",
+		"9"=>"07",
+
+		"103"=>"0330",
+		"131"=>"0391",
+		"133"=>"0393",
 		"1033"=>"0332",
 		"1035"=>"0333",
 		"1037"=>"0334",
 		"1039"=>"0335",
-		"111"=>"0341",
-		"113"=>"0342",
-		"114"=>"0343"
+		"111"=>"0340",
+		"112"=>"0350",
+		"113"=>"0370",
+		"114"=>"0343",
+		"115"=>"0380",
+		"1114"=>"0343",
+		"1141"=>"0361",
+		"1149"=>"0364",
+		"1145"=>"0362",
+		"1159"=>"0385",
+		"1123"=>"0352",
+		"13"=>"0390",
+
+		"1155"=>"0383",
+		"139"=>"0394",
+		"1325"=>"0392",
+		"1113"=>"0342",
+		"113G"=>"0379",
+		"113H"=>"0379A",
+
+		"1031"=>"0331",
+		"1037"=>"0334",
+		"1121"=>"0351",
+		"1131"=>"0371",
+		"1135"=>"0373",
+		"1139"=>"0375",
+		"1147"=>"0363",
+		"1153"=>"0382",
+		"1118"=>"0345",
+		"1137"=>"0374",
+		"113D"=>"0377",
+		"113B"=>"0376",
+		"113F"=>"0378",
+		"1157"=>"0384",
+		"1133"=>"0372",
 	);
 
 
@@ -793,26 +848,68 @@ class EstateController extends Controller
 		}
 	}
 */
+
+
+
+	public function adminSearchAction(Request $request) {
+		if(!$type=$request->query->get('type')) {
+			$type="sale";
+		}
+		
+		$em = $this->getDoctrine()->getManager();
+		if(!$datas=$request->request->get('search_form')) {
+			$datas=array('location'=>0);
+		}
+		if($datas['location']==1) {
+			$type="rent";
+		}
+
+		$datas['status']="any";
+		$datas['offset']=0;
+		$datas['limit']=10000;
+
+		$search_form=$this->searchForm($request, $type);
+		
+		if(isset($datas['reference'])) {
+			if($datas['reference']!="") {
+				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByReference("030/".$datas['reference']);
+				return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
+					'entities'      => $estates,
+					'search_form'   => $search_form->createView()
+				));
+			}
+		}
+
+		if(isset($datas['address'])) {
+			$geocoder = $this->get('ivory_google_map.geocoder');
+			$response = $geocoder->geocode($datas['address'].", Belgique");
+
+			foreach($response->getResults() as $result)
+			{
+				if($location=$result->getGeometry()->getLocation()) {
+					$lat=$location->getLatitude();
+					$lng=$location->getLongitude();
+					$datas['latlng']=$lat.",".$lng;
+				}
+
+			}
+		}
+
+		
+
+		$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
+		return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
+			'entities'      => $estates,
+			'search_form'   => $search_form->createView()
+		));
+	}
 		/**
 		 * Lists all Estate entities.
 		 *
 		 */
 		public function indexAction(Request $request)
 		{
-				$em = $this->getDoctrine()->getManager();
-
-			/*  $paginator  = $this->get('knp_paginator');
-
-				$entities = $em->getRepository('CaravaneEstateBundle:Estate')->findAll();
-
-				return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
-						'entities' => $entities,
-				));
-
-
-*/
-
-
+			$em = $this->getDoctrine()->getManager();
 
 
 
@@ -827,6 +924,8 @@ class EstateController extends Controller
 				array('defaultSortFieldName' => 'E.updatedOn', 'defaultSortDirection' => 'desc')
 
 		);
+
+		$entities=$em->getRepository('CaravaneEstateBundle:Estate')->findAll();
 
 		// parameters to template
 		return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array('entities' => $entities));
@@ -1356,135 +1455,29 @@ class EstateController extends Controller
 		}
 
 
-		private function searchForm($request, $type='sale') {
-				$em = $this->getDoctrine()->getManager();
-				$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
+	private function searchForm($request, $type='sale') {
+		$em = $this->getDoctrine()->getManager();
+		$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
 
-				$options=array('prices'=>$prices,'type'=>$type);
-				if($type=='rent') {
-					$options['location']=1;
-
-				}
-				else {
-					$options['location']=0;
-				}
-				$options['isNewBuilding']=0;
-				if($type=='new') {
-					$options['isNewBuilding']=1;
-					$options['location']=0;
-				}
-
-
-				$search_form = $this->createForm( 'search_form', null, $options);
-				$search_form->get('location')->setData($options['location']);
-				$search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
-				$search_form->handleRequest($request);
-				return $search_form;
-/*
-				$datas=array('location'=>($type=='sale'?0:1),"sort"=>"updatedOn desc");
-				if($type=='new') {
-						$datas['isNewBuilding']=true;
-						$datas['location']=0;
-				}
-				$em = $this->getDoctrine()->getManager();
-				$prices=$em->getRepository('CaravaneEstateBundle:Price')->getPrices($type);
-
-
-
-				$form = $this->createFormBuilder($datas)
-				->add('prix','choice', array(
-								"label"=>false,
-								"expanded"=>true,
-								"multiple"=>true,
-								'choices' => $prices,
-								"attr"=>array(
-										"class"=>"btn-group btn-group-vertical",
-										"data-toggle"=>"buttons"
-								)
-						))
-						->add('area',"entity",array(
-								"label"=>false,
-								"empty_value" => 'Quartier',
-								"class"=>"Caravane\Bundle\EstateBundle\Entity\Area"
-						))
-						->add('zone','entity', array(
-								"label"=>false,
-								"expanded"=>true,
-								"multiple"=>true,
-								"class"=>"Caravane\Bundle\EstateBundle\Entity\Zone",
-								"attr"=>array(
-										"class"=>"btn-group btn-group-vertical",
-										"data-toggle"=>"buttons"
-								)
-						))
-						->add("rayon","choice",array(
-								"label"=>false,
-								"empty_value" => 'Rayon',
-								"choices"=>array(
-										"1"=>"1 km",
-										"5"=>"5 km",
-										"10"=>"10 km",
-										"20"=>"20 km",
-										"50"=>"50 km"
-								)
-						))
-						->add('reference',"text",array(
-								"attr"=>array(
-										"placeholder"=>"Reference"
-								)
-						))
-						 ->add('address',"text",array(
-								"attr"=>array(
-										"placeholder"=>"Adresse"
-								)
-						))
-						->add('category','entity', array(
-								"label"=>false,
-								"expanded"=>true,
-								"multiple"=>true,
-								"class"=>"Caravane\Bundle\EstateBundle\Entity\Category",
-								"attr"=>array(
-										"class"=>"btn-group btn-group-vertical",
-										"data-toggle"=>"buttons"
-								)
-						))
-						->add('location','hidden')
-
-						->add('isNewBuilding',($type!='rent'?'checkbox':'hidden'),array(
-								"label"=>"Biens neufs uniquement",
-								"attr"=>array(
-										"class"=>"btn "
-								)
-						))
-						->add('keyword','text',array(
-								"attr"=>array(
-										"placeholder"=>"Mot clef (ex.: piscine, brugmann)"
-								)
-						))
-						->add('offset','hidden',array(
-								"data"=>0))
-						->add('limit','hidden',array(
-								"data"=>24,
-						))
-						->add('sort','choice',array(
-								"label"=>false,
-								"empty_value" => 'Ordonner les résultats par',
-								"choices"=>array(
-										"prix asc"=>"Prix croissants",
-										"prix desc"=>"Prix decroissants",
-										"locfr asc"=>"Communes",
-										"updatedOn desc"=>"Nouveautés",
-								)
-						))
-
-						->getForm();
-						$form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
-				 //   $form->setMethod('GET');
-						$form->handleRequest($request);
-
-						return $form;
-						*/
+		$options=array('prices'=>$prices,'type'=>$type);
+		if($type=='rent') {
+			$options['location']=1;
 		}
+		else {
+			$options['location']=0;
+		}
+		$options['isNewBuilding']=0;
+		if($type=='new') {
+			$options['isNewBuilding']=1;
+			$options['location']=0;
+		}
+
+		$search_form = $this->createForm( 'search_form', null, $options);
+		$search_form->get('location')->setData($options['location']);
+		$search_form->add('submit', 'submit', array('label' => 'Rechercher','attr'=>array('class'=>'form-control btn-red')));
+		$search_form->handleRequest($request);
+		return $search_form;
+	}
 
 
 		function printAction(Request $request, $reference) {

@@ -2,6 +2,87 @@
 
 {% block body -%}
 
+
+    {% if search_form is defined %}
+        <div>
+
+            <form name="caravane_bundle_estatebundle_search" id="caravane_bundle_estatebundle_search" method="POST" action="{{path('caravane_estate_backend')}}" role="form" novalidate ><div id="caravane_bundle_estatebundle_search">
+
+
+
+
+                {{form_widget(search_form.location)}}
+
+                {#<section class='row' style="margin-bottom:10px">
+                    <div class="col-md-4 col-md-offset-4">
+                        {{form_row(search_form.location)}}
+                    </div>
+                </section>#}
+
+                <section class='row' style="margin-bottom:10px">
+                    <div class="col-sm-6  col-md-4">
+
+                        {{form_row(search_form.category)}}
+
+                        {% if search_form.isNewBuilding is defined %}
+                            {{form_row(search_form.isNewBuilding)}}
+                        {% endif %}
+
+                    </div>
+                    <div class="col-sm-6  col-md-4">
+                        {{form_row(search_form.zone)}}
+                    </div>
+                    <div class="col-sm-6  col-md-4">
+                         <a class="btn btn-primary" onclick="$('#search_form_location').val(1);submit();" >Location</a>
+
+
+                        {{form_row(search_form.prix)}}
+                    </div>
+                </section>
+                <section class='row' style="margin-bottom:10px">
+                    <div class='col-sm-6  col-md-4'>
+                        <div class="form-group input-group">
+                            <span class="input-group-addon">030</span>
+                            {{form_widget(search_form.reference)}}
+                        </div>
+                        <div class="form-group  input-group">
+                            <span class="input-group-addon"><span class="fa  fa-search"></span></span>
+                            {{form_widget(search_form.keyword)}}
+
+                        </div>
+                    </div>
+                    <div class='col-sm-6  col-md-4'>
+                        <div class="form-group  input-group">
+                            <span class="input-group-addon"><span class="fa  fa-map-marker"></span></span>
+                            {{form_widget(search_form.address)}}
+
+                        </div>
+                        {{form_row(search_form.area)}}
+                        {{form_row(search_form.rayon)}}
+                    </div>
+                    <div class=' col-sm-6 col-md-4'>
+                        {{"Ordonner les résultats par"|trans}}
+                        {{form_row(search_form.sort)}}
+                    </div>
+                </section>
+                <section class='row' style="margin-bottom:10px">
+
+                    <div class="col-md-offset-8  col-md-4">
+                        {#{form_row(search_form.save)}#}
+                        {{form_row(search_form.submit)}}
+                    </div>
+                </section>
+
+
+<div style="display:none">
+            {{ form_rest(search_form) }}
+</div>
+            </div>
+            </form>
+        </div>
+
+    {% endif %}
+
     <div >
       <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate_new') }}">
                 Nouveau bien
@@ -10,12 +91,12 @@
     <br/>
 
 <div class="navigation">
-    {{ knp_pagination_render(entities) }}
+    {#{ knp_pagination_render(entities) }#}
 </div>
 
     <table class="records_list  table table-bordered table-condensed table-striped">
         <thead>
-            <tr>
+            {#<tr>
                 <th style="width:80px"></th>
                 <th colspan="8"></th>
                 <th colspan="4">Visites</th>
@@ -27,48 +108,20 @@
                 <th></th>
                 <th>{{ knp_pagination_sortable(entities, 'Reférence', 'E.reference') }} </th>
                 <th>{{ knp_pagination_sortable(entities, 'Nom', 'E.name') }} </th>
-
                 <th>{{ knp_pagination_sortable(entities, 'Prix', 'E.prix') }} </th>
-                 <th>{{ knp_pagination_sortable(entities, 'Type', 'E.location') }}</th>
-                {#<th>Oldprix</th>#}
+                <th>{{ knp_pagination_sortable(entities, 'Type', 'E.location') }}</th>
                 <th>{{ knp_pagination_sortable(entities, 'Localité', 'E.locfr') }}</th>
-               {# <th>Locuk</th>#}
-                {#<th>Zone</th>#}
-                {#<th>Summary</th>
-                <th>Shortdescren</th>
-                <th>Description</th>
-                <th>Descren</th>#}
-                {#<th>Vendu</th>#}
-               {# <th>Sur demande</th>#}
-
-                {#<th>Reference</th>#}
-                {#<th>Option</th>#}
-
-                {#<th>Zip</th>#}
-                {#<th>Googlemap</th>
-                <th>Moredescrfr</th>
-                <th>Surface</th>
-                <th>Rooms</th>
-                <th>Bathrooms</th>
-                <th>Garages</th>
-                <th>Garden</th>
-                <th>Viewable</th>#}
                 <th>Actif</th>
                 <th>Jour</th>
                 <th>Sem.</th>
                 <th>Mois</th>
                 <th>Total</th>
-                {#<th>Jour</th>
-                <th>Sem.</th>
-                <th>Mois</th>#}
-                {#<th>Lat</th>
-                <th>Lng</th>#}
                 <th>Viewed</th>
                 <th>Favorites</th>
                 <th>{{ knp_pagination_sortable(entities, 'Créé', 'E.createdOn') }}</th>
                 <th>{{ knp_pagination_sortable(entities, 'Mis à jour', 'E.updatedOn' ) }}</th>
                 <th></th>
-            </tr>
+            </tr>#}
         </thead>
         <tbody>
         {% for entity in entities %}
@@ -79,40 +132,13 @@
                 <td>{{ entity.name }}</td>
 
                 <td>{{ entity.prix }} </td>
-                 <td>{{ entity.location=="1"?"Location":"Vente" }}</td>
-               {# <td>{{ entity.oldprix }}</td>#}
+                <td>{{ entity.location=="1"?"Location":"Vente" }}</td>
                 <td>{{ entity.locfr }}</td>
-                {#<td>{{ entity.locuk }}</td>#}
-                {#<td>{{ entity.zone }}</td>#}
-                {#<td>{{ entity.summary }}</td>
-                <td>{{ entity.shortdescren }}</td>
-                <td>{{ entity.description }}</td>
-                <td>{{ entity.descren }}</td>#}
-                {#<td>{{ entity.sold }}</td>#}
-                {#<td>{{ entity.ondemand }}</td>#}
-
-                {#<td>{{ entity.reference }}</td>#}
-               {# <td>{{ entity.enoption }}</td>#}
-
-                {#<td>{{ entity.zip }}</td>#}
-                {#<td>{{ entity.googleMap }}</td>
-                <td>{{ entity.moredescrfr }}</td>
-                <td>{{ entity.surface }}</td>
-                <td>{{ entity.rooms }}</td>
-                <td>{{ entity.bathrooms }}</td>
-                <td>{{ entity.garages }}</td>
-                <td>{{ entity.garden }}</td>
-                <td>{{ entity.viewable }}</td>#}
                 <td>{{ entity.status==1?'Oui':'' }}</td>
                 <td>{{ entity.dayview }}</td>
                 <td>{{ entity.weekview }}</td>
                 <td>{{ entity.monthview }}</td>
                 <td>{{ entity.totalview }}</td>
-                {#<td>{{ entity.lastdayview }}</td>
-                <td>{{ entity.lastweekview }}</td>
-                <td>{{ entity.lastmonthview }}</td>#}
-                {#<td>{{ entity.lat }}</td>
-                <td>{{ entity.lng }}</td>#}
                 <td>{% for e in entity.user %} {% if e.saved != true %} <li><a href="{{ path('caravane_crm_contact_edit', { 'id': e.user.contact.id }) }}">{{e.user.contact.salutation}} {{e.user.contact.firstname}} {{e.user.contact.lastname}} ({{e.date|date('Y/m/d')}})</a></li>{% endif %} {% endfor %}</td>
                 <td>{% for e in entity.user %} {% if e.saved == true %} <li><a href="{{ path('caravane_crm_contact_edit', { 'id': e.user.contact.id }) }}">{{e.user.contact.salutation}} {{e.user.contact.firstname}} {{e.user.contact.lastname}} ({{e.date|date('Y/m/d')}})</a></li>{% endif %} {% endfor %}</td>
                 <td>{% if entity.createdOn %}{{ entity.createdOn|date('d/m/Y') }}{% endif %}</td>
@@ -130,7 +156,7 @@
 
 
 <div class="navigation">
-    {{ knp_pagination_render(entities) }}
+    {#{ knp_pagination_render(entities) }#}
 </div>
     <div >
       <a class="btn btn-primary" href="{{ path('caravane_estate_backend_estate_new') }}">
