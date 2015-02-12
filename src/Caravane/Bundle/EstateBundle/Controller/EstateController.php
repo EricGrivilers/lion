@@ -94,6 +94,26 @@ class EstateController extends Controller
 		"0321"=>array("Waterloo - Faubourg","50.729211, 4.403640")
 	);
 
+
+	private $oldCodes=array(
+		"01B"=>"0301",
+		"01B1"=>"0302",
+		"01B2"=>"0303",
+		"01H"=>"0320",
+		"01H1"=>"0321",
+
+		"103"=>"0331",
+		"1033"=>"0332",
+		"1035"=>"0333",
+		"1037"=>"0334",
+		"1039"=>"0335",
+		"111"=>"0341",
+		"113"=>"0342",
+		"114"=>"0343"
+	);
+
+
+
 	public function importAction(Request $request) {
 
 		$force=$request->query->get('force');
@@ -563,6 +583,11 @@ class EstateController extends Controller
 				$estate->setCategory($category);
 
 				$zone=null;
+				echo "-".$xmlEstate->TABLGEOG."-";
+				if(array_key_exists((string)$xmlEstate->TABLGEOG, $this->oldCodes)) {
+					$xmlEstate->TABLGEOG=$this->oldCodes[(string)$xmlEstate->TABLGEOG];
+					echo "---old code---";
+				}
 				if(substr($xmlEstate->TABLGEOG,0,2)=='00' || substr($xmlEstate->TABLGEOG,0,2)=='01' || $xmlEstate->TABLGEOG=="0") {
 					$zone=$this->zone1;
 				}
