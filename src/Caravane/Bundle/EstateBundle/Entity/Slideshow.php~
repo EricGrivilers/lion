@@ -27,12 +27,12 @@ class Slideshow
     private $estate;
 
     /**
-     * @ORM\OneToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo")
+     * @ORM\OneToOne( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", cascade={"persist"})
      */
     private $photo;
 
     /**
-     * @ORM\Column(name="content", type="text", nullable=false)
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 
@@ -40,7 +40,7 @@ class Slideshow
     /**
      * @var integer
      *
-     * @ORM\Column(name="ranking", type="integer", nullable=false)
+     * @ORM\Column(name="ranking", type="integer", nullable=true)
      */
     private $ranking;
 

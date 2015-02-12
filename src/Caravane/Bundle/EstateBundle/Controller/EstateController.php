@@ -499,8 +499,12 @@ class EstateController extends Controller
 				if($iType=="p") {
 					$query.=" AND E.isNewBuilding=1 " ; 
 				}
+				if($iType=="t") {
+					$query.=" AND E.isTerrain=1 " ; 
+				}
 				else {
 					$query.=" AND E.isNewBuilding=0 " ; 
+					$query.=" AND E.isTerrain=0 " ; 
 				}
 			}
 
@@ -608,9 +612,14 @@ class EstateController extends Controller
 						echo "new";
 						$estate->setIsNewBuilding(true);
 					}
+					if($iType=="t") {
+						echo "new";
+						$estate->setIsTerrain(true);
+					}
 					else {
 						echo "old";
 						$estate->setIsNewBuilding(false);
+						$estate->setIsTerrain(false);
 					}
 				}
 

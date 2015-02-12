@@ -333,6 +333,15 @@ class Estate
      */
     private $isNewBuilding = false;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="isTerrain", type="boolean", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $isTerrain = false;
+
 
     /**
      * @var integer
@@ -1769,5 +1778,28 @@ class Estate
 
         }  
         return array("total"=>$nbTotal,"month"=>$nbMonth,"week"=>$nbWeek,"day"=>$nbDay);
+    }
+
+    /**
+     * Set isTerrain
+     *
+     * @param boolean $isTerrain
+     * @return Estate
+     */
+    public function setIsTerrain($isTerrain)
+    {
+        $this->isTerrain = $isTerrain;
+
+        return $this;
+    }
+
+    /**
+     * Get isTerrain
+     *
+     * @return boolean 
+     */
+    public function getIsTerrain()
+    {
+        return $this->isTerrain;
     }
 }
