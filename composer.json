@@ -42,6 +42,7 @@
         "egeloen/ckeditor-bundle": "~2.0",
         "willdurand/geocoder": "~2.8",
         "widop/http-adapter-bundle": "1.1.*",
+        "liuggio/excelbundle": "~2.0",
 
         "hybridauth/hybridauth": "dev-master",
         "lexik/jwt-authentication-bundle": "dev-master",

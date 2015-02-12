@@ -1517,6 +1517,92 @@ die();
 		}
 
 
+	public function exportAction() {
+		$em = $this->getDoctrine()->getManager();
+		$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findAll();
+
+		$phpExcelObject = $this->get('phpexcel')->createPHPExcelObject();
+
+		$phpExcelObject->getProperties()->setCreator("ImmoLeLion")
+		//->setLastModifiedBy("Giulio De Donato")
+		->setTitle("Biens");
+		//->setSubject("Office 2005 XLSX Test Document")
+		//->setDescription("Test document for Office 2005 XLSX, generated using PHP classes.")
+		//->setKeywords("office 2005 openxml php")
+		//->setCategory("Test result file");
+		$phpExcelObject->setActiveSheetIndex(0)
+		->setCellValue('A1', 'ID')
+		->setCellValue('B1', 'Reference')
+		->setCellValue('C1', 'Nom')
+		->setCellValue('D1', 'Prix')
+        ->setCellValue('E1', 'Type')
+        ->setCellValue('F1', 'Localité')
+        ->setCellValue('G1', 'Actif')
+        ->setCellValue('H1', 'Jour')
+        ->setCellValue('I1', 'Sem.')
+        ->setCellValue('J1', 'Mois')
+        ->setCellValue('K1', 'Total')
+        ->setCellValue('L1', 'Viewed')
+        ->setCellValue('M1', 'Favorites')
+        ->setCellValue('N1', 'Créé')
+        ->setCellValue('O1', 'Mis à jour')
+		;
+
+		$i=2;
+		foreach($estates as $estate) {
+			
+	        $viewed="";
+	        $saved="";
+	        foreach($estate->getUser() as $e) {
+	        	if($e->getSaved()!= true ) {
+	        		$viewed.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
+	        	}
+	        	else {
+	        		$saved.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
+	        	}
+	        }
+	        $createdOn=$estate->getCreatedOn()->format('Y-m-d');
+	        if($estate->getUpdatedOn()) {
+	        	$updatedOn=$estate->getUpdatedOn()->format('Y-m-d');
+	        }
+	        $phpExcelObject->getActiveSheet()
+			->setCellValue('A'.$i , $estate->getId())
+			->setCellValue('B'.$i, $estate->getReference())
+			->setCellValue('C'.$i, $estate->getName())
+			->setCellValue('D'.$i, $estate->getPrix())
+	        ->setCellValue('E'.$i, $estate->getLocation()==1?'Location':'Vente')
+	        ->setCellValue('F'.$i, $estate->getLocfr())
+	        ->setCellValue('G'.$i, $estate->getStatus()==1?"Oui":"Non")
+	        ->setCellValue('H'.$i, $estate->getDayview())
+	        ->setCellValue('I'.$i, $estate->getWeekview())
+	        ->setCellValue('J'.$i, $estate->getMonthview())
+	        ->setCellValue('K'.$i, $estate->getTotalview())
+	        ->setCellValue('L'.$i, $viewed)
+	        ->setCellValue('M'.$i, $saved)
+	        ->setCellValue('N'.$i, $createdOn)
+	        ->setCellValue('O'.$i, $updatedOn)
+	       ;
+
+	       	$phpExcelObject->getActiveSheet()->getStyle('L'.$i)->getAlignment()->setWrapText(true);
+	        $phpExcelObject->getActiveSheet()->getStyle('M'.$i)->getAlignment()->setWrapText(true);
+	       $i++;
+		}
+		//$phpExcelObject->getActiveSheet()->setTitle('Simple');
+		// Set active sheet index to the first sheet, so Excel opens this as the first sheet
+		$phpExcelObject->setActiveSheetIndex(0);
+
+		// create the writer
+		$writer = $this->get('phpexcel')->createWriter($phpExcelObject, 'Excel5');
+		// create the response
+		$response = $this->get('phpexcel')->createStreamedResponse($writer);
+		// adding headers
+		$response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
+		$response->headers->set('Content-Disposition', 'attachment;filename=stream-file.xls');
+		$response->headers->set('Pragma', 'public');
+		$response->headers->set('Cache-Control', 'maxage=1');
+
+        return $response;        
+	}
 
 
 }

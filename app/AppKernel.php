@@ -36,6 +36,7 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
             new RMS\PushNotificationsBundle\RMSPushNotificationsBundle(),
+            new Liuggio\ExcelBundle\LiuggioExcelBundle(),
 
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
