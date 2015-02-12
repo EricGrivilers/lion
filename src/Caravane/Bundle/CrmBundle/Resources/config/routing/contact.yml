@@ -19,6 +19,10 @@ caravane_crm_contact_edit:
     path:     /{id}/edit
     defaults: { _controller: "CaravaneCrmBundle:Contact:edit" }
 
+caravane_crm_contact_export:
+    path:     /export
+    defaults: { _controller: "CaravaneCrmBundle:Contact:export" }
+
 caravane_crm_contact_update:
     path:     /{id}/update
     defaults: { _controller: "CaravaneCrmBundle:Contact:update" }

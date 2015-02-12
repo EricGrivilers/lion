@@ -9,6 +9,7 @@
 
 <div class="navigation">
     {#{ knp_pagination_render(entities) }#}
+    <a class="btn btn-primary" href="{{path('caravane_crm_contact_export')}}">Exporter</a>
 </div>
 
     <table class="records_list  table table-bordered table-condensed table-striped">
@@ -39,10 +40,10 @@
                 <th>Email</th>
                 <th>Lang.</th>
                 <th>Tel</th>
-                <th>City</th>
-                <th>Country</th>
-                <th>Viewed</th>
-                <th>Favorites</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Vues</th>
+                <th>Sauv.</th>
                 <th></th>
             </tr>
         </thead>

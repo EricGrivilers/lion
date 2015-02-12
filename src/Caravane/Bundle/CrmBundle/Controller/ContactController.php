@@ -252,20 +252,17 @@ class ContactController extends Controller
         //->setCategory("Test result file");
         $phpExcelObject->setActiveSheetIndex(0)
         ->setCellValue('A1', 'ID')
-        ->setCellValue('B1', 'Reference')
-        ->setCellValue('C1', 'Nom')
-        ->setCellValue('D1', 'Prix')
-        ->setCellValue('E1', 'Type')
-        ->setCellValue('F1', 'Localité')
-        ->setCellValue('G1', 'Actif')
-        ->setCellValue('H1', 'Jour')
-        ->setCellValue('I1', 'Sem.')
-        ->setCellValue('J1', 'Mois')
-        ->setCellValue('K1', 'Total')
-        ->setCellValue('L1', 'Viewed')
-        ->setCellValue('M1', 'Favorites')
-        ->setCellValue('N1', 'Créé')
-        ->setCellValue('O1', 'Mis à jour')
+        ->setCellValue('B1', 'Date')
+        ->setCellValue('C1', 'Titre')
+        ->setCellValue('D1', 'Firstname')
+        ->setCellValue('E1', 'Lastname')
+        ->setCellValue('F1', 'Email')
+        ->setCellValue('G1', 'Langue')
+        ->setCellValue('H1', 'Tel')
+        ->setCellValue('I1', 'Ville')
+        ->setCellValue('J1', 'Pays')
+        ->setCellValue('K1', 'Visites')
+        ->setCellValue('L1', 'Sauvegardes')
         ;
 
         $i=2;
@@ -273,35 +270,48 @@ class ContactController extends Controller
             
             $viewed="";
             $saved="";
-            foreach($estate->getUser() as $e) {
+            $email="";
+            foreach($estate->getUser()->getEstate() as $e) {
                 if($e->getSaved()!= true ) {
-                    $viewed.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
+                    $dv='';
+                    if($e->getDate()) {
+                        $dv=$e->getDate()->format('Y-m-d');
+                    }
+                    $viewed.=$e->getEstate()->getShortReference()." (".$dv.")\n";
                 }
                 else {
-                    $saved.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
+                    $ds='';
+                    if($e->getDate()) {
+                        $ds=$e->getDate()->format('Y-m-d');
+                    }
+                    $saved.=$e->getEstate()->getShortReference()." (".$ds.")\n";
                 }
             }
-            $createdOn=$estate->getCreatedOn()->format('Y-m-d');
-            if($estate->getUpdatedOn()) {
-                $updatedOn=$estate->getUpdatedOn()->format('Y-m-d');
+            //$createdOn=$estate->getCreatedOn()->format('Y-m-d');
+            $createdOn="";
+            if($estate->getCreatedOn()) {
+                $createdOn=$estate->getCreatedOn()->format('Y-m-d');
+            }
+            if($estate->getUser()) {
+                $email=$estate->getUser()->getEmail();
             }
             $phpExcelObject->getActiveSheet()
-            ->setCellValue('A'.$i , $estate->getId())
-            ->setCellValue('B'.$i, $estate->getReference())
-            ->setCellValue('C'.$i, $estate->getName())
-            ->setCellValue('D'.$i, $estate->getPrix())
-            ->setCellValue('E'.$i, $estate->getLocation()==1?'Location':'Vente')
-            ->setCellValue('F'.$i, $estate->getLocfr())
-            ->setCellValue('G'.$i, $estate->getStatus()==1?"Oui":"Non")
-            ->setCellValue('H'.$i, $estate->getDayview())
-            ->setCellValue('I'.$i, $estate->getWeekview())
-            ->setCellValue('J'.$i, $estate->getMonthview())
-            ->setCellValue('K'.$i, $estate->getTotalview())
-            ->setCellValue('L'.$i, $viewed)
-            ->setCellValue('M'.$i, $saved)
-            ->setCellValue('N'.$i, $createdOn)
-            ->setCellValue('O'.$i, $updatedOn)
+            ->setCellValue('A'.$i ,$estate->getId())
+            ->setCellValue('B'.$i, $createdOn)
+            ->setCellValue('C'.$i, $estate->getSalutation())
+            ->setCellValue('D'.$i, $estate->getFirstname())
+            ->setCellValue('E'.$i, $estate->getLastname())
+            ->setCellValue('F'.$i, $email)
+            ->setCellValue('G'.$i, $estate->getLanguage())
+            ->setCellValue('H'.$i, $estate->getTel())
+            ->setCellValue('I'.$i, $estate->getCity())
+            ->setCellValue('J'.$i, $estate->getCountry())
+            ->setCellValue('K'.$i, $viewed)
+            ->setCellValue('L'.$i, $saved)
            ;
+
+            $phpExcelObject->getActiveSheet()->getStyle('K'.$i)->getAlignment()->setWrapText(true);
+            $phpExcelObject->getActiveSheet()->getStyle('L'.$i)->getAlignment()->setWrapText(true);
            $i++;
         }
         //$phpExcelObject->getActiveSheet()->setTitle('Simple');
@@ -314,7 +324,7 @@ class ContactController extends Controller
         $response = $this->get('phpexcel')->createStreamedResponse($writer);
         // adding headers
         $response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
-        $response->headers->set('Content-Disposition', 'attachment;filename=stream-file.xls');
+        $response->headers->set('Content-Disposition', 'attachment;filename=contacts_'.date('Y-m-d-H:i:s').'.xls');
         $response->headers->set('Pragma', 'public');
         $response->headers->set('Cache-Control', 'maxage=1');
 

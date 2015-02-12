@@ -1561,7 +1561,12 @@ die();
 	        		$saved.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
 	        	}
 	        }
-	        $createdOn=$estate->getCreatedOn()->format('Y-m-d');
+	        
+	        $createdOn="";
+	        if($estate->getCreatedOn()) {
+	        	$createdOn=$estate->getCreatedOn()->format('Y-m-d');
+	        }
+	        $updatedOn="";
 	        if($estate->getUpdatedOn()) {
 	        	$updatedOn=$estate->getUpdatedOn()->format('Y-m-d');
 	        }
@@ -1597,7 +1602,7 @@ die();
 		$response = $this->get('phpexcel')->createStreamedResponse($writer);
 		// adding headers
 		$response->headers->set('Content-Type', 'text/vnd.ms-excel; charset=utf-8');
-		$response->headers->set('Content-Disposition', 'attachment;filename=stream-file.xls');
+		$response->headers->set('Content-Disposition', 'attachment;filename=biens_'.date('Y-m-d-H:i:s').'.xls');
 		$response->headers->set('Pragma', 'public');
 		$response->headers->set('Cache-Control', 'maxage=1');
 
