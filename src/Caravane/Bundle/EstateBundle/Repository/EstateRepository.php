@@ -79,6 +79,9 @@ class EstateRepository extends EntityRepository
 		$query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C')
 			->where('C.location = :type')
 			->setParameter('type', $datas['location']);
+		if(!isset($datas['status'])) {
+			 $datas['status']=1;
+		}
 		if($datas['status']!='any') {
 			$query->andWhere('C.status = :status')
 			->setParameter('status', 1);

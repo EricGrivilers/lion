@@ -859,6 +859,12 @@ class EstateController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		if(!$datas=$request->request->get('search_form')) {
 			$datas=array('location'=>0);
+			$estates=array();
+			$search_form=$this->searchForm($request, $type);
+			return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
+				'entities'      => $estates,
+				'search_form'   => $search_form->createView()
+			));
 		}
 		if($datas['location']==1) {
 			$type="rent";
@@ -869,7 +875,7 @@ class EstateController extends Controller
 		$datas['limit']=10000;
 
 		$search_form=$this->searchForm($request, $type);
-		
+
 		if(isset($datas['reference'])) {
 			if($datas['reference']!="") {
 				$estates=$em->getRepository('CaravaneEstateBundle:Estate')->findByReference("030/".$datas['reference']);
