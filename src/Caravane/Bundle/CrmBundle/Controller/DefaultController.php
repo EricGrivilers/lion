@@ -24,14 +24,22 @@ class DefaultController extends Controller
         $contact_form=$this->contactForm($request);
         if($contact_form->isValid()) {
             $data = $contact_form->getData();
+            $estate=null;
+            $subject = "Website Le Lion - Contact";
+            if($data['ref']) {
+                $em = $this->getDoctrine()->getManager();
+                $estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($data['ref']);
+                $subject = "Website Le Lion - ".($estate->getLocation()==1?'Location':'Vente')." - ".$estate->getCategory()->getName()." - ref.:".$estate->getShortReference();
+            }
+            
             $message = \Swift_Message::newInstance()
-                ->setSubject('Website: Contact')
+                ->setSubject($subject)
                 ->setFrom('contact@immo-lelion.be')
                 ->setTo('contact@immo-lelion.be')
-                ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_contact.txt.twig', array('data' => $data)))
+                ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_contact.txt.twig', array('data' => $data, 'estate'=>$estate)))
             ;
             if($data['location']!='') {
-                $message->setSubject("Website: Demande d'estimation");
+                $message->setSubject("Website Le Lion - Demande d'estimation");
             }
             if(!$this->get('mailer')->send($message)) {
                 echo "error";
@@ -46,6 +54,13 @@ class DefaultController extends Controller
     }
 
     private function contactForm($request) {
+        $ref="";
+        $comments="";
+        if($request->query->get('ref')) {
+            $ref=$request->query->get('ref');;
+            $comments="Bonjour, merci de bien vouloir me contacter à propos du bien ".$ref;
+        }
+
         $datas=array();
         $form = $this->createFormBuilder($datas)
         ->add('lastname', 'text',array(
@@ -89,7 +104,8 @@ class DefaultController extends Controller
             "required"=>false,
             "label"=>"Pour une demande d'estimation, veuillez préciser la localisation du bien :"
         ))
-        ->add('comments','textarea',array("label"=>"Message","required"=>false))
+        ->add('ref','hidden',array('data'=>$ref))
+        ->add('comments','textarea',array("data"=>$comments, "label"=>"Message","required"=>false))
         ->getForm();
         $form->add('submit', 'submit', array('label' => 'Envoyer','attr'=>array('class'=>'form-control btn-red')));
          //   $form->setMethod('GET');

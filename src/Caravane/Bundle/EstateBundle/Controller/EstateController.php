@@ -489,7 +489,7 @@ class EstateController extends Controller
 		$em = $this->getDoctrine()->getManager();
 
 	echo "page".$p."<br/>";
-		if($p==1) {
+		if($p==1 && in_array($iType, array('V','L','p','t'))) {
 			$query='update CaravaneEstateBundle:Estate E set E.status = 0 ';
 			if($iType=="L") {
 				$query.=" WHERE E.location=1";
@@ -502,7 +502,7 @@ class EstateController extends Controller
 				if($iType=="t") {
 					$query.=" AND E.isTerrain=1 " ; 
 				}
-				else {
+				else if($iType=="V"){
 					$query.=" AND E.isNewBuilding=0 " ; 
 					$query.=" AND E.isTerrain=0 " ; 
 				}
@@ -731,7 +731,7 @@ class EstateController extends Controller
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
-							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)) {
+							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename) ) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
 									curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -765,7 +765,7 @@ class EstateController extends Controller
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
 							//echo $filename;
-							if(!file_exists(__DIR__.'/../../../../../web/pdfs/'.$filename)) {
+							if(!file_exists(__DIR__.'/../../../../../web/pdfs/'.$filename) ) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/pdfs/'.$filename, 'wb');
 									curl_setopt($ch, CURLOPT_FILE, $fp);

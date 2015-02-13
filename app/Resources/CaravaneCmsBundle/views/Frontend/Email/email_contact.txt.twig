@@ -12,4 +12,16 @@ Pays: {{ data.country }}
 Estimation pour l'adresse: {{data.location}}
 {% endif %}
 Message: {{data.comments}}
+
+
+{% if estate %}
+Bien:
+
+{{estate.name}}
+{{estate.reference}}
+{{estate.category}}
+{{estate.locfr}}
+{{url('caravane_estate_frontend_estate_sale_show', {'reference':estate.shortReference})}}
+
+{% endif %}
        
