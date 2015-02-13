@@ -31,11 +31,12 @@ class DefaultController extends Controller
                 $estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($data['ref']);
                 $subject = "Website Le Lion - ".($estate->getLocation()==1?'Location':'Vente')." - ".$estate->getCategory()->getName()." - ref.:".$estate->getShortReference();
             }
-            
+            $to=$this->container->getParameter('contactemail');
+            $from=$this->container->getParameter('contactemail');
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
-                ->setFrom('contact@immo-lelion.be')
-                ->setTo('contact@immo-lelion.be')
+                ->setFrom($from)
+                ->setTo($to)
                 ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_contact.txt.twig', array('data' => $data, 'estate'=>$estate)))
             ;
             if($data['location']!='') {
