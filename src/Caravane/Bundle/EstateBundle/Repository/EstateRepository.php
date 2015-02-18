@@ -46,6 +46,13 @@ class EstateRepository extends EntityRepository
 			);
 			$estates=$collection;
 		}
+		$tEstates=array();
+		foreach($estates as $estate) {
+			if($estate->getPhoto()) {
+				$tEstates[]=$estate;
+			}
+		}
+		$estates=$tEstates;
 		return $estates;
 	}
 
