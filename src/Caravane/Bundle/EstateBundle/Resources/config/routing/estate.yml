@@ -93,6 +93,36 @@ caravane_estate_frontend_estate_new_list:
     path:   /vente/bien-neuf
     defaults: { _controller: "CaravaneEstateBundle:Estate:newList" }
 
+
+caravane_estate_frontend_estate_sale_show_30:
+    path:   /vente/030/{reference}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: caravane_estate_frontend_estate_sale_show
+        permanent: true
+
+caravane_estate_frontend_estate_rent_show_30:
+    path:   /location/030/{reference}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: caravane_estate_frontend_estate_rent_show
+        permanent: true
+
+caravane_estate_frontend_estate_sale_show_30:
+    path:   /sale/030/{reference}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: caravane_estate_frontend_estate_sale_show
+        permanent: true
+
+caravane_estate_frontend_estate_rent_show_30:
+    path:   /rent/030/{reference}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: caravane_estate_frontend_estate_rent_show
+        permanent: true
+
+
 caravane_estate_frontend_estate_sale_show:
     path:   /vente/{reference}
     defaults: { _controller: "CaravaneEstateBundle:Estate:saleView" }
