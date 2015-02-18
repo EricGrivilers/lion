@@ -6,9 +6,9 @@ var i = 0,
     iDevice = ['iPad', 'iPhone', 'iPod'];
 
 for ( ; i < iDevice.length ; i++ ) {
-    if( navigator.platform === iDevice[i] ){ 
+    if( navigator.platform === iDevice[i] ){
     	iOS = true;
-    	break; 
+    	break;
     }
 }
 
@@ -193,7 +193,7 @@ function initializeSearchMap() {
 			if (document.cookie.indexOf("mobile") < 0) {
 	    		date = new Date();
 	    		expiry = new Date();
-	            expiry.setTime(date.getTime()+1000000); 
+	            expiry.setTime(date.getTime()+1000000);
 
 	             //First time here - show a message, set a cookie and redirect etc.
 	            document.cookie = "mobile=yes; expires=" + expiry.toGMTString();
@@ -239,10 +239,10 @@ function initializeSearchMap() {
 		            $('.list:last').append(html.html());
 		            prepareLinks();
 		            if(data!="end" && hashReference>0) {
-						if(estateIsListed(hashReference) ==false) {
-							$('#nextEstate').click();
-						}
+					if(estateIsListed(hashReference) ==false) {
+						$('#nextEstate').click();
 					}
+				}
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -328,10 +328,26 @@ function initializeSearchMap() {
 				});
 		          // $('body').scrollTo(element);
 		            //detail.slideDown();
-		            $('html, body').animate({
+
+		           var $viewport = $('html, body');
+
+
+
+				$viewport.animate({
+					scrollTop: $("div#detail").offset().top - 40
+				}, 1000);
+
+				// Stop the animation if the user scrolls. Defaults on .stop() should be fine
+				$viewport.bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+				    if ( e.which > 0 || e.type === "mousedown" || e.type === "mousewheel"){
+				         $viewport.stop().unbind('scroll mousedown DOMMouseScroll mousewheel keyup'); // This identifies the scroll as a user action, stops the animation, then unbinds the event straight after (optional)
+				    }
+				});
+
+		     /*       $('.body').animate({
 				        scrollTop: $("div#detail").offset().top - 40
 				    }, 1000);
-
+*/
 		        },
 		        error: function(jqXHR, textStatus, errorThrown)
 		        {
@@ -352,7 +368,7 @@ function initializeSearchMap() {
 		return false;
 	}
 
-
+/*
 $.fn.scrollTo = function( target, options, callback ){
   if(typeof options == 'function' && arguments.length == 2){ callback = options; options = target; }
   var settings = $.extend({
@@ -370,4 +386,4 @@ $.fn.scrollTo = function( target, options, callback ){
     });
   });
 }
-
+*/
