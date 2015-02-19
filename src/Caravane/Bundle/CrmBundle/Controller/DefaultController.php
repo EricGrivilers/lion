@@ -66,6 +66,19 @@ class DefaultController extends Controller
         }
 
         $datas=array();
+        if($this->getUser()) {
+            if($contact=$this->getUser()->getContact()) {
+                $datas['email']=$this->getUser()->getEmail();
+                $datas['lastname']=$contact->getLastname();
+                $datas['firstname']=$contact->getFirstname();
+                $datas['phone']=$contact->getTel();
+                $datas['address']=$contact->getAddress();
+                $datas['zip']=$contact->getZip();
+                $datas['city']=$contact->getCity();
+                $datas['country']=$contact->getCountry();
+
+            }
+        }
         $form = $this->createFormBuilder($datas)
         ->add('lastname', 'text',array(
             "label"=>"Nom",

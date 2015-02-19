@@ -166,6 +166,9 @@ class Contact
     private $lastSearch;
 
 
+    public function getAddress() {
+        return $this->street." ".$this->number;
+    }
 
     /**
      * Get id
