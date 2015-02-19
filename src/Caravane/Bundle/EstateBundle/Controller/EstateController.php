@@ -498,10 +498,10 @@ class EstateController extends Controller
 				if($iType=="p") {
 					$query.=" AND E.isNewBuilding=1 " ; 
 				}
-				if($iType=="t") {
+				else if($iType=="t") {
 					$query.=" AND E.isTerrain=1 " ; 
 				}
-				else if($iType=="V"){
+				else {
 					$query.=" AND E.isNewBuilding=0 " ; 
 					$query.=" AND E.isTerrain=0 " ; 
 				}
