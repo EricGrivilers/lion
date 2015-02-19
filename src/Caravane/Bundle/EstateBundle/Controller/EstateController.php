@@ -1441,10 +1441,12 @@ class EstateController extends Controller
 						}
 						else {
 							$userEstate->setSaved(true);
-							$to=$this->container->getParameter('contactemail');
-							$from=$this->container->getParameter('contactemail');
+							//$to=$this->container->getParameter('contactemail');
+							//$from=$this->container->getParameter('contactemail');
+							$to = "favoris@immo-lelion.be";
+							$from = $user->getEmail();
 							$message = \Swift_Message::newInstance()
-						        ->setSubject('Website: Bien ajouté en favori')
+						        ->setSubject('Site-Favoris : '.($user->getContact()->getFirstname()." ".$user->getContact()->getLastname()).' - '. $estate->getName())
 						        ->setFrom($from)
 						        ->setTo($to)
 						        ->setBody($this->renderView('CaravaneCmsBundle:Frontend:Email/email_favorite.txt.twig', array('user' => $user, 'estate'=>$estate)))
