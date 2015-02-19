@@ -197,7 +197,7 @@ class EstateController extends Controller
 			$estatesGroup=$estates;
 			foreach($estatesGroup as $es) {
 				foreach($es->COMPS as $estates) {
-					$n=$this->import($estates,$t,$force, $es->CLAS,$p);
+					$n=$this->import($estates,$t,$force, $es->CLAS,null);
 				}
 			}
 		}
