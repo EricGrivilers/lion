@@ -1,8 +1,16 @@
 {% extends 'CaravaneEstateBundle:Backend:admin.html.twig' %}
 
 {% block body -%}
-
-
+    <section class='row' style="margin-bottom:10px">
+        Import 
+        <a class="btn btn-primary" href="{{url('caravane_estate_backend_estate_import', {'t':'V','p':1})}}">Vente</a>
+        <a class="btn btn-primary" href="{{url('caravane_estate_backend_estate_import', {'t':'L','p':1})}}">Location</a>
+        <a class="btn btn-primary" href="{{url('caravane_estate_backend_estate_import', {'t':'p','p':1})}}">Neuf</a>
+        <a class="btn btn-primary" href="{{url('caravane_estate_backend_estate_import', {'t':'t','p':1})}}">Terrain</a>
+    </section>
+    <br/>
+    <h1>Recherche</h1>
+    <div class="separator"></div>
     {% if search_form is defined %}
         <div>
 

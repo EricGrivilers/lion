@@ -219,16 +219,15 @@ class EstateController extends Controller
 			}
 		}
 */
-
-
+		
 		if($n>0) {
-			$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
-			return new response($response);
-
+			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
+			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
+			//return new response($response);
 		}
 
 
-		return $this->redirect($this->generateUrl('caravane_estate_backend_estate'));
+		return $this->redirect($this->generateUrl('caravane_estate_backend'));
 	}
 
 
@@ -536,7 +535,7 @@ class EstateController extends Controller
 				}
 				
 			}
-			echo "<br/>p:".$listEstate->CODE;
+			echo "<br/>------<br/>p:".$listEstate->CODE."<br/>";
 			$clas=$listEstate->CLAS;
 			$clas=str_replace("030/","",$clas);
 			if(!$estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$clas)) {
@@ -549,7 +548,7 @@ class EstateController extends Controller
 				echo "exists";
 			}
 			$estate->setUpdatedOn($date);
-			echo $estate->getId();
+			echo "Estate Id:".$estate->getId()."<br/>";
 			if(!$edate=$estate->getUpdatedOn()) {
 				$edate=new \Datetime("now");
 			}
@@ -606,18 +605,18 @@ class EstateController extends Controller
 					$estate->setIsNewBuilding(false);
 				}
 				else {
-					echo "vente";
+					echo "vente :".$iType."<br/>";
 					$estate->setLocation(false);
 					if($iType=="p") {
-						echo "new";
+						echo "is new";
 						$estate->setIsNewBuilding(true);
 					}
-					if($iType=="t") {
-						echo "new";
+					else if($iType=="t") {
+						echo "is terrain";
 						$estate->setIsTerrain(true);
 					}
 					else {
-						echo "old";
+						echo "is old";
 						$estate->setIsNewBuilding(false);
 						$estate->setIsTerrain(false);
 					}
