@@ -13,51 +13,38 @@ for ( ; i < iDevice.length ; i++ ) {
 }
 
 function initializeSearchMap() {
-		    var mapOptions = {
-		      center: new google.maps.LatLng(50.833555,4.39552),
-		      zoom: 12
-		    };
-		    var map = new google.maps.Map(document.getElementById("search_map"), mapOptions);
-		   i=0;
-		   $.each(markers,function(a,b) {
-
-				/*marker = new google.maps.Marker({
-			        position: new google.maps.LatLng(b.lat, b.lng),
-			        map: map
-			      });
-*/
-			if(b.num>0) {
-				var marker = new MarkerWithLabel({
-				       position: new google.maps.LatLng(b.lat, b.lng),
-				       map: map,
-				        labelContent: b.num,
-				       labelAnchor: new google.maps.Point(20, 40),
-				       labelClass: "marker_label"
-				});
-
-
-
-				 google.maps.event.addListener(marker, 'click', (function(marker, i) {
-					return function() {
-						$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(0);
-						$('#form_container form')[0].reset();
-						$('#form_container form #search_form_area').val(markers[i].id);
-						if(type=='new') {
-							$('#form_container form #search_form_isNewBuilding').attr('checked',true);
-						}
-						$('#form_container form')[0].submit();
-						//route=Routing.generate('caravane_estate_frontend_estate_search_by_area',{'type':type,'id': markers[i].id});
-						//document.location=route;
-					}
-				}) (marker, i));
-			}
-
-			i++;
-
-
+	var mapOptions = {
+		center: new google.maps.LatLng(50.833555,4.39552),
+		zoom: 12
+	};
+	var map = new google.maps.Map(document.getElementById("search_map"), mapOptions);
+	i=0;
+	$.each(markers,function(a,b) {
+		if(b.num>0) {
+			var marker = new MarkerWithLabel({
+				position: new google.maps.LatLng(b.lat, b.lng),
+				map: map,
+				labelContent: b.num,
+				labelAnchor: new google.maps.Point(20, 40),
+				labelClass: "marker_label"
 			});
 
-	}
+			google.maps.event.addListener(marker, 'click', (function(marker, i) {
+				return function() {
+					$("form#caravane_bundle_estatebundle_search input#search_form_offset").val(0);
+					$('#form_container form')[0].reset();
+					$('#form_container form #search_form_area').val(markers[i].id);
+					if(type=='new') {
+						$('#form_container form #search_form_isNewBuilding').attr('checked',true);
+					}
+					$('#form_container form')[0].submit();
+				}
+			}) (marker, i));
+		}
+		i++;
+	});
+
+}
 
 
 

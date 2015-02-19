@@ -29,10 +29,13 @@ class DefaultController extends Controller
             if($data['ref']) {
                 $em = $this->getDoctrine()->getManager();
                 $estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($data['ref']);
-                $subject = "Website Le Lion - ".($estate->getLocation()==1?'Location':'Vente')." - ".$estate->getCategory()->getName()." - ref.:".$estate->getShortReference();
+                $subject = "Site Le Lion - ".($estate->getLocation()==1?'Location':'Vente')." - ".$estate->getCategory()->getName()." - ref.:".$estate->getShortReference();
             }
             $to=$this->container->getParameter('contactemail');
             $from=$this->container->getParameter('contactemail');
+            if($data['email']!='') {
+                $from=$data['email'];
+            }
             $message = \Swift_Message::newInstance()
                 ->setSubject($subject)
                 ->setFrom($from)
