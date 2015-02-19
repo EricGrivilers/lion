@@ -5,8 +5,9 @@
 	<header class='page-header '>
 		{#    SLIDE SHOW  #}
 		{#% include "CaravaneCmsBundle:Frontend:Widget/slider.html.twig" %#}
-		{{ render(controller('CaravaneEstateBundle:Slideshow:render' )) }}
-
+		{% if is_mobile() == false %}
+			{{ render(controller('CaravaneEstateBundle:Slideshow:render' )) }}
+		{% endif %}
 
 		{#    MAIN MENU + SEARCH  #}
 		{% include "CaravaneCmsBundle:Menu:main.html.twig" %}
@@ -14,9 +15,10 @@
 {% endblock header %}
 
 {% block content %}
-
-	{#   NEW ITEMS #}
-	{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 6 } ) ) }}
+	{% if is_mobile() == false %}
+		{#   NEW ITEMS #}
+		{{ render(controller('CaravaneEstateBundle:Estate:lastUpdated', { 'max': 6 } ) ) }}
+	{% endif %}
 		<!-- Content area 4 -->
 	<aside class='wrapper border-tb-white marble-color home_infos'  id="home_infos">
 		<div class='container'>
