@@ -103,7 +103,7 @@ class EstateController extends Controller
 		"01B2"=>"0303",
 		"01H"=>"0320",
 		"01H1"=>"0321",
-		
+
 		"000"=>"01 A1",
 		"0000"=>"01 A2",
 		"0001"=>"01 A3",
@@ -167,9 +167,11 @@ class EstateController extends Controller
 		"1133"=>"0372",
 	);
 
+	public function cronAction(Request $request) {
+		$this->importAction($request, true);
+	}
 
-
-	public function importAction(Request $request) {
+	public function importAction(Request $request, $cron=false) {
 
 		$force=$request->query->get('force');
 		$p=$request->query->get('p');
@@ -219,14 +221,16 @@ class EstateController extends Controller
 			}
 		}
 */
-		
+
 		if($n>0) {
 			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
 			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
 			//return new response($response);
 		}
 
-
+		if($cron==true) {
+			die();
+		}
 		return $this->redirect($this->generateUrl('caravane_estate_backend'));
 	}
 
@@ -442,7 +446,7 @@ class EstateController extends Controller
 			$libe=trim($libe);
 			if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByCode($areaXml->CODE)) {
 				$area = new Area();
-				
+
 				$area->setNomQuartier($libe);
 				$area->setCode($areaXml->CODE);
 
@@ -460,7 +464,7 @@ class EstateController extends Controller
 					}
 				}
 
-				
+
 			}
 			if($area->getLat()=='' || $area->getLng()=='' || $area->getLatLng()=='') {
 				$geocoder = $this->get('ivory_google_map.geocoder');
@@ -496,24 +500,24 @@ class EstateController extends Controller
 			else {
 				$query.=" WHERE E.location=0";
 				if($iType=="p") {
-					$query.=" AND E.isNewBuilding=1 " ; 
+					$query.=" AND E.isNewBuilding=1 " ;
 				}
 				else if($iType=="t") {
-					$query.=" AND E.isTerrain=1 " ; 
+					$query.=" AND E.isTerrain=1 " ;
 				}
 				else {
-					$query.=" AND E.isNewBuilding=0 " ; 
-					$query.=" AND E.isTerrain=0 " ; 
+					$query.=" AND E.isNewBuilding=0 " ;
+					$query.=" AND E.isTerrain=0 " ;
 				}
 			}
 
 			$q = $em->createQuery($query);
 			$numUpdated = $q->execute();
 		}
-		
 
 
-		
+
+
 		$n=0;
 		foreach($estates as $k=>$listEstate) {
 			$n++;
@@ -533,7 +537,7 @@ class EstateController extends Controller
 				else {
 					$date=new \Datetime();
 				}
-				
+
 			}
 			echo "<br/>------<br/>p:".$listEstate->CODE."<br/>";
 			$clas=$listEstate->CLAS;
@@ -863,7 +867,7 @@ class EstateController extends Controller
 		if(!$type=$request->query->get('type')) {
 			$type="sale";
 		}
-		
+
 		$em = $this->getDoctrine()->getManager();
 		if(!$datas=$request->request->get('search_form')) {
 			$datas=array('location'=>0);
@@ -909,7 +913,7 @@ class EstateController extends Controller
 			}
 		}
 
-		
+
 
 		$estates=$em->getRepository('CaravaneEstateBundle:Estate')->getSearchResult($datas);
 		return $this->render('CaravaneEstateBundle:Estate:index.html.twig', array(
@@ -1042,7 +1046,7 @@ class EstateController extends Controller
 				$editForm = $this->createEditForm($entity);
 				$deleteForm = $this->createDeleteForm($id);
 
-				if(!json_decode($entity->getStats(), true)) { 
+				if(!json_decode($entity->getStats(), true)) {
 		            $visits=array();
 		        }
 		        else {
@@ -1070,7 +1074,7 @@ class EstateController extends Controller
 		        		}
 		        	}
 		        }
-		        
+
 		        //$tA=array(5,6,7,8,7,1,2);
 		         $series = array(
 			        array("type"=>"spline","name" => "Visites",    "data" => $tA)
@@ -1087,7 +1091,7 @@ class EstateController extends Controller
 			    $ob->yAxis->title(array('text'  => "Visites"));
 			    $ob->series($series);
 
-			   
+
 				return $this->render('CaravaneEstateBundle:Estate:edit.html.twig', array(
 						'entity'      => $entity,
 						'edit_form'   => $editForm->createView(),
@@ -1460,7 +1464,7 @@ class EstateController extends Controller
 						}
 						$em->persist($userEstate);
 						$em->flush();
-						
+
 						return new Response('success');
 
 					}
@@ -1561,7 +1565,7 @@ die();
 
 		$i=2;
 		foreach($estates as $estate) {
-			
+
 	        $viewed="";
 	        $saved="";
 	        foreach($estate->getUser() as $e) {
@@ -1572,7 +1576,7 @@ die();
 	        		$saved.=$e->getUser()->getContact()->getSalutation()." ".$e->getUser()->getContact()->getFirstname()." ".$e->getUser()->getContact()->getLastname()."\n";
 	        	}
 	        }
-	        
+
 	        $createdOn="";
 	        if($estate->getCreatedOn()) {
 	        	$createdOn=$estate->getCreatedOn()->format('Y-m-d');
@@ -1617,7 +1621,7 @@ die();
 		$response->headers->set('Pragma', 'public');
 		$response->headers->set('Cache-Control', 'maxage=1');
 
-        return $response;        
+        return $response;
 	}
 
 

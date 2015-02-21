@@ -10,6 +10,10 @@ caravane_estate_backend_estate_import:
     path:     /admin/estate/import
     defaults: { _controller: "CaravaneEstateBundle:Estate:import" }
 
+caravane_estate_backend_estate_cron:
+    path:     /cron
+    defaults: { _controller: "CaravaneEstateBundle:Estate:cron" }
+
 caravane_estate_backend_estate_export:
     path:     /admin/estate/export
     defaults: { _controller: "CaravaneEstateBundle:Estate:export" }
