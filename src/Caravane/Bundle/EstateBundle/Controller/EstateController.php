@@ -712,10 +712,12 @@ class EstateController extends Controller
 				*/
 
 
-
-				foreach($estate->getPhoto() as $photo) {
-					//$estate->removePhoto($photo);
+				if($force==true) {
+					foreach($estate->getPhoto() as $photo) {
+						$estate->removePhoto($photo);
+					}
 				}
+
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
 					$xmlPhoto="PHOTO_".$id;
