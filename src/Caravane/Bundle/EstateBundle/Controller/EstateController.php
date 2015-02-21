@@ -189,8 +189,13 @@ class EstateController extends Controller
 
 
 
+		if($cron==true) {
+			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage='.$p );
 
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
+		}
+		else {
+			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
+		}
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$n=$this->import($estates,$t,$force,null,$p);
