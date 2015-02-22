@@ -714,7 +714,10 @@ class EstateController extends Controller
 
 				//if($force==true) {
 					foreach($estate->getPhoto() as $photo) {
-						$estate->removePhoto($photo);
+						if($photo) {
+							$estate->removePhoto($photo);
+						}
+
 					}
 				//}
 
