@@ -194,7 +194,7 @@ class EstateController extends Controller
 
 		}
 		else {
-			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
+			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=3&OxyPage='.$p );
 		}
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
@@ -712,11 +712,11 @@ class EstateController extends Controller
 				*/
 
 
-				if($force==true) {
+				//if($force==true) {
 					foreach($estate->getPhoto() as $photo) {
 						$estate->removePhoto($photo);
 					}
-				}
+				//}
 
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
@@ -726,7 +726,7 @@ class EstateController extends Controller
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
-							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)  || $force==true) {
+							//if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)  || $force==true) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
 									curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -745,7 +745,7 @@ class EstateController extends Controller
 										$em->persist($photo);
 									}
 								}
-							}
+							//}
 
 						}
 					}
