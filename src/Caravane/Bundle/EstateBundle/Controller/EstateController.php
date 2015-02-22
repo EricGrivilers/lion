@@ -189,13 +189,13 @@ class EstateController extends Controller
 
 
 
-		if($cron==true) {
-			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage='.$p );
+		//if($cron==true) {
+		//	curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage='.$p );
 
-		}
-		else {
+		//}
+		//else {
 			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=5&OxyPage='.$p );
-		}
+		//}
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$n=$this->import($estates,$t,$force,null,$p);
@@ -210,17 +210,17 @@ class EstateController extends Controller
 		}
 
 		if($n>0) {
-			if($cron==true) {
-				return $this->redirect($this->generateUrl('caravane_estate_backend_estate_cron', array('t'=>$t,'p'=>($p+1))));
-			}
+			//if($cron==true) {
+			//	return $this->redirect($this->generateUrl('caravane_estate_backend_estate_cron', array('t'=>$t,'p'=>($p+1))));
+			//}
 			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
 			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
 			//return new response($response);
 		}
 
-		if($cron==true) {
+		//if($cron==true) {
 			//die();
-		}
+		//}
 		return $this->redirect($this->generateUrl('caravane_estate_backend'));
 	}
 
