@@ -723,7 +723,8 @@ class EstateController extends Controller
 					//$estate->removePhoto($photo);
 				}
 				for($i=1;$i<=20;$i++) {
-					$id=($i<10?"0".$i:$i);
+					//$id=($i<10?"0".$i:$i);
+					$id="0".$i;
 					$xmlPhoto="PHOTO_".$id;
 
 					if($xmlUrl=$xmlEstate->$xmlPhoto) {
