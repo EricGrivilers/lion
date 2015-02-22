@@ -167,11 +167,9 @@ class EstateController extends Controller
 		"1133"=>"0372",
 	);
 
-	public function cronAction(Request $request) {
-		$this->importAction($request, true);
-	}
 
-	public function importAction(Request $request, $cron=false) {
+
+	public function importAction(Request $request) {
 
 		$force=$request->query->get('force');
 		$p=$request->query->get('p');
@@ -189,13 +187,8 @@ class EstateController extends Controller
 
 
 
-		//if($cron==true) {
-		//	curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage='.$p );
 
-		//}
-		//else {
-			curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=3&OxyPage='.$p );
-		//}
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$n=$this->import($estates,$t,$force,null,$p);
@@ -209,18 +202,31 @@ class EstateController extends Controller
 			}
 		}
 
+
+/*
+
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/carte.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
+		$xml = curl_exec($rs);
+		$estates = new \SimpleXMLElement($xml);
+		$this->setGeo($estates,$t,$force);
+
+		if($t=='p') {
+			$estatesGroup=$estates;
+			foreach($estatesGroup as $es) {
+				foreach($es->COMPS as $estates) {
+					$this->setGeo($estates,"new",$force);
+				}
+			}
+		}
+*/
+
 		if($n>0) {
-			//if($cron==true) {
-			//	return $this->redirect($this->generateUrl('caravane_estate_backend_estate_cron', array('t'=>$t,'p'=>($p+1))));
-			//}
 			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
 			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
 			//return new response($response);
 		}
 
-		//if($cron==true) {
-			//die();
-		//}
+
 		return $this->redirect($this->generateUrl('caravane_estate_backend'));
 	}
 
@@ -712,15 +718,10 @@ class EstateController extends Controller
 				*/
 
 
-				//if($force==true) {
-					foreach($estate->getPhoto() as $photo) {
-						if($photo) {
-							$estate->removePhoto($photo);
-						}
 
-					}
-				//}
-
+				foreach($estate->getPhoto() as $photo) {
+					//$estate->removePhoto($photo);
+				}
 				for($i=1;$i<=20;$i++) {
 					$id=($i<10?"0".$i:$i);
 					$xmlPhoto="PHOTO_".$id;
@@ -729,7 +730,7 @@ class EstateController extends Controller
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
 							$filename=$t[count($t)-1];
-							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename)  || $force==true) {
+							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename) ) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
 									curl_setopt($ch, CURLOPT_FILE, $fp);
