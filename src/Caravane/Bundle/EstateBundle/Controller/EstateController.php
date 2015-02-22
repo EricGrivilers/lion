@@ -723,14 +723,15 @@ class EstateController extends Controller
 					//$estate->removePhoto($photo);
 				}
 				for($i=1;$i<=20;$i++) {
-					//$id=($i<10?"0".$i:$i);
-					$id="0".$i;
+					$id=($i<10?"0".$i:$i);
+					//$id="0".$i;
 					$xmlPhoto="PHOTO_".$id;
 
 					if($xmlUrl=$xmlEstate->$xmlPhoto) {
 						if(preg_match("/\//",$xmlUrl)) {
 							$t=explode("/",$xmlUrl);
-							$filename=$t[count($t)-1];
+							$filename=end($t);
+							//$t[count($t)-1];
 							if(!file_exists(__DIR__.'/../../../../../web/photos/big/'.$filename) ) {
 								if($ch = curl_init($xmlUrl)) {
 									$fp = fopen(__DIR__.'/../../../../../web/photos/big/'.$filename, 'wb');
@@ -739,19 +740,18 @@ class EstateController extends Controller
 									curl_exec($ch);
 									curl_close($ch);
 									fclose($fp);
-									if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
-										$photo= new Photo();
-										$photo->setFilename($filename);
-										$photo->setRanking(intval(substr($filename,0,2)));
-										$photo->setEstate($estate);
-										if($i==1) {
-											$photo->setIsDefault(true);
-										}
-										$em->persist($photo);
-									}
 								}
 							}
-
+							if(!$photo=$em->getRepository('CaravaneEstateBundle:Photo')->findOneByFilename($filename)) {
+								$photo= new Photo();
+								$photo->setFilename($filename);
+								$photo->setRanking(intval(substr($filename,0,2)));
+								$photo->setEstate($estate);
+								if($i==1) {
+									$photo->setIsDefault(true);
+								}
+								$em->persist($photo);
+							}
 						}
 					}
 				}
