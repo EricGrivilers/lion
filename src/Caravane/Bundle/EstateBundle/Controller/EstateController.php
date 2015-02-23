@@ -220,7 +220,7 @@ class EstateController extends Controller
 		}
 */
 
-		if($n>0) {
+		if($n>=0) {
 			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
 			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
 			//return new response($response);
@@ -487,7 +487,7 @@ class EstateController extends Controller
 	private function import($estates, $iType, $force=false, $parentClas=null,$p=1) {
 		$em = $this->getDoctrine()->getManager();
 
-	echo "page".$p."<br/>";
+		echo "page".$p."<br/>";
 		if($p==1 && in_array($iType, array('V','L','p','t'))) {
 			$query='update CaravaneEstateBundle:Estate E set E.status = 0 ';
 			if($iType=="L") {
