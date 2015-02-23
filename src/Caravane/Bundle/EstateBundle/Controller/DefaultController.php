@@ -19,11 +19,13 @@ class DefaultController extends Controller
 
 
     public function installAction() {
+    	$em = $this->getDoctrine()->getManager();
+    		$conn = $this->get('database_connection');
     	echo "U";
 		$userManager = $this->get('fos_user.user_manager');
-		$em = $this->getDoctrine()->getManager();
 
-    	$conn = $this->get('database_connection');
+
+
 		$sql = 'SELECT * FROM users WHERE processed!=1 LIMIT 0,50';
 		$rows = $conn->query($sql);
 
@@ -187,7 +189,7 @@ class DefaultController extends Controller
 				$sql2 = 'UPDATE items SET processed=1 WHERE reference="'.$reference.'"';
 				$conn->query($sql2);
 
-				
+
 			}
 			else {
 				$sql2 = 'UPDATE items SET processed=1 WHERE reference="'.$reference.'"';
@@ -209,7 +211,7 @@ class DefaultController extends Controller
 			if($user=$userManager->findUserByEmail($email)) {
 				if($estate=$em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($reference)) {
 					echo $user->getEmail()." <> ".$estate->getName()."<br/>";
-					
+
 					$ue=new UserEstate();
 					$ue->setUser($user);
 					$ue->setEstate($estate);
@@ -248,7 +250,7 @@ class DefaultController extends Controller
 						}
 						else {//2015
 							$date=date_create_from_format('z-Y', $k."-2015");
-							
+
 						}
 						echo $date->format("Y-m-d")."<br/>";
 						$estate->addVisit($date->format("Y-m-d"), $v);
@@ -265,7 +267,7 @@ class DefaultController extends Controller
 			$sql2 = 'UPDATE item_statsv2 SET processed=1 WHERE itemId="'.$row['itemId'].'"';
 			$conn->query($sql2);
 		}
-		
+
 		$em->flush();
 
     }

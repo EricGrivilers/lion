@@ -188,7 +188,7 @@ class EstateController extends Controller
 
 
 
-		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=10&OxyPage='.$p );
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=5&OxyPage='.$p );
 		$xml = curl_exec($rs);
 		$estates = new \SimpleXMLElement($xml);
 		$n=$this->import($estates,$t,$force,null,$p);
@@ -220,13 +220,50 @@ class EstateController extends Controller
 		}
 */
 
-		if($n>=0) {
-			//$response= "<script>document.location='import?t=".$t."&force=".$force."&p=".($p+1)."'</script>";
-			return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))));
-			//return new response($response);
+		if($n>0) {
+			//sleep(1);
+			$response= "<script>document.location='import?t=".$t."&p=".($p+1)."'</script>";
+			//return $this->redirect($this->generateUrl('caravane_estate_backend_estate_import', array('t'=>$t,'p'=>($p+1))), 301);
+			return new response($response);
 		}
 
+		$actives=array();
+		curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage=1' );
+		$xml = curl_exec($rs);
+		$estates = new \SimpleXMLElement($xml);
+		foreach($estates as $listEstate) {
+			$clas=$listEstate->CLAS;
+			//echo $clas;
+			$clas=str_replace("030/","",$clas);
+			if($estate= $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/'.$clas)) {
+				$actives[]=$estate->getId();
+			}
+		}
 
+		$query='update CaravaneEstateBundle:Estate E set E.status = 0 ';
+		if($t=="L") {
+			$query.=" WHERE E.location=1";
+		}
+		else {
+			$query.=" WHERE E.location=0";
+			if($t=="p") {
+				$query.=" AND E.isNewBuilding=1 " ;
+			}
+			else if($t=="t") {
+				$query.=" AND E.isTerrain=1 " ;
+			}
+			else {
+				$query.=" AND E.isNewBuilding=0 " ;
+				$query.=" AND E.isTerrain=0 " ;
+			}
+		}
+		$query.=" AND E.id NOT IN (".implode(",", $actives).")";
+		//var_dump($actives);
+//echo $query;
+		$q = $em->createQuery($query);
+		$numUpdated = $q->execute();
+
+//die();
 		return $this->redirect($this->generateUrl('caravane_estate_backend'));
 	}
 
@@ -487,6 +524,7 @@ class EstateController extends Controller
 	private function import($estates, $iType, $force=false, $parentClas=null,$p=1) {
 		$em = $this->getDoctrine()->getManager();
 
+/*
 		echo "page".$p."<br/>";
 		if($p==1 && in_array($iType, array('V','L','p','t'))) {
 			$query='update CaravaneEstateBundle:Estate E set E.status = 0 ';
@@ -510,7 +548,7 @@ class EstateController extends Controller
 			$q = $em->createQuery($query);
 			$numUpdated = $q->execute();
 		}
-
+*/
 
 
 
@@ -822,6 +860,7 @@ class EstateController extends Controller
 			$em->persist($estate);
 			$em->flush();
 		}
+		echo $n."<br/>";
 		return $n;
 	}
 
