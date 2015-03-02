@@ -63,6 +63,7 @@ class RegistrationController extends BaseController
             $em = $this->get('doctrine')->getEntityManager();
             $contact=$user->getContact();
             $contact->setUser($user);
+            $contact->setCreatedOn(new \Datetime('now'));
             $em->persist($contact);
             $em->flush();
 

@@ -112,7 +112,7 @@ class ApiController extends RestController
         $em->flush();
 
 
-        
+
         $contact = new Contact();
         $contact->setLanguage($data['language']);
         $contact->setSalutation($data['salutation']);
@@ -126,6 +126,7 @@ class ApiController extends RestController
         $contact->setFax($data['fax']);
         $contact->setCountry($data['country']);
         $contact->setUser($user);
+        $contact->setCreatedOn(new \Datetime('now'));
         $em->persist($contact);
         $em->flush();
 
@@ -300,7 +301,7 @@ class ApiController extends RestController
             throw new AccessDeniedException();
         }
 
-        
+
         $estates=array();
         $em = $this->getDoctrine()->getManager();
         $type="vente";
@@ -375,7 +376,7 @@ class ApiController extends RestController
             return array(
             'estates'      => $estates
         );
-        
+
 
 
     }
@@ -408,11 +409,11 @@ class ApiController extends RestController
                     }
                 }
         }
-        
+
         if(count($estates)<=0) {
             $estates=$em->getRepository('CaravaneEstateBundle:Estate')->findLastUpdated($max);
         }
-       
+
         return array(
             'estates'      => $estates
         );
