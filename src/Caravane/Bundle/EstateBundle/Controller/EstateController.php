@@ -760,7 +760,7 @@ class EstateController extends Controller
 				foreach($estate->getPhoto() as $photo) {
 					//$estate->removePhoto($photo);
 				}
-				for($i=1;$i<=20;$i++) {
+				for($i=1;$i<=40;$i++) {
 					$id=($i<10?"0".$i:$i);
 					//$id="0".$i;
 					$xmlPhoto="PHOTO_".$id;
