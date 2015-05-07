@@ -58,3 +58,6 @@ web/old
 
 
 sftp-config.json
+*.idea
+.idea
+.idea/*
