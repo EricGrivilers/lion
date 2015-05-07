@@ -53,6 +53,15 @@ class Estate
     private $updatedOn;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="importedOn", type="datetime", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $importedOn;
+
+    /**
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", mappedBy="estate")
      * @ORM\OrderBy({"ranking" = "ASC"})
      * @Expose
@@ -1801,5 +1810,28 @@ class Estate
     public function getIsTerrain()
     {
         return $this->isTerrain;
+    }
+
+    /**
+     * Set importedOn
+     *
+     * @param \DateTime $importedOn
+     * @return Estate
+     */
+    public function setImportedOn($importedOn)
+    {
+        $this->importedOn = $importedOn;
+
+        return $this;
+    }
+
+    /**
+     * Get importedOn
+     *
+     * @return \DateTime 
+     */
+    public function getImportedOn()
+    {
+        return $this->importedOn;
     }
 }
