@@ -242,4 +242,18 @@ class EstateRepository extends EntityRepository
 
 	}
 
+
+
+    public function imported($existing) {
+        $today= new \datetime('now');
+        $today->setTime(0,0,1);
+        $query=$this->getEntityManager()->getRepository("CaravaneEstateBundle:Estate")->createQueryBuilder('C');
+        $query->where($query->expr()->in('C.id', $existing));
+        $query->andWhere('C.importedOn < :today OR C.importedOn IS NULL')->setParameter('today', $today);
+
+        $query->setMaxResults(5);
+        $entities = $query->getQuery()->getResult();
+        return $entities;
+    }
+
 }

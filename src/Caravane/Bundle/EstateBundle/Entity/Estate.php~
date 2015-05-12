@@ -53,6 +53,15 @@ class Estate
     private $updatedOn;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="importedOn", type="datetime", nullable=true)
+     * @Expose
+     * @Groups({"list","detail","search"})
+     */
+    private $importedOn;
+
+    /**
      * @ORM\OneToMany( targetEntity="Caravane\Bundle\EstateBundle\Entity\Photo", mappedBy="estate")
      * @ORM\OrderBy({"ranking" = "ASC"})
      * @Expose
@@ -1778,5 +1787,28 @@ class Estate
 
         }  
         return array("total"=>$nbTotal,"month"=>$nbMonth,"week"=>$nbWeek,"day"=>$nbDay);
+    }
+
+    /**
+     * Set isTerrain
+     *
+     * @param boolean $isTerrain
+     * @return Estate
+     */
+    public function setIsTerrain($isTerrain)
+    {
+        $this->isTerrain = $isTerrain;
+
+        return $this;
+    }
+
+    /**
+     * Get isTerrain
+     *
+     * @return boolean 
+     */
+    public function getIsTerrain()
+    {
+        return $this->isTerrain;
     }
 }
