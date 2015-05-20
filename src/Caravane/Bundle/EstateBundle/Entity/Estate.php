@@ -672,7 +672,6 @@ class Estate
                     $i++;
                 }
             }
-
         }
 
         return $this->summary;

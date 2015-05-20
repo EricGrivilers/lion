@@ -46,6 +46,8 @@ web/photos
 web/pdfs
 web/old/photos
 
+admin/lib/html2ps/public_html/cache/*
+
 .DS_Store
 *.DS_Store
 */.DS_Store
@@ -55,7 +57,7 @@ web/old/photos
 
 app/var/jwt
 web/old
-
+_new/
 
 sftp-config.json
 *.idea

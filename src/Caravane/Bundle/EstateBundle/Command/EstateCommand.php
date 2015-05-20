@@ -168,12 +168,16 @@ class EstateCommand extends ContainerAwareCommand {
         $this
         ->setName('caravane:estate:import')
         ->setDescription('Import from Evosys')
-        ->addArgument('type', InputArgument::REQUIRED, 'iType')
+        //->addArgument('type', InputArgument::REQUIRED, 'iType')
         //->addOption('type', null, InputOption::VALUE_NONE, 'Type')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output) {
+        $estateManager=$this->getContainer()->get('caravane_estate.manager');
+        $estateManager->setUp();
+        $estateManager->import();
+        /*
         $em = $this->getContainer()->get('doctrine')->getManager();
         $iType = $input->getArgument('type');
         $this->setup();
@@ -197,6 +201,7 @@ class EstateCommand extends ContainerAwareCommand {
             $estate=$this->import($estate,$iType);
             $em->persist($estate);
         }
+        */
         $text = "ok";
         $output->writeln($text);
     }
