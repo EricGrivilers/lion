@@ -54,7 +54,7 @@
                 {%  if estate.isNewBuilding %}
                     {%  set boundaries=estate.getChildrenBoundaries  %}
                     <li><label>{{"Prix"|trans}}: de</label>  {{ boundaries.prices.min|number_format(0,'.', '.') }} <label>à</label> {{ boundaries.prices.max|number_format(0,'.', '.') }} <label>€</label></li>
-                    <li><label>{{"Reférence du bien"|trans}}:</label> {%  for ref in boundaries.references %}{{ref}} {%  endfor  %}</li>
+                    {#<li><label>{{"Reférence du bien"|trans}}:</label> {%  for ref in boundaries.references %}{{ref}} {%  endfor  %}</li>#}
                     <li><label>{{"Supérficie"|trans}}: de </label> {{ boundaries.surface.min }} <label>à</label> {{ boundaries.surface.max }} <label>m2</label></li>
                     <li><label>{{"Chambre"|trans}}{{estate.rooms>1?"s":""}}: de </label> {{ boundaries.rooms.min }} <label>à</label> {{ boundaries.rooms.max }} </li>
 

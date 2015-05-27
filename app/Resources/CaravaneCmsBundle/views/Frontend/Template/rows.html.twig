@@ -19,7 +19,8 @@
 								<div class="bg"></div>
 								<div class="text">
                                     {%  if estate.isNewBuilding %}
-                                        <h2><b>{{estate.locfr}}</b><br>
+                                        {%  set name=estate.name|split(' ')  %}
+                                        <h2><b>{{estate.locfr}} {{ name[0] }}</b><br>
                                         {%  if  estate.children|length>1 %}
                                             {%  set boundaries=estate.getChildrenBoundaries  %}
                                             {%  if  boundaries.rooms.min==boundaries.rooms.max %}
