@@ -18,8 +18,25 @@
 							<header>
 								<div class="bg"></div>
 								<div class="text">
+                                    {%  if estate.isNewBuilding %}
+                                        <h2><b>{{estate.locfr}}</b><br>
+                                        {%  if  estate.children|length>1 %}
+                                            {%  set boundaries=estate.getChildrenBoundaries  %}
+                                            {%  if  boundaries.rooms.min==boundaries.rooms.max %}
+                                                {{ boundaries.rooms.max }} chambre{{ boundaries.rooms.max>1?"s":""}}
+                                            {%  else  %}
+                                                De {{ boundaries.rooms.min }} à {{ boundaries.rooms.max }} chambres
+                                            {%  endif %}
+                                            <br>
+                                            De {{ boundaries.prices.min|number_format(0,'.', '.') }} à {{ boundaries.prices.max|number_format(0,'.', '.') }} €
+                                            </h2>
+                                        {%  else  %}
+                                            <h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":'Prix sur demande'|trans}}</h2>
+                                        {%  endif %}
+                                    {%  else  %}
 									<h2><b>{{estate.locfr}}</b>{% if estate.rooms>0 %}<br> {{estate.rooms}} chambre{{estate.rooms>1?"s":""}}{% endif %}<br>{{estate.onDemand!=1?estate.prix|number_format(0,'.', '.')~"€":'Prix sur demande'|trans}}</h2>
-									<p>{{estate.summary|raw }} </p>
+									{%  endif %}
+                                    <p>{{estate.summary|raw }} </p>
 								</div>
 							</header>
 							<img src="{{asset(('photos/big/'~estate.photo) | imagine_filter('thumbnail_medium_square') ) }}" class="img-responsive" alt="{{estate.category.name}} {{estate.locfr}}"  />

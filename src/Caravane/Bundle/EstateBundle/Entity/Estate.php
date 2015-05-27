@@ -1631,7 +1631,37 @@ class Estate
     }
 
 
+    public function getChildrenBoundaries()
+    {
+        $prices=array('min'=>1000000000000000000000,'max'=>0);
+        $rooms=array('min'=>100000,'max'=>0);
+        $surfaces=array('min'=>10000000000,'max'=>0);
+        $references=array();
+        foreach($this->getChildren() as $child) {
+            if($child->getPrix()<$prices['min']) {
+                $prices['min']=$child->getPrix();
+            }
+            if($child->getPrix()>$prices['max']) {
+                $prices['max']=$child->getPrix();
+            }
+            if($child->getRooms()<$rooms['min']) {
+                $rooms['min']=$child->getRooms();
+            }
+            if($child->getRooms()>$rooms['max']) {
+                $rooms['max']=$child->getRooms();
+            }
+            if($child->getSurface()<$surfaces['min']) {
+                $surfaces['min']=$child->getSurface();
+            }
+            if($child->getSurface()>$rooms['max']) {
+                $surfaces['max']=$child->getSurface();
+            }
+            $references[]=$child->getReference();
+        }
 
+        //array_sort($children);
+        return array('prices'=>$prices,'rooms'=>$rooms, 'surface'=>$surfaces, 'references'=>$references);
+    }
     /**
      * Set refe
      *
