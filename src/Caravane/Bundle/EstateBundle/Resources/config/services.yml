@@ -11,7 +11,7 @@ services:
 
     caravane_estate.manager:
         class: Caravane\Bundle\EstateBundle\Manager\EstateManager
-        arguments: ["@doctrine.orm.entity_manager","@ivory_google_map.geocoder"]
+        arguments: ["@doctrine.orm.entity_manager","@ivory_google_map.geocoder", %evosysId%, %evosysPrefix%, %evosysUrl% ]
 
     fix_authentication_header_listener:
         class: Caravane\Bundle\EstateBundle\Listener\AuthenticationHeaderListener

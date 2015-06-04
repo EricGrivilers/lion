@@ -11,10 +11,19 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 
 use Caravane\Bundle\EstateBundle\Entity\Estate;
+use Caravane\Bundle\EstateBundle\Entity\Category;
+use Caravane\Bundle\EstateBundle\Entity\Zone;
+use Caravane\Bundle\EstateBundle\Entity\Area;
+use Caravane\Bundle\EstateBundle\Entity\Location;
 use Caravane\Bundle\EstateBundle\Entity\Photo;
+use Caravane\Bundle\EstateBundle\Entity\Price;
 
 class EstateManager
 {
+
+    private $evosysId;
+    private $evosysPrefix;
+    private $evosysUrl;
 
     private $geocoder;
     private $em;
@@ -57,8 +66,12 @@ class EstateManager
     private $zone2;
     private $zone3;
     private $zone4;
+    private $zone5;
 
-    private $types=array("V","L","p","t");
+    private $zone;
+
+    private $types=array("V","L","P","T");
+
 
     private $communes = array(
         "0"=>array("Bxl 19 Communes",""),
@@ -195,201 +208,244 @@ class EstateManager
     );
 
 
-    public function __construct(EntityManager $em, $geocoder) {
+
+    public function __construct(EntityManager $em, $geocoder, $evosysId, $evosysPrefix, $evosysUrl) {
         $this->em = $em;
         $this->geocoder=$geocoder;
 
         $this->photosDirectory= __DIR__."/../../../../../web/photos/big";
         $this->photosCacheDirectory= __DIR__."/../../../../../web/media/cache";
 
+        $this->evosysId=$evosysId;
+
+        $this->evosysPrefix= $evosysPrefix;
+        $this->evosysUrl = $evosysUrl;
+
+
     }
 
-    public function setup() {
+    public function setup($setZone=false, $setGeo=false, $force=false) {
         $em = $this->em;
 
         if(!file_exists(__DIR__.'/../../../../../web/pdfs')) {
             mkdir(__DIR__.'/../../../../../web/pdfs', 0755);
         }
 
-        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(1)) {
-            $price=new Price();
-            $price->setPrice(750000);
-            $price->setType('sale');
-            $em->persist($price);
-            $em->flush();
-        }
+        $prices=array(
+            "1"=>array(
+                "type"=>"sale",
+                "price"=>750000
+            ),
+            "2"=>array(
+                "type"=>"sale",
+                "price"=>1500000
+            ),
+            "3"=>array(
+                "type"=>"rent",
+                "price"=>2000
+            ),
+            "4"=>array(
+                "type"=>"rent",
+                "price"=>4000
+            ),
+            "5"=>array(
+                "type"=>"rent",
+                "price"=>6000
+            )
+        );
 
-        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(2)) {
-            $price=new Price();
-            $price->setPrice(1500000);
-            $price->setType('sale');
-            $em->persist($price);
-            $em->flush();
-        }
 
-        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(3)) {
-            $price=new Price();
-            $price->setPrice(2000);
-            $price->setType('rent');
-            $em->persist($price);
-            $em->flush();
-        }
-        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(4)) {
-            $price=new Price();
-            $price->setPrice(4000);
-            $price->setType('rent');
-            $em->persist($price);
-            $em->flush();
-        }
-        if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find(5)) {
-            $price=new Price();
-            $price->setPrice(6000);
-            $price->setType('rent');
-            $em->persist($price);
-            $em->flush();
+        foreach($prices as $k=>$pri) {
+            if(!$price=$em->getRepository('CaravaneEstateBundle:Price')->find($k)) {
+                $price=new Price();
+                $price->setPrice($pri['price']);
+                $price->setType($pri['type']);
+                $em->persist($price);
+                //$em->flush();
+            }
         }
 
         if(!$categoryMaison=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Maison')) {
-            $categoryMaison = new category();
+            $categoryMaison = new Category();
             $categoryMaison->setName("Maison");
             $em->persist($categoryMaison);
-            $em->flush();
-        }
 
+        }
         $this->categoryMaison=$categoryMaison;
 
         if(!$categoryAppartement=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Appartement')) {
-            $categoryAppartement = new category();
+            $categoryAppartement = new Category();
             $categoryAppartement->setName("Appartement");
             $em->persist($categoryAppartement);
-            $em->flush();
-        }
 
+        }
         $this->categoryAppartement = $categoryAppartement;
 
         if(!$categoryAutre=$em->getRepository('CaravaneEstateBundle:Category')->findOneByName('Autre')) {
-            $categoryAutre = new category();
+            $categoryAutre = new Category();
             $categoryAutre->setName("Autre");
             $em->persist($categoryAutre);
-            $em->flush();
-        }
 
+        }
         $this->categoryAutre = $categoryAutre;
+
 
         if(!$zone1=$em->getRepository('CaravaneEstateBundle:Zone')->find(1)) {
             $zone1=new Zone();
             $zone1->setName("Bruxelles Sud et Centre");
             $em->persist($zone1);
-            $em->flush();
         }
-
         $this->zone1 = $zone1;
 
         if(!$zone2=$em->getRepository('CaravaneEstateBundle:Zone')->find(2)) {
             $zone2=new Zone();
             $zone2->setName("Bruxelles Est");
             $em->persist($zone2);
-            $em->flush();
         }
-
         $this->zone2 = $zone2;
 
         if(!$zone3=$em->getRepository('CaravaneEstateBundle:Zone')->find(3)) {
             $zone3=new Zone();
             $zone3->setName("Périphérie bruxelloise");
             $em->persist($zone3);
-            $em->flush();
         }
-
-
         $this->zone3 = $zone3;
 
         if(!$zone4=$em->getRepository('CaravaneEstateBundle:Zone')->find(4)) {
             $zone4=new Zone();
             $zone4->setName("Country");
             $em->persist($zone4);
-            $em->flush();
         }
-
-
         $this->zone4 = $zone4;
 
 
-        $rs = curl_init();
-        curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/secteurs.php' );
-        curl_setopt($rs,CURLOPT_HEADER,0);
-        curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
-        curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
-        $xml = curl_exec($rs);
-        $areasXml = new \SimpleXMLElement($xml);
+        /*
+        $this->zones=array(
+            "1"=>array(
+                "prefix"=>array("01","010","011"),
+                "name"=>"Bruxelles Sud et Centre",
+                "zone"=>null
+            ),
+            "2"=>array(
+                "prefix"=>array("013"),
+                "name"=>"Bruxelles Ext",
+                "zone"=>null
+            ),
+            "3"=>array(
+                "prefix"=>array("03"),
+                "name"=>"Périphérie bruxelloise",
+                "zone"=>null
+            ),
+            "4"=>array(
+                "prefix"=>array("05","015","2","3","4"),
+                "name"=>"Country",
+                "zone"=>null
+            ),
 
-        foreach($areasXml as $k=>$areaXml) {
-            $libe=ltrim ($areaXml->LIBE_FR, '-');
-            $libe=ltrim ($libe, '-');
-            $libe=trim($libe);
-            if(!$area=$em->getRepository("CaravaneEstateBundle:Area")->findOneByCode($areaXml->CODE)) {
-                $area = new Area();
+        );
 
-                $area->setNomQuartier($libe);
-                $area->setCode($areaXml->CODE);
 
-                if(isset($this->communes[(string)$areaXml->CODE])) {
-                    $commune=$this->communes[(string)$areaXml->CODE];
-                    if(isset($commune[1])) {
-                        $latlng=$commune[1];
-                        $area->setLatlng($latlng);
-                        $a=explode(",",$latlng);
-                        if(count($a)==2) {
-                            $area->setLat(trim($a[0]));
-                            $area->setLng(trim($a[1]));
+        foreach($this->zones as $k=>$zon) {
+            if(!$zone=$em->getRepository('CaravaneEstateBundle:Zone')->find($k)) {
+                $zone=new Zone();
+                $zone->setName($zon['name']);
+                $em->persist($zone);
+
+                //$em->flush();
+            }
+            $z="zone".$k;
+            $this->zones[$k]['zone']=$zone;
+            $this->$z=$zone;
+        }
+        */
+        $em->flush();
+
+        if($setZone) {
+            $rs = curl_init();
+            curl_setopt($rs, CURLOPT_URL, $this->evosysUrl . $this->evosysId . '/secteurs.php');
+            curl_setopt($rs, CURLOPT_HEADER, 0);
+            curl_setopt($rs, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($rs, CURLOPT_FOLLOWLOCATION, 1);
+            $xml = curl_exec($rs);
+            $areasXml = new \SimpleXMLElement($xml);
+
+            $count = 0;
+            foreach ($areasXml as $k => $areaXml) {
+                $libe = ltrim($areaXml->LIBE_FR, '-');
+                $libe = ltrim($libe, '-');
+                $libe = trim($libe);
+                if (!$area = $em->getRepository("CaravaneEstateBundle:Area")->findOneByCode($areaXml->CODE)) {
+                    $area = new Area();
+
+                    $area->setNomQuartier($libe);
+                    $area->setCode($areaXml->CODE);
+                    echo $areaXml->CODE . " " . $libe . "\n";
+                }
+                $area->setZone($this->getZone($areaXml->CODE));
+                //echo "=".intval($areaXml->CODE) ."=";
+                if($setGeo ) {
+                    if ($area->getLat() == '' || $area->getLng() == '' || $area->getLatLng() == '' || $force) {
+                        //continue;
+                        $geocoder = $this->geocoder;
+                        if (intval($areaXml->CODE) > 0) {
+                            $response = $geocoder->geocode($libe . ", Belgique");
+                            //echo "-b-";
+                        } else {
+                            $response = $geocoder->geocode($libe);
+                            //echo "-o-";
                         }
-                        $em->persist($area);
+
+                        echo "searching coords for " . $areaXml->CODE . " " . $libe . "\n";
+                        foreach ($response->getResults() as $result) {
+                            if ($location = $result->getGeometry()->getLocation()) {
+                                $lat = $location->getLatitude();
+                                $lng = $location->getLongitude();
+                                $area->setLat($lat);
+                                $area->setLng($lng);
+                                $area->setLatLng($lat . ", " . $lng);
+                                break;
+                            }
+
+                        }
                     }
                 }
+                $em->persist($area);
 
-
-            }
-            if($area->getLat()=='' || $area->getLng()=='' || $area->getLatLng()=='') {
-                $geocoder = $this->geocoder;
-                $response = $geocoder->geocode($libe.", Belgique");
-
-                foreach($response->getResults() as $result)
-                {
-                    if($location=$result->getGeometry()->getLocation()) {
-                        $lat=$location->getLatitude();
-                        $lng=$location->getLongitude();
-                        $area->setLat($lat);
-                        $area->setLng($lng);
-                        $area->setLatLng($lat.", ".$lng);
-                        break;
-                    }
-
+                $count++;
+                if ($count >= 5) {
+                    $em->flush();
+                    $count = 0;
+                    echo "saving areas\n";
                 }
+
             }
-            $em->persist($area);
         }
         $em->flush();
     }
 
 
-    public function import() {
+    public function import($setPhotos=false, $setGeo=false, $force=false) {
+
         $em=$this->em;
         $finder = new Finder();
         $fs= new Filesystem();
 
+
         foreach($this->types as $t) {
+
+            echo $this->evosysUrl.$this->evosysId.'/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage=1'."\n";
             $rs = curl_init();
             curl_setopt($rs,CURLOPT_HEADER,0);
             curl_setopt($rs,CURLOPT_RETURNTRANSFER,1);
             curl_setopt($rs,CURLOPT_FOLLOWLOCATION,1);
             curl_setopt($rs,CURLOPT_FRESH_CONNECT,true);
-            curl_setopt($rs,CURLOPT_URL,'http://www.esimmo.com/Virtual/lelion/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage=1' );
+            curl_setopt($rs,CURLOPT_URL,$this->evosysUrl.$this->evosysId.'/resultats.php?OxySeleOffr='.$t.'&OxySeleBiensParPage=500&OxyPage=1' );
             $xml = curl_exec($rs);
             $estates = new \SimpleXMLElement($xml);
             foreach($estates as $listEstate) {
                 $clas=$listEstate->CLAS;
-                $clas=str_replace("030/","",$clas);
-                $this->actives[]='030/'.$clas;
+                $clas=str_replace($this->evosysPrefix."/","",$clas);
+                $this->actives[]=$this->evosysPrefix.'/'.$clas;
                 $this->estates[$t][]=$listEstate;
 
             }
@@ -404,13 +460,20 @@ class EstateManager
         $count=1;
         $max=count($this->actives);
 
+        if(!file_exists($this->photosDirectory)) {
+            mkdir($this->photosDirectory,0755);
+        }
         $now=new \Datetime('NOW');
+
         foreach($this->estates as $t=>$e) {
 
             foreach ($e as $listEstate) {
-                $clas = $listEstate->CLAS;
-                $clas = str_replace("030/", "", $clas);
 
+
+                $clas = $listEstate->CLAS;
+                $clas = str_replace($this->evosysPrefix."/", "", $clas);
+
+                echo "Clas: ".$clas."\n";
                 if ($listEstate->MODI_DATE != '') {
                     $date = date_create_from_format('d/m/Y', $listEstate->MODI_DATE);
                 } else {
@@ -418,17 +481,16 @@ class EstateManager
                 }
 
 
-                if (!$estate = $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference('030/' . $clas)) {
+                echo "Ref: ".$this->evosysPrefix.'/' . $clas."\n";
+                if (!$estate = $em->getRepository('CaravaneEstateBundle:Estate')->findOneByReference($this->evosysPrefix.'/' . $clas)) {
                     $estate = new Estate();
-                    $estate->setReference('030/' . $clas);
-                    $estate->setCreatedOn(new \Datetime('NOW'));
+                    $estate->setReference($this->evosysPrefix.'/' . $clas);
+                    $estate->setCreatedOn($date);
                     $estate->setImportedOn($now);
 
                 }
-
-                //echo $estate->getImportedOn()->format('Y-m-d')." <> ".$now->format('Y-m-d')."\n";
                 else if(!is_null($estate->getImportedOn())) {
-                    if ($estate->getImportedOn()->format('Y-m-d') == $now->format('Y-m-d') ) {
+                    if ($estate->getImportedOn()->format('Y-m-d') == $now->format('Y-m-d') && !$force) {
 
                         //echo "skip\n";
                         echo $count."/".$max." (".$t.")\n";
@@ -441,8 +503,9 @@ class EstateManager
                 $estate->setUpdatedOn($date);
                 $estate->setBathrooms(intval($listEstate->BAIN_NBR));
 
+                echo "loading :".($this->evosysUrl.$this->evosysId.'/offre.php?OxySeleCode=' . $listEstate->CODE)."\n";
                 $rs = curl_init();
-                curl_setopt($rs, CURLOPT_URL, 'http://www.esimmo.com/Virtual/lelion/offre.php?OxySeleCode=' . $listEstate->CODE);
+                curl_setopt($rs, CURLOPT_URL, $this->evosysUrl.$this->evosysId.'/offre.php?OxySeleCode=' . $listEstate->CODE);
                 curl_setopt($rs, CURLOPT_HEADER, 0);
                 curl_setopt($rs, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($rs, CURLOPT_FOLLOWLOCATION, 1);
@@ -466,6 +529,8 @@ class EstateManager
                 $estate->setIsNewBuilding(false);
                 $estate->setIsTerrain(false);
                 $estate->setLocation(false);
+
+
                 if($t=="L") {
                     $estate->setLocation(true);
                 }
@@ -480,8 +545,11 @@ class EstateManager
                 }
 
                 if($area=$em->getRepository('CaravaneEstateBundle:Area')->findOneByCode($xmlEstate->TABLGEOG)) {
+                    echo "\narea: ".$area->getId()."\n";
                     $estate->setArea($area);
+                    //$estate->setZone($estate->getArea()->getZone());
                 }
+
                 if(!$loc=$em->getRepository('CaravaneEstateBundle:Location')->findOneByFr($xmlEstate->COMM)) {
                     $loc=new Location();
                     $loc->setFr(ucfirst($xmlEstate->COMM));
@@ -490,20 +558,24 @@ class EstateManager
                 $estate->setLocFr($loc->getZip()." ".$loc->getFr());
                 $estate->setZip(intval($loc->getZip()));
 
-                if(substr($xmlEstate->TABLIMME,0,2)=='01') {
+                if(substr($xmlEstate->TABLIMME,0,2)=='03') {
                     $category=$this->categoryAppartement;
                 }
-                else if(substr($xmlEstate->TABLIMME,0,2)=='02') {
+                else if(substr($xmlEstate->TABLIMME,0,2)=='01') {
                     $category=$this->categoryMaison;
                 }
                 else {
                     $category=$this->categoryAutre;
                 }
+
+
                 $estate->setCategory($category);
 
                 $zone=null;
+                echo "-".$xmlEstate->TABLGEOG."-";
                 if(array_key_exists((string)$xmlEstate->TABLGEOG, $this->oldCodes)) {
                     $xmlEstate->TABLGEOG=$this->oldCodes[(string)$xmlEstate->TABLGEOG];
+                    echo "---old code---";
                 }
                 if(substr($xmlEstate->TABLGEOG,0,2)=='00' || substr($xmlEstate->TABLGEOG,0,2)=='01' || $xmlEstate->TABLGEOG=="0") {
                     $zone=$this->zone1;
@@ -511,13 +583,20 @@ class EstateManager
                 else if(substr($xmlEstate->TABLGEOG,0,2)=='02') {
                     $zone=$this->zone2;
                 }
+                /*else if(substr($xmlEstate->TABLGEOG,0,2)=='10') {
+                    $zone=$this->zone3;
+                }*/
                 else if(substr($xmlEstate->TABLGEOG,0,2)=='03') {
                     $zone=$this->zone3;
                 }
                 else {
                     $zone=$this->zone4;
                 }
+                /*else if(substr($xmlEstate->TABLGEOG,0,2)=='11') {
+                    $zone=$this->zone4;
+                }*/
                 $estate->setZone($zone);
+
                 $estate->setRooms(intval($xmlEstate->CHBR_NBR));
                 $estate->setGarages(intval($xmlEstate->VOIT_NBR));
                 $estate->setSurface(intval($xmlEstate->SURF_HAB));
@@ -534,84 +613,96 @@ class EstateManager
                 $estate->setRefe($listEstate->REFE);
 
 
-                $photos=array();
-                foreach($estate->getPhotos() as $ph) {
-                    //echo $ph->getFilename()."\n";
-                    if($ph->getFilename()!='') {
-                        $fi=$this->photosDirectory."/".$ph->getFilename();
-                        if(file_exists($fi) && !is_dir($fi)) {
-                            unlink($fi);
-                        }
-                        foreach($this->photosCacheName as $f) {
-                            $fi=$this->photosCacheDirectory."/".$f."/photos/big/".$ph->getFilename();
-                            if(file_exists($fi) && !is_dir($fi)) {
+                if($setPhotos) {
+
+                    $photos = array();
+                    foreach ($estate->getPhotos() as $ph) {
+                        //echo $ph->getFilename()."\n";
+                        if ($ph->getFilename() != '') {
+                            $fi = $this->photosDirectory . "/" . $ph->getFilename();
+                            if (file_exists($fi) && !is_dir($fi)) {
                                 unlink($fi);
                             }
-                        }
-                    }
-                    $estate->removePhoto($ph);
-                }
-                //var_dump($photos);
-                //$fs->remove($photos);
-
-                for($i=1;$i<=40;$i++) {
-                    $id=($i<10?"0".$i:$i);
-                    //$id="0".$i;
-                    $xmlPhoto="PHOTO_".$id;
-
-                    if($xmlUrl=$xmlEstate->$xmlPhoto) {
-                        if(preg_match("/\//",$xmlUrl)) {
-                            $tp=explode("/",$xmlUrl);
-                            $filename=end($tp);
-                            //echo $filename."\n";
-
-                            if($ch = curl_init($xmlUrl)) {
-                                //echo $filename."------\n";
-                                $fp = fopen($this->photosDirectory.'/'.$filename, 'wb');
-                                curl_setopt($ch, CURLOPT_FILE, $fp);
-                                curl_setopt($ch, CURLOPT_FILETIME, true);
-                                curl_setopt($ch, CURLOPT_HEADER, 0);
-                                curl_exec($ch);
-
-                                //$timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
-
-                                curl_close($ch);
-                                fclose($fp);
-                                //echo $timestamp;
-                                $photo= new Photo();
-                                $photo->setFilename($filename);
-                                $photo->setRanking(intval(substr($filename,0,2)));
-                                $photo->setIsDefault(true);
-                                if($i==1) {
-                                    $photo->setIsDefault(true);
+                            foreach ($this->photosCacheName as $f) {
+                                $fi = $this->photosCacheDirectory . "/" . $f . "/photos/big/" . $ph->getFilename();
+                                if (file_exists($fi) && !is_dir($fi)) {
+                                    unlink($fi);
                                 }
-                                $photo->setEstate($estate);
-                                $em->persist($photo);
                             }
+                        }
+                        $estate->removePhoto($ph);
+                        $em->remove($ph);
+                    }
+                    //var_dump($photos);
+                    //$fs->remove($photos);
 
+                    for ($i = 1; $i <= 40; $i++) {
+                        $id = ($i < 10 ? "0" . $i : $i);
+                        //$id="0".$i;
+                        $xmlPhoto = "PHOTO_" . $id;
+
+                        if ($xmlUrl = $xmlEstate->$xmlPhoto) {
+
+                            if (preg_match("/\//", $xmlUrl)) {
+                                echo "fetching " . $xmlEstate->$xmlPhoto . "\n";
+                                $tp = explode("/", $xmlUrl);
+                                $filename = end($tp);
+                                //echo $filename."\n";
+
+                                if ($ch = curl_init($xmlUrl)) {
+                                    //echo $filename."------\n";
+                                    $fp = fopen($this->photosDirectory . '/' . $filename, 'wb');
+                                    curl_setopt($ch, CURLOPT_FILE, $fp);
+                                    curl_setopt($ch, CURLOPT_FILETIME, true);
+                                    curl_setopt($ch, CURLOPT_HEADER, 0);
+                                    curl_exec($ch);
+
+                                    //$timestamp = curl_getinfo($ch, CURLINFO_FILETIME);
+
+                                    curl_close($ch);
+                                    fclose($fp);
+                                    //echo $timestamp;
+                                    $photo = new Photo();
+                                    $photo->setFilename($filename);
+                                    $photo->setRanking(intval(substr($filename, 0, 2)));
+                                    $photo->setIsDefault(true);
+                                    if ($i == 1) {
+                                        $photo->setIsDefault(true);
+                                    }
+                                    $photo->setEstate($estate);
+                                    $em->persist($photo);
+                                }
+
+                            }
+                        } else {
+                            $i = 40;
                         }
                     }
-                    else {
-                        $i=40;
-                    }
                 }
-
-                if($estate->getLat()=='' || $estate->getLng()=='') {
-                    $geocoder = $this->geocoder;
-                    $response = $geocoder->geocode($listEstate->ADRN." ".$listEstate->ADR1.", ".$listEstate->LOCA);
-                    foreach($response->getResults() as $result)
-                    {
-                        if($location=$result->getGeometry()->getLocation()) {
-                            $lat=$location->getLatitude();
-                            $lng=$location->getLongitude();
-                            $estate->setLat($lat);
-                            $estate->setLng($lng);
+                if($setGeo) {
+                    if ($estate->getLat() == '' || $estate->getLng() == '' || $force) {
+                        $geocoder = $this->geocoder;
+                        $response = $geocoder->geocode($listEstate->ADRN . " " . $listEstate->ADR1 . ", " . $listEstate->LOCA);
+                        foreach ($response->getResults() as $result) {
+                            if ($location = $result->getGeometry()->getLocation()) {
+                                $lat = $location->getLatitude();
+                                $lng = $location->getLongitude();
+                                $estate->setLat($lat);
+                                $estate->setLng($lng);
+                            }
                         }
                     }
                 }
-
                 $estate->setUpdatedOn($date);
                 $estate->setStatus(1);
+
+
+                /* ##########   hack Louise only ################*/
+                //$estate->setOnDemand(false);
+                //$estate->setGardenSurface(intval($xmlEstate->SUPE_TER));
+                /* ############################################## */
+
+
 
                 $em->persist($estate);
                 echo $count."/".$max." (".$t.")\n";
@@ -623,5 +714,38 @@ class EstateManager
             }
         }
         $em->flush();
+    }
+
+
+    private function getZone($code) {
+        echo "\ncode: ".$code;
+        $shortCode=substr($code,0,3);
+        echo "\nsgortcode: ".$shortCode."\n";
+        foreach($this->zones as $k=>$z) {
+            if(in_array( $shortCode, $z['prefix'])) {
+                echo "\nsc: ".$shortCode." + zone: ".$z['zone']->getId();
+                return $z['zone'];
+            }
+        }
+        $shortCode=substr($code,0,2);
+        echo "\nsgortcode: ".$shortCode."\n";
+        foreach($this->zones as $k=>$z) {
+            if(in_array( $shortCode, $z['prefix'])) {
+                echo "\nsc: ".$shortCode." + zone: ".$z['zone']->getId();
+                return $z['zone'];
+            }
+        }
+        $shortCode=substr($code,0,1);
+        echo "\nsgortcode: ".$shortCode."\n";
+        foreach($this->zones as $k=>$z) {
+            if(in_array( $shortCode, $z['prefix'])) {
+                echo "\nsc: ".$shortCode." + zone: ".$z['zone']->getId();
+                return $z['zone'];
+            }
+        }
+        echo "zone: ".$z['zone']->getId();
+
+        return $z['zone'];
+
     }
 }
