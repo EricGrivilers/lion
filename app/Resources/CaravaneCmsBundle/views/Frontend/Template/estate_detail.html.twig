@@ -51,21 +51,30 @@
 	<div class="col-md-3">
 		<div class="infos">
 			<ul>
-				{% if estate.ondemand==false %}
-					<li><label>{{"Prix"|trans}}:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
-				{% else %}
-					<li><label>{{"Prix sur demande"|trans}}</label></li>
-				{% endif %}
-				<li><label>{{"Reférence du bien"|trans}}:</label> {{estate.reference}}</li>
-				{% if estate.surface %}<li><label>{{"Supérficie"|trans}}:</label> {{estate.surface}} <label>m2</label></li>{% endif %}
-				{% if estate.rooms %}<li><label>{{"Chambre"|trans}}{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>{% endif %}
-				{% if estate.bathrooms %}<li><label>{{"Salle"|trans}}{{estate.bathrooms>1?"s":""}} {{"d'eau"|trans}}:</label> {{estate.bathrooms}}</li>{% endif %}
-				{% if estate.garages %}
-					<li><label>{{"Garage"|trans}}{{estate.garages>1?"s":""}}:</label> {{estate.garages}}</li>
-				{% endif %}
-				{% if estate.garden %}
-					<li>{{estate.garden}} </li>
-				{% endif %}
+                {%  if estate.isNewBuilding %}
+                    {%  set boundaries=estate.getChildrenBoundaries  %}
+                    <li><label>{{"Prix"|trans}}: de</label>  {{ boundaries.prices.min|number_format(0,'.', '.') }} <label>à</label> {{ boundaries.prices.max|number_format(0,'.', '.') }} <label>€</label></li>
+                    {#<li><label>{{"Reférence du bien"|trans}}:</label> {%  for ref in boundaries.references %}{{ref}} {%  endfor  %}</li>#}
+                    <li><label>{{"Supérficie"|trans}}: de </label> {{ boundaries.surface.min }} <label>à</label> {{ boundaries.surface.max }} <label>m2</label></li>
+                    <li><label>{{"Chambre"|trans}}{{estate.rooms>1?"s":""}}: de </label> {{ boundaries.rooms.min }} <label>à</label> {{ boundaries.rooms.max }} </li>
+
+                {%  else  %}
+                    {% if estate.ondemand==false %}
+                        <li><label>{{"Prix"|trans}}:</label> {{estate.prix|number_format(0,'.', '.')}} <label>€</label></li>
+                    {% else %}
+                        <li><label>{{"Prix sur demande"|trans}}</label></li>
+                    {% endif %}
+                    <li><label>{{"Reférence du bien"|trans}}:</label> {{estate.reference}}</li>
+                    {% if estate.surface %}<li><label>{{"Supérficie"|trans}}:</label> {{estate.surface}} <label>m2</label></li>{% endif %}
+                    {% if estate.rooms %}<li><label>{{"Chambre"|trans}}{{estate.rooms>1?"s":""}}:</label> {{estate.rooms}}</li>{% endif %}
+                    {% if estate.bathrooms %}<li><label>{{"Salle"|trans}}{{estate.bathrooms>1?"s":""}} {{"d'eau"|trans}}:</label> {{estate.bathrooms}}</li>{% endif %}
+                    {% if estate.garages %}
+                        <li><label>{{"Garage"|trans}}{{estate.garages>1?"s":""}}:</label> {{estate.garages}}</li>
+                    {% endif %}
+                    {% if estate.garden %}
+                        <li>{{estate.garden}} </li>
+                    {% endif %}
+                {%  endif %}
 
 			</ul>
 		</div>

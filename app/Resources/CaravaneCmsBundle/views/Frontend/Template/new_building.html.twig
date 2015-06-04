@@ -1,7 +1,7 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
 	<li class="active"><a href="#estate_new_description" role="tab" data-toggle="tab">Présentation</a></li>
-	{% if estate.parent %}<li><a href="#estate_new_liste" role="tab" data-toggle="tab">Liste</a></li>{% endif %}
+	{% if estate.children %}<li><a href="#estate_new_liste" role="tab" data-toggle="tab">Liste</a></li>{% endif %}
 	<li><a href="#estate_new_documents" role="tab" data-toggle="tab">Documents</a></li>
 </ul>
 
@@ -10,28 +10,30 @@
 	<div class="tab-pane active" id="estate_new_description">
 		<div id="text">{{estate.description|raw }}</div>
 	</div>
-	{% if estate.parent %}
+	{% if estate.children %}
 	<div class="tab-pane" id="estate_new_liste">
 		<table class="table table-condensed table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>
-						Lot</th><th>Surf. brute</th><th>Ch.</th><th>Prix</th><th>Detail</th></tr></thead>
+						Lot</th><th>Surf. brute</th><th>Ch.</th><th>Prix</th><th>Reference</th></tr></thead>
 						<tbody>
-							{% if estate.parent %}
-								{% for es in estate.parent.children %}
+							{#% if estate.parent %#}
+								{% for es in estate.children %}
 									<tr {{es.reference==estate.reference?"style='background: #666666; color: #ffffff'":""}} >
 
 										<td>
 										{{es.refe}}  </td>
-										<td> {{es.surface}} <label> m² </label></td>
-										<td>{{es.rooms}}</td>
+										<td><label> {{es.surface}} </label> m² </td>
+										<td><label>{{es.rooms}}</label></td>
 
-										<td>  {{es.prix|number_format(0,'.', '.')}} <label>€</label>  </td>
-										<td><a href="{{url('caravane_estate_frontend_estate_sale_show', {'reference':es.shortReference} )}}" >{{es.reference}}</a></td>
+										<td> <label> {{es.prix|number_format(0,'.', '.')}} </label>€  </td>
+                                        {#<td><a href="{{url('caravane_estate_frontend_estate_sale_show', {'reference':es.shortReference} )}}" >{{es.reference}}</a></td>
+#}
+                                        <td>{{es.reference}}</td>
 									</tr>
 								{% endfor %}
-							{% endif %}
+							{#% endif %#}
 						</tbody>
 		</table>
 	</div>

@@ -1435,6 +1435,9 @@ class EstateController extends Controller
 	}
 
 	public function detailEstate($estate) {
+        if(!$estate) {
+            return null;
+        }
 		$em = $this->getDoctrine()->getManager();
 		if($user=$this->getUser()) {
 			if(!$ue=$em->getRepository('CaravaneEstateBundle:UserEstate')->findOneBy(
