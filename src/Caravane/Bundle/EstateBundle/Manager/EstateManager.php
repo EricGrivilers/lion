@@ -424,6 +424,11 @@ class EstateManager
     }
 
 
+    /**
+     * @param bool $setPhotos
+     * @param bool $setGeo
+     * @param bool $force
+     */
     public function import($setPhotos=false, $setGeo=false, $force=false) {
 
         $em=$this->em;
@@ -467,6 +472,14 @@ class EstateManager
 
         foreach($this->estates as $t=>$e) {
 
+            /*if($t=='p') {
+                $estatesGroup=$e;
+                foreach($estatesGroup as $es) {
+                    foreach($es->COMPS as $estates) {
+                        $n=$this->import($estates,$t,$force, $es->CLAS,null);
+                    }
+                }
+            }*/
             foreach ($e as $listEstate) {
 
 
@@ -558,15 +571,17 @@ class EstateManager
                 $estate->setLocFr($loc->getZip()." ".$loc->getFr());
                 $estate->setZip(intval($loc->getZip()));
 
-                if(substr($xmlEstate->TABLIMME,0,2)=='03') {
+
+                if(substr($xmlEstate->TABLIMME,0,2)=='01') {
                     $category=$this->categoryAppartement;
                 }
-                else if(substr($xmlEstate->TABLIMME,0,2)=='01') {
+                else if(substr($xmlEstate->TABLIMME,0,2)=='02') {
                     $category=$this->categoryMaison;
                 }
                 else {
                     $category=$this->categoryAutre;
                 }
+
 
 
                 $estate->setCategory($category);
@@ -714,6 +729,7 @@ class EstateManager
             }
         }
         $em->flush();
+        mail('eric@caravanemedia.com','import ok','import ok at '.date('Y-m-d H:i:s'));
     }
 
 

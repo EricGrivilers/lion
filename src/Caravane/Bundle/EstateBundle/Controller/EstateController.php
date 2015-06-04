@@ -935,18 +935,19 @@ class EstateController extends Controller
 		}
 
 		if(isset($datas['address'])) {
-			$geocoder = $this->get('ivory_google_map.geocoder');
-			$response = $geocoder->geocode($datas['address'].", Belgique");
+            if($datas['address']!="") {
+                $geocoder = $this->get('ivory_google_map.geocoder');
+                $response = $geocoder->geocode($datas['address'] . ", Belgique");
 
-			foreach($response->getResults() as $result)
-			{
-				if($location=$result->getGeometry()->getLocation()) {
-					$lat=$location->getLatitude();
-					$lng=$location->getLongitude();
-					$datas['latlng']=$lat.",".$lng;
-				}
+                foreach ($response->getResults() as $result) {
+                    if ($location = $result->getGeometry()->getLocation()) {
+                        $lat = $location->getLatitude();
+                        $lng = $location->getLongitude();
+                        $datas['latlng'] = $lat . "," . $lng;
+                    }
 
-			}
+                }
+            }
 		}
 
 

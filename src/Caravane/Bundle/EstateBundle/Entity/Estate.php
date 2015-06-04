@@ -668,7 +668,12 @@ class Estate
             $tA=explode(".",strip_tags($this->description));
             if(is_array($tA)) {
                 while(strlen($this->summary)<150) {
-                    $this->summary.=$tA[$i].". ";
+                    if(isset($tA[$i])) {
+                        $this->summary .= $tA[$i] . ". ";
+                    }
+                    else {
+                        return $this->summary;
+                    }
                     $i++;
                 }
             }
